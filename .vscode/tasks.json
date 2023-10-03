@@ -1,0 +1,72 @@
+{
+    // Tareas recomendadas para el curso Páginas web HTML y hojas de estilo CSS de www.mclibre.org
+
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Abrir en Firefox",
+        "command": "explorer",
+        "windows": {
+          "command": "C:/Program Files/Mozilla Firefox/firefox.exe"
+        },
+        "linux": {
+            "command": "firefox"
+        },
+        "args": [
+            "${file}"
+        ],
+        "presentation": {
+          "reveal": "never"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Abrir en Chrome",
+        "command": "explorer",
+        "windows": {
+          "command": "C:/Program Files/Google/Chrome/Application/chrome.exe"
+        },
+        "linux": {
+            "command": "google-chrome"
+        },
+        "args": [
+          "${file}"
+        ],
+        "presentation": {
+          "reveal": "never"
+        },
+        "problemMatcher": []
+      },
+          //
+    // Tareas recomendadas para el curso Programación web en PHP de www.mclibre.org
+    {
+        "label": "Abrir en localhost (Firefox)",
+        "command": "explorer",
+        "windows": {
+          "command": "C:/Program Files/Mozilla Firefox/firefox.exe"
+        },
+        "args": [
+          "localhost/${relativeFile}"
+        ],
+        "presentation": {
+          "reveal": "never"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Abrir en localhost (Chrome)",
+        "command": "explorer",
+        "windows": {
+          "command": "C:/Program Files/Google/Chrome/Application/chrome.exe"
+        },
+        "args": [
+          "localhost/${relativeFile}"
+        ],
+        "presentation": {
+          "reveal": "never"
+        },
+        "problemMatcher": []
+      },
+      //
+    ]
+  }

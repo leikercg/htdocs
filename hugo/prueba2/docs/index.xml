@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mi blog personal</title>
+    <link>https://leikercg.github.io/prueba2/</link>
+    <description>Recent content on Mi blog personal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 22 Sep 2023 19:57:16 +0200</lastBuildDate><atom:link href="https://leikercg.github.io/prueba2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Segundo_post</title>
+      <link>https://leikercg.github.io/prueba2/posts/segundo_post/</link>
+      <pubDate>Fri, 22 Sep 2023 19:57:16 +0200</pubDate>
+      
+      <guid>https://leikercg.github.io/prueba2/posts/segundo_post/</guid>
+      <description>Hola este es mi posttttt numero 1 Deserunt do fugiat sit nulla fugiat eiusmod dolore quis sunt. Ad ut cillum non eu anim cillum ex dolor est commodo cillum irure aute. Aute in non veniam excepteur.
+Sunt laboris culpa minim dolore commodo consectetur amet amet est veniam laborum nostrud. Magna minim aute pariatur ad anim do culpa ullamco pariatur id. Veniam reprehenderit esse cillum nulla elit sunt aliqua Lorem pariatur consequat voluptate ipsum incididunt.</description>
+    </item>
+    
+    <item>
+      <title>Primer_post</title>
+      <link>https://leikercg.github.io/prueba2/posts/primer_post/</link>
+      <pubDate>Fri, 22 Sep 2023 19:57:06 +0200</pubDate>
+      
+      <guid>https://leikercg.github.io/prueba2/posts/primer_post/</guid>
+      <description>Hola este es mi posttttt numero 1 Deserunt do fugiat sit nulla fugiat eiusmod dolore quis sunt. Ad ut cillum non eu anim cillum ex dolor est commodo cillum irure aute. Aute in non veniam excepteur.
+Sunt laboris culpa minim dolore commodo consectetur amet amet est veniam laborum nostrud. Magna minim aute pariatur ad anim do culpa ullamco pariatur id. Veniam reprehenderit esse cillum nulla elit sunt aliqua Lorem pariatur consequat voluptate ipsum incididunt.</description>
+    </item>
+    
+    <item>
+      <title>Main</title>
+      <link>https://leikercg.github.io/prueba2/main/</link>
+      <pubDate>Fri, 22 Sep 2023 19:39:19 +0200</pubDate>
+      
+      <guid>https://leikercg.github.io/prueba2/main/</guid>
+      <description>sitio de prueba *** Exercitation nostrud deserunt nqqqon et eu esse fugiat magna laboris. Tempor elit eu eu nisi proident ipsum non deserunt. Ipsum do laborum sint do velit dolore pariatur. Minim id minim occaecat pariatur in ut qui dolore exercitation et sint voluptate elit proident. ***
+Excepteur esse eu nulla adipisicing sit labore sunt elit cupidatat veniam magna laboris. Excepteur magna adipisicing et sit et irure aliqua nisi amet dolor.</description>
+    </item>
+    
+  </channel>
+</rss>
