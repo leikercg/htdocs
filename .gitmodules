@@ -1,0 +1,3 @@
+[submodule "hugo/prueba2"]
+	path = hugo/prueba2
+	url = https://github.com/leikercg/prueba2.git
