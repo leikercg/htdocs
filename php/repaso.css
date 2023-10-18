@@ -1,0 +1,127 @@
+body{
+    background-color: lightgreen;
+    margin: 0px;
+    height: 2500px;
+}
+
+header{
+    background: rgba(128, 128, 128, 0.30);
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+}
+
+header img{
+    height: 150px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+header h1{
+    color: aqua;
+    line-height: 100px;
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 100%;
+    text-align: center;
+}
+
+div.cuerpo{
+    display: flex;
+    height: 100%;
+}
+
+nav{
+    background-color: rgba(128, 128, 128, 0.50);
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+nav div{
+    height: 50px;
+    width: 200px;
+    line-height: 50px;
+    font-size: 30px;
+    color: aqua;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    overflow:hidden;
+}
+
+.par{
+    background-color: violet;
+
+}
+
+.impar{
+    background-color: rgb(192, 102, 192);
+}
+
+main{
+    background-color: rgba(255, 235, 205, 0.50);
+    width: 80%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+main h1{
+    height: 30px;
+    width: 100%;
+    line-height: 30px;
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+main h2{
+    height: 25px;
+    width: 100%;
+    line-height: 25px;
+    font-size: 25px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: left;
+}
+
+main h3{
+    height: 20px;
+    width: 100%;
+    line-height: 20px;
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+main p{
+    width: 100%;
+    line-height: 20px;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: justify;
+}
+
+main p::first-letter{
+    font-size:2em;
+    font-style  : italic;
+    color:blue;
+}
+
+img.parrafo{
+    width: 100px;
+    margin-top: 15px;
+    margin-right: 15px;
+    margin-bottom:0px;
+    float: left;
+}
+
+table{
+    border: 5px outset lightgray;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: center;
+}
