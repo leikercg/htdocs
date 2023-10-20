@@ -8,27 +8,33 @@
 </head>
 
 <body>
-  <h1>CUESTIONARIO</h1>
 
-  <form action="control.php" method="get">
-    <label for="nombre">Introduce tu nombre</label>
-    <input type="text" id="nombre" name="nombre">
-    <br><br>
-    <label for="apellidos">Introduce tus apellidos</label>
-    <input type="text" id="apellidos" name="apellidos">
-    <br>
-    <p>¿En qué año estamos?</p>
-    <input type="radio" name="anio" value="2010">2010<br>
-    <input type="radio" name="anio" value="2020">2020<br>
-    <input type="radio" name="anio" value="2023">2023<br>
-    <input type="radio" name="anio" value="1990">1990<br>
-    <p>¿Cuales tienen plumas?</p>
-    <input type="checkbox" name="animal[]" value="perros">perros<br>
-    <input type="checkbox" name="animal[]" value="gallinas">gallinas<br>
-    <input type="checkbox" name="animal[]" value="loros">loros<br>
-    <input type="checkbox" name="animal[]" value="gatos">gatos<br>
-    <input type="submit" value="Enviar">
-  </form>
+  <header>
+    <h1>CUESTIONARIO</h1>
+  </header>
+  <main>
 
+    <form action="control.php" method="get">
+      <label for="nombre">Introduce tu nombre</label>
+      <input type="text" id="nombre" name="nombre">
+      <br><br>
+      <label for="apellidos">Introduce tus apellidos</label>
+      <input type="text" id="apellidos" name="apellidos">
+      <br>
+      <p>¿En qué año estamos?</p>
+      <input type="radio" name="anio" value="2010">2010<br>
+      <input type="radio" name="anio" value="2020">2020<br>
+      <input type="radio" name="anio" value="2023">2023<br>
+      <input type="radio" name="anio" value="1990">1990<br>
+      <p>¿Cuales tienen plumas?</p>
+      <input type="checkbox" name="perrs" value="perros">perros<br>
+      <input type="checkbox" name="gallinas" value="gallinas">gallinas<br>
+      <input type="checkbox" name="loros" value="loros">loros<br>
+      <input type="checkbox" name="gatos" value="gatos">gatos<br>
+
+      <input type="submit" value="Enviar">
+      <input type="reset" value="Borrar">
+    </form>
+  </main>
 </body>
 </html>
