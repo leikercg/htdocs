@@ -7,3 +7,6 @@
 [submodule "hugo/vehiculos/themes/hugo-bearcub"]
 	path = hugo/vehiculos/themes/hugo-bearcub
 	url = https://github.com/clente/hugo-bearcub
+[submodule "hugo/vehiculos"]
+	path = hugo/vehiculos
+	url = https://github.com/leikercg/vehiculos.git
