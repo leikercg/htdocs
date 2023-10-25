@@ -1,0 +1,32 @@
+label {
+    font-weight: bold;
+}
+
+p {
+    font-weight: bold;
+
+}
+
+body {
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+header {
+    color: white;
+    background-color: rgb(139, 46, 46);
+    width: 100%;
+    text-align: center;
+
+}
+
+main {
+    padding: 10px;
+    background-color: white;
+    width: 60%;
+}
