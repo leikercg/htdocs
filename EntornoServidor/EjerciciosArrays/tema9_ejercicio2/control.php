@@ -10,24 +10,20 @@
 function cambio($euros)
 {
     $valor    = [500, 200, 100, 50, 20, 10, 5, 2, 1];
-    $contador = 0;
+    $billetes = 0;
 
     for ($i = 0; $i <= 8; $i++) {
-        if ($euros % $valor[$i] == 0) {
-            $contador++;
-        } else {
-            echo $contador . " billetes de " . $valor[$i];
-            $contador=0;
-
-        }if ($euros==1) {
-           $i==8;
+        if ($euros >= $valor[$i]) {
+            $billetes = intval($euros / $valor[$i]);
+            $euros    = $euros % $valor[$i];
+            echo $billetes . " billetes de " . $valor[$i]."<br>";
         }
+
     }
 
 }
 
-$euros = 275; // Cambia el valor de euros aquí
-    cambio($euros);
+
     ?>
 
 
