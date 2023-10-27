@@ -15,6 +15,7 @@ function cambio($euros)
     for ($i = 0; $i <= 8; $i++) {
         if ($euros % $valor[$i] == 0) {
             $contador++;
+            $euros=$euros % $valor[$i];
         } else {
             echo $contador . " billetes de " . $valor[$i];
             $contador=0;

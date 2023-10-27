@@ -8,8 +8,8 @@
 
     <?php
     function tabla($filas,$columnas){
-        echo "<h3> TABLA DE ".$filaaas." X ".$columna." </h3>";
-        echo "<table border ='1'>"
+        echo "<h3> TABLA DE ".$filas." X ".$columnas." </h3>";
+        echo "<table border ='1'>";
 
 
     }
