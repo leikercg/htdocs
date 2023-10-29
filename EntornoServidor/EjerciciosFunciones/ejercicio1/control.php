@@ -7,12 +7,21 @@
     <link rel="stylesheet" type="text/css" href="estilos.css">
 
     <?php
-    function tabla($filas,$columnas){
+    function tabla($filas, $columnas)
+    {
+        $n = 0;
+        print "<h3> TABLA DE " . $filas . " X " . $columnas . " </h3>";
 
-        echo "<h3> TABLA DE ".$filas." X ".$columnas." </h3>";
-
-        echo "<table border ='1'>";
-
+        print "<table border ='1'>";
+        for ($i = 1; $i <= $filas; $i++) {
+            print "<tr>";
+            for ($j = 1; $j <= $columnas; $j++) {
+                $n++;
+                print "<td>" . $n . "</td>";
+            }
+            print "</tr> ";
+        }
+        print "</table>";
 
     }
     ?>
@@ -27,16 +36,12 @@
     <main>
 
 <?php
-$filas = $_REQUEST["filas"];
-$columnas = $_REQUEST["columnas"];
+$filas        = $_REQUEST["filas"];
+    $columnas = $_REQUEST["columnas"];
 
-    tabla($filas,$columnas);
+    tabla($filas, $columnas);
 
-
-
-
-
-
+    tabla($filas, $columnas);
 
     ?>
     </main>
