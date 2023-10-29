@@ -9,7 +9,7 @@
     <?php
     function tabla($filas,$columnas){
         echo "<h3> TABLA DE ".$filaaas." X ".$columna." </h3>";
-        echo "<table border ='1'>"
+        echo "<table border ='1'>";
 
 
     }
