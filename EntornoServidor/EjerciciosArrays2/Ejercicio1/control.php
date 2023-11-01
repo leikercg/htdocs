@@ -27,24 +27,27 @@
 
     function eliminarRepetidos($arr)
     {
-        $unico = array();
+        $unico = [];
         if(is_array($arr)) {
             $unico = array_unique($arr);
-            $unico=array_values($unico);
+            $unico = array_values($unico);
             print "<p>Array unico: ";
-            print_r ($unico);
             for ($i = 0; $i < count($unico); $i++) {
                 if($i != count($unico) - 1) {
                     print  $unico[$i] . ", ";
                 } elseif($i == count($unico) - 1) {
                     print  $unico[$i];
                 }
-
             }
             print "</p>";
-
         }
+        return $unico;
+    }
+    function media($arr)  {
+        $suma = array_sum($arr);
+        $divisor = count($arr);
 
+        echo " la media de valores del array sin duplicados es: ".$suma / $divisor;
     }
 
     ?>
@@ -61,7 +64,8 @@
                 <?php
                 $myarray = generarArrayAleatorio($_REQUEST["longitud"], $_REQUEST["minimo"], $_REQUEST["maximo"]);
 
-    eliminarRepetidos($myarray);
+
+    media(eliminarRepetidos($myarray));
     ?>
 
 <form action="control.php" method="get">
