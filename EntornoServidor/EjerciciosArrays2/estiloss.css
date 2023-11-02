@@ -30,3 +30,8 @@ main {
     background-color: white;
     width: 60%;
 }
+td,th{
+    border: 2px rgb(80, 179, 80) solid;
+    color: rgb(28, 83, 185);
+    background-color: beige;
+}
