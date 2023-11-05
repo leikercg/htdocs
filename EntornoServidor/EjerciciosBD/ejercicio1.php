@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+    <header>
+        <h1>clientes</h1>
+    </header>
     <?php
-        $conexion = mysqli_connect("localhost", "root", "") or exit("No se puede conectar con el servidor <br>");
+        $conexion = mysqli_connect("localhost", "root", "") or die("No se puede conectar con el servidor <br>");
 
-    mysqli_select_db($conexion, "jardineria") or exit("No se pude conectar con la base de datos");
+    mysqli_select_db($conexion, "jardineria") or die("No se pude conectar con la base de datos");
 
     $resultconsulta = mysqli_query($conexion, "Select codigocliente, nombrecliente, nombrecontacto from clientes;");
 
@@ -34,7 +37,7 @@
 
         for($i = 0; $i < $nfilas; $i++) {
             // $resultado = mysqli_fetch_row($resulconsulta);
-            $resultado = mysqli_fetch_assoc($resultconsulta); // tiene que estar dentro, por que devuelve el primer valor, dentro devuelve el valor siguiente.
+            $resultado = mysqli_fetch_array($resultconsulta); // tiene que estar dentro, por que devuelve el primer valor, dentro devuelve el valor siguiente.
 
             print "<TR>";
             print "<TD>" . $resultado["codigocliente"] . "</TD>"; //hay que poner los mismos campos que se han escrito en la consulta, incluso las mayusculas
