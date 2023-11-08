@@ -12,7 +12,7 @@
         if($_REQUEST) {
             $gama = $_REQUEST["gama"];
 
-            $conexion = mysqli_connect("localhost", "root", "", "jardineria") or die("no se pudo acceder a la base de datos a fallo la concexion");
+            $conexion = mysqli_connect("localhost", "root", "", "jardineria") or exit("no se pudo acceder a la base de datos a fallo la concexion");
 
             $consulta = "select codigoproducto, nombre, cantidadenstock from productos where gama = '$gama' ";
 
@@ -33,29 +33,37 @@
                     print "</tr>";
                 }
                 print "</table>";
-            }else{
+            } else {
                 print "<h3>No hay productos en la gama de $gama.</h3>";
             }
 
             print '<a href="ejercicio2.php">Nueva consulta</a>';
+            mysqli_close($conexion);
 
         } else {
-            ?>
+            // recorremos las gamas para mostrarlas en un <formulario></formulario
+            $conexion       = mysqli_connect('localhost', 'root', '', 'jardineria');
+            $consulta       = "select gama from gamasproductos";
+            $resultconsulta = mysqli_query($conexion, $consulta);
 
-    <form action="ejercicio2.php" method="get">
-        <select name="gama" id="">
-            <option value="no" selected disabled >Elige una gama</option>
-            <option value="aromaticas">Aromáticas</option>
-            <option value="frutales">frutales</option>
-            <option value="herbaceas">herbaceas</option>
-            <option value="herramientas">Herramientas</option>
-            <option value="ornamentales">Ornamentales</option>
-            <input type="submit" value="enviar">
-        </select>
-    </form>
-
-        <?php
+            $nfilas = mysqli_num_rows($resultconsulta);
+            if($nfilas > 0) {
+                print "<form action='ejercicio2.php' method='get'>";
+                print "<select name='gama'>";
+                print "<option value='no' selected disabled >Elige una gama</option>";
+                for($i = 0; $i < $nfilas; $i++) {
+                    $resultado = mysqli_fetch_assoc($resultconsulta);
+                    foreach($resultado as $key => $value) {
+                        print "<option value=" . $value . ">$value</option>"; // para imprimir solo el valor, no el nombre de la columna
+                    }
+                }
+                print "<input type='submit' value='enviar'>
+                </select>
+            </form>";
+                mysqli_close($conexion);
+            }
         }
+
         ?>
 
 
