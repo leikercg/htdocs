@@ -10,8 +10,6 @@
      <header><h1>Modificar clientes</h1></header>
        <main>
         <section>
-
-                <option value=""></option>
                  <?php
                  if(!$_REQUEST) {
                      print "<form action='ejercicio6.php'>
@@ -35,49 +33,67 @@
                  </form>";
                      mysqli_close($conexion);
                  } else {
-                     $telefono = $_REQUEST["telefono"];
+                     if($_GET["fax"]) {
+                         print "gola";
+                     } else {
 
-                     $conexion          = mysqli_connect("localhost", "root", "", "jardineria");
-                     $sentencia         = "Select Codigocliente, nombrecliente, nombrecontacto, apellidocontacto,telefono,fax,lineadireccion1,lineadireccion2,ciudad,region,pais,codigopostal,codigoempleadorepventas,limitecredito from clientes where telefono = $telefono";
-                     $resultadoconsulta = mysqli_query($conexion, $sentencia);
+                         $telefono = $_REQUEST["telefono"];
 
-                     $nfilas = mysqli_num_rows($resultadoconsulta);
-                     print "<form action='ejercicio.php'>";
-                     print "<table border ='1'>";
+                         $conexion          = mysqli_connect("localhost", "root", "", "jardineria");
+                         $sentencia         = "Select codigocliente, nombrecliente, nombrecontacto, apellidocontacto,telefono,fax,lineadireccion1,lineadireccion2,ciudad,region,pais,codigopostal,limitecredito, codigoempleadorepventas from clientes where telefono =" . $telefono;
+                         $resultadoconsulta = mysqli_query($conexion, $sentencia);
 
-                     if(mysqli_num_rows($resultadoconsulta) > 0) {
+                         $nfilas = mysqli_num_rows($resultadoconsulta);
+                         print "<form action='ejercicio6.php'>";
+                         print "<table border ='1'>";
 
-                         for($i = 0; $i < $nfilas; $i++) {
+                         if(mysqli_num_rows($resultadoconsulta) > 0) {
 
-                             $resultado = mysqli_fetch_assoc($resultadoconsulta);
-                             foreach($resultado as $key => $value) {
-                                 if($key != "Codigocliente") {
-                                     print "<tr>";
-                                     print "<td><label>$key</label></td>
-                                 <td><input type='text' name='$value'  value='$value' disabled></td>";
-                                     print "</tr>";
-                                 } else {
-                                     print "<tr>";
-                                     print "<td><label>$key</label></td>
-                                 <td><input type='text' name='$value'  value='$value'></td>";
-                                     print "</tr>";
+                             for($i = 0; $i < $nfilas; $i++) {
 
+                                 $resultado = mysqli_fetch_assoc($resultadoconsulta);
+                                 foreach($resultado as $key => $value) {
+                                     if($key == "codigoempleadorepventas") {
+                                         print "<tr>";
+                                         print "<td><label>Codigocliente</label></td>";
+                                         print "<td><select name='telefono'>";
+                                         $sentencia2         = "select distinct codigoempleadorepventas from clientes";
+                                         $resultadoconsulta2 = mysqli_query($conexion, $sentencia2);
+                                         $nfilas2            = mysqli_num_rows($resultadoconsulta2);
+                                         for($j = 0; $j < $nfilas2; $j++) {
+                                             $resultado2 = mysqli_fetch_assoc($resultadoconsulta2);
+                                             foreach($resultado2 as $key2 => $value2) {
+                                                 print "<option value='$value2'>$value2</option> ";
+                                             }
+                                         }
+                                         print "</select></td>";
+                                         print "</tr>";
+
+                                     } elseif($key != "Codigocliente") {
+                                         print "<tr>";
+                                         print "<td><label>$key</label></td>
+                                 <td><input type='text' name='$value'  value='$value' ></td>";
+                                         print "</tr>";
+                                     } else {
+                                         print "<tr>";
+                                         print "<td><label>$key</label></td>
+                                 <td><input type='text' name='$value'  value='$value' readonly></td>";
+                                         print "</tr>";
+
+                                     }
                                  }
+
                              }
+                             print "</table>";
+                             print "<input type ='submit' value='modificar'>";
+                             print "</form>";
 
                          }
-                         print "</table>";
-                         print "<input type ='submit' value='modificar cliente'>";
-                         print "</form>";
-
                      }
                  }
 
                  ?>
 
-         <?php
-
-                 ?>
 
     </main>
 

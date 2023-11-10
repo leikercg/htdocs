@@ -10,6 +10,7 @@
     <main>
         <?php
         if($_REQUEST) {// recogo los valores del formulario
+            print_r($_REQUEST);
             $nombrecliente  = $_REQUEST["nombrecliente"];
             $nombrecontacto = $_REQUEST["nombrecontacto"];
             $apellido       = $_REQUEST["apellido"];
@@ -116,7 +117,7 @@
                 for($i = 0; $i < $nfilas; $i++) {
                     $resultado = mysqli_fetch_assoc($resultadoconsulta);
                     foreach($resultado as $key => $value) {
-                        print "<option value=' . $value . '>$value</option>";
+                        print "<option value='  $value  '>$value</option>";
                     }
                 }
             }
