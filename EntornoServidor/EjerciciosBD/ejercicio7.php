@@ -23,10 +23,15 @@ if($_REQUEST) {
         $consulta2 = mysqli_query($conexion, $sentencia2); ////por nombre
         $nfilas2   = mysqli_num_rows($consulta2);
 
+        print "<form action=''>";
+        $clinteid = "";
         for($i = 0; $i < $nfilas1; $i++) {
             $resultado = mysqli_fetch_assoc($consulta1);
             foreach($resultado as $key => $value) {
                 print"" . $key . "-->" . $value . "<br>";
+                if($key == "CodigoCliente") {
+                    $clinteid = $value;
+                }
             }
 
         }
@@ -35,20 +40,35 @@ if($_REQUEST) {
             $resultado = mysqli_fetch_assoc($consulta2);
             foreach($resultado as $key => $value) {
                 print"" . $key . "-->" . $value . "<br>";
+                print "<input type='text' name='$key' hidden value='$value'>";
             }
-
         }
-        ?>
-        <form action="">
-            <label for="">Desea Borrar a este cliente de la base de datos?</label>
-            <input type="submit" name="si" value="si">
-            <input type="submit" name="si" value="no">
-        </form>
 
-        <?php
+        print "<input type='text' name='codigo' hidden value='$clinteid'>
+            <label>Desea Borrar a este cliente de la base de datos?</label>
+            <input type='submit' name='si' value='si'>
+            <input type='submit' name='si' value='no'>
+        </form>";
 
-    }else{
-        echo "Aqui mostrar que hacer si se borra o  mostrar link";
+        mysqli_close($conexion);
+
+    } else {
+        print_r($_REQUEST);
+        $codigo = $_REQUEST["CodigoCliente"];
+        if($_REQUEST["si"] == "si") {
+            $conexion   = mysqli_connect("localhost", "root", "", "jardineria") or exit("no se pudo conectar al servidor o a la base de datos");
+
+            $consulta1 = mysqli_query($conexion, "delete from pagos where codigocliente =$codigo") or exit("no se pudo borrar el campo");
+            $consulta1 = mysqli_query($conexion, "delete from detallepedidos where codigocliente =$codigo") or exit("no se pudo borrar el campo");
+            $consulta1 = mysqli_query($conexion, "delete from pedidos where codigocliente =$codigo") or exit("no se pudo borrar el campo");
+            $consulta1 = mysqli_query($conexion, "delete from clientes where codigocliente =$codigo") or exit("no se pudo borrar el campo");
+            print
+            "<h2>Se han borrado los datos del cliente con codigo $codigo";
+        }else{
+            print
+            "<h2>no se borro el usuario";
+        }
+
     }
 } else {
 
