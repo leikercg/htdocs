@@ -42,6 +42,8 @@
             print $key . "  " . $value . "<br>";
         }
 
+        mysqli_close($conexion);
+
         /*
         mysqli_stmt_bind_param($stmt, "tipos", $parametro1, $parametro2, ...);
 
@@ -68,6 +70,7 @@
               print "La contraseña no es válida.";
           }
          */
+
         ?>
     </main>
 
