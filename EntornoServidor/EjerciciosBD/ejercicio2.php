@@ -57,6 +57,7 @@
                         print "<option value=" . $value . ">$value</option>"; // para imprimir solo el valor, no el nombre de la columna
                     }
                 }
+                //dar nombre al boton enviar para enviar name ='enviar';
                 print "<input type='submit' value='enviar'>
                 </select>
             </form>";

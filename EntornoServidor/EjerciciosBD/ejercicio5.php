@@ -9,6 +9,7 @@
     <header><h1>Insertar Clientes</h1></header>
     <main>
         <?php
+        /*header("ejercicio5.php"); esto recarga la página*/
         if($_REQUEST) {// recogo los valores del formulario
             print_r($_REQUEST);
             $nombrecliente  = $_REQUEST["nombrecliente"];

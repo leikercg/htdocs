@@ -46,8 +46,8 @@ if($_REQUEST) {
 
         print "<input type='text' name='codigo' hidden value='$clinteid'>
             <label>Desea Borrar a este cliente de la base de datos?</label>
-            <input type='submit' name='si' value='si'>
-            <input type='submit' name='si' value='no'>
+            <input type='submit' name='respuesta' value='si'>
+            <input type='submit' name='respuesta' value='no'>
         </form>";
 
         mysqli_close($conexion);
@@ -55,16 +55,19 @@ if($_REQUEST) {
     } else {
         print_r($_REQUEST);
         $codigo = $_REQUEST["CodigoCliente"];
-        if($_REQUEST["si"] == "si") {
-            $conexion   = mysqli_connect("localhost", "root", "", "jardineria") or exit("no se pudo conectar al servidor o a la base de datos");
+        if($_REQUEST["respuesta"] == "si") {
+            $conexion = mysqli_connect("localhost", "root", "", "jardineria") or exit("no se pudo conectar al servidor o a la base de datos");
 
-            $consulta1 = mysqli_query($conexion, "delete from pagos where codigocliente =$codigo") or exit("no se pudo borrar el campo");
-            $consulta1 = mysqli_query($conexion, "delete from detallepedidos where codigocliente =$codigo") or exit("no se pudo borrar el campo");
-            $consulta1 = mysqli_query($conexion, "delete from pedidos where codigocliente =$codigo") or exit("no se pudo borrar el campo");
-            $consulta1 = mysqli_query($conexion, "delete from clientes where codigocliente =$codigo") or exit("no se pudo borrar el campo");
-            print
+            $consulta1 = mysqli_query($conexion, "delete from pagos where codigocliente =$codigo")    or exit("no se pudo borrar el campo");
+            $consulta3 = mysqli_query($conexion, "delete from pedidos where codigocliente =$codigo")  or exit("no se pudo borrar el campo");
+            $consulta4 = mysqli_query($conexion, "delete from clientes where codigocliente =$codigo") or exit("no se pudo borrar el campo");
+            if($consulta2) {
+                print "se borro al cliente con codigo $codigo";
+            }else{
+                print "no se pudo borrar";
+            }
             "<h2>Se han borrado los datos del cliente con codigo $codigo";
-        }else{
+        } else {
             print
             "<h2>no se borro el usuario";
         }
