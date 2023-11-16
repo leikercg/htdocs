@@ -36,7 +36,7 @@ if(!$_REQUEST) {
                  $usuarioveri = $resultado[0];
              }
 
-             if($claveveri == $clave && $usuarioveri == $usuario) {
+             if($claveveri ==  password_verify($clave,$claveveri) && $usuarioveri == $usuario) {
                  $resultconsulta = mysqli_query($conexion, "Select codigocliente, nombrecliente, nombrecontacto from clientes;");
 
                  $nfilas2=mysqli_num_rows($resultconsulta);
