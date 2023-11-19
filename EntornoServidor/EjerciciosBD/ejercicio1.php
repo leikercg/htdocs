@@ -69,6 +69,7 @@
 
         }
         print "</TABLE>";
+        mysqli_close($conexion);
     }
     ?>
 
