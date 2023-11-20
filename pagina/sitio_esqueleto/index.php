@@ -8,8 +8,9 @@
 </head>
 <body>
     <header>
-        <a href="https://cpilosenlaces.com/"><img src="../images/enlaces.png" alt="aaaa"></a>
-        <h1>DESARROLLO WEB ENTORNO SERVIDOR</h1>
+        <div><a href="https://cpilosenlaces.com/"><img src="../images/enlaces.png" alt="aaaa"></a></div>
+        <div class="centrar"><h1>DESARROLLO WEB ENTORNO SERVIDOR</h1></div>
+        <div></div>
     </header>
     <section>
         <nav></nav>
@@ -34,8 +35,17 @@
                 ?>
             </div>
 		</main>
-        <aside></aside>
+        <aside>
+            <div><a href="https://www.php.net/"><img src="../images/php.png" alt="logo de php"></a></div>
+            <div><a href="https://www.google.es/"><img src="../images/google.png" alt="logo de google"></a></div>
+            <div><a href="https://www.mysql.com/"><img src="../images/mysql.png" alt="logo de mySql"></a></div>
+        </aside>
     </section>
-    <footer></footer>
+    <footer>
+        <div>LEIKER_CASTILLO®</div>
+        <div>
+            <div><a href="https://github.com/leikercg"><img src="../images/git.png" alt="logo de git"></a></div>
+        </div>
+    </footer>
 </body>
 </html>

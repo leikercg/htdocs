@@ -1,38 +1,53 @@
-body{
+body {
     height: 1100px;
     display: flex;
     flex-direction: column;
     margin: 0px;
 }
-h1{
-    font-size: 35px;
-}
-header{
+
+header {
     height: 15%;
     width: 100%;
-    background-color: black;
+    background-color: rgb(70, 140, 187);
     font-size: 1.5em;
     color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-
+    justify-content: center
+}
+img{
+    height: 100px;
+    width: 100px;
 }
 
-section{
+header h1 {
+
+    font-size: 35px;
+
+}
+.centrar{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header div {
+    width: 15%;
+}
+
+section {
     display: flex;
     height: 60%;
     width: 100%;
 }
 
-nav{
+nav {
     height: 100%;
     width: 20%;
-    background-color: gray;
+    background-color: rgb(49, 46, 46);
 }
 
-main{
+main {
     height: 60%;
     width: 100%;
     display: flex;
@@ -42,25 +57,33 @@ main{
     padding: 5%;
 }
 
-aside{
+aside {
     height: 100%;
     width: 20%;
-    background-color: gray;
+    background-color: rgb(49, 46, 46);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
-p{
+p {
     height: 100%;
 }
 
-footer{
+footer {
     height: 20%;
     width: 100%;
-    background-color: black;
+    background-color: rgb(70, 140, 187);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-header img{
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    left: 20px;
-    top: 20%;
+
+footer img{
+    margin:15px;
+    height: auto;
 }
+
