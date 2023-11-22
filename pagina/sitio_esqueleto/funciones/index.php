@@ -9,7 +9,7 @@
         <?php include("../includes/nav_funciones.php") ?>
 
         <main>
-            funciones
+            <h2>Ejercicios de funciones</h2>
 		</main>
         <?php include("../includes/aside2.php") ?>
     </section>

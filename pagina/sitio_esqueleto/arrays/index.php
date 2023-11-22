@@ -9,7 +9,7 @@
         <?php include("../includes/nav_arrays.php") ?>
 
         <main>
-		    arrays
+		    <h2>Ejercicios de arrays</h2>
 
 		</main>
         <?php include("../includes/aside2.php") ?>

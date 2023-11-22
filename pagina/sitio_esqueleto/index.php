@@ -11,7 +11,7 @@
         <main>
 		    <h1>EJERCICIOS RESUELTOS EN CLASE</h1>
             <img style="height: auto; width: 500px;" src="images/portada.png" alt="imagen de un servidor">
-            <p style="font-size:20px;">Esta página servirá de consulta y repasado de cara al examen, pues contiene todos los ejercicios realizados en clase.</p>
+            <p style="font-size:20px;">Esta página servirá de consulta y repaso de cara al examen, pues contiene todos los ejercicios realizados en clase.</p>
 
 		</main>
         <?php include("includes/aside.php") ?>
