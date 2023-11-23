@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if(isset($_REQUEST["cerrar"])){
+    unset($_SESSION["usuario"]);//usar unset para borrar varibales de sesión
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <?php include "../includes/metadata2.php"; ?>
@@ -17,50 +24,52 @@
         <div class="contenido">
 
         <?php
-if (!$_REQUEST) {
-    print "<form  action='ejer6.php' method='get'>";
-    print "Selecciona el telefono del cliente: &nbsp;";
-    print"<select name='codigocliente'>";
+        if (!isset($_SESSION["usuario"])) {//si no esta la variable de sesión usuario mostrar este mensaja
+            print"No se ha iniciado sesión, no puede acceder, por favor inicie sesión <a href='login.php'>aquí</a>";
+        } else {
+            if (!$_REQUEST) {
+                print "<form  action='ejer6.php' method='get'>";
+                print "Selecciona el telefono del cliente: &nbsp;";
+                print"<select name='codigocliente'>";
 
-    $c = mysqli_connect("localhost", "jardinero", "jardinero");
-    mysqli_select_db($c, "jardineria");
+                include("conectabd.php");
 
-    $consulta1      = "SELECT codigocliente, telefono, nombrecliente FROM clientes";
-    $resulconsulta1 = mysqli_query($c, $consulta1);
+                $consulta1      = "SELECT codigocliente, telefono, nombrecliente FROM clientes";
+                $resulconsulta1 = mysqli_query($c, $consulta1);
 
-    while ($registro = mysqli_fetch_row($resulconsulta1)) {
-        print"<option value=$registro[0]>" . $registro[1] . "--" . $registro[2] . "</option>";
-    }
-    print"</select><br><br>";
-    print "<input type='submit' value='Enviar consulta' name='enviar'>";
-    print "</form>";
-} else {
-    if(!isset($_REQUEST["modificar"])) {
-        $codigocliente = $_REQUEST['codigocliente'];
+                while ($registro = mysqli_fetch_row($resulconsulta1)) {
+                    print"<option value=$registro[0]>" . $registro[1] . "--" . $registro[2] . "</option>";
+                }
+                print"</select><br><br>";
+                print "<input type='submit' value='Enviar consulta' name='enviar'>";
+                print "</form>";
+            } else {
+                if(!isset($_REQUEST["modificar"])) {
+                    $codigocliente = $_REQUEST['codigocliente'];
 
-        $c = mysqli_connect("localhost", "root", "");
-        mysqli_select_db($c, "jardineria");
+                    $c = mysqli_connect("localhost", "root", "");
+                    mysqli_select_db($c, "jardineria");
 
-        $consulta2      = "SELECT * FROM clientes where codigocliente='$codigocliente' ";
-        $resulconsulta2 = mysqli_query($c, $consulta2);
-        $registro       = mysqli_fetch_row($resulconsulta2);
+                    $consulta2      = "SELECT * FROM clientes where codigocliente='$codigocliente' ";
+                    $resulconsulta2 = mysqli_query($c, $consulta2);
+                    $registro       = mysqli_fetch_row($resulconsulta2);
 
-        //Se puede almacenar en distintas variables cada uno de los registros del cliente elegido por el usuario
-        /*
-        $nombrecliente=$registro[1];
-        $nombrecontacto=$registro[2];
-        $apellidocontacto=$registro[3];
-        $telefono=$registro[4];
-        $fax=$registro[5];
-        $lineadireccion1=$registro[6];
-        $lineadireccion2=$registro[7];
-        $ciudad=$registro[8];
-        $region=$registro[9];
-        $pais=$registro[10];
-        $codigopostal=$registro[11];
-        $codigoempleadorepventas=$registro[12];
-        $limitecredito=$registro[13];*/
-        ?>
+                    //Se puede almacenar en distintas variables cada uno de los registros del cliente elegido por el usuario
+                    /*
+                    $nombrecliente=$registro[1];
+                    $nombrecontacto=$registro[2];
+                    $apellidocontacto=$registro[3];
+                    $telefono=$registro[4];
+                    $fax=$registro[5];
+                    $lineadireccion1=$registro[6];
+                    $lineadireccion2=$registro[7];
+                    $ciudad=$registro[8];
+                    $region=$registro[9];
+                    $pais=$registro[10];
+                    $codigopostal=$registro[11];
+                    $codigoempleadorepventas=$registro[12];
+                    $limitecredito=$registro[13];*/
+                    ?>
 
 		<table>
 		<form  action='ejer6.php' method='GET'>
@@ -116,19 +125,19 @@ if (!$_REQUEST) {
 			<td>CodigoEmpleadoRepventas:</td>
 			<td> <?php	print "<select name = 'codigoempleadorepventas'>";
 
-        $consulta = "SELECT CodigoEmpleado, Nombre, Apellido1, Apellido2 FROM empleados";
-        $rescon   = mysqli_query($c, $consulta);
+                    $consulta = "SELECT CodigoEmpleado, Nombre, Apellido1, Apellido2 FROM empleados";
+                    $rescon   = mysqli_query($c, $consulta);
 
-        while($valor = mysqli_fetch_row($rescon)) {
-            print "<option ";
-            if($valor[0] == $registro[12]) {
-                print "selected ";
-            } //Para que aparezca seleccionado por defecto el empleado asignado al cliente
-            print "value = $valor[0]>" . $valor[1] . " " . $valor[2] . " " . $valor[3] . "</option>";
-        }
-        mysqli_close($c);
-        print "</select>";
-        ?>
+                    while($valor = mysqli_fetch_row($rescon)) {
+                        print "<option ";
+                        if($valor[0] == $registro[12]) {
+                            print "selected ";
+                        } //Para que aparezca seleccionado por defecto el empleado asignado al cliente
+                        print "value = $valor[0]>" . $valor[1] . " " . $valor[2] . " " . $valor[3] . "</option>";
+                    }
+                    mysqli_close($conexion);
+                    print "</select>";
+                    ?>
 			</td>
 		</tr>
 		<tr>
@@ -143,37 +152,38 @@ if (!$_REQUEST) {
 		</form>
 		</table>
 <?php
-    } else {
-        $codigocliente           = $_REQUEST['codigocliente'];
-        $nombrecliente           = $_REQUEST['nombrecliente'];
-        $nombrecontacto          = $_REQUEST['nombrecontacto'];
-        $apellidocontacto        = $_REQUEST['apellidocontacto'];
-        $telefono                = $_REQUEST['telefono'];
-        $fax                     = $_REQUEST['fax'];
-        $lineadireccion1         = $_REQUEST['lineadireccion1'];
-        $lineadireccion2         = $_REQUEST['lineadireccion2'];
-        $ciudad                  = $_REQUEST['ciudad'];
-        $region                  = $_REQUEST['region'];
-        $pais                    = $_REQUEST['pais'];
-        $codigopostal            = $_REQUEST['codigopostal'];
-        $codigoempleadorepventas = $_REQUEST['codigoempleadorepventas'];
-        $limitecredito           = $_REQUEST['limitecredito'];
+                } else {
+                    $codigocliente           = $_REQUEST['codigocliente'];
+                    $nombrecliente           = $_REQUEST['nombrecliente'];
+                    $nombrecontacto          = $_REQUEST['nombrecontacto'];
+                    $apellidocontacto        = $_REQUEST['apellidocontacto'];
+                    $telefono                = $_REQUEST['telefono'];
+                    $fax                     = $_REQUEST['fax'];
+                    $lineadireccion1         = $_REQUEST['lineadireccion1'];
+                    $lineadireccion2         = $_REQUEST['lineadireccion2'];
+                    $ciudad                  = $_REQUEST['ciudad'];
+                    $region                  = $_REQUEST['region'];
+                    $pais                    = $_REQUEST['pais'];
+                    $codigopostal            = $_REQUEST['codigopostal'];
+                    $codigoempleadorepventas = $_REQUEST['codigoempleadorepventas'];
+                    $limitecredito           = $_REQUEST['limitecredito'];
 
-        $c = mysqli_connect("localhost", "root", "");
-        mysqli_select_db($c, "jardineria");
+                    $c = mysqli_connect("localhost", "root", "");
+                    mysqli_select_db($c, "jardineria");
 
-        print "<b>Se procede a la modificación del cliente con código $codigocliente</b><br>";
-        $modificacion = "UPDATE clientes SET nombrecliente='$nombrecliente', nombrecontacto='$nombrecontacto', apellidocontacto='$apellidocontacto', telefono='$telefono', fax='$fax', lineadireccion1='$lineadireccion1', lineadireccion2='$lineadireccion2', ciudad='$ciudad', region='$region', pais='$pais', codigopostal='$codigopostal', codigoempleadorepventas='$codigoempleadorepventas', limitecredito='$limitecredito' WHERE codigocliente = '$codigocliente'";
+                    print "<b>Se procede a la modificación del cliente con código $codigocliente</b><br>";
+                    $modificacion = "UPDATE clientes SET nombrecliente='$nombrecliente', nombrecontacto='$nombrecontacto', apellidocontacto='$apellidocontacto', telefono='$telefono', fax='$fax', lineadireccion1='$lineadireccion1', lineadireccion2='$lineadireccion2', ciudad='$ciudad', region='$region', pais='$pais', codigopostal='$codigopostal', codigoempleadorepventas='$codigoempleadorepventas', limitecredito='$limitecredito' WHERE codigocliente = '$codigocliente'";
 
-        print "<b>Sentencia de modificación:</b><br>$modificacion<br>";
-        if(mysqli_query($c, $modificacion)) {	//Devuelve true si se ha podido realizar la consulta y a la vez la ejecuta
-            print "<br><b>Inserción completada correctamente.</b><br><br>";
-        } else {
-            print "<br><b>Ha ocurrido error al ejecutar sentencia SQL INSERT.</b><br/>";
-        }
-        print "<a href = 'ejer6.php'>Vuelta al formulario de inserción</a><br/>";
-    }
-}?>
+                    print "<b>Sentencia de modificación:</b><br>$modificacion<br>";
+                    if(mysqli_query($c, $modificacion)) {	//Devuelve true si se ha podido realizar la consulta y a la vez la ejecuta
+                        print "<br><b>Inserción completada correctamente.</b><br><br>";
+                    } else {
+                        print "<br><b>Ha ocurrido error al ejecutar sentencia SQL INSERT.</b><br/>";
+                    }
+                    print "<a href = 'ejer6.php'>Vuelta al formulario de inserción</a><br/>";
+                }
+            }
+        }?>
 
 
         </div>

@@ -14,7 +14,7 @@
 				<a class="inicio" href="index.php">Inicio ejercicios BBDD</a><h2>REGISTRASE</h2>
 
                 <?php
-                if(!$_REQUEST) {
+                if(!$_REQUEST) {//si no está establecido el array request mostrar formulario
                     ?>
                         <form action="">
                                     <label for="">Nombre</label>
@@ -27,22 +27,36 @@
                         </form>
                             <?php } else {
                                 $nombre = $_REQUEST["nombre"];
-                                $clave  = $_REQUEST["clave"];
-                                $clave2 = $_REQUEST["clave2"];
+                                $clave  = $_REQUEST["clave"]; //clave
+                                $clave2 = $_REQUEST["clave2"]; //confirmación de clave
 
-                                if($clave != $clave2) {
-                                    print"<h2> Las contraseñas no coinciden</h2> <br><br> ";
-                                    print "<h3>volver al <a href=''>formulario</a></h3>";
-                                } else {
-/*comprobar que no exista el usuario*/
+                                $conexion        = mysqli_connect("localhost", "root", "", "jardineria");
+                                $sqlnombre       = "SELECT nombre from usuarios where nombre='$nombre'";
+                                $consulta_nombre = mysqli_query($conexion, $sqlnombre);
+
+                                if(mysqli_num_rows($consulta_nombre) == 1 && $clave != $clave2) {//entra si la cosulta devuelve una fila es por que está registrado ese usurario y si las contraseñas son distintas
+                                    print"<h2> EL usuario ya está registrado y además as contraseñas no coinciden</h2> <br><br> ";
+                                    print "<h3>volver al <a href='register.php'>formulario</a></h3>";
+                                } elseif($clave != $clave2 || $clave =="") {//si las contraseñas son distintas o la contraseña esta en blanco
+
+                                    print"<h2> Las contraseñas no coinciden o están en blanco</h2> <br><br> ";
+                                    print "<h3>volver al <a href='register.php'>formulario</a></h3>";
+                                } elseif(mysqli_num_rows($consulta_nombre) == 1) {// comprobar que no exista el usuario
+
+                                    print"<h2> EL usuario ya está registrado.</h2> <br><br> ";
+                                    print "<h3>volver al <a href='register.php'>formulario</a></h3>";
+
+                                } else {//si no se cumple nada de lo anterior se registrara el usuario.
                                     $clave_encriptada = password_hash($clave, PASSWORD_BCRYPT);
-                                    print $clave_encriptada;
+                                    $sqlRegistrar = "INSERT into usuarios (nombre,clave) values ('$nombre','$clave_encriptada')";
+                                    $consulta_registrar = mysqli_query($conexion, $sqlRegistrar);
 
-                                    if(!password_verify($nombre, $clave_encriptada)) {
-                                        print"<h3>Las contraseña no co";
-                                    }
+                                    print"<h2> EL usuario se ha creado correctamente.</h2> <br><br> ";
+                                    print "<h3>Inicie sesión <a href='login.php'>aquí.</a></h3>";
+
+
                                 }
-
+                                mysqli_close($conexion);
                             }
 
     ?>

@@ -1,3 +1,11 @@
+
+<?php
+session_start();
+
+if(isset($_REQUEST["cerrar"])){
+    unset($_SESSION["usuario"]);//usar unset para borrar varibales de sesión
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <?php include "../includes/metadata2.php"; ?>
@@ -18,13 +26,11 @@
 
 
         <?php
-   // Conectar con el servidor de base de datos
-   $conexion = mysqli_connect("localhost", "jardinero", "jardinero")
-      or exit("No se puede conectar con el servidor");
-
-    // Seleccionar base de datos
-    mysqli_select_db($conexion, "jardineria")
-       or exit("No se puede seleccionar la base de datos");
+if (!isset($_SESSION["usuario"])) {//si no esta la variable de sesión usuario mostrar este mensaja
+    print"No se ha iniciado sesión, no puede acceder, por favor inicie sesión <a href='login.php'>aquí</a>";
+} else {
+    // Conectar con el servidor de base de datos
+    include("conectabd.php");
 
     if (isset($_REQUEST['gama'])) {
         $gama = $_REQUEST['gama'];
@@ -82,7 +88,8 @@
     }
     // Cerrar conexión
     mysqli_close($conexion);
-    ?>
+}
+?>
 
         </div>
 		</main>

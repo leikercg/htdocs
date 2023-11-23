@@ -162,3 +162,15 @@ color: rgb(7, 7, 7);
 a{
     color: blue;
 }
+
+#usuario{
+    color: rgb(23, 23, 190);
+    position: relative;
+    top:-20px;
+    left: 550px;
+}
+#cerrar{
+    position: relative;
+    top:-20px;
+    left: 550px;
+}

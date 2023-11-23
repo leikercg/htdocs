@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <?php include "../includes/metadata2.php"; ?>
@@ -17,39 +20,51 @@
 
         <div class="contenido">
             <?php
-            if(!$_REQUEST){
-            ?>
+            if(!isset($_REQUEST["entrar"])) {//si no establecido el botón enviar del formulario hacer esto
+                ?>
                 <form action="">
                             <label for="">Nombre</label>
                             <input type="text" name="nombre" id=""><br><br>
                             <label for="">contraseña</label>
                             <input type="text" name="clave" id=""><br><br>
-                            <input type="submit" value ="enviar" id="">
+                            <input type="submit" value ="entrar" id="" name="entrar">
                 </form>
-                    <?php }else{
-                        print_r($_REQUEST);
-                         $nombre=$_REQUEST["nombre"];
-                         $clave=$_REQUEST["clave"];
+                    <?php } else {//si lo está hacer esto
+                        $nombre = $_REQUEST["nombre"];
+                        $clave  = $_REQUEST["clave"];
 
-                         $conexion=mysqli_connect("localhost","root","","jardineria");
+                        $claveBBDD = "";
 
-                         $sqlnombre="SELECT nombre from usuarios where clave = '$clave' ";
+                        $conexion        = mysqli_connect("localhost", "root", "", "jardineria");
+                        $sqlnombre       = "SELECT nombre, clave from usuarios where nombre = '$nombre'";
+                        $consultaUsuario = mysqli_query($conexion, $sqlnombre);
+                        $filasnombre     = mysqli_num_rows($consultaUsuario);
+                        if(mysqli_num_rows($consultaUsuario) == 0) {//si devuelve 0 filas pedimos que se registre
+                            print"<h2> EL usuario no está registrado</h2> <br><br> ";
+                            print "<h3>Registrese <a href='register.php'>aquí</a></h3>";
 
-                         $consultanombre = mysqli_query($conexion, $sqlnombre);
+                        } else {//si devuelve 1 fila
+                            for($i = 0; $i < $filasnombre; $i++) {
+                                $resultadonombre = mysqli_fetch_array($consultaUsuario);
+                                $claveBBDD       = $resultadonombre["clave"];
 
-                         $filasnombre = mysqli_num_rows($consultanombre);
+                                if(password_verify($clave, $claveBBDD)) {//verificamos las contraseñas encriptadas con las pasadas por el formulario, si se cumple inicia sesión
+                                    print"<h2>Has iniciado sesión correctamente $nombre</h2> <br><br> ";
+                                    print "<h3>BIENVENID@ A LA SECCIÓN DE BASE DE DATOS</h3>";
 
-                         for($i= 0;$i<$filasnombre;$i++){
-                        $resultadonombre=mysqli_fetch_array($consultanombre);
-                        print $resultadonombre["nombre"];
+                                    $_SESSION["usuario"]=$nombre;
+                                } else {//si no se verifican correctamente pide rellenar de nuevo el formulario.
+                                    print"<h2> Contraseña erronea</h2> <br><br> ";
+                                    print "<h3>Volver al <a href='login.php'>formulario</a></h3>";
+                                }
+
+                            }
+
                         }
-
+                        mysqli_close($conexion);
                     }
 
-
-
-
-            ?>
+    ?>
         </div>
 		</main>
         <?php include "../includes/aside2.php"; ?>
