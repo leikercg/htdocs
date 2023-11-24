@@ -28,6 +28,13 @@ if (!isset($_SESSION["usuario"])) {
             <h3>
 
             <?php } else {
+                if(isset($_SESSION["usuario"])) {//mostrar el nombre de usaurio y botón de cerrar sesión
+
+                    print"<div id='usuario'>" . $_SESSION["usuario"] . "</div>";
+                    print"<form id='cerrar' action=''>
+                        <input type='submit' name='cerrar' value='cerrar'>
+                        </form>";
+                }
                 print"<h2> Bien venid@ " . $_SESSION["usuario"] . "</h2> <br><br> ";
             }?>
 		</main>

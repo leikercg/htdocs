@@ -2,8 +2,8 @@
 <?php
 session_start();
 
-if(isset($_REQUEST["cerrar"])){
-    unset($_SESSION["usuario"]);//usar unset para borrar varibales de sesión
+if(isset($_REQUEST["cerrar"])) {
+    unset($_SESSION["usuario"]); //usar unset para borrar varibales de sesión
 }
 ?>
 <!DOCTYPE html>
@@ -21,6 +21,13 @@ if(isset($_REQUEST["cerrar"])){
 			<div>
 				<a class="inicio" href="index.php">Inicio ejercicios BBDD</a><h2>COLSULTA PRODUCTOS</h2>
 			</div>
+            <?php if(isset($_SESSION["usuario"])) {//mostrar el nombre de usaurio y botón de cerrar sesión
+
+                print"<div id='usuario'>" . $_SESSION["usuario"] . "</div>";
+                print"<form id='cerrar' action=''>
+    <input type='submit' name='cerrar' value='cerrar'>
+    </form>";
+            }?>
 		</div>
         <div class="contenido">
 
@@ -30,7 +37,7 @@ if (!isset($_SESSION["usuario"])) {//si no esta la variable de sesión usuario m
     print"No se ha iniciado sesión, no puede acceder, por favor inicie sesión <a href='login.php'>aquí</a>";
 } else {
     // Conectar con el servidor de base de datos
-    include("conectabd.php");
+    include "conectabd.php";
 
     if (isset($_REQUEST['gama'])) {
         $gama = $_REQUEST['gama'];
