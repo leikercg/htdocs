@@ -46,7 +46,11 @@
                                     print"<h2> EL usuario ya está registrado.</h2> <br><br> ";
                                     print "<h3>volver al <a href='register.php'>formulario</a></h3>";
 
-                                } else {//si no se cumple nada de lo anterior se registrara el usuario.
+                                } elseif ($nombre==trim($nombre)){
+                                    print"<h2> El campo usuario usuario está vacio.</h2> <br><br> ";
+                                    print "<h3>volver al <a href='register.php'>formulario</a></h3>";
+                                }
+                                else {//si no se cumple nada de lo anterior se registrara el usuario.
                                     $clave_encriptada = password_hash($clave, PASSWORD_BCRYPT);
                                     $sqlRegistrar = "INSERT into usuarios (nombre,clave) values ('$nombre','$clave_encriptada')";
                                     $consulta_registrar = mysqli_query($conexion, $sqlRegistrar);
