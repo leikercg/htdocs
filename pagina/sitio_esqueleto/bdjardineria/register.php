@@ -46,7 +46,7 @@
                                     print"<h2> EL usuario ya está registrado.</h2> <br><br> ";
                                     print "<h3>volver al <a href='register.php'>formulario</a></h3>";
 
-                                } elseif ($nombre==trim($nombre)){
+                                } elseif (trim($nombre)==""){
                                     print"<h2> El campo usuario usuario está vacio.</h2> <br><br> ";
                                     print "<h3>volver al <a href='register.php'>formulario</a></h3>";
                                 }
