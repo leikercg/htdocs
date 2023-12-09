@@ -1,0 +1,122 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body,
+html {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    /*eliminar la barra de desplazamiento horizontal*/
+}
+
+header {
+    background-color: black;
+    height: 20vh;
+    color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    min-width: 100vh;
+    min-height: 60vh;
+    display: flex;
+}
+
+aside {
+    min-height: 100vh;
+    /*hay que indicar ancho y alto ya que estan vacios*/
+    min-width: 15%;
+    background-color: gray;
+}
+
+nav {
+    min-height: 100vh;
+    min-width: 15%;
+    background-color: gray;
+}
+
+main {
+    min-width: 70%;
+    min-height: 100vh;
+
+    position: relative;
+    /*para mover los objetos de dentro*/
+}
+
+.titulo {
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    background-color: black;
+    height: 20vh;
+    color: beige;
+}
+
+/******************************************************************************/
+.botones button,
+.contenido [type="submit"],
+.contenido [type="reset"] {
+    margin: 5px;
+    padding: 5px;
+}
+
+.botones button a {
+    text-decoration: none;
+    color: black;
+}
+
+.botones {
+    height: 15%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.inicio {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    color: blue;
+    text-decoration: none
+}
+
+.contenido {
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 96%;
+
+}
+
+.formulario {
+    padding: 5px 5px 5px;
+    margin-top: 10px;
+    border: 1px solid blue;
+}
+
+.centrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fecha {
+    display: flex;
+    justify-content: flex-end;
+    color: rgb(125, 36, 36);
+    margin: 5px;
+}
+
+.contenido h3 ~ table  tr:hover{
+    background-color: yellow;
+}
