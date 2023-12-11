@@ -9,17 +9,18 @@
     <?php
 function cambio($euros)
 {
-    $valor    = [500, 200, 100, 50, 20, 10, 5, 2, 1];
-    $billetes = 0;
+    $desglose = ["500" => 0, "200" => 0, "100" => 0, "50" => 0, "20" => 0, "10" => 0, "5" => 0, "2" => 0, "1" => 0];
 
-    for ($i = 0; $i <= 8; $i++) {
-        if ($euros >= $valor[$i]) {
-            $billetes = intval($euros / $valor[$i]);
-            $euros    = $euros % $valor[$i];
-            echo $billetes . " billetes de " . $valor[$i]."<br>";
-        }
-
+    foreach ($desglose as $moneda => &$cantidad) {/*es necesario para modificar el valor de ese indice*/
+if($euros >=$moneda) {
+    $cantidad = (int)($euros / $moneda);
+    $euros    = $euros % $moneda;
+    print $cantidad." billetes de ".$moneda."<br>";
+}else{
+    print $cantidad." billetes de ".$moneda."<br>";
+}
     }
+
 
 }
 

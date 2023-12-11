@@ -18,6 +18,8 @@
     <?php
     if($_REQUEST) {
         $semana = $_REQUEST["v"];
+    print_r($semana);
+
         $media  = array_sum($semana) / count($semana);
         print "<h4> la temperatura media de la semana ha sido " . round($media,2) . " esta semana</h4>";
         echo "<a href='main.html'>volver al formulario</a>";

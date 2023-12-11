@@ -29,7 +29,7 @@
     {
         $unico = [];
         if(is_array($arr)) {
-            $unico = array_unique($arr);
+            $unico = array_unique($arr);/*BORRAR LOS ELEMENTOS BORRADOS E INDEXAR DE NUEVO PARA RELLENAR LOS HUECOS BORRADOS*/
             $unico = array_values($unico);
             print "<p>Array unico: ";
             for ($i = 0; $i < count($unico); $i++) {

@@ -18,7 +18,7 @@
         return $value % 2 == 0;
 
     });
-    $cadena = implode("-", $pares);
+    $cadena = implode("-", $pares);//devuelve un string con el separador indicado
     print $cadena."<br>";
 
     function cuadrado($num)  {

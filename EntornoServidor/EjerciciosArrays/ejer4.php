@@ -18,7 +18,7 @@ function rellenarArray()
 {
     $array = [];
     for($i = 0; $i < 100; $i++) {
-        $array[$i] = rand(0, 100);
+        $array[$i] = rand(0, 100);/*maximo y minimo incluido*/
     }
     sort($array);
     print_r($array);
@@ -28,7 +28,7 @@ function rellenarArray()
 }
 function rellenarIntervalos($ar)
 {
-    $intervbalos = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    $intervbalos = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     for($i = 0; $i < 100; $i++) {
         if($ar[$i] >= 0 && $ar[$i] <= 9) {
             $intervbalos[0] += 1;

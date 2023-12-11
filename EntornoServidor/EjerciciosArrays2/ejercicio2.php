@@ -33,7 +33,7 @@ function clave(&$myarray)
 
 function valor(&$myarray)
 {
-    asort($myarray);
+    aRsort($myarray);
     print "<h3>DATOS DEL ARRAY POR VALOR</h3>
     <table border =1>";
     foreach ($myarray as $k => $v) {

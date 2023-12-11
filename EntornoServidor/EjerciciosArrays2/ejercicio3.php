@@ -28,8 +28,11 @@
         $equipos = $_REQUEST["equipo"];
         $equipo  = $equipos;
         $puntos  = $listaEquipos[$equipo];
-        rsort($listaEquipos);
-        $posicion = array_search($puntos, $listaEquipos);
+        arsort($listaEquipos);
+        print_r($listaEquipos);/*HACER COPIAS PARA ORDENAR POR VARIAS MANERAS*/
+        $listaEquiposnum=$listaEquipos;
+        sort($listaEquiposnum);
+        $posicion = array_search($puntos, $listaEquiposnum);
 
         print '<table border="1">
         <tr>
@@ -37,9 +40,10 @@
             <th>Equipo</th>
             <th>Puntos</th>
         </tr>';
+        $contador=1;
         foreach($listaEquipos as $key => $value) {
-            $key=intval($key)+1;
-            print "<tr><td>$key</td><td>equipo</td><td>$value</td></tr>";
+            print "<tr><td>$contador</td><td>$key</td><td>$value</td></tr>";
+            $contador++;
         }
         print "</table>";
         print "<h3> el $equipo tiene $puntos y esta " . ($posicion + 1) . "º en la tabla";

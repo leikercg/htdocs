@@ -1,3 +1,16 @@
 is_numeric(num)
 is_string(str)
 is_array(arr)
+
+
+
+
+AL USAR ARRAYS HACER COPIAS PARA ORDENAR DE DIFERENTES MANERAS.
+
+DESPUES DE USAR UNIQUE VOLVER A INDEXAR, UNIQUE NO REORDENA.
+
+SI QUIERO MODIFICAR UN VALOR DE ARRAY Hay que pasarlo por referencia.
+
+ACORDARSE DE CERRAR LA CONEXION SIEMPRE.
+
+strtoupper y tolower no modifical a la variable string;
