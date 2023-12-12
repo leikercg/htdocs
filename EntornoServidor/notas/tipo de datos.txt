@@ -13,4 +13,79 @@ SI QUIERO MODIFICAR UN VALOR DE ARRAY Hay que pasarlo por referencia.
 
 ACORDARSE DE CERRAR LA CONEXION SIEMPRE.
 
+
+
+*****************************STRINGS*******************************
+
+
 strtoupper y tolower no modifical a la variable string;
+str_replace --> no modifica, devuelve otra, (busqueda, sustituto, objeto);
+str_ireplace --> no modifica, devuelve otra, (busqueda, sustituto, objeto) ignorando las mayusculas
+
+substr($string, posicionInicial, [tamaño])
+strstr($string, "texto buscadp")= devuelve un string desde que lo encuentra hasta ek final.
+
+
+explode("separados",$string, [limite de cadenas])=nuevoARRAY
+implode("separador",$arraay)= une todos los elementos de un arraay en una string.
+str_split($str,[tanaño])= nueva ARRAY troceada a cachos del tamaño, no se indica tamaño por defecto es 1
+
+
+strpos($str,"buscado")=devuele un int, la posicion en la que se encuetra
+stripos($str,"buscado")=devuele un int, la posicion en la que se encuetra ignorandi mayusculas
+
+strrev($string)= nuevostring Al reves
+
+
+
+
+
+*****************************ARRAYS*******************************
+array_flip() --> no modifica, hay que asignarlo a un valor
+
+
+array_filter--> no modifica al array original
+unset-->borra y reorganiza.
+array_values= reindexiza los elementos, NO MODIFICA EL ARRAY!!!! usar despues de UNIQUE
+
+
+
+array_splice modifica al original--> sirve para borrar:
+                                    $miArray = array(1, 2, 3, 4, 5);
+                                    array_splice($miArray, 2, 1); // Elimina 1 elemento en el índice 2
+                                -->sustituit:
+                                    $miArray = array(1, 2, 3, 4, 5);
+                                    array_splice($miArray, 2, 1, 6, 7); // Elimina 1 elemento en el índice 2 y agrega 6 y 7
+                                    ($array,indice, tamño,x ,y , z...)
+
+
+array_slice($array, inicio, finSinIncluir)=$nuevoArray noFin coge hasta el final;
+
+array_count_values($array)=  devuelve un array en el que se cuentan los valores.
+
+
+array_pop y push:
+                pop--lo quita de arriba
+                push lo pone arriba
+array unshift y shift:
+                unshift lo pone abajo
+                shift lo quita de abajo.
+
+array_serch (valor,$array, [srticto])=clave de valor si esta, si no false;
+
+in_array(valor,$array)=true o false;
+
+array_filter($array,"funcionentrecomillas")=$nuevoarray
+
+array_map("funcionentrecomillas",$array)= nuevo array con valores aplicados a la funcion.
+
+
+
+*****************************SESIONES*******************************
+crear seion:
+session.start();
+$_SESSION['nombre_usuario'] = 'Juan';
+modificar el valor:
+$_SESSION['nombre_usuario'] = 'Pedro';
+borrar el array sesio:
+unset(%SESSION[]);

@@ -13,7 +13,7 @@
 
             $conexion = mysqli_connect("localhost", "root", "", "jardineria") or die("no se pudo acceder a la base de datos a fallo la concexion");
 
-            $consulta = "select gamasproductos.gama, descripciontexto, COUNT(codigoproducto) as numproductos from gamasproductos join productos on gamasproductos.gama =productos.gama GROUP BY gamasproductos.gama";
+            $consulta = "select gamasproductos.gama, descripciontexto, COUNT(codigoproducto) as 'num productos' from gamasproductos join productos on gamasproductos.gama =productos.gama GROUP BY gamasproductos.gama";
 
             $resultconsulta = mysqli_query($conexion, $consulta);
 

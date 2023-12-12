@@ -27,21 +27,21 @@ section {
 }
 
 aside {
-    min-height: 100vh;
+    min-height: 100%;
     /*hay que indicar ancho y alto ya que estan vacios*/
     min-width: 15%;
     background-color: gray;
 }
 
 nav {
-    min-height: 100vh;
+    min-height: 100%;
     min-width: 15%;
     background-color: gray;
 }
 
 main {
     min-width: 70%;
-    min-height: 100vh;
+    min-height: 100%;
 
     position: relative;
     /*para mover los objetos de dentro*/
@@ -92,7 +92,7 @@ footer {
 }
 
 .contenido {
-    padding-left: 2%;
+    padding-left: 2%;/*Se refiere al tanto por ciento del contenedor del padre.*/
     padding-right: 2%;
     width: 96%;
 
@@ -108,6 +108,10 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+
+    background-color: aqua;
+
 }
 
 .fecha {

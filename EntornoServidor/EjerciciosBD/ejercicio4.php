@@ -14,7 +14,7 @@
 
             $conexion = mysqli_connect("localhost", "root", "", "jardineria") or die("no se pudo acceder a la base de datos a fallo la concexion");
 
-            $consulta = "Select CodigoCliente, NombreCliente,NombreContacto,ApellidoContacto, Pais from clientes where lower(Pais)='$pais'";
+            $consulta = "Select CodigoCliente, NombreCliente,NombreContacto,ApellidoContacto, Pais from clientes where UPPER(Pais)= UPPER('$pais') "; //Compara ambos en mayusculas
 
             $resultconsulta = mysqli_query($conexion, $consulta);
 
@@ -22,7 +22,7 @@
             if($nfilas > 0) {
 
                 print "<table border='1'>";
-                print "<tr> <th>Código</th> <th>Nombre Cliente</th> <th>Nombre Contacto</th> <th>Apellido Contacto</th><th>Apellido Pais</th></tr>";
+                print "<tr> <th>Código</th> <th>Nombre Cliente</th> <th>Nombre Contacto</th> <th> Contacto</th><th> Pais</th></tr>";
 
                 for($i = 0; $i < $nfilas; $i++) {
                     $resultado = mysqli_fetch_assoc($resultconsulta);

@@ -7,29 +7,41 @@
 </head>
 <body>
     <?php
-        function bidimensional($alumnos, $asignaturas)
-        {
-            $arrayMulti = [];
-            $arrayNotas = [];
-
-            foreach ($alumnos as $indice => $nombre) {
-                foreach ($asignaturas as $indicenotas => $clase) {
-                    $nota        = rand(0, 1000)/100;
-                    $indicenotas = $clase;
-                    $arrayNotas[$clase] = $nota;
-                }
-                $boletin             = $arrayNotas;
-                $arrayNotas          = [];
-                $arrayMulti[$nombre] = $boletin;
+        function aprobado($num) {
+            if($num >= 5){
+                print "Apobado";
+            }else{
+                print "Suspendido";
             }
-            return $arrayMulti;
+        }
+        function bidimensional(array $alumnos, array $asignaturas)
+        {
+            print "<table border=1>";
+            print "<tr> <td>ALumnos</td>  <td>Lengua</td>  <td>Ingles</td>  <td>Mates</td>  <td>Programación</td> </tr>";
+            $nuevoarrayAsig =array_flip($asignaturas);//intercambio valores por indices
+            $nuevoarrayAlum=array_flip($alumnos);
+            foreach ($nuevoarrayAlum as $alumno => &$miarray) {//modifico por referencia
+                print "<tr> <td>$alumno</td>";
+                foreach ($nuevoarrayAsig as $asignatura=> &$nota) {//este nuevo array aleatorio es el nuevo valor de $miarray, a la proxima vuekta se generará otro diferente.
+                    $nota=(float)rand(0,100)/10;
+                    print" <td>$nota";
+                    print "<br>";
+                    aprobado($nota);
+                    print "</td>";
+                }
+                $miarray=$nuevoarrayAsig;
 
+                print "</tr>";
+
+            }
+            print "<table>";
+                return $nuevoarrayAlum;
         }
 
-        $lista = ["leiker", "david", "castillo", "guzman"];
+        $alumnos = ["leiker", "david", "castillo", "guzman"];
     $materias  = ["lengua", "ingles", " matematicas", "programación"];
 
-    print_r(bidimensional($lista, $materias));
+    (bidimensional($alumnos, $materias));
 
     print "<table border=1>";
     print"<tr> <th>Lengua</th> <th>Ingles</th> <th>Mates</th> <th>Programación</th> </tr>";

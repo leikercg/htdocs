@@ -93,13 +93,15 @@
             print"<tr><td>$key</td><td>$value</td></tr>";
         }
         print "</table>";
-    }
-    print"<br><br>";
+
+        print"<br><br>";
     sort($_REQUEST);
     print "<table border=1>";
     print "<tr><th>VENTA MEDIA</th><th>VENTA MÁXIMA</th><th>VENTA MÍNIMA</th></tr>";
     print"<tr><td>".array_sum($_REQUEST)."</td><td>".$_REQUEST[11]."</td><td>".$_REQUEST[0]."</td></tr>";
     print "</table>";
+    }
+
     ?>
 <table>
 
