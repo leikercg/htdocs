@@ -89,3 +89,36 @@ modificar el valor:
 $_SESSION['nombre_usuario'] = 'Pedro';
 borrar el array sesio:
 unset(%SESSION[]);
+
+
+
+
+**********************************************************base de datos***************
+SELECT: Especifica las columnas que deseas recuperar en el resultado de la consulta.
+
+FROM: Indica las tablas de las cuales se obtendrán los datos.
+
+WHERE: Filtra las filas basándose en una condición específica.
+
+GROUP BY: Agrupa las filas basándose en los valores de una o más columnas.
+
+HAVING: Filtra grupos de filas basándose en una condición específica (similar a WHERE, pero para grupos).
+
+ORDER BY: Ordena el resultado según una o más columnas, de forma ascendente o descendente.
+
+Ejemplo:
+SELECT columna1, columna2 º
+FROM tabla
+WHERE condicion
+GROUP BY columna1
+HAVING condicion_grupo
+ORDER BY columna1 ASC;
+Es importante notar que no siempre es necesario usar todas las cláusulas en una consulta. Si no necesitas filtrar filas (WHERE), agrupar (GROUP BY), filtrar grupos (HAVING), o ordenar (ORDER BY), puedes omitir esas cláusulas en tu consulta. Por lo tanto, una consulta típica puede tener solo SELECT y FROM si no se requieren condiciones adicionales.
+
+Las columnas que  aparecen en la clausula order by tienen que estar en el select a no ser que esten en una funcion de grupo,
+
+count()
+sum()
+avg()
+mas()
+min()
