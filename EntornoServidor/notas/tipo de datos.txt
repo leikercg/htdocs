@@ -88,7 +88,7 @@ $_SESSION['nombre_usuario'] = 'Juan';
 modificar el valor:
 $_SESSION['nombre_usuario'] = 'Pedro';
 borrar el array sesio:
-unset(%SESSION[]);
+unset(_SESSION[]);
 
 
 
