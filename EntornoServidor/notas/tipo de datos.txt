@@ -117,9 +117,34 @@ Es importante notar que no siempre es necesario usar todas las cláusulas en una
 
 Las columnas que  aparecen en la clausula order by tienen que estar en el select a no ser que esten en una funcion de grupo, si se usa group by las funciones de grupose ejecutan para cada grupo:
 
+si queremos que aparezca una columna en el select tiene que estar en el group by: libros agrupados por categoriay precio
+SELECT genero.id, COUNT(genero.id), AVG(libros.Precio), libros.precio from libros JOIN genero on (libros.idgenero=genero.Id) GROUP by genero.Id, libros.Precio;
 
 count()
 sum()
 avg()
 mas()
 min()
+
+
+
+INSERT INTO :::::INSERT INTO Clientes (nombre, apellidos, direccion, cuenta)
+                    VALUES ('Fernando', 'García Rodriguez', 'C/Virgen del rosal 28', 111222333);
+
+
+UPDATE::::::UPDATE nombre-de-la-tabla
+            SET nombre-de-la-columna = valor[, nombre-de-la-columna=valor]
+            [WHERE condición]
+
+MODIFY :::::ALTER TABLE mi_tabla
+            MODIFY mi_columna VARCHAR(100);
+
+DELETE:::::DELETE FROM pieza_ordenador
+            WHERE fabricante = ‘intel’;
+
+
+SELECT genero.id, COUNT(genero.id), AVG(libros.Precio) from libros JOIN genero on (libros.idgenero=genero.Id) GROUP by genero.Id;
+
+
+
+
