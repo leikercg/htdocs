@@ -115,7 +115,7 @@ HAVING condicion_grupo se usan funcones de grupo por ejemplo AVg(price)>100
 ORDER BY columna1 ASC;
 Es importante notar que no siempre es necesario usar todas las cláusulas en una consulta. Si no necesitas filtrar filas (WHERE), agrupar (GROUP BY), filtrar grupos (HAVING), o ordenar (ORDER BY), puedes omitir esas cláusulas en tu consulta. Por lo tanto, una consulta típica puede tener solo SELECT y FROM si no se requieren condiciones adicionales.
 
-Las columnas que  aparecen en la clausula order by tienen que estar en el select a no ser que esten en una funcion de grupo, si se usa group by las funciones de grupose ejecutan para cada grupo:
+Las columnas que  aparecen en la clausula group by tienen que estar en el select a no ser que esten en una funcion de grupo, si se usa group by las funciones de grupose ejecutan para cada grupo:
 
 
 count()
@@ -127,6 +127,20 @@ min()
 SELECT genero.id, COUNT(genero.id), AVG(libros.Precio) from libros JOIN genero on (libros.idgenero=genero.Id) GROUP by genero.Id;
 
 
-
 si queremos que aparezca una columna en el select tiene que estar en el group by: libros agrupados por categoriay precio
 SELECT genero.id, COUNT(genero.id), AVG(libros.Precio), libros.precio from libros JOIN genero on (libros.idgenero=genero.Id) GROUP by genero.Id, libros.Precio;
+
+-- Ejemplo: Insertar un nuevo empleado en la tabla 'empleados'
+INSERT INTO empleados (nombre, salario, departamento)
+VALUES ('Juan Pérez', 30000, 'Ventas');
+
+
+-- Ejemplo: Aumentar el salario en un 10% para todos los empleados en el departamento 'Ventas'
+UPDATE empleados
+SET salario = salario * 1.1
+WHERE departamento = 'Ventas';
+
+
+-- Ejemplo: Eliminar todos los empleados con un salario menor a 20000
+DELETE FROM empleados
+WHERE salario < 20000;
