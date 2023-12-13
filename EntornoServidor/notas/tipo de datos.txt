@@ -122,3 +122,18 @@ sum()
 avg()
 mas()
 min()
+
+
+INSERT INTO :::::INSERT INTO Clientes (nombre, apellidos, direccion, cuenta)
+                    VALUES ('Fernando', 'García Rodriguez', 'C/Virgen del rosal 28', 111222333);
+
+
+UPDATE::::::UPDATE nombre-de-la-tabla
+            SET nombre-de-la-columna = valor[, nombre-de-la-columna=valor]
+            [WHERE condición]
+
+MODIFY :::::ALTER TABLE mi_tabla
+            MODIFY mi_columna VARCHAR(100);
+
+DELETE:::::DELETE FROM pieza_ordenador
+            WHERE fabricante = ‘intel’;
