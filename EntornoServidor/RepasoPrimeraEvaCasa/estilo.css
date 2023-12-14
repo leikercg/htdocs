@@ -124,3 +124,10 @@ footer {
 .contenido h3 ~ table  tr:hover{
     background-color: yellow;
 }
+
+table{
+    border-collapse: collapse;
+}
+td{
+    padding: 5px;
+}

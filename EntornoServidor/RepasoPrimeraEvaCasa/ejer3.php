@@ -57,9 +57,9 @@
                             }
                             print "<tr><td colspan = 5> Total productos diferentes</td><td>$nfilas</td></tr>";
 
-                            print "<tr><td colspan = 5> Total productos diferentes</td><td>" . $total / $nfilas . "</td></tr>";
+                            print "<tr><td colspan = 5> Media precio</td><td>" . $total / $nfilas . "</td></tr>";
 
-                            print "<tr><td colspan = 5> Total productos diferentes</td><td>" . $stock . "</td></tr>";
+                            print "<tr><td colspan = 5> Prodcutos totales</td><td>" . $stock . "</td></tr>";
 
                             print "</table>";
                         }
