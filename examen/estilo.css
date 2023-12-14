@@ -54,6 +54,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: brown;
 }
 
 footer {
@@ -95,6 +96,8 @@ footer {
     padding-left: 2%;/*Se refiere al tanto por ciento del contenedor del padre.*/
     padding-right: 2%;
     width: 96%;
+    padding-top: 10px;
+    margin-bottom: 10px;
 
 }
 
@@ -107,11 +110,16 @@ footer {
 .centrar {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-bottom: 10px;
 
 
-    background-color: aqua;
-
+}
+.centrar p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.contenido form{
+    margin-top: 15px;
 }
 
 .fecha {
@@ -123,4 +131,40 @@ footer {
 
 .contenido h3 ~ table  tr:hover{
     background-color: yellow;
+}
+.subtitulo{
+    display: flex;
+    margin-top: 10px;
+
+}
+
+.matriz{
+    border-collapse: collapse;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    margin: 10px;
+}
+.matriz td{
+    padding: 10px;
+    width: 30px;
+    height: 20px;
+
+}
+.suma{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bd {
+    background-color: aqua;
+
+}
+table{
+    margin: auto;
+font-weight: bold;
+border-collapse: collapse;
+}
+table td{
+    text-align: center;
 }
