@@ -49,7 +49,7 @@
                         print "</table>";
                         mysqli_close($conexion);
 
-                    }else{
+                    }elseif(isset($_REQUEST["localidades"])){
 
 
                         $conexion=mysqli_connect("localhost","root","","geografia");
