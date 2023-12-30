@@ -2,9 +2,9 @@
 
 class Persona
 {
-    protected $nombre;
+    protected $nombre;/*Con protected se pueden usar estos atributos en los descendientes*/
     protected $apellido;
-    private $edad;
+    private $edad;/*con private no se pueden usar estos atribbutos en los descendientes, solo pueden ser accedidos mediante metodos publicos*/
     public function __construct(string $nombre, string $apellido, int $edad)
     {
         $this->nombre   = $nombre;
@@ -39,6 +39,11 @@ class Persona
 
         return $this;
     }
+    public function edadMas10(){
+        print "<br>";
+        echo $this->edad+10;
+    }
+
 }
 
 class Empleada extends Persona
@@ -59,5 +64,9 @@ if($this->sueldo > 2000) {
     print " me llamo {$this->nombre} {$this->apellido} y NO tengo que pagar impuestos";
 }
     }
+    public function mostrarEdad(){
+        print "<br>".$this->ed;
+    }
+
 
 }

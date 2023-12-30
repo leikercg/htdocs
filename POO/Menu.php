@@ -44,5 +44,14 @@ class Menu
         }
         print "</table>";
     }
+    public function setDia( $dia): void {$this->dia = $dia;}
+
+	public function setFecha( $fecha): void {$this->fecha = $fecha;}
+
+	public function getDia() {return $this->dia;}
+
+	public function getFecha() {return $this->fecha;}
+
+
 
 }

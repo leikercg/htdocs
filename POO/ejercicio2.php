@@ -1,5 +1,11 @@
 <?php
 include "Menu.php";
+session_start();
+if(isset($_REQUEST["borrarMenu"])) {
+    unset($_SESSION["miMenu"]);
+}
+print_r($_SESSION);
+print_r($_REQUEST);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,10 +27,18 @@ include "Menu.php";
             height: 20%;
             width: 100%;
             background-color: blanchedalmond;
+            text-align: center
         }
         section{
             height: ;
         }
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
     </style>
 </head>
 <body>
@@ -33,48 +47,68 @@ include "Menu.php";
         <aside></aside>
         <main>
             <?php
-                if(!$_REQUEST) {
-                    ?>
+                if(!isset($_SESSION["miMenu"])) {/*si no esta establecido el menu*/
+                    if(!$_REQUEST || isset($_REQUEST["borrarMenu"])) {
+                        ?>
         <form action="ejercicio2.php">
             <label for="">Indicar dia de la semana</label>
             <input type="text" name="dia" id=""><br><br>
             <input type="submit" name="enviar" value="enviar" id="">
         </form>
-        <?php
-                } else {
-                    $dia   = $_REQUEST["dia"];
-                    $fecha = date("d-M-Y");
+            <?php
+                    } elseif(isset($_REQUEST["enviar"])) {
+                        $dia                = $_REQUEST["dia"];
+                        $fecha              = date("d-m-Y");
+                        $miMenu             = new Menu($dia, $fecha);
+                        $_SESSION["miMenu"] = $miMenu;
 
-                    $miMenu = new Menu($dia, $fecha);
+                    }
+                }
+                if(isset($_SESSION["miMenu"])) {/*si esto fuera un elseif no se ejecutaria por que al cumplirse el if anterior no entra en este bucle*/
                     if(!isset($_REQUEST["agregar"])) {
-
-                        print "<form action='ejercicio2.php'>
-                    <label>Nombre del plato</label>
-                    <input type='text' name='plato'> <br><br>
-                    <input type='radio' name='lugar' value='primeros'>A primeros platos <br><br>
-                    <input type='radio' name='lugar' value='segundos'>A segundos platos <br><br>
-                    <input type='radio' name='lugar' value='postres'>A postres <br><br>
-                    <input type='submit' name='agregar'>
-                </form>";
-
+                        ?>
+            <form action="ejercicio2.php">
+                <label for="plato">Nombre del plato</label>
+                <input type="text" name="plato" id="plato" required><br><br>
+                <label for="">Elige el tipo de plato</label><br><br>
+                <input type="radio" name="lugar" value="primero" checked>Primer plato <br><br>
+                <input type="radio" name="lugar" value="segundo" id="" >Segundo plato <br><br>
+                <input type="radio" name="lugar" value="postre" id="">Postre <br><br>
+                <input type="submit" name="agregar" id="" value="Agregar plato">
+            </form>
+        <?php
                     } else {
                         $plato = $_REQUEST["plato"];
                         $lugar = $_REQUEST["lugar"];
-                        if($lugar == "primeros") {
-                            $miMenu->AgregarPrimer($plato);
-                        } elseif($lugar == "segundos") {
-                            $miMenu->AgregarSegundo($plato);
-                        } else {
-                            $miMenu->AgregarPostre($plato);
+                        print "<h3>Plato: {$_REQUEST["plato"]}. <br>
+                        Agregado a: {$_REQUEST["lugar"]}.</h3><br>";
+
+                        if($lugar == "primero") {
+                            $_SESSION["miMenu"]->AgregarPrimer($plato);
                         }
-                        print "PLATO AGREGADO AL MENÚ <br>";
-                        print " <a href='ejercicio2.php'>Agregar más platos</a>";
-                        $miMenu->MostrarMenu();
+                        if($lugar == "segundo") {
+                            $_SESSION["miMenu"]->AgregarSegundo($plato);
+                        }
+                        if($lugar == "postre") {
+                            $_SESSION["miMenu"]->AgregarPostre($plato);
+                        }
+
+                        $_SESSION["miMenu"]->MostrarMenu();
+                        print " <br><form action='ejercicio2.php'>
+                        <input type='submit' name='otro' value='Agregar otro plato'>
+                        <input type='submit' name='borrarMenu' value='borrarMenu'>
+
+                        </form>";
+
+                        print"<br> este menu es para el {$_SESSION["miMenu"]->getDia()} y fue creado en la fecha {$_SESSION["miMenu"]->getFecha()} ";
                     }
 
                 }
+
 ?>
+
         </main>
+
         <nav></nav>
     </section>
     <footer></footer>

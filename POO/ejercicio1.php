@@ -12,6 +12,7 @@ include "Persona.php";
     <?php
     $miPersona=new Empleada("Leiker","Castillo",26,"Programador",12899);
     $miPersona->presentar();
+    $miPersona->edadMas10();
     ?>
 
 
