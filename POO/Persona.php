@@ -3,8 +3,8 @@
 class Persona
 {
     protected $nombre;/*Con protected se pueden usar estos atributos en los descendientes*/
-    protected $apellido;
-    private $edad;/*con private no se pueden usar estos atribbutos en los descendientes, solo pueden ser accedidos mediante metodos publicos*/
+    private $apellido;
+    private $edad;/*con private no se pueden usar estos atribbutos desde los descendientes, solo pueden ser accedidos mediante metodos publicos (getters y setters)*/
     public function __construct(string $nombre, string $apellido, int $edad)
     {
         $this->nombre   = $nombre;
@@ -39,14 +39,9 @@ class Persona
 
         return $this;
     }
-    public function edadMas10(){
-        print "<br>";
-        echo $this->edad+10;
-    }
-
 }
 
-class Empleada extends Persona
+class Empleado extends Persona
 {
     private $puesto;
     private $sueldo;
@@ -56,17 +51,28 @@ class Empleada extends Persona
         $this->puesto=$puesto;
         $this->sueldo=$sueldo;
     }
+	public function getPuesto() {return $this->puesto;}
+
+	public function getSueldo() {return $this->sueldo;}
+
+
+    //no hace falta volver a declarar los metodos ya declarados en el padre,
+    //a no ser que se desee sobre cargar metodos
+
+
+
+	public function setPuesto( $puesto): void {$this->puesto = $puesto;}
+
+	public function setSueldo( $sueldo): void {$this->sueldo = $sueldo;}
+
+
 
     public function presentar(){
 if($this->sueldo > 2000) {
-    print " me llamo {$this->nombre} {$this->apellido} y tengo que pagar impuestos";
+    print "{$this->nombre} {$this->getApellido()}, {$this->getPuesto()}, debe pagar impuestos. <br><br>"; //en el caso de nombre podemos acceder directamente ya que es protected, pero en el caso del apellido solo podemos acceder através del metodo getApellido() al ser private*/
 }else{
-    print " me llamo {$this->nombre} {$this->apellido} y NO tengo que pagar impuestos";
+    print "{$this->nombre} {$this->getApellido()}, {$this->getPuesto()}, no debe pagar impuestos. <br><br>";
 }
     }
-    public function mostrarEdad(){
-        print "<br>".$this->ed;
-    }
-
 
 }
