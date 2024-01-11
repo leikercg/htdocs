@@ -27,22 +27,45 @@ class Menu
         array_push($this->postres, $plato);
     }
 
-    public function MostrarMenu()
+    public function MostrarPrimeros()
     {
-        print"<table border=1>";
-        print"<tr> <th>PRIMEROS PLATOS</th> </tr>";
-        foreach ($this->primerosPlatos as $key => $plato) {
-            print"<tr> <td> $plato</td> </tr>";
-        }
-        print"<tr> <th>SEGUNDOS PLATOS</th> </tr>";
-        foreach ($this->segundosPlatos as $key => $plato) {
-            print"<tr> <td> $plato</td> </tr>";
-        }
-        print"<tr> <th>POSTRES</th> </tr>";
-        foreach ($this->postres as $key => $postre) {
-            print"<tr> <td>$postre</td> </tr>";
-        }
-        print "</table>";
+     foreach ($this->primerosPlatos as $key => $value) {
+        print"<p>$value</p>";
+     }
+    }
+    public function MostrarSegundos()
+    {
+     foreach ($this->segundosPlatos as $key => $value) {
+        print"<p>$value</p>";
+     }
+    }
+    public function MostrarPostres()
+    {
+     foreach ($this->postres as $key => $value) {
+        print"<p>$value</p>";
+     }
+    }
+    public function mostrarFecha() {
+        print"<div id='subtitulo'>Menú del $this->dia, $this->fecha</div>";
+    }
+
+    public function presentacion() {
+        print "<img src='imgSup.png' class='decoracion'>";
+        print "<div id='presentacion'>";
+        print "<h3>Menú del día</h3>";
+        print "<h4>$this->dia, $this->fecha</h4>";
+        print "<br>";
+        print "<h4>Primeros platos</h4>";
+        $this->MostrarPrimeros();
+        print "<br>";
+        print "<h4>Segundos platos</h4>";
+        $this->MostrarSegundos();
+        print "<br>";
+        print "<h4>Postres</h4>";
+        $this->MostrarPostres();
+
+        print "</div>";
+        print "<img src='imgInf.png' class='decoracion'>";
     }
     public function setDia( $dia): void {$this->dia = $dia;}
 

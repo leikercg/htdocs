@@ -93,7 +93,25 @@ footer {
 position: relative;
 margin-bottom: 10px;
 }
+.campo{
+    width: 60%;
+}
+/*css PRESENTACION FINAL*********/
+.decoracion{
+    width: 60%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+#presentacion{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 
 
