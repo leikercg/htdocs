@@ -26,8 +26,10 @@ substr($string, posicionInicial, [tamaño])
 strstr($string, "texto buscadp")= devuelve un string desde que lo encuentra hasta ek final.
 
 
-explode("separados",$string, [limite de cadenas])=nuevoARRAY
-implode("separador",$arraay)= une todos los elementos de un arraay en una string.
+explode("separador",$string, [limite de cadenas])=nuevoARRAY
+
+implode("separador",$arraay)= une todos los elementos de un arraay en una string. el separador que se ponga es el que aparecera.
+
 str_split($str,[tanaño])= nueva ARRAY troceada a cachos del tamaño, no se indica tamaño por defecto es 1
 
 
