@@ -11,10 +11,18 @@
 </head>
 <body>
     <?php
-    $miRacional= new Racional(12/4);
-    $tuRacional= new Racional(5/4);
-    $miRacional->sumar($tuRacional);
+    $miRacional= new Racional("8/4");
     print $miRacional->__toString();
+    print "<br>";
+
+    $tuRacional= new Racional("10/4");
+    print $tuRacional->__toString();
+    print "<br>";
+    $miRacional->restar($tuRacional);
+    print $miRacional->__toString();
+    print "<br>";
+
+
 
 
 

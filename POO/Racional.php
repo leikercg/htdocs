@@ -27,7 +27,7 @@ class Racional
 
     public function simplificar(){
         // Encuentra el menor entre el numerador y el denominador
-        $min = min($this->numerador, $this->denominador);
+        $min = min(abs($this->numerador),abs($this->denominador));
 
         // Itera desde el menor hasta 2 para encontrar divisores comunes
         for ($i = $min; $i >= 2; $i--) {
@@ -41,9 +41,9 @@ class Racional
         }
 
 
-    public function sumar(Racional $otroRacioanl){
-        $otroDenominador=$otroRacioanl->getDenominador();
-        $otroNumerador=$otroRacioanl->getNumerador();
+    public function sumar(Racional $otroRacioanal) :void{
+        $otroDenominador=$otroRacioanal->getDenominador();
+        $otroNumerador=$otroRacioanal->getNumerador();
 
         $numerador=$this->getNumerador();
         $denominador=$this->getDenominador();
@@ -55,7 +55,25 @@ class Racional
         $this->setDenominador($denominador*$otroDenominador);
         $this->setNumerador($numerador+$otroNumerador);
 
+        $this->simplificar();
 
+    }
+
+    public function restar(Racional $otroRacioanal) :void {
+        $otroDenominador=$otroRacioanal->getDenominador();
+        $otroNumerador=$otroRacioanal->getNumerador();
+
+        $numerador=$this->getNumerador();
+        $denominador=$this->getDenominador();
+
+
+        $numerador=$numerador*$otroDenominador;
+        $otroNumerador=$otroNumerador*$denominador;
+
+        $this->setDenominador($denominador*$otroDenominador);
+        $this->setNumerador($numerador-$otroNumerador);
+
+        $this->simplificar();
     }
 
 public function getNumerador() {return $this->numerador;}
