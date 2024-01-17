@@ -1,0 +1,139 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body,
+html {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    /*eliminar la barra de desplazamiento horizontal*/
+}
+
+header {
+    background-color: black;
+    height: 20vh;
+    color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    min-width: 100vh;
+    min-height: 60vh;
+    display: flex;
+}
+
+aside {
+    min-height: 100%;
+    /*hay que indicar ancho y alto ya que estan vacios*/
+    min-width: 25%;
+    background-color: gray;
+}
+
+nav {
+    min-height: 100%;
+    min-width: 25%;
+    background-color: gray;
+}
+
+main {
+    min-width: 50%;
+    min-height: 100%;
+
+    position: relative;
+    /*para mover los objetos de dentro*/
+}
+
+footer {
+    background-color: black;
+    height: 20vh;
+    color: beige;
+}
+
+#contenido{
+    margin: auto;
+    width: 90%;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+
+}
+
+#formulario{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+fieldset{
+    border: 1px solid blue;
+    border-radius: 17px;
+    background-color: rgb(172, 171, 171);
+}
+legend{
+    font-weight: bold;
+    position: static;
+    text-align: center;
+}
+
+#reglas{
+    padding: 30px;
+    width: 300px;
+    height: 350px;
+}
+#operacion{
+    padding: 30px;
+    width: 300px;
+    height: 100px;
+}
+#resultado{
+    padding: 30px;
+    width: 300px;
+    min-height: 30px;
+}
+
+[type="text"]{
+    width: 100px;
+}
+
+#tabla{
+    border-collapse: collapse;
+    border: 1px black solid;
+
+}
+
+#cabecera{
+    font-weight: bold;
+}
+
+#tabla td{
+    padding: 5px;
+}
+.fila1{
+    width: 180px;
+    font-weight: bold;
+}
+.fila1+td,#cabecera{
+    text-align: center;
+}
+
+#resultado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cabecera{
+    background-color: rgb(23, 23, 141);
+    color: white;
+    font-size: large;
+}
+
+#operacionCompleta{
+    font-weight: bold;
+    color: blue;
+}
+
+

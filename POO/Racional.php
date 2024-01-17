@@ -22,7 +22,7 @@ class Racional
         }
         }
     public function __toString(){
-        return $this->numerador."/ ".$this->denominador;
+        return $this->numerador."/".$this->denominador;
     }
 
     public function simplificar(){
@@ -41,9 +41,9 @@ class Racional
         }
 
 
-    public function sumar(Racional $otroRacioanal) :void{
-        $otroDenominador=$otroRacioanal->getDenominador();
-        $otroNumerador=$otroRacioanal->getNumerador();
+    public function sumar(Racional $otroRacional) :void{
+        $otroDenominador=$otroRacional->getDenominador();
+        $otroNumerador=$otroRacional->getNumerador();
 
         $numerador=$this->getNumerador();
         $denominador=$this->getDenominador();
@@ -55,13 +55,13 @@ class Racional
         $this->setDenominador($denominador*$otroDenominador);
         $this->setNumerador($numerador+$otroNumerador);
 
-        $this->simplificar();
+
 
     }
 
-    public function restar(Racional $otroRacioanal) :void {
-        $otroDenominador=$otroRacioanal->getDenominador();
-        $otroNumerador=$otroRacioanal->getNumerador();
+    public function restar(Racional $otroRacional) :void {
+        $otroDenominador=$otroRacional->getDenominador();
+        $otroNumerador=$otroRacional->getNumerador();
 
         $numerador=$this->getNumerador();
         $denominador=$this->getDenominador();
@@ -73,12 +73,38 @@ class Racional
         $this->setDenominador($denominador*$otroDenominador);
         $this->setNumerador($numerador-$otroNumerador);
 
-        $this->simplificar();
+    }
+
+    public function multiplicar(Racional $otroRacional) :void {
+        $otroNumerador=$otroRacional->getNumerador();
+        $otroDenominador=$otroRacional->getDenominador();
+
+        $numerador=$this->getNumerador();
+        $denominador=$this->getDenominador();
+
+
+        $this->setNumerador($numerador*$otroNumerador);
+        $this->setDenominador($otroDenominador*$denominador);
+
+
+    }
+    public function dividir(Racional $otroRacional) :void {
+        $otroNumerador=$otroRacional->getNumerador();
+        $otroDenominador=$otroRacional->getDenominador();
+
+        $numerador=$this->getNumerador();
+        $denominador=$this->getDenominador();
+
+
+        $this->setNumerador($numerador*$otroDenominador);
+        $this->setDenominador($otroNumerador*$denominador);
+
+
     }
 
 public function getNumerador() {return $this->numerador;}
 
-public function getDenominador() {return $this->denominador;}
+public function getDenominador(){return $this->denominador;}
 
 public function setNumerador( $numerador): void {$this->numerador = $numerador;}
 
