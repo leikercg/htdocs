@@ -1,0 +1,24 @@
+THIS---------------------------
+$this se utiliza dentro de una clase para referirse a la instancia actual de la clase.
+
+Se utiliza para acceder a propiedades y métodos de la inst
+ancia en la que se encuentra.
+
+Es útil cuando necesitas referenciar elementos de la instancia actual de la clase.
+
+Se utiliza en el contexto de la instancia.
+
+SELF---------------------------
+Self se utiliza dentro de una clase para referirse a la propia clase.
+
+Se usa para acceder a métodos estáticos y propiedades estáticas de la misma clase.
+
+Es útil cuando necesitas referenciar elementos estáticos dentro de la misma clase.
+
+Se utiliza en el contexto de la clase, no de la instancia.
+
+
+
+
+
+El nombre es {$_REQUEST["nombre"]} para impirmir con comillas dentro de print
