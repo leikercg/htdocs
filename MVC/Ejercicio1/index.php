@@ -10,22 +10,33 @@
     <header>
         <h1>clientes</h1>
     </header>
-    <?php
-        $conexion = mysqli_connect("localhost", "root", "") or die("No se puede conectar con el servidor <br>");
+             <?php
 
-    mysqli_select_db($conexion, "jardineria") or die("No se pude conectar con la base de datos");
+            include "viewController.php";
 
-    $resultconsulta = mysqli_query($conexion, "Select codigocliente, nombrecliente, nombrecontacto from clientes;");
+            // Miramos a ver si se indica alguna acción en la URL
+            if (!isset($_REQUEST['action'])) {
+                // No hay acción en la URL. Usamos la acción por defecto (main). Puedes cambiarla por cualquier otra que vaya bien con tu aplicación.
+                $action = "showAll";
+            } else {
+                // Sí hay acción en la URL. Recuperamos su nombre.
+                $action = $_REQUEST['action'];
+            }
 
+            // Hacemos lo mismo con el nombre del controlador
+            if (!isset($_REQUEST['controller'])) {
+                // No hay controlador en la URL. Asignaremos un controlador por defecto (Articles). Por supuesto, puedes cambiarlo por otro que vaya bien con tu aplicación.
+                $controllerClassName = "viewController";
+            } else {
+                // Sí hay controlador en la URL. Recuperamos su nombre.
+                $controllerClassName = $_REQUEST['controller'];
+            }
 
-    $articles = array();
-    while ($row = $resultconsulta->fetch_array())  {
-        $articles[] = $row;
-    }
-    $conexion->close();
+            // Instanciamos el controlador e invocamos al método que se llama como la acción
+            $controller = new $controllerClassName();
+            $controller->{$action}();
 
-    include("vista.php");
-    ?>
+            ?>
 
 </body>
 </html>
