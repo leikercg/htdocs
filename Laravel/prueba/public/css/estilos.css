@@ -1,0 +1,165 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    font-size: xx-large;
+    height: 20vh;
+    min-width: 100vw;
+    background-color: black;
+    font-size: 1.5em;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section{
+    display: flex;
+    min-height: 60vh;
+    min-width: 100vw;
+    position: relative;
+}
+
+nav{
+    min-height: 100vh;
+    min-width: 15%;
+    background-color: gray;
+}
+
+main{
+    min-height: 100vh;
+    min-width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: top center;
+    padding: 5%;
+}
+
+
+form.tablas{
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+}
+
+form.tablas input[min]{
+    width: 2em;
+}
+
+div.tablas{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table{
+   border: solid 1px black;
+   border-collapse: collapse;
+   width: fit-content;
+}
+
+td.matriz{
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    text-align: right;
+}
+
+aside{
+    min-height: 100vh;
+    min-width: 15%;
+    background-color: gray;
+}
+
+footer{
+    height: 20vh;
+    min-width: 100vw;
+    background-color: black;
+}
+button{
+    margin: 5px;
+    padding: 5px;
+
+}
+
+div button a{
+    color:black;
+    text-decoration: none;
+}
+.boton{
+    margin: 5px;
+    padding: 5px;
+}
+.inicio{
+    position: absolute;
+    right: 18%;
+    top: 3%;
+}
+.inicio a{
+    color: blue;
+}
+.contenedorForm{
+    border: blue solid 2px;
+    padding: 10px;
+    width: 80%;
+}
+.tituloForm{
+    display: flex;
+    width: 80%;
+
+}
+td{
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+
+}
+.fecha{
+    color: blue;
+    width: 100%;
+    padding: 5%;
+    display: flex;
+    justify-content: end;
+}
+
+
+.tablaProductos{
+    border:0px;
+}
+.descripcion{
+    width: 60%;
+    border: 1px solid black;
+}
+.producto{
+    width: 40%;
+    border: 1px solid black;
+}
+.precio, th{
+    border: 1px solid black;
+}
+.noBorde{
+    border: 0px;
+}
+
+.inputProducto{
+    width: 300px;
+   float: right;
+
+}
+.formProducto{
+    position: relative;
+}

@@ -1,27 +1,38 @@
-@extends("master")
+@extends('master')
 
-@section("title", "Administración de productos")
+@section('title', 'Administración de productos')<!--En esta seccion se ingresara esto-->
 
-@section("header", "Administración de productos")
+@section('header', 'Administración de productos')
 
-@section("content")
-    <a href="{{ route('product.create') }}">Nuevo</a>
-    <table border='1'>
-    @foreach ($productList as $product)
+@section('content')
+
+
+    <table class="tablaProductos">
         <tr>
-            <td>{{$product->name}}</td>
-            <td>{{$product->description}}</td>
-            <td>{{$product->price}}</td>
-            <td>
-                <a href="{{route('product.edit', $product->id)}}">Modificar</a></td>
-            <td>
-                <form action = "{{route('product.destroy', $product->id)}}" method="POST">
-                    @csrf
-                    @method("DELETE")
-                    <input type="submit" value="Borrar">
-                </form>
-            </td>
-        <br>
-    @endforeach
+            <th>Producto</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+        </tr>
+        @foreach ($productList as $product)
+            <tr>
+                <td class="producto">{{ $product->name }}</td>
+                <td class="descripcion">{{ $product->description }}</td>
+                <td class="precio">{{ $product->price }}</td>
+
+                <td class="noBorde">
+                    <a href="{{ route('product.edit', $product->id) }}">Modificar</a>
+                </td>
+                <td class="noBorde">
+                    <form action = "{{ route('product.destroy', $product->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Borrar">
+                    </form>
+                </td>
+                <br>
+        @endforeach
     </table>
+    <a href="{{ route('product.create') }}">Nuevo artículo</a>
 @endsection
+@section('footer')
+@section('tituloSeccion',"Listado de productos")

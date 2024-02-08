@@ -5,18 +5,21 @@
 @section("title", "Inserción de productos")
 
 @section("header", "Inserción de productos")
+@section('tituloSeccion','Modificar/borrar producto')
 
 @section("content")
+<br><br><br><br>
     @isset($product)
-        <form action="{{ route('product.update', ['product' => $product->id]) }}" method="POST">
+        <form class="formProducto" action="{{ route('product.update', ['product' => $product->id]) }}" method="POST">
         @method("PUT")
     @else
-        <form action="{{ route('product.store') }}" method="POST">
+        <form class="formProducto" action="{{ route('product.store') }}" method="POST">
     @endisset
         @csrf
-        Nombre del producto:<input type="text" name="name" value="{{$product->name ?? '' }}"><br>
-        Descripción:<input type="text" name="description" value="{{$product->description ?? '' }}"><br>
-        Precio:<input type="text" name="price" value="{{$product->price ?? '' }}"><br>
+        Nombre del producto:<input class="inputProducto" type="text" name="name" value="{{$product->name ?? '' }}"><br><br>
+        Descripción:<input class="inputProducto" type="text" name="description" value="{{$product->description ?? '' }}"><br><br>
+        Precio:<input class="inputProducto" type="text" name="price" value="{{$product->price ?? '' }}"><br><br>
         <input type="submit">
         </form>
 @endsection
+
