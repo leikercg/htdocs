@@ -11,10 +11,10 @@
     </header>
     <section>
         <aside></aside>
-        <!--@section('sidebar')
+        @section('sidebar')
             Este es mi master sidebar     Esto es lo que se mostrará si no se defini nada en la vista hija-->
         @show
-        <!--Esto es el cierre de la etiqueta section creada-->
+
 
         <main>
             <h3>@yield('tituloSeccion')</h3>

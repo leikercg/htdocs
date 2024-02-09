@@ -6,6 +6,9 @@
 
 @section("header", "Inserción de productos")
 @section('tituloSeccion','Modificar/borrar producto')
+@section('sidebar')
+<h1>hola</h1>
+@endsection
 
 @section("content")
 <br><br><br><br>
