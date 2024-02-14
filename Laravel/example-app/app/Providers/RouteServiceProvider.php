@@ -31,13 +31,23 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
-                ->namespace('App\Http\Controllers')
+                ->namespace('App\Http\Controllers')  /////////////HAY QUE AÑADIR ESTO PARA QUE FUNCIONE LA SINTAXIS
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
             ->namespace($this->namespace)
-            ->namespace('App\Http\Controllers')
-            ->group(base_path('routes/web.php'));
+            ->namespace('App\Http\Controllers') /////////////// Y ESTO
+            ->group(base_path('routes/web.php')); ///////////////// Y ESTO TAMBIEN
+
+
+
+            /////////ACTUALMENTE ES CON ESTO
+            ////////ENRUTADOR Route::get('/hola', HolaController::class);
+            /////// CONTROLADOR
+            /*public function __invoke() {
+                return "Hola, mundo";
+            }*/
+
         });
     }
 }

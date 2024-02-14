@@ -3,11 +3,14 @@
 <head>
     <title>@yield('title')</title><!--yield significa que aquí debera ser insertado lo que hay en la title content-->
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+    <link rel="stylesheet" href="/css/app.css">
+    <script src="js/app.js" defer></script>
+
 </head>
 
 <body>
     <header>
-        <h1>@yield('header')</h1>
+        <h1 class="bg-primary">@yield('header')</h1>
     </header>
     <section>
         <aside></aside>

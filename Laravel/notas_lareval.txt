@@ -1,0 +1,208 @@
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR CLAVE SEGURA @@@@@@@@@@@@@@@@@@@@@@@@ ESTO ES LO PRIMERO QUE HAY QUE HACER EN CUALQUIER PROYECTO DE LARAVEL
+
+php artisan key:generate
+
+@@@@@@@@@@@@@@@@@@@@@@@ ACTUALIZAR VENDOR ARCHIVOS  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+COMPOSER UPDATE
+
+LOS PASOS ANTERIORES ESTÁN RELACIONADOS CON GIT: NO OLVIDAR REESCRIBIR EL ARCHVIO .ENV
+
+
+Métodos: se nombran en camelCase y con minúscula al principio.
+Ejemplo: RegisteredUser::getAll()
+Atributos: se nombran en snake_case y con minúscula al principio.
+Ejemplo: RegisteredUser::first_name
+Variables: camelCase camelCases
+Columnas de las tablas: se nombran en snake_case, sin referencia al nombre de la tabla.
+Ejemplo: first_name
+Claves ajenas: Se forman con el nombre de la tabla ajena en singular más la palabra id.
+Ejemplo: article_id
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@ modicicar env @@@@@@@@@@@@@@@@@@
+
+'default' => env('DB_CONNECTION', 'mysql')
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR CONTROLADOR @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan make:controller RegisterUserController
+
+php artisan make:controller RegisterUserController --resource
+
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR CONTROLADOR TIPO API @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan make:controller RegisterUserController --api
+
+Route::apiResource('usuarios', 'RegisterUserController');-----> añaidir esto al enrutador
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@ LISTA DE COMANDOS DE ARTISAN @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan list
+
+@@@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR LAS TODAS LAS MIGRACIONES ejecuta todas las que no estan @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate
+
+@@@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR LAS MIGRACIONES ejecuta una @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate --path=/database/migrations/nombre_de_la_migracion.php
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR LOS SEADER, TODOS LOS ALMACENADOS EN SEEDAR DB @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan db:seed
+
+@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR UN SEEDER EN CONCRETO @@@@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan db:seed --class=UsuariosSeeder
+
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR MIGRACION MODIFICAR @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan make:migration add_email_to_clients --table=registered_users    plural
+
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR MIGRACION CREAR @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan make:migration add_email_to_clients --create=registered_users   plurar
+
+@@@@@@@@@@@@@@@@@@@@@@@@ REVERTIR ULTIMA MIGRACION @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate:rollback
+
+@@@@@@@@@@@@@@@@@@@@@@@ DEJAR BD ESTADO ORIGINAL, VACIA@@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate:reset
+
+@@@@@@@@@@@@@@@@@@@@@@@ REVERTIR N MIGRACIONES@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate:rollback --step=3
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@ Resetear la BD y reconstruirla lanzando todas las migraciones @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate:refresh //--seed ejecutar seeders mantiene el hisotorial de migraciones
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@ Elimina las tablas y reconstruirla lanzando todas las migraciones @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate:refresh //--seed ejecutar seeders NO mantiene el hisotorial de migraciones
+
+@@@@@@@@@@@@@@@@@@@@@@@@ INSTALAR MIGRACION @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan migrate:install
+
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR SEEDER @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan make:seeder UsersTableSeeder
+
+@@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR UN UNICO SEEDER@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan db:seed --class-UsersTableSeeder
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR MODELO @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan make:model RegisterUser        CamelCase singular
+
+@@@@@@@@@@@@@@@@@@@@@@@@ CREAR MODELO y migracion @@@@@@@@@@@@@@@@@@@@@@@@
+
+php artisan make:model RegisterUser -m
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ VERBOS LARABEL @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Route::get();    // Solicitudes habituales, para acceder a información
+Route::post();   // Recepción de datos de formulario (para INSERT) para crear usuarios
+Route::put();    // Recepción de datos para UPDATE, para actualizar todos los campos, también puede escribirse :
+Route::patch(), que es para actualizar un campo
+Route::delete(); // Recepción de datos para DELETE
+Route::patch(array('GET','POST'), 'ruta', acción)  // Responderá tanto a GET como a POST
+
+<form action="/foo/bar" method="POST">
+    @method('DELETE')
+    @method('PATCH')
+    @method('PUT')
+
+
+Route::get('user', 'UserController@index')->name('user.index');         // Recupera todos los usuarios
+Route::get('user/{user}', 'UserController@show')->name('user.show');    // Recupera usuario con id=user
+Route::get('user/crear', 'UserController@create')->name('user.create'); // Lanza el formulario de creación de usuarios
+Route::post('user/{user}', 'UserController@store')->name('user.store');        // Recoge los datos del formulario y los inserta en la base de datos
+Route::get('user/{user}/edit', 'UserController@edit')->name('user.edit');      // Lanza el formulario de modificación de usuarios
+Route::patch('user/{user}', 'UserController@update')->name('user.update');     // Recoge los datos del formulario y modifica el usuario de la base de datos
+Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');  // Elimina al usuario de la base de datos
+
+
+Todo esto en una linea::--------->  Route::resource('user');
+
+
+
+
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ BLADE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@section → Marca el inicio de una sección de contenido.
+@endsection → Marca el final de una sección.
+@show → Marca el final de una sección y la muestra.
+@yield(‘section’) → Muestra el contenido de una sección, si existe.
+@extends(‘view’) → Hereda de una plantilla padre.
+@parent → Muestra el contenido de la sección del mismo nombre en la plantilla padre.
+@include(‘view’) → Incluye una subvista.
+@if - @else - @endif → Condicional.
+@for - @endfor → Bucle for clásico.
+@foreach - @endforeach → Bucle foreach.
+@forelse - @empty - @endforelse → Como foreach, pero con tratamiento de arrays que vienen vacíos (es como un foreach dentro de un if).
+@break - @continue → Para usar en los bucles.
+@switch - @case - @break → Condicional múltiple.
+@isset($variable) - @endisset → Comprueba si la variable existe.
+@auth - @endauth → La sección solo se muestra si hay un usuario autenticado en la aplicación.
+@php - @endphp → Para añadir código PHP plano. Usar con moderación.
+{{- Comment -}} → Comentarios (no serán renderizados).
+
+{{ $variable }} → Equivalente a echo $variable, pero no es necesario abrir y cerrar PHP, y nos protegemos contra inyección de JS.
+
+{{ $variable ?? texto-por-defecto }} → Como el anterior, pero chequea si la variable existe. Si no existe, muestra texto-por-defecto.
+
+$loop → Es una variable muy útil para usar al depurar un foreach. Nos dice si estamos en el primer elemento, en el último, cuántos loops llevamos, etc.
+
+<form method="POST" action="{{ route('mi-ruta') }}"> <!--Ruta por su nombre-->
+//@method(delete)
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error) // para validar datos del formulario
+            {{ $error }}<br>
+        @endforeach
+    @endif
+
+
+    @csrf   <!-- Para evitar ataques CSRF -->
+    <input type="email" name="email"><br>
+    <input type="text" name="asunto"><br>
+    <textarea name="contenido"></textarea><br>
+    <button type="submit">Enviar</button>
+</form>
+
+en el metodo correspondiente quedaria asi:
+
+
+public function store() {
+    request->validate([                           //metodo para validar formularios
+        'email' => 'required|email',              //clave->valor  email debe ser e-mail y required
+        'asunto' => 'required'                   //asunto debe ser required
+    ]); // A partir de aquí, se procesa el formulario igual que antes
+
+
+    //resto del methodo
+}
+
+en caso de producirse un error volveria a mostrar el formulario con los codigos de error correspondiente
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
