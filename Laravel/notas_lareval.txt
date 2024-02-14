@@ -204,5 +204,15 @@ en caso de producirse un error volveria a mostrar el formulario con los codigos 
 
 
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ACIONES CON ROUTAS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+$url = route('profile.show', ['id' => 1]);
+
+<a href="{{ route('profile.show', ['id' => 1]) }}">Ver perfil</a>
+
+return redirect()->route('profile.show', ['id' => 1]);
+
+if (Route::currentRouteName() == 'profile.show') {
+    // La ruta actual coincide con 'profile.show'
+}
 
