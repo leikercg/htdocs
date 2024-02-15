@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/index',function(){
-return view("index");
-});
+
+//Route::get('index', "MovieController@mostrar") ->name('mostrar');
+
+/*se debe nombras las vista igual que el los metodos cuando es resource*/
+Route::get('index', [MovieController::class,"index"]) ->name('mostrar');
+
+//Route::get('index', [MovieController::class,"index"]) ->name('mostrar');
+
+
+
