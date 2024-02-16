@@ -23,7 +23,7 @@ class Movie extends Model
         return $this->belongsToMany('App\Directors');//en la otra se copia y pega los mismo
     }*/
 
-    public function writer()
+    public function writer()/*esto define el nombre*/
     {
         return $this->hasMany('App\Writer'); //return $this->hasMany('App\Writer','claveForanea')
     } // ATENCIÓN: hemos tenido que indicar el nombre de la clave foránea
