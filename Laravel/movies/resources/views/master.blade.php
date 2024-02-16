@@ -60,18 +60,7 @@
 
                 <div id="contenedorDerecha">
                     <h3>@yield('main_title')</h3>
-                    <div id='peliculas'>
-                        <table>
-                            @foreach ($movies->chunk(3) as $chunk) <!--divide el array movies e segmentos de 3 -->
-                            <tr>
-                                @foreach ($chunk as $movie)
-                                    <td><img class="portada" src="{{ asset('images/' . $movie->image) }}" alt="Portada de la película"></td>
-                                @endforeach
-                            </tr>
-                        @endforeach
-
-                        </table>
-                    </div>
+                    @section('content')
 
                 </div>
 

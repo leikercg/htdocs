@@ -226,3 +226,6 @@ if (Route::currentRouteName() == 'profile.show') {
     // La ruta actual coincide con 'profile.show'
 }
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ rutas con parametros @@@@@@@@@@@@@@@@@@@@@@@@@@@
+<a href="{{ route('pelicula', ['id' => $id, 'otro_parametro' => $valor]) }}">Enlace con múltiples parámetros</a>

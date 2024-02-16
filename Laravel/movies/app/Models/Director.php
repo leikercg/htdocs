@@ -11,6 +11,6 @@ class Director extends Model
     // Este director pertenece a un usuario de la clase Movie
     public function movie()
     {
-        return $this->belongsTo('App\Movie');
+        return $this->belongsTo('App\Models\Movie');
     }
 }

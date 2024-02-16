@@ -11,7 +11,7 @@ class Movie extends Model
     // Este usuario tiene un elemento email de la clase Director
     public function director()
     {
-        return $this->hasOne('App\Director');
+        return $this->hasOne('App\Models\Director');
     }
     // Este usuario tiene un elemento email de la clase LeadActor
     public function leadActor()

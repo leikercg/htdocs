@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+
+
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -13,7 +15,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
-        return view('master', ['movies' => $movies]); //array clave--> valor
+        return view('index', ['movies' => $movies]); //array clave--> valor
         //en las vistas se reciben las variables ya extraidas, no hay que indexarlars.
     }
 
@@ -36,8 +38,25 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
+    $movie=Movie::find($id);
+    $data['director']=$movie->director;
+
+
+
+    //Esto devuelve todos los datos de movie*/
+   /* $data['title'] = $movie->title;
+    $data['release_date'] = $movie->release_date;
+    $data['duration'] = $movie->duration;
+    $data['image'] = $movie->image;
+    $data['synopsys'] = $movie->synopsys;
+    $data['genre_id'] = $movie->genre_id;
+    $data['director_id'] = $movie->director_id;
+    $data['lean_actor_id'] = $movie->lean_actor_id;*/
+
+    return view('pelicula', $data);
+
 
         //
     }

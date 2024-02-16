@@ -10,7 +10,7 @@ class Writer extends Model
     use HasFactory;
     public function movie()
     {
-        return $this->belongsTo('App\Movie');
+        return $this->belongsTo('App\Models\Movie');
     }
 
 }
