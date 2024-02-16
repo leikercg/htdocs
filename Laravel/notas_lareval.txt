@@ -6,6 +6,16 @@ php artisan key:generate
 
 COMPOSER UPDATE
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@Descargar paquete @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-----este primero
+
+ composer require pestphp/pest --dev sin --dev es para producción
+
+ composer.json> indica las dependencias requeridas
+ composer.lock> indica las versiones descargadas
+
+ composer install installa vendor
+ comporser update lo actualiza
+
 LOS PASOS ANTERIORES ESTÁN RELACIONADOS CON GIT: NO OLVIDAR REESCRIBIR EL ARCHVIO .ENV
 
 
