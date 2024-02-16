@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <title>@yield('Cartelera')</title><!--yield significa que aquí debera ser insertado lo que hay en la title content-->
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}"> {{-- Asset es la ruta al directorio public y los corchetes son para insertar una variable --}}
@@ -13,7 +12,7 @@
         <nav>
             <img src='{{ asset('images/itsfree_header.gif') }}'>
             <div id="contenedorIzquierdo">
-                <h3><a href="{{ route('mostrar')}}">PELICULAS ONLINE</a></h3>
+                <h3><a href="{{ route('mostrar') }}">PELICULAS ONLINE</a></h3>
                 <div id="botonesIzquierdos">
                     <a href="#">Últimas novedades</a>
                     <a href="#">Próximos estrenos</a>
@@ -58,14 +57,20 @@
 
         </nav>
         <main>
-            @section('derecha')
-                <div id="contenedorDerecha">
-                    <h3>CATALOGO DE PELICULAS</h3>
-                    <div id='peliculas'>
-                        @foreach ($movies as $movie)
 
-                            <img class="portada" src="{{ URL::asset('images/' . $movie->image) }}">
+                <div id="contenedorDerecha">
+                    <h3>@yield('main_title')</h3>
+                    <div id='peliculas'>
+                        <table>
+                            @foreach ($movies->chunk(3) as $chunk) <!--divide el array movies e segmentos de 3 -->
+                            <tr>
+                                @foreach ($chunk as $movie)
+                                    <td><img class="portada" src="{{ asset('images/' . $movie->image) }}" alt="Portada de la película"></td>
+                                @endforeach
+                            </tr>
                         @endforeach
+
+                        </table>
                     </div>
 
                 </div>

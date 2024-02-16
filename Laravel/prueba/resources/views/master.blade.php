@@ -15,7 +15,7 @@
     <section>
         <aside></aside>
         @section('sidebar')
-            Este es mi master sidebar     Esto es lo que se mostrará si no se defini nada en la vista hija-->
+            Este es mi master sidebar     Esto es lo que se mostrará si no se defini nada en la vista hija-->tttttt
         @show
 
 
