@@ -11,6 +11,6 @@ class LeadActor extends Model
     // Este leadActor pertenece a un usuario de la clase Movie
     public function movie()
     {
-        return $this->belongsTo('App\Movie');
+        return $this->belongsTo('App\Models\Movie');
     }
 }

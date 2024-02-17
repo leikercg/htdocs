@@ -229,3 +229,44 @@ if (Route::currentRouteName() == 'profile.show') {
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ rutas con parametros @@@@@@@@@@@@@@@@@@@@@@@@@@@
 <a href="{{ route('pelicula', ['id' => $id, 'otro_parametro' => $valor]) }}">Enlace con múltiples parámetros</a>
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ rutas con parametros en medio @@@@@@@@@@@@@@@@@@@@@@
+<a href="{{ route('pelicula', ['id' => $movie->id]) }}/director">Ver director</a>
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ELOQUENT@@@@@@@@@@@@@@@@@@@@@@@@
+
+$users = DB::table("users")->get();
+$users = DB::table("users")->where("name", "=", "Ana")->first();
+$users = DB::table("users")->where("edad", ">=", 18)->orderBy("apellidos");
+$maxId = DB::table("users")->max("id");
+$existe = DB::table("users")->where("id", "=", $id)->exists();
+$users = DB::table("users")->select("nombre, apellidos as apell")->get();
+
+---------AQUI creando instancias------
+ $genero=Genres::where('genre',$g)->first();//instancia de genero
+        // o
+        //$genero = Genres::where('genre', $g)->first(); para coger el primero
+        $movies=Movie::where('genre_id',$genero->id)->get(); //para coger todos
+        $data['movies']=$movies;
+        $data['genero']= strtoupper($g);
+        return view('genero',$data);
+
+
+
+-------sql crudo------
+$resultado = DB::raw('escribe-aquí-tu-sentencia-SQL');
+
+------con parametros se pasa arrays para asignar cada ?-----
+$genero = Genres::whereRaw('LOWER(genre) = ? and date = ?', [strtolower($g), $date])->first();
+
+---------------con un solo parametro------------
+
+$genero = Genres::whereRaw('LOWER(genre) = ?', strtolower($g))->first();
+
+
+
+

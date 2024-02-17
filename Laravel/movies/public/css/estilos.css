@@ -1,52 +1,60 @@
-
-a{
+a {
     text-decoration: none;
     color: white;
 }
-body{
+
+body {
     margin: 0px;
     padding: 0px;
     min-height: 100vh;
     min-width: 100vw;
 }
-section{
+
+section {
     margin: 0px;
     padding: 0px;
     min-height: 100vh;
     max-width: 100vw;
     display: flex;
 }
-nav{
+
+nav {
     width: 40%;
     height: 100vh;
     background-color: gray;
     font-family: 'Courier New', Courier, monospace;
 }
-nav form, #generos{
+
+nav form,
+#generos {
     font-size: x-large;
 }
+
 /*imagen its free*/
-nav  img{
+nav img {
     width: 100%;
 }
 
 /*contenedor izquierdo*/
-#contenedorIzquierdo{
+#contenedorIzquierdo {
     display: flex;
     flex-direction: column;
     padding: 20px;
 }
-h3{
+
+h3 {
     text-align: center;
     font-size: 30px;
 }
+
 /*botones izquierdos*/
-#botonesIzquierdos{
-   display: flex;
-   justify-content: space-around;
-   padding-bottom: 10px;
+#botonesIzquierdos {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
 }
-#botonesIzquierdos a{
+
+#botonesIzquierdos a {
     background-color: black;
     border-radius: 7px;
     color: white;
@@ -57,19 +65,21 @@ h3{
     align-items: center;
     display: flex;
 }
-.campo{
+
+.campo {
     width: 80%;
 }
-#generos .fila{
-justify-content: space-between;
-display: flex;
-padding-left: 3%;
-padding-right: 3%;
-margin-top: 10px;
-margin-bottom: 10px;
+
+#generos .fila {
+    justify-content: space-between;
+    display: flex;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.fila a{
+.fila a {
     font-size: medium;
     text-decoration: none;
     height: 30px;
@@ -78,40 +88,66 @@ margin-bottom: 10px;
     border-radius: 7px;
     color: white;
     display: flex;
-    align-items: center ;
+    align-items: center;
     justify-content: center;
 }
-#terror{
+
+#terror {
     justify-content: center;
     align-items: center;
     display: flex;
 }
-#terror a{
+
+#terror a {
     text-decoration: none;
     height: 30px;
     width: 150px;
     background-color: black;
     border-radius: 7px;
     color: white;
-    align-items: center ;
+    align-items: center;
     justify-content: center;
     display: flex;
     font-size: medium;
 }
+
 /*********************************************************************/
-main{
+main {
     width: 60%;
     height: 100vh;
     font-family: 'Courier New', Courier, monospace;
 }
-#contenedorDerecha{
+
+#contenedorDerecha {
     padding: 10%;
 }
 
-.portada{
+.portada {
     width: 250px;
 }
 
 
+/***********************  VISTA PELÍCULA*********************/
+#pelicula{
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+#datos{
+    margin-left: 30px;
+}
+#pelicula>div>img{
+    width: 300px;
+}
 
 
+
+.writer{
+    position: relative;
+    left: 105px;
+}
+#synopsis{
+    margin-top: 20px;
+    display: flex;
+}

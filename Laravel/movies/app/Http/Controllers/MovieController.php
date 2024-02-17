@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genres;
 use App\Models\Movie;
 
 
@@ -17,6 +18,16 @@ class MovieController extends Controller
         $movies = Movie::all();
         return view('index', ['movies' => $movies]); //array clave--> valor
         //en las vistas se reciben las variables ya extraidas, no hay que indexarlars.
+    }
+
+    public function genero($g) {
+        $genero=Genres::where('genre',$g)->first();//instancia de genero
+        // o
+        //$genero = Genres::where('genre', $g)->first(); para coger el primero
+        $movies=Movie::where('genre_id',$genero->id)->get(); //para coger todos
+        $data['movies']=$movies;
+        $data['genero']= strtoupper($g);
+        return view('genero',$data);
     }
 
     /**
@@ -40,22 +51,39 @@ class MovieController extends Controller
      */
     public function show(int $id)
     {
-    $movie=Movie::find($id);
-    $data['director']=$movie->director;
+        $movie=Movie::find($id);
+
+        $data['title']=$movie->title;
+        $data['release_date']=$movie->release_date;
+        $data['duration']=$movie->duration;
+        $data['image']=$movie->image;
+        $data['synopsis']=$movie->synopsis;
+
+        $data['writers']=$movie->writers;
+
+        $data['genre']=Genres::find($movie->genre_id)->genre;
+
+        $data['director']=$movie->director;
+        $data['leadActor']=$movie->leadActor;
+        $data['writers']=$movie->writers;
+        //$data['genre']=$movie->genres->genre;
 
 
 
-    //Esto devuelve todos los datos de movie*/
-   /* $data['title'] = $movie->title;
-    $data['release_date'] = $movie->release_date;
-    $data['duration'] = $movie->duration;
-    $data['image'] = $movie->image;
-    $data['synopsys'] = $movie->synopsys;
-    $data['genre_id'] = $movie->genre_id;
-    $data['director_id'] = $movie->director_id;
-    $data['lean_actor_id'] = $movie->lean_actor_id;*/
+        //Esto devuelve todos los datos de movie*/
+        /* $data['title'] = $movie->title;
+         $data['release_date'] = $movie->release_date;
+         $data['duration'] = $movie->duration;
+         $data['image'] = $movie->image;
+         $data['synopsys'] = $movie->synopsys;
+         $data['genre_id'] = $movie->genre_id;
+         $data['director_id'] = $movie->director_id;
+         $data['lean_actor_id'] = $movie->lean_actor_id;
 
-    return view('pelicula', $data);
+         SE DEVEN DEVOLVER ARRAYS!!!
+         */
+
+        return view('pelicula', $data);
 
 
         //

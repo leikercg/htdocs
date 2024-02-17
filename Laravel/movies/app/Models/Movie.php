@@ -16,16 +16,16 @@ class Movie extends Model
     // Este usuario tiene un elemento email de la clase LeadActor
     public function leadActor()
     {
-        return $this->hasOne('App\LeadActor');
+        return $this->hasOne('App\Models\LeadActor');
     }
     /*
     public function directors() {//esta clase tienen una relacion n:n
-        return $this->belongsToMany('App\Directors');//en la otra se copia y pega los mismo
+        return $this->belongsToMany('App\Models\Directors');//en la otra se copia y pega los mismo
     }*/
 
-    public function writer()/*esto define el nombre*/
+    public function writers()/*esto define el nombre*/
     {
-        return $this->hasMany('App\Writer'); //return $this->hasMany('App\Writer','claveForanea')
+        return $this->hasMany('App\Models\Writer'); //return $this->hasMany('App\Writer','claveForanea')
     } // ATENCIÓN: hemos tenido que indicar el nombre de la clave foránea
     // (idUsuario) porque no habíamos respetado la convención de Laravel
     // (usuario_id) al crear la tabla de artículos
@@ -34,7 +34,7 @@ class Movie extends Model
     //esto es cuando la relación es 1:N
     public function genres()
     {
-        return $this->belongsTo('App\Genres');
+        return $this->belongsTo('App\Models\Genres');
     }
 
 }

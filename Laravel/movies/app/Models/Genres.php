@@ -10,6 +10,6 @@ class Genres extends Model
     use HasFactory;
     public function movie()
     {
-        return $this->hasMany('App\Movie');
+        return $this->hasMany('App\Models\Movie');
     }
 }

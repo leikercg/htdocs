@@ -18,37 +18,37 @@
                     <a href="#">Próximos estrenos</a>
                 </div>
                 <form action="#">
-                    <label for="titulo">título</label>
+                    <label for="titulo"><b>título</b></label>
                     <div>
                         <input class="campo" type="text" name="titulo" id="titulo"> <button>Lupa</button>
                     </div>
                 </form>
                 <form action="#">
-                    <label for="titulo">director</label>
+                    <label for="director"><b>director</b></label>
                     <div>
-                        <input class="campo" type="text" name="titulo" id="titulo"> <button>Lupa</button>
+                        <input class="campo" type="text" name="director" id="director"> <button>Lupa</button>
                     </div>
                 </form>
                 <div id="generos">
-                    <span>género</span>
+                    <span><b>género</b></span>
                     <div>
                         <div class="fila">
-                            <a href="#">Acción</a>
-                            <a href="#">Aventura</a>
-                            <a href="#">Ciencia ficción</a>
+                            <a href="{{route('genero',['genero'=>'Acción'])}}">Acción</a>
+                            <a href="{{route('genero',['genero'=>'Aventura'])}}">Aventura</a>
+                            <a href="{{route('genero',['genero'=>'Ciencia ficción'])}}">Ciencia ficción</a>
                         </div>
                         <div class="fila">
-                            <a href="#">Comedia</a>
-                            <a href="#">Historia</a>
-                            <a href="#">Fantasia</a>
+                            <a href="{{route('genero',['genero'=>'Comedia'])}}">Comedia</a>
+                            <a href="{{route('genero',['genero'=>'Drama'])}}">Drama</a>
+                            <a href="{{route('genero',['genero'=>'Historia'])}}">Historia</a>
                         </div>
                         <div class="fila">
-                            <a href="#">Fantasía</a>
-                            <a href="#">Animación</a>
-                            <a href="#">Romance</a>
+                            <a href="{{route('genero',['genero'=>'Fantasía'])}}">Fantasía</a>
+                            <a href="{{route('genero',['genero'=>'Animación'])}}">Animación</a>
+                            <a href="{{route('genero',['genero'=>'Romance'])}}">Romance</a>
                         </div>
                         <div id="terror">
-                            <a href="#">Terror</a>
+                            <a href="{{route('genero',['genero'=>'Terror'])}}">Terror</a>
                         </div>
 
                     </div>
