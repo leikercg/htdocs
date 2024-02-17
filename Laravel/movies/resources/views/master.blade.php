@@ -14,16 +14,16 @@
             <div id="contenedorIzquierdo">
                 <h3><a href="{{ route('mostrar') }}">PELICULAS ONLINE</a></h3>
                 <div id="botonesIzquierdos">
-                    <a href="#">Últimas novedades</a>
-                    <a href="#">Próximos estrenos</a>
+                    <a href="{{route('novedades',['fecha'=>'novedades'])}}">Últimas novedades</a>
+                    <a href="{{route('novedades',['fecha'=>'proximos'])}}">Próximos estrenos</a>
                 </div>
-                <form action="#">
+                <form method="GET" action="{{route('titulo')}}">
                     <label for="titulo"><b>título</b></label>
                     <div>
                         <input class="campo" type="text" name="titulo" id="titulo"> <button>Lupa</button>
                     </div>
                 </form>
-                <form action="#">
+                <form method="GET" action="{{route('director')}}">
                     <label for="director"><b>director</b></label>
                     <div>
                         <input class="campo" type="text" name="director" id="director"> <button>Lupa</button>

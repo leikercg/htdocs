@@ -29,5 +29,10 @@ Route::get('index/peliculas/{id}',[MovieController::class,'show'])->name('pelicu
 
 Route::get('index/genero/{genero}',[MovieController::class,'genero'])->name('genero');
 
+Route::get('index/fecha/{fecha}',[MovieController::class,'novedades'])->name('novedades');
+
+Route::get('index/director',[MovieController::class,'director'])->name('director');
+
+Route::get('index/titulo',[MovieController::class,'titulo'])->name('titulo');
 
 

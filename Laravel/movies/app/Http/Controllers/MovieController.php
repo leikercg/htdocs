@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Genres;
 use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class MovieController extends Controller
 {
@@ -20,22 +22,63 @@ class MovieController extends Controller
         //en las vistas se reciben las variables ya extraidas, no hay que indexarlars.
     }
 
-    public function genero($g) {
-        $genero=Genres::where('genre',$g)->first();//instancia de genero
+    public function genero($g)
+    {
+        $genero=Genres::where('genre', $g)->first();//instancia de genero
         // o
         //$genero = Genres::where('genre', $g)->first(); para coger el primero
-        $movies=Movie::where('genre_id',$genero->id)->get(); //para coger todos
+        $movies=Movie::where('genre_id', $genero->id)->get(); //para coger todos
         $data['movies']=$movies;
         $data['genero']= strtoupper($g);
-        return view('genero',$data);
+        return view('genero', $data);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+
+    public function director(Request $request){
+        $moviesSinFiltro=Movie::all();
+        $movies=[];
+
+        foreach ($moviesSinFiltro as $movie){
+            if(str_contains(strtolower($movie->director->name), strtolower($request->director))){
+                array_push($movies,$movie);
+            }elseif(str_contains(strtolower($movie->director->surname), strtolower($request->director))){
+                array_push($movies,$movie);
+            }
+        }
+        $data['movies']=$movies;
+        $data['busqueda']=$request->director;
+        return view ('director',$data);
+
+    }
+
+    public function titulo(Request $request){
+        $movies = DB::table('movies')->whereRaw('LOWER(title) LIKE ?', ["%" . strtolower($request->titulo) . "%"])->get();
+
+    //$resultado = DB::raw('SELECT * FROM movies WHERE LOWER(title) LIKE LOWER('%texto%')');
+
+        $data['movies']=$movies;
+        $data['busqueda']=$request->titulo;
+        return view ('titulo',$data);
+
+    }
+
+    public function novedades($f)
     {
-        //
+        $data=[];
+        $date= Date::now()->format('Y-m-d');
+        if($f=='novedades'){
+            $data['movies']=Movie::where('release_date','<',$date)->get();
+            $data['titulo']='Últimas novedades';
+        }else{
+            $data['movies']=Movie::where('release_date','>',$date)->get();
+            $data['titulo']='Próximos estrenos';
+
+        }
+
+        return view('novedades',$data);
     }
 
     /**

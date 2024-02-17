@@ -128,18 +128,41 @@ Route::patch(), que es para actualizar un campo
 Route::delete(); // Recepción de datos para DELETE
 Route::patch(array('GET','POST'), 'ruta', acción)  // Responderá tanto a GET como a POST
 
+
+
+
+
 <form action="/foo/bar" method="POST">
     @method('DELETE')
     @method('PATCH')
     @method('PUT')
 
 
+
+
+
+
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@ rutas resource@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
 Route::get('user', 'UserController@index')->name('user.index');         // Recupera todos los usuarios
+
 Route::get('user/{user}', 'UserController@show')->name('user.show');    // Recupera usuario con id=user
+
 Route::get('user/crear', 'UserController@create')->name('user.create'); // Lanza el formulario de creación de usuarios
+
 Route::post('user/{user}', 'UserController@store')->name('user.store');        // Recoge los datos del formulario y los inserta en la base de datos
+
 Route::get('user/{user}/edit', 'UserController@edit')->name('user.edit');      // Lanza el formulario de modificación de usuarios
+
 Route::patch('user/{user}', 'UserController@update')->name('user.update');     // Recoge los datos del formulario y modifica el usuario de la base de datos
+
 Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');  // Elimina al usuario de la base de datos
 
 
@@ -157,20 +180,39 @@ Todo esto en una linea::--------->  Route::resource('user');
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ BLADE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 @section → Marca el inicio de una sección de contenido.
+
 @endsection → Marca el final de una sección.
+
 @show → Marca el final de una sección y la muestra.
+
 @yield(‘section’) → Muestra el contenido de una sección, si existe.
+
 @extends(‘view’) → Hereda de una plantilla padre.
+
 @parent → Muestra el contenido de la sección del mismo nombre en la plantilla padre.
+
 @include(‘view’) → Incluye una subvista.
+
 @if - @else - @endif → Condicional.
+
 @for - @endfor → Bucle for clásico.
+
 @foreach - @endforeach → Bucle foreach.
+
 @forelse - @empty - @endforelse → Como foreach, pero con tratamiento de arrays que vienen vacíos (es como un foreach dentro de un if).
+
 @break - @continue → Para usar en los bucles.
+
 @switch - @case - @break → Condicional múltiple.
+
 @isset($variable) - @endisset → Comprueba si la variable existe.
+
 @auth - @endauth → La sección solo se muestra si hay un usuario autenticado en la aplicación.
+
+
+
+
+
 @php - @endphp → Para añadir código PHP plano. Usar con moderación.
 {{- Comment -}} → Comentarios (no serán renderizados).
 
@@ -178,7 +220,10 @@ Todo esto en una linea::--------->  Route::resource('user');
 
 {{ $variable ?? texto-por-defecto }} → Como el anterior, pero chequea si la variable existe. Si no existe, muestra texto-por-defecto.
 
+
 $loop → Es una variable muy útil para usar al depurar un foreach. Nos dice si estamos en el primer elemento, en el último, cuántos loops llevamos, etc.
+
+
 
 <form method="POST" action="{{ route('mi-ruta') }}"> <!--Ruta por su nombre-->
 //@method(delete)
@@ -250,10 +295,16 @@ $users = DB::table("users")->select("nombre, apellidos as apell")->get();
  $genero=Genres::where('genre',$g)->first();//instancia de genero
         // o
         //$genero = Genres::where('genre', $g)->first(); para coger el primero
+
         $movies=Movie::where('genre_id',$genero->id)->get(); //para coger todos
         $data['movies']=$movies;
         $data['genero']= strtoupper($g);
         return view('genero',$data);
+
+----------------------- selecionar solo unos campos-------------------------
+$movies = Movie::select('name', 'director')->where('id', 6)->get();
+
+
 
 
 
@@ -270,3 +321,136 @@ $genero = Genres::whereRaw('LOWER(genre) = ?', strtolower($g))->first();
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@ isset, empty if @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@isset($variable)
+    La variable está definida y no es nula.
+@else
+    La variable no está definida o es nula.
+@endisset
+---------------------------------------------
+@empty($variable)
+    La variable está definida pero está "vacía".
+@else
+    La variable tiene contenido.
+@endempty
+--------------------------------------------------
+@if(isset($variable) && $variable == 'valor')
+    La variable está definida y tiene el valor 'valor'.
+@else
+    La variable no está definida o no tiene el valor 'valor'.
+@endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ REQUEST HELPER @@@@@@@@@@@@@@@@@@@@@@@
+
+request()->url() → Devuelve un string con la ruta actual (completa).
+
+request()->path() → Devuelve un string con la ruta actual (solo desde la raíz de la aplicación, sin http ni el nombre del servidor).
+
+request()->is(“ruta”) → Devuelve true si coincide con la ruta actual.
+
+request()->input(“campo”) → Devuelve el valor de “campo” (enviado desde formulario).
+
+request()->all() → Devuelve un array con todos los campos.
+
+request()->has(“campo”) → Devuelve true si en la petición existe un campo con el nombre indicado.
+
+request()->isMethod(“método”) → Devuelve true si la petición se hizo por el método indicado (POST, GET, PUT, etc).
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@ REDIRECT @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+use Illuminate\Support\Facades\Redirect;
+
+Route::get('/redireccionar', function () {
+    // Redirigir a una ruta específica
+    return redirect('/nueva-ruta');
+
+    // Redirigir a una ruta con parámetros
+    return redirect('/nueva-ruta')->with('parametro', 'valor');
+
+    // Redirigir a una ruta con un nombre de ruta
+    return redirect()->route('nombre.ruta');
+
+    // Redirigir a una ruta con un nombre de ruta y parámetros
+    return redirect()->route('nombre.ruta', ['parametro' => 'valor']);
+
+    // Redirigir a la URL anterior
+    return redirect()->back();
+
+    // Redirigir con un mensaje de sesión
+    return redirect('/')->with('mensaje', '¡Redirección exitosa!');
+});
+
+----EJEMPLO:
+class UserController extends Controller
+{
+    public function store(Request $request)
+    {
+        // Aquí iría la lógica para guardar al usuario en la base de datos
+
+        // Después de guardar al usuario, devolver la vista del home
+        return redirect('/home');
+    }
+}
+
+return redirect('user/login');
+return redirect()->action('LoginController@login');
+return back();
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@ FECHAS@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Controlador::
+$fechaActual = Date::now();
+$fechaActual->format('d/m/Y H:i:s')   ///fecha con formato
+
+---acceder a los datos ---:
+<p>Año: {{ $fechaActual->year }}</p>
+<p>Mes: {{ $fechaActual->month }}</p>
+<p>Día: {{ $fechaActual->day }}</p>
+<p>Hora: {{ $fechaActual->hour }}</p>
+<p>Minutos: {{ $fechaActual->minute }}</p>
+<p>Segundos: {{ $fechaActual->second }}</p>
+
+l: Representa el día de la semana completo en texto (por ejemplo, "Monday").
+j: Representa el día del mes sin ceros iniciales (por ejemplo, "1" a "31").
+F: Representa el mes completo en texto (por ejemplo, "January" a "December").
+Y: Representa el año con cuatro dígitos (por ejemplo, "2024").
