@@ -6,11 +6,10 @@
 
 @section('content')
     <div id='peliculas'>
-
+<!--recibimos dos parámetros, busqueda que es lo escrito en el form y un array php-->
         @php $contador=1; @endphp
         <table>
             @foreach ($movies as $movie)
-                <!--divide el array movies e segmentos de 3 -->
 
                 @if ($contador  == 1)
                     <tr>
