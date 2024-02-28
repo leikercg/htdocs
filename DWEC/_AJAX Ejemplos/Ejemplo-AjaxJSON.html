@@ -6,21 +6,21 @@
 		<script>
 			function cargarDoc() {
 				var xhr = new XMLHttpRequest();
-				
+
 				var resultado = document.getElementById("elemento_destino");
-				
+
 				xhr.onreadystatechange = function() {
-					
+
 					if (xhr.readyState == 4 && xhr.status == 200) {
 						// Carga archivo JSON.
 						//alert("Prueba: " + xhr.responseText);
 						//var array = JSON.parse('{"nombre":"Luis", "apellido":"Cárdenas", "edad":30}');
 						var array = JSON.parse(xhr.responseText); // Si el servidor no es confiable.
-						
+
 						resultado.innerHTML = "<br />" + array.nombre + " " + array.apellido + " tiene " + array.edad + " años.";
 					}
 				};
-				
+
 				xhr.open("GET", "Ejemplo-AjaxJSON.json", true);
 				//xhr.setRequestHeader("Content-type", "application/json");
 				xhr.send(null);

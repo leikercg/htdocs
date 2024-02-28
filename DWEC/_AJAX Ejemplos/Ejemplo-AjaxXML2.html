@@ -14,18 +14,23 @@
 		</style>
 		<script>
 			function cargarDoc() {
-				var xhr = new XMLHttpRequest();
-				
-				xhr.onreadystatechange = function() {
-					
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						
+				var xhr = new XMLHttpRequest(); //se crea el elemento para poder realizar la solicitud.
+
+
+
+				xhr.open("GET", "Ejemplo-AjaxXML2.xml", true); //se indican los parametros de la solicitud
+				xhr.send(); //se envia la solicitud con los parámetros
+
+				xhr.onreadystatechange = function() {//Cunado se produzca el evento readystatechange hara esto:
+
+					if (xhr.readyState == 4 && xhr.status == 200) { //==4 solicitud completa, y status==200 respuesta exitosa se procesa
+
 						// Carga archivo XML.
-						var docXML = xhr.responseXML;
-						
-						var discos = docXML.getElementsByTagName("CD");
-						var tabla = "<tr><th>Título</th><th>Artista</th></tr>";
-						
+						var docXML = xhr.responseXML; //crea el documento xml
+
+						var discos = docXML.getElementsByTagName("CD"); //se seleccionan los nodos CD
+						var tabla = "<tr><th>Título</th><th>Artista</th></tr>"; //se iteran y se crea una cadena para susituit el elemento de destino.
+
 						for (var i=0; i<discos.length; i++) {
 							tabla += "<tr><td>";
 							tabla += discos[i].getElementsByTagName("TITLE")[0].textContent;
@@ -33,13 +38,10 @@
 							tabla += discos[i].getElementsByTagName("ARTIST")[0].textContent;
 							tabla += "</td></tr>";
 						}
-						
+
 						document.getElementById("elemento_destino").innerHTML = tabla;
 					}
 				};
-				
-				xhr.open("GET", "Ejemplo-AjaxXML2.xml", true);
-				xhr.send();
 			}
 		</script>
 	</head>
