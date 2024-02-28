@@ -17,7 +17,7 @@
                     <a href="{{route('novedades',['fecha'=>'novedades'])}}">Últimas novedades</a>
                     <a href="{{route('novedades',['fecha'=>'proximos'])}}">Próximos estrenos</a>
                 </div>
-                <form method="GET" action="{{route('titulo')}}">
+                <form method="GET" action="{{route('titulo')}}"> <!--Preguntar-->
                     <label for="titulo"><b>título</b></label>
                     <div>
                         <input class="campo" type="text" name="titulo" id="titulo"> <button>Lupa</button>

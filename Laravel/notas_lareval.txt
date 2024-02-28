@@ -318,6 +318,12 @@ $genero = Genres::whereRaw('LOWER(genre) = ? and date = ?', [strtolower($g), $da
 
 $genero = Genres::whereRaw('LOWER(genre) = ?', strtolower($g))->first();
 
+------------------------ varios where en  una condicional---------------------
+
+$data['movies'] = Movie::where('release_date', '<', $date)
+                       ->where('genre', $genre)
+                       ->get();
+
 
 
 

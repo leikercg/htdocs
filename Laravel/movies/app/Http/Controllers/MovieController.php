@@ -27,7 +27,7 @@ class MovieController extends Controller
         $genero=Genres::where('genre', $g)->first();//instancia de genero
         // o
         //$genero = Genres::where('genre', $g)->first(); para coger el primero
-        $movies=Movie::where('genre_id', $genero->id)->get(); //para coger todos
+        $movies=Movie::where('genre_id', $genero->id)->get(); //para coger todos, es una coleccion de laravel.
         $data['movies']=$movies;
         $data['genero']= strtoupper($g);
         return view('genero', $data);
@@ -41,7 +41,7 @@ class MovieController extends Controller
         $moviesSinFiltro=Movie::all();
         $movies=[];
 
-        foreach ($moviesSinFiltro as $movie){
+        foreach ($moviesSinFiltro as $movie){//los comparamos en minúsculas para ignorar mayúsculas*/
             if(str_contains(strtolower($movie->director->name), strtolower($request->director))){
                 array_push($movies,$movie);
             }elseif(str_contains(strtolower($movie->director->surname), strtolower($request->director))){
@@ -56,6 +56,7 @@ class MovieController extends Controller
 
     public function titulo(Request $request){
         $movies = DB::table('movies')->whereRaw('LOWER(title) LIKE ?', ["%" . strtolower($request->titulo) . "%"])->get();
+        //por cada "?" debemos incluir un elemento en el array parametro, se van adjudicando por orden.
 
     //$resultado = DB::raw('SELECT * FROM movies WHERE LOWER(title) LIKE LOWER('%texto%')');
 
@@ -68,7 +69,7 @@ class MovieController extends Controller
     public function novedades($f)
     {
         $data=[];
-        $date= Date::now()->format('Y-m-d');
+        $date= Date::now()->format('Y-m-d'); // esto es un formato de fecha en laravel
         if($f=='novedades'){
             $data['movies']=Movie::where('release_date','<',$date)->get();
             $data['titulo']='Últimas novedades';
