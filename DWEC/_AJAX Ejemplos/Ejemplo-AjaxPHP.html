@@ -5,33 +5,33 @@
 		<title>Ejemplo de AJAX con PHP</title>
 		<script>
 			var xhr = new XMLHttpRequest();
-			
+
 			function enviarDatosServidor() {
-				
+
 				var name = document.getElementsByTagName("input")[0].value;
 				var lastname = document.getElementsByTagName("input")[1].value;
 				//alert("Prueba: " + name + " " + lastname);
 				var parametros = 'name=' + name + '&lastname=' + lastname;
-				
+
 				// Cuando se produzca un cambio en el estado del objeto, se ejecuta la función.
-				xhr.onreadystatechange = recibirDatosServidor();
-				
+				xhr.onreadystatechange = recibirDatosServidor;
+
 				// Se inicializa la instancia usando el método POST (más seguro que GET).
 				xhr.open("POST", "Ejemplo-AjaxPHP.php", true); // "true" porque es asíncrona.
-				
+
 				// Se indica el tipo de parámetros a enviar para que el método POST sea admitido.
 				// Esta cabecera indica el tipo de contenido: los datos enviados deben tratarse como los extraídos de un formulario.
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				
+
 				// Se abre la conexión y se envía la solicitud al servidor. Pasa datos como parámetros.
 				xhr.send(parametros);
 			}
-			
+
 			function recibirDatosServidor() {
-				
+
 				var elemento_destino = document.getElementById("elemento_destino");
 				//elemento_destino.innerHTML = "<br />" + "Prueba";
-				
+
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					elemento_destino.innerHTML = xhr.responseText; // Respuesta o devolución a la petición AJAX del servidor.
 				}
