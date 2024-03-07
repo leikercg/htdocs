@@ -55,7 +55,7 @@ php artisan list
 
 @@@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR LAS TODAS LAS MIGRACIONES ejecuta todas las que no estan @@@@@@@@@@@@@@@@@@@@@@@@
 
-php artisan migrate
+php artisan migrate OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
 @@@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR LAS MIGRACIONES ejecuta una @@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -64,7 +64,7 @@ php artisan migrate --path=/database/migrations/nombre_de_la_migracion.php
 
 @@@@@@@@@@@@@@@@@@@@@@@@ EJECUTAR LOS SEADER, TODOS LOS ALMACENADOS EN SEEDAR DB @@@@@@@@@@@@@@@@@@@@@@@@
 
-php artisan db:seed
+php artisan db:seed 000000000000000000000000000000000000000000000000000000
 
 @@@@@@@@@@@@@@@@@@@@@@ EJECUTAR UN SEEDER EN CONCRETO @@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -92,11 +92,11 @@ php artisan migrate:rollback --step=3
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@ Resetear la BD y reconstruirla lanzando todas las migraciones @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-php artisan migrate:refresh //--seed ejecutar seeders mantiene el hisotorial de migraciones
+php artisan migrate:refresh //--seed ejecutar seeders mantiene el hisotorial de migraciones 0000000000000000000000000000000000
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@ Elimina las tablas y reconstruirla lanzando todas las migraciones @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-php artisan migrate:refresh //--seed ejecutar seeders NO mantiene el hisotorial de migraciones
+php artisan migrate:fresh //--seed ejecutar seeders NO mantiene el hisotorial de migraciones
 
 @@@@@@@@@@@@@@@@@@@@@@@@ INSTALAR MIGRACION @@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -282,7 +282,7 @@ if (Route::currentRouteName() == 'profile.show') {
 
 
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ELOQUENT@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ELOQUENT @@@@@@@@@@@@@@@@@@@@@@@@
 
 $users = DB::table("users")->get();
 $users = DB::table("users")->where("name", "=", "Ana")->first();
@@ -460,3 +460,79 @@ l: Representa el día de la semana completo en texto (por ejemplo, "Monday").
 j: Representa el día del mes sin ceros iniciales (por ejemplo, "1" a "31").
 F: Representa el mes completo en texto (por ejemplo, "January" a "December").
 Y: Representa el año con cuatro dígitos (por ejemplo, "2024").
+
+
+
+
+
+Relaciones:
+---------------------------------------------------------------------------------------
+1 a N:
+ tabla maestra:
+
+ public function contact() {
+        return $this->hasMany('App\Models\Contact');
+    }
+
+tabla no maestra:
+
+public function employee() {
+        return $this->belongsTo('App\Models\Employee');
+    }
+---------------------------------------------------------------------------------------
+
+1 a 1:
+ Tabla maestra:
+
+ public function director()
+    {
+        return $this->hasOne('App\Models\Director');
+    }
+
+Tabla no maestra:
+
+public function movie()
+    {
+        return $this->belongsTo('App\Models\Movie');
+    }
+--------------------------------------------------------------------------------------
+
+N a N
+
+Tabla maestra:
+public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+Tabla no maestra:
+ public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+
+
+-------------------------------------------------------------------
+ejemplos de migraciones:
+
+ Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('old_column_name', 'new_column_name');
+        });
+
+        datos:
+        $table->string('name', 100);
+        $table->string('email')->after('name');
+        $table->bigIncrements('id');
+        $table->string('middle_name')->nullable();
+        $table->string('status')->default('active');
+        $table->unique('email');
+        $table->primary('id');
+        $table->foreign('user_id')->references('id')->on('users');
+        $table->unique(['first_name', 'last_name']);         varias columnas
+        $table->integer('age')->nullable()->default(18)->check('age >= 18');    chekear la edad
+
+
+
+
+
