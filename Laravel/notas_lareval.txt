@@ -442,7 +442,7 @@ return back();
 
 
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@ FECHAS@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@ FECHAS @@@@@@@@@@@@@@@@@@@@@@@@@
 
 Controlador::
 $fechaActual = Date::now();
@@ -531,6 +531,7 @@ ejemplos de migraciones:
         $table->foreign('user_id')->references('id')->on('users');
         $table->unique(['first_name', 'last_name']);         varias columnas
         $table->integer('age')->nullable()->default(18)->check('age >= 18');    chekear la edad
+        $table->string('name')->nullable(false)->default('valor_por_defecto'); not null y con valor por defecto
 
 
 
