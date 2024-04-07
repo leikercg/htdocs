@@ -1,0 +1,10 @@
+body{
+background-color: grey;}
+
+header{
+    background-color: rgb(47, 145, 194);
+    min-height: 20vh;
+}
+main{
+    background-color: white;
+}
