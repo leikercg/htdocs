@@ -10,15 +10,16 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
-    protected $primaryKey = 'id'; //Al no seguir la convención de laravel indicamos la columna clave
-
-    protected $keyType = 'string'; // Indicamos que no es num por que por defecto considera la id int incrementable, solo seleciona la parte numérica
-    public function empleado() //cada usuario tiene un unico empleado
+    public function empleado()//tiene un solo empleado
     {
-        return $this->belongsTo(Empleado::class);
+        return $this->belongsTo(Empleado::class, 'dni', 'id'); //(tabla local,tabla referencia)
     }
 
+    public function familiar() //cada usuario tiene un unico familiar
+    {
+        return $this->belongsTo(Familiar::class, 'dni', 'Id_familiar'); //(tabla local,tabla referencia)
+
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +27,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'dni',
         'email',
+        'id_departamento',
         'password',
     ];
 

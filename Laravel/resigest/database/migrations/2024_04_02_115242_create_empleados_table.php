@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('Direccion', 255)->nullable(false);
             $table->string('Telefono', 20)->nullable(false);
             $table->unsignedBigInteger('Id_departamento');
-            $table->foreign('id_departamento')->references('id')->on('departamentos');
+            $table->foreign('Id_departamento')->references('id')->on('departamentos');
             $table->timestamps();
+
+            $table->foreign('id')->references('dni')->on('users');
+
         });
     }
 

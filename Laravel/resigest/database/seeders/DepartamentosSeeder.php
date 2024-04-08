@@ -14,12 +14,6 @@ class DepartamentosSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('departamentos')->insert([
-            ['nombre' => 'Medicina'],
-            ['nombre' => 'Enfermería'],
-            ['nombre' => 'Fisioterapia'],
-            ['nombre' => 'Terapia'],
-            ['nombre' => 'Asistencial'],
-        ]);
+
     }
 }

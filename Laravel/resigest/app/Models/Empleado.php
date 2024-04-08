@@ -21,7 +21,7 @@ class Empleado extends Model
 /////////////////////////////////////////////////////////////////////////////////
 //TODOS
     public function departamento() { //un empleado pertenece a un departamento
-        return $this->belongsTo(Departamento::class,'id_departamento');
+        return $this->belongsTo(Departamento::class,'Id_departamento');
     }
 
 
@@ -52,6 +52,6 @@ class Empleado extends Model
 
     public function user() //cada empleado tiene un unico usuario
     {
-        return $this->hasOne(User::class);
-    }
+        return $this->hasOne(User::class, 'id', 'dni'); //(tabla local, tabla referencia)
+        }
 }

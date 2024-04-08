@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('Apellidos', 255)->nullable(false);
             $table->string('Direccion', 255);
             $table->string('Telefono', 15)->nullable(false);
+            $table->unsignedBigInteger('Id_departamento');
             $table->timestamps();
+
+            $table->foreign('Id_familiar')->references('dni')->on('users');
         });
     }
 

@@ -19,4 +19,12 @@ class Familiar extends Model
     {
         return $this->belongsToMany(Residente::class, 'familiar_residente', 'Id_familiar', 'Id_residente');
     }
+
+    public function user() //cada empleado tiene un unico usuario
+    {
+        return $this->hasOne(User::class, 'Id_familiar', 'dni'); //(tabla local, tabla referencia)
+    }
+    public function departamento() { //un familiar pertenece a un departamento
+        return $this->belongsTo(Departamento::class,'Id_departamento');
+    }
 }

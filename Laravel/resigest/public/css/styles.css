@@ -5,6 +5,11 @@ header{
     background-color: rgb(47, 145, 194);
     min-height: 20vh;
 }
+
+div#user{
+
+    background-color: rgb(47, 145, 194);
+}
 main{
     background-color: white;
 }

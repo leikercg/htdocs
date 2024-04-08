@@ -21,6 +21,7 @@ class FamiliaresSeeder extends Seeder
                 'Apellidos' => 'Gonzalez',
                 'Direccion' => 'Calle Principal 123',
                 'Telefono' => '123456789',
+                'Id_departamento'=>6,
             ],
             [
                 'Id_familiar' => '73222673B',
@@ -28,6 +29,8 @@ class FamiliaresSeeder extends Seeder
                 'Apellidos' => 'Castillo Gonzalez',
                 'Direccion' => 'Calle Delicias 123',
                 'Telefono' => '692697712',
+                'Id_departamento'=>6,
+
             ],
             [
                 'Id_familiar' => 'FAM222222',
@@ -35,6 +38,8 @@ class FamiliaresSeeder extends Seeder
                 'Apellidos' => 'Martinez',
                 'Direccion' => 'Avenida Central 456',
                 'Telefono' => '987654321',
+                'Id_departamento'=>6,
+
             ],
             [
                 'Id_familiar' => 'FAM333333',
@@ -42,6 +47,8 @@ class FamiliaresSeeder extends Seeder
                 'Apellidos' => 'Lopez',
                 'Direccion' => 'Calle Secundaria 789',
                 'Telefono' => '111222333',
+                'Id_departamento'=>6,
+
             ],
             [
                 'Id_familiar' => 'FAM444444',
@@ -49,6 +56,8 @@ class FamiliaresSeeder extends Seeder
                 'Apellidos' => 'Sanchez',
                 'Direccion' => 'Paseo de la Montana 101',
                 'Telefono' => '444555666',
+                'Id_departamento'=>6,
+
             ],
             [
                 'Id_familiar' => 'FAM555555',
@@ -56,6 +65,8 @@ class FamiliaresSeeder extends Seeder
                 'Apellidos' => 'Perez',
                 'Direccion' => 'Calle de la Plaza 456',
                 'Telefono' => '777888999',
+                'Id_departamento'=>6,
+
             ],
         ]);
     }

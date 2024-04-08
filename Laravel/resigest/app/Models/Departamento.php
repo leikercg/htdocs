@@ -9,7 +9,7 @@ class Departamento extends Model
 {
     use HasFactory;
     public function empleados() { //un departamento tiene varias empleados
-        return $this->hasMany(Empleado::class, 'id_departamento');
+        return $this->hasMany(Empleado::class, 'Id_departamento');
     }
 
     public function seguimientos()//un departamento tiene varios seguimientos
