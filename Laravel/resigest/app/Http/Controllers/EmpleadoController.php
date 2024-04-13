@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empleado;
+use App\Models\Familiar;
+
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -17,9 +20,9 @@ class EmpleadoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create() //enviar a formulario de creacion o modificación de empleado
+    {//
+        return view('gerente.formEmpleado');
     }
 
     /**
@@ -38,12 +41,21 @@ class EmpleadoController extends Controller
         //
     }
 
+    public function buscar(Request $request)
+    {
+        $empleados = Empleado::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con el nombre ó apellido
+
+        return view('gerente.familiar_empleado', ['empleados' => $empleados]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id)//enviar a formulario de creacion o modificación de empleado con el empleado indicado
     {
-        //
+        $empleado = Empleado::find($id);
+        return view('gerente.formEmpleado', ['empleado' => $empleado]);
+
     }
 
     /**
@@ -52,6 +64,20 @@ class EmpleadoController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $empleado = Empleado::find($id);
+
+
+        $empleado->telefono  = $request->telefono;
+        $empleado->direccion = $request->direccion;
+        $empleado->save();
+
+         // Empleado del 1 al 5
+         $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();
+
+         // Obtener los usuarios familiares (departamento_id 6)
+         $familiares = Familiar::where('departamento_id', 6)->get();
+
+         return view('gerente.familiar_empleado', ['empleados' => $empleados, 'familiares' => $familiares]); //enviamos todos los usuario por separado a la vista
     }
 
     /**

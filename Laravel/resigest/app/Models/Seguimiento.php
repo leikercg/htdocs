@@ -11,12 +11,12 @@ class Seguimiento extends Model
 
     public function residente()//un segumiento solo tiene un residente
     {
-        return $this->belongsTo(Residente::class, 'Id_residente');
+        return $this->belongsTo(Residente::class);
     }
 
 
     public function departamento()//un seguimiento pertenece a un departamento
     {
-        return $this->belongsTo(Departamento::class, 'Id_departamento');
-    }
+    return $this->belongsTo(Departamento::class);
+}
 }

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('familiar_residente', function (Blueprint $table) {
-            $table->char('Id_familiar', 9);
-            $table->char('Id_residente', 9);
-            $table->primary(['Id_familiar', 'Id_residente']);
-            $table->foreign('Id_familiar')->references('Id_familiar')->on('familiares')->onDelete('cascade');
-            $table->foreign('Id_residente')->references('Id_residente')->on('residentes')->onDelete('cascade');
+        Schema::create('familiares_residentes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('familiar_id');
+            $table->unsignedBigInteger('residente_id');
+            $table->foreign('familiar_id')->references('id')->on('familiares')->onDelete('cascade');
+            $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');
             $table->timestamps();
         });
     }

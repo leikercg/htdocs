@@ -16,8 +16,8 @@ class Visitas_Seeder extends Seeder
         //
         DB::table('visitas')->insert([
             [
-                'Id_empleado'  => '12345678A',
-                'Id_residente' => '11111111A',
+                'empleado_id'  => 3,
+                'residente_id' => 1,
                 'Fecha'        => '2024-03-14',
                 'Hora'         => '10:00:00',
             ],

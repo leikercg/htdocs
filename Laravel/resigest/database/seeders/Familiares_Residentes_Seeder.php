@@ -14,31 +14,19 @@ class Familiares_Residentes_Seeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('familiar_residente')->insert([
+        DB::table('familiares_residentes')->insert([
             [
-                'Id_familiar' => 'FAM111111',
-                'Id_residente' => '11111111A',
+                'familiar_id' => 1,
+                'residente_id' => 1,
             ],
             [
-                'Id_familiar' => '73222673B',
-                'Id_residente' => '11111111A',
+                'familiar_id' => 2,
+                'residente_id' => 1,
             ],
 
             [
-                'Id_familiar' => 'FAM222222',
-                'Id_residente' => '22222222B',
-            ],
-            [
-                'Id_familiar' => 'FAM333333',
-                'Id_residente' => '33333333C',
-            ],
-            [
-                'Id_familiar' => 'FAM444444',
-                'Id_residente' => '44444444D',
-            ],
-            [
-                'Id_familiar' => 'FAM555555',
-                'Id_residente' => '55555555E',
+                'familiar_id' => 3,
+                'residente_id' => 2,
             ],
         ]);
     }

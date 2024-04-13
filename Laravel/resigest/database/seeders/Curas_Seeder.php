@@ -17,8 +17,8 @@ class Curas_Seeder extends Seeder
         //
         DB::table('curas')->insert([
             [
-                'Id_residente' => '11111111A',
-                'Id_empleado' => '98765432B',
+                'residente_id' => 1,
+                'empleado_id' => 3,
                 'Fecha' => '2024-03-14',
                 'Hora' => '15:00:00',
                 'Zona' => 'Cadera',

@@ -15,8 +15,8 @@ class Sesiones_Seeder extends Seeder
         //
         DB::table('sesiones')->insert([
             [
-                'Id_empleado'  => '11122233C',
-                'Id_residente' => '11111111A',
+                'empleado_id'  => 5,
+                'residente_id' => 1,
                 'Fecha'        => '2024-03-14',
                 'Hora'         => '12:00:00',
             ],

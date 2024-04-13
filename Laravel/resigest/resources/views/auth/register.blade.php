@@ -1,6 +1,9 @@
-<x-guest-layout>
+@extends('master')
+@section('title',('Crear Usuario'))
+@section('content')
     <form method="POST" action="{{ route('register') }}">
         @csrf
+        <!-- Este es el formulario por defecto, hemos añadido los campos necesarios para los usuario y extendido la plantilla master -->
 
         <!-- Name -->
         <div>
@@ -75,4 +78,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+    @endsection

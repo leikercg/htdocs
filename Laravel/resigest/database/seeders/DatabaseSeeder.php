@@ -32,106 +32,89 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'dni'=>'123456789',
+            'dni'=>'12345678M',
             'email' => 'test@example.com',
-            'id_departamento'=>1,
+            'departamento_id'=>1,
         ]);
 
-          // usuarios
+          // usuarios para pruebas
+
+          //////ADMIN ////
+          User::factory()->create([
+            'name' => 'ADMIN',
+            'dni' => '12345678G',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password1'),
+            'departamento_id'=>7,
+        ]);
+
           User::factory()->create([
             'name' => 'Usuario1',
-            'dni' => '12345678A',
+            'dni' => '12345678M',
             'email' => 'usuario1@example.com',
             'password' => Hash::make('password1'),
-            'id_departamento'=>1,
+            'departamento_id'=>1,
         ]);
 
         User::factory()->create([
             'name' => 'Usuario2',
-            'dni' => '98765432B',
+            'dni' => '12345678E',
             'email' => 'usuario2@example.com',
-            'password' => Hash::make('password2'),
-            'id_departamento'=>2,
+            'password' => Hash::make('password1'),
+            'departamento_id'=>2,
         ]);
 
         User::factory()->create([
             'name' => 'Usuario3',
-            'dni' => '11122233C',
+            'dni' => '12345678F',
             'email' => 'usuario3@example.com',
-            'password' => Hash::make('password3'),
-            'id_departamento'=>3,
+            'password' => Hash::make('password1'),
+            'departamento_id'=>3,
         ]);
 
         User::factory()->create([
             'name' => 'Usuario4',
-            'dni' => '44455566D',
+            'dni' => '12345678T',
             'email' => 'usuario4@example.com',
-            'password' => Hash::make('password4'),
-            'id_departamento'=>4,
+            'password' => Hash::make('password1'),
+            'departamento_id'=>4,
         ]);
 
         User::factory()->create([
             'name' => 'Usuario5',
-            'dni' => '77788899E',
+            'dni' => '12345678A',
             'email' => 'usuario5@example.com',
-            'password' => Hash::make('password5'),
-            'id_departamento'=>5,
+            'password' => Hash::make('password1'),
+            'departamento_id'=>5,
         ]);
 
-        ////////////////////familiares
+        ////////////////////familiares para pruebas
 
         User::factory()->create([
-            'dni' => 'FAM111111',
+            'dni' => '1111111F1',
             'name' => 'Luis',
             'email' => 'luis@example.com',
-            'password' => Hash::make('password123'),
-            'id_departamento'=>6,
+            'password' => Hash::make('password1'),
+            'departamento_id'=>6,
         ]);
 
         User::factory()->create([
-            'dni' => '73222673B',
+            'dni' => '1111111F2',
             'name' => 'Leiker',
             'email' => 'leiker@example.com',
-            'password' => Hash::make('password123'),
-            'id_departamento'=>6,
+            'password' => Hash::make('password1'),
+            'departamento_id'=>6,
 
         ]);
 
         User::factory()->create([
-            'dni' => 'FAM222222',
+            'dni' => '1111111F3',
             'name' => 'Elena',
             'email' => 'elena@example.com',
-            'password' => Hash::make('password123'),
-            'id_departamento'=>6,
+            'password' => Hash::make('password1'),
+            'departamento_id'=>6,
 
         ]);
-        User::factory()->create([
-            'dni' => 'FAM333333',
-            'name' => 'Carlos Lopez',
-            'email' => 'carlos@example.com',
-            'password' => Hash::make('password123'),
-            'id_departamento'=>6,
-
-        ]);
-
-        User::factory()->create([
-            'dni' => 'FAM444444',
-            'name' => 'Marta Sanchez',
-            'email' => 'marta@example.com',
-            'password' => Hash::make('password123'),
-            'id_departamento'=>6,
-
-        ]);
-
-        User::factory()->create([
-            'dni' => 'FAM555555',
-            'name' => 'Pedro Perez',
-            'email' => 'pedro@example.com',
-            'password' => Hash::make('password123'),
-            'id_departamento'=>6,
-
-        ]);
-
 
         $this->call(DepartamentosSeeder::class);
         $this->call(EmpleadosSeeder::class);

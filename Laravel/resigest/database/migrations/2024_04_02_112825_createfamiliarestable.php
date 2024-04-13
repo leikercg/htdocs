@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('familiares', function (Blueprint $table) {
-            $table->char('Id_familiar', 9)->primary();
-            $table->string('Nombre', 255)->nullable(false);
-            $table->string('Apellidos', 255)->nullable(false);
-            $table->string('Direccion', 255);
-            $table->string('Telefono', 15)->nullable(false);
-            $table->unsignedBigInteger('Id_departamento');
+            $table->id();
+            $table->char('dni', 9);
+            $table->string('nombre', 255)->nullable(false);
+            $table->string('apellidos', 255)->nullable(false);
+            $table->string('direccion', 255);
+            $table->string('telefono', 15)->nullable(false);
+            $table->unsignedBigInteger('departamento_id');
             $table->timestamps();
 
-            $table->foreign('Id_familiar')->references('dni')->on('users');
+            $table->foreign('dni')->references('dni')->on('users')->onDelete('cascade');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
         });
     }
 

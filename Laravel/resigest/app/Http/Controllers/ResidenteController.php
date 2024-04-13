@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Residente;
-
+use App\Models\Seguimiento;
+use App\Models\Departamento;
 use DateTime; //exportar clase Date
 
 class ResidenteController extends Controller
@@ -15,21 +16,48 @@ class ResidenteController extends Controller
     public function index()
     {
         //
-        $residentes = Residente::all();
-
+        $residentes = Residente::where('estado', 'alta')->orderBy('apellidos')->orderBy('nombre')->get();
+        //ordenar por apellido y nombre y filtro de estado
         // Calcular la edad para cada residente
         foreach ($residentes as $residente) {
 
-            $fechaNacimiento = new DateTime($residente->Fecha_Nac); //Fecha de nacimiento
+            $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
 
             $fechaActual = new DateTime(); //Fecha de actual
 
             $edad = $fechaActual->diff($fechaNacimiento)->y; //edad en años ->Y
 
-            $residente->edad = $edad; //Agregar atributo edad a losdatos de la vista
+            $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
+        }
+        if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
+            return view('gerente.gestionarResidentes', ['residentes' => $residentes]);
         }
         return view('empleado.general', ['residentes' => $residentes]); //array clave--> valor
         //en las vistas se reciben las variables ya extraidas, no hay que indexarlars.
+
+    }
+
+    public function indexBajas()
+    {
+        //
+        $residentes = Residente::where('estado', 'baja')->orderBy('apellidos')->orderBy('nombre')->get(); //ordenar por apellido y nombre
+        // Calcular la edad para cada residente
+        foreach ($residentes as $residente) {
+
+            $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
+
+            $fechaActual = new DateTime(); //Fecha de actual
+
+            $edad = $fechaActual->diff($fechaNacimiento)->y; //edad en años ->Y
+
+            $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
+        }
+        if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
+            return view('gerente.bajas', ['residentes' => $residentes]);
+        }
+        return view('empleado.general', ['residentes' => $residentes]); //array clave--> valor
+        //en las vistas se reciben las variables ya extraidas, no hay que indexarlars.
+
     }
 
     /**
@@ -37,7 +65,11 @@ class ResidenteController extends Controller
      */
     public function create()
     {
-        //
+        if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
+            return view('gerente.formResidente'); //enviar al formulario de creación/modificación de residente
+        }
+        return redirect()->route('lista.residentes'); //si no es admin vera la lista de residentes, no podra editar ni crear
+
     }
 
     /**
@@ -45,7 +77,45 @@ class ResidenteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /////////////////crea el residente////////////////////////
+        $residente             = new Residente();
+        $residente->nombre     = $request->nombre;
+        $residente->dni        = $request->dni;
+        $residente->apellidos  = $request->apellidos;
+        $residente->habitacion = $request->habitacion;
+        $residente->fecha_nac  = $request->fecha;
+        $residente->estado     = $request->estado;
+        $residente->fecha_nac  = $request->fecha_nac;
+
+        $residente->save();
+        /////////////crea el seguimiento de cada area para el residente creado//////////
+
+        for ($i = 1; $i <= 5; $i++) {
+            $departamento = Departamento::find($i);
+            if ($departamento) {
+                $seguimiento                  = new Seguimiento();
+                $seguimiento->residente_id    = $residente->id;
+                $seguimiento->departamento_id = $i;
+                $seguimiento->seguimiento     = "Seguimiento del departamento de " . $departamento->nombre . " para " . $residente->nombre . " " . $residente->apellidos;
+                $seguimiento->save();
+            }
+        }
+
+        //////////devuelve la lista de residentes para la vista///////////////////
+
+        $residentes = Residente::all();
+        foreach ($residentes as $residente) {
+
+            $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
+
+            $fechaActual = new DateTime(); //Fecha de actual
+
+            $edad = $fechaActual->diff($fechaNacimiento)->y; //edad en años ->Y
+
+            $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
+
+        }
+        return view('gerente.gestionarResidentes', ['residentes' => $residentes]); //enviar al formulario de creación/modificación de residente
     }
 
     /**
@@ -64,7 +134,7 @@ class ResidenteController extends Controller
 
         $familiares = $residente->familiares;
 
-        $fechaNacimiento = new DateTime($residente->Fecha_Nac); //Fecha de nacimiento
+        $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
 
         $fechaActual = new DateTime(); //Fecha de actual
 
@@ -76,12 +146,38 @@ class ResidenteController extends Controller
         return view('empleado.ficha_residente', ['residente' => $residente, 'familiares' => $familiares]);
     }
 
+    public function buscar(Request $request)
+    {
+        $todosResidentes = Residente::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con ek nombre ó apellido
+
+        $residentes= $todosResidentes->where('estado', 'alta');
+
+        foreach ($residentes as $residente) {
+
+            $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
+
+            $fechaActual = new DateTime(); //Fecha de actual
+
+            $edad = $fechaActual->diff($fechaNacimiento)->y; //edad en años ->Y
+
+            $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
+        }
+
+        return view('empleado.general', ['residentes' => $residentes]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $residente = Residente::find($id);
+
+        if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
+            return view('gerente.formResidente', ['residente' => $residente]); //enviar al formulario de creación/modificación de residente
+        }
+        return redirect()->route('empleado.general'); //si no es admin vera la lista de residentes, no podra editar ni crear
+
     }
 
     /**
@@ -89,7 +185,18 @@ class ResidenteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $residente             = Residente::find($id);
+        $residente->nombre     = $request->nombre;
+        $residente->dni        = $request->dni;
+        $residente->apellidos  = $request->apellidos;
+        $residente->habitacion = $request->habitacion;
+        $residente->fecha_nac  = $request->fecha;
+        $residente->estado     = $request->estado;
+        $residente->fecha_nac  = $request->fecha_nac;
+        $residente->save();
+
+        return redirect()->route('lista.residentes');
     }
 
     /**
@@ -97,14 +204,14 @@ class ResidenteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $residente = Residente::find($id);
+        $residente->delete();
+        return redirect()->route('lista.residentes'); ////revisar
     }
-
-
 
     public function itinerario(Request $request, $Id_residente)
     {
-        $fecha = $request->input('fecha', now()->toDateString()); // Si no se especifica la fecha, se establece como la fecha de hoy
+        $fecha       = $request->input('fecha', now()->toDateString()); // Si no se especifica la fecha, se establece como la fecha de hoy
         $residente   = Residente::find($Id_residente);
         $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
 

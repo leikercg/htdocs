@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Residente_Grupo extends Model
 {
     use HasFactory;
+
+
+    //rellenar
 }

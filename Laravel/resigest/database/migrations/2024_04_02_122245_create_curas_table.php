@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('curas', function (Blueprint $table) {
             $table->id();
-            $table->char('Id_residente', 9);
-            $table->char('Id_empleado', 9);
-            $table->date('Fecha')->nullable(false);
-            $table->time('Hora')->nullable(false);
-            $table->string('Zona', 255)->nullable(false);
-            $table->string('Estado', 50)->nullable(false);
-            $table->foreign('Id_residente')->references('Id_residente')->on('residentes');
-            $table->foreign('Id_empleado')->references('id')->on('empleados');
+            $table->unsignedBigInteger('residente_id');
+            $table->unsignedBigInteger('empleado_id');
+            $table->date('fecha')->nullable(false);
+            $table->time('hora')->nullable(false);
+            $table->string('zona', 255)->nullable(false);
+            $table->string('estado', 50)->nullable(false);
+            $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
 
             $table->timestamps();
         });

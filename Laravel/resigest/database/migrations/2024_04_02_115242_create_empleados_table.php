@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('empleados', function (Blueprint $table) {
-            $table->char('id', 9)->primary();
-            $table->string('Nombre', 255)->nullable(false);
-            $table->string('Apellidos', 255)->nullable(false);
-            $table->string('Direccion', 255)->nullable(false);
-            $table->string('Telefono', 20)->nullable(false);
-            $table->unsignedBigInteger('Id_departamento');
-            $table->foreign('Id_departamento')->references('id')->on('departamentos');
+            $table->id();
+            $table->char('dni', 9);
+            $table->string('nombre', 255)->nullable(false);
+            $table->string('apellidos', 255)->nullable(false);
+            $table->string('direccion', 255)->nullable(false);
+            $table->string('telefono', 20)->nullable(false);
+            $table->unsignedBigInteger('departamento_id');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreign('id')->references('dni')->on('users');
+            $table->foreign('dni')->references('dni')->on('users')->onDelete('cascade');
 
         });
     }

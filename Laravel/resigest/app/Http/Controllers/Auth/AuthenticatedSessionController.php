@@ -28,7 +28,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        //return redirect()->intended(route('dashboard', absolute: false));//anulamos esta ruta despues de iniciar sesión
+        return redirect()->route('lista.residentes');//indicamos esta ruta al iniciar sesión
+
     }
 
     /**

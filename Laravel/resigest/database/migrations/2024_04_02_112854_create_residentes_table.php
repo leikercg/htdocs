@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('residentes', function (Blueprint $table) {
-            $table->char('Id_residente', 9)->primary();
-            $table->string('Nombre', 255)->nullable(false);
-            $table->string('Apellidos', 255)->nullable(false);
-            $table->integer('Habitacion')->nullable(false);
-            $table->date('Fecha_Nac')->nullable(false);
+            $table->id();
+            $table->char('dni', 9);
+            $table->string('nombre', 255)->nullable(false);
+            $table->string('apellidos', 255)->nullable(false);
+            $table->integer('habitacion')->nullable(false);
+            $table->string('estado')->nullable(false);
+            $table->date('fecha_nac')->nullable(false);
             $table->timestamps();
         });
     }

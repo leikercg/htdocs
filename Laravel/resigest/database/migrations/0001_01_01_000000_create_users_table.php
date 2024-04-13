@@ -10,16 +10,24 @@ return new class () extends Migration {
      */
     public function up(): void
     {
+        Schema::create('departamentos', function (Blueprint $table) {//creamos primero esta tabla para poder asignarle usuarios
+            $table->id();
+            $table->string('nombre', 255)->nullable(false);
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->char('dni', 9)->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->unsignedBigInteger('id_departamento');
+            $table->unsignedBigInteger('departamento_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('estado')->default('activo');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -36,6 +44,7 @@ return new class () extends Migration {
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
     }
 
     /**
@@ -46,5 +55,7 @@ return new class () extends Migration {
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('departamentos');
+
     }
 };

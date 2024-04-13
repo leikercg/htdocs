@@ -1,15 +1,18 @@
-body{
-background-color: grey;}
+body {
+    background-color: grey;
+}
 
-header{
+header {
     background-color: rgb(47, 145, 194);
     min-height: 20vh;
 }
 
-div#user{
+div#user {
 
     background-color: rgb(47, 145, 194);
 }
-main{
+
+main {
     background-color: white;
+    min-height: 60vh;
 }

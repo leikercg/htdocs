@@ -12,11 +12,11 @@ class Sesion extends Model
 
     public function residente() //uns sesion puede tener solo un residente
     {
-        return $this->belongsTo(Residente::class, 'Id_residente');
+        return $this->belongsTo(Residente::class);
     }
 
     public function empleado()// una sesión solo pertenece a un empleado
     {
-        return $this->belongsTo(Empleado::class, 'Id_empleado');
+        return $this->belongsTo(Empleado::class);
     }
 }

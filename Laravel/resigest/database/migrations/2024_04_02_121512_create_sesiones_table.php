@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('sesiones', function (Blueprint $table) {
             $table->id();
-            $table->char('Id_empleado', 9);
+            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('residente_id');
             $table->date('Fecha')->nullable(false);
             $table->time('Hora')->nullable(false);
-            $table->char('Id_residente', 9);
-            $table->foreign('Id_empleado')->references('id')->on('empleados');
-            $table->foreign('Id_residente')->references('Id_residente')->on('residentes');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
+            $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('grupos', function (Blueprint $table) {
             $table->id();
-            $table->string('Descripcion', 255)->nullable(false);
-            $table->date('Fecha')->nullable(false);
-            $table->time('Hora')->nullable(false);
-            $table->char('Id_empleado', 9);
-            $table->foreign('Id_empleado')->references('id')->on('empleados');
+            $table->string('descripcion', 255)->nullable(false);
+            $table->date('fecha')->nullable(false);
+            $table->time('hora')->nullable(false);
+            $table->unsignedBigInteger('empleado_id');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('seguimientos', function (Blueprint $table) {
             $table->id();
-            $table->char('Id_residente', 9);
-            $table->foreign('Id_residente')->references('Id_residente')->on('residentes');
-            $table->unsignedBigInteger('Id_departamento');
-            $table->foreign('Id_departamento')->references('id')->on('departamentos');
-            $table->text('Seguimiento');
+            $table->unsignedBigInteger('residente_id');
+            $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');
+            $table->unsignedBigInteger('departamento_id');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
+            $table->text('seguimiento');
             $table->timestamps();
         });
     }

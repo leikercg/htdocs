@@ -11,11 +11,11 @@ class Visita extends Model
 
     public function empleado()//un visita solo puede pertenecer a un empleado
     {
-        return $this->belongsTo(Empleado::class, 'Id_empleado');
+        return $this->belongsTo(Empleado::class);
     }
 
     public function residente()//una visita solo puede pertenecer a un residente
     {
-        return $this->belongsTo(Residente::class, 'Id_residente');
+        return $this->belongsTo(Residente::class);
     }
 }

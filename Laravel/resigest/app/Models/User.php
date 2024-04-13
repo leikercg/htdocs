@@ -12,12 +12,12 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     public function empleado()//tiene un solo empleado
     {
-        return $this->belongsTo(Empleado::class, 'dni', 'id'); //(tabla local,tabla referencia)
+        return $this->hasOne(Empleado::class, 'dni', 'dni'); //(tabla local,tabla referencia) por que no se sigue la convención.
     }
 
     public function familiar() //cada usuario tiene un unico familiar
     {
-        return $this->belongsTo(Familiar::class, 'dni', 'Id_familiar'); //(tabla local,tabla referencia)
+        return $this->hasOne(Familiar::class, 'dni', 'dni'); //(tabla local,tabla referencia)
 
     }
     /**
@@ -29,7 +29,7 @@ class User extends Authenticatable
         'name',
         'dni',
         'email',
-        'id_departamento',
+        'departamento_id',
         'password',
     ];
 

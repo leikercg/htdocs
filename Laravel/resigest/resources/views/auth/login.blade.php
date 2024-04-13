@@ -1,5 +1,7 @@
 <x-guest-layout>
     <!-- Session Status -->
+    <img src="{{ asset('images/logo-FRA.png') }}" alt= "Logo de Fundación Rey Ardid" />
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
@@ -40,7 +42,7 @@
             @endif
 
             <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+                {{ __('Iniciar Sesión') }}
             </x-primary-button>
         </div>
     </form>

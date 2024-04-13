@@ -38,9 +38,13 @@ class SeguimientoController extends Controller
     public function show(string $Id_residente, string $Id_departamento)
     {
         $residente= Residente::find($Id_residente);
-        $seguimiento = Seguimiento::where('Id_residente', $Id_residente)
-                                    ->where('Id_departamento', $Id_departamento)
-                                    ->first();
+        $seguimientos = $residente->seguimientos;
+        $seguimiento=null;
+        foreach($seguimientos as $seguimientoLista){
+            if($seguimientoLista->departamento->id==$Id_departamento){
+               $seguimiento=$seguimientoLista;
+            }
+        }
 
         return view('seguimiento.seguimiento', ['seguimiento' => $seguimiento,'residente'=>$residente]);
 
