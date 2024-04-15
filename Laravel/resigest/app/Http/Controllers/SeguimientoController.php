@@ -34,12 +34,13 @@ class SeguimientoController extends Controller
 
     /**
      * Display the specified resource.
+     * //modificamos el meotodo que devuelve una seguimiento en concreto para que nos devuelva todos los de un residente
      */
     public function show(string $Id_residente, string $Id_departamento)
     {
         $residente= Residente::find($Id_residente);
         $seguimientos = $residente->seguimientos;
-        $seguimiento=null;
+        $seguimiento=null;//solo para pruebas seeder, BORRAAAAAR
         foreach($seguimientos as $seguimientoLista){
             if($seguimientoLista->departamento->id==$Id_departamento){
                $seguimiento=$seguimientoLista;

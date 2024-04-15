@@ -1,15 +1,17 @@
 <?php
 
+use App\Http\Controllers\CuraController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\FamiliarController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ResidenteController;
 use App\Http\Controllers\SeguimientoController;
+use App\Http\Controllers\SesionController;
+use App\Http\Controllers\VisitaController;
 use App\Models\Residente;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('auth.login'); //inicio de laravel, hacemos que la pagina raiz deveulva la bista login
+    return view('welcome'); //inicio de laravel, hacemos que la pagina raiz deveulva la bista login
 })->name('inicio');
 
 Route::get('/dashboard', function () {//ruta al dashboarda
@@ -31,32 +33,37 @@ Route::get('product/{product}/edit', 'ProductController@edit')->name('product.ed
 Route::patch('product/{product}', 'ProductController@update')->name('product.update');
 Route::delete('product/{product}', 'ProductController@destroy')->name('product.destroy');
 
-//////////////////////////////// Rutas de Residentes///////////////////////////////
-Route::get('lista_residentes', [ResidenteController::class, 'index'])->name('lista.residentes'); ///lista de residentes
-Route::get('lista_residentes_completa', [ResidenteController::class, 'indexBajas'])->name('lista.completa.residentes'); ///lista de residentes con bajas incluidas
-Route::get('ficha_residente/{id}', [ResidenteController::class, 'show'])->name('ficha.residente'); ///ficha de residente
-Route::get('itinerario/{id}', [ResidenteController::class, 'itinerario'])->name('itinerario.residente'); ///itinerario de residente
-
-Route::get('residente/crear', [ResidenteController::class, 'create'])->name('crear.residente'); //formulario de creación de residente
-Route::post('residente/{id?}', [ResidenteController::class, 'store'])->name('almacenar.residente'); //almacenar residente
-Route::get('residente/{id}', [ResidenteController::class, 'edit'])->name('editar.residente'); //lanzar formulario de edición
-Route::put('residente/{id}', [ResidenteController::class, 'update'])->name('actualizar.residente'); //actualizar residente
-
-Route::get('lista_residentes/busqueda', [ResidenteController::class, 'buscar'])->name('buscar.residente'); ///ficha de residente por filtro de búsquda
-
-Route::get('empleado/busqueda', [EmpleadoController::class, 'buscar'])->name('buscar.empleado'); /// empleado por filtro de búsquda
-Route::get('familiar/busqueda', [FamiliarController::class, 'buscar'])->name('buscar.familiar'); ///familiar por filtro de búsquda
 
 
+//////////////////////////////// Rutas de medicos///////////////////////////////
+Route::get('residente/visitas/{residente_id}', [VisitaController::class, 'show'])->name('visitas.residente');
+Route::get('residente/visitas/{id}/{residente_id}', [VisitaController::class, 'edit'])->name('editar.visita'); //lanzar formulario de edición
+Route::put('residente/visita/{id}', [VisitaController::class, 'update'])->name('actualizar.visita'); //actualizar visita
+Route::get('visita/{residente_id}', [VisitaController::class, 'create'])->name('crear.visita'); //formulario de creación de vistas
+Route::post('visita/{id?}', [VisitaController::class, 'store'])->name('almacenar.visita');//crea la visita
+Route::delete('visita/{id}', [VisitaController::class, 'destroy'])->name('borrar.visita');//borrar visita
+
+Route::get('residente/sesion/{residente_id}', [SesionController::class, 'show'])->name('sesiones.residente');
+Route::get('residente/sesion/{id}/{residente_id}', [SesionController::class, 'edit'])->name('editar.sesion'); //lanzar formulario de edición
+Route::put('residente/sesion/{id}', [SesionController::class, 'update'])->name('actualizar.sesion'); //actualizar sesion
+Route::get('sesion/{residente_id}', [SesionController::class, 'create'])->name('crear.sesion'); //formulario de creación de vistas
+Route::post('sesion/{id?}', [SesionController::class, 'store'])->name('almacenar.sesion');//crea la sesion
+Route::delete('sesion/{id}', [SesionController::class, 'destroy'])->name('borrar.sesion');//borrar sesion
+
+
+
+Route::get('residente/cura/{residente_id}', [CuraController::class, 'show'])->name('curas.residente');
+Route::get('residente/cura/{id}/{residente_id}', [CuraController::class, 'edit'])->name('editar.cura'); //lanzar formulario de edición
+Route::put('residente/cura/{id}', [CuraController::class, 'update'])->name('actualizar.cura'); //actualizar cura
+Route::get('cura/{residente_id}', [CuraController::class, 'create'])->name('crear.cura'); //formulario de creación de curas
+Route::post('cura/{id?}', [CuraController::class, 'store'])->name('almacenar.cura');//crea la cura
+Route::delete('cura/{id}', [CuraController::class, 'destroy'])->name('borrar.cura');//borrar cura
 
 
 
 /////////////RUTAS DE ADMINISTRACIÓN///////////////////////////////////////
 
-
 //////////////////////////////////// Rutas para gerentes/////////////////////////////////////
-
-Route::get('lista_residentes', [ResidenteController::class, 'index'])->name('lista.residentes'); ///lista de residentes
 
 //////////////////////////////// Rutas de seguimientos///////////////////////////////
 Route::get('segumiento_residente/{id}/{departamento_id}', [SeguimientoController::class, 'show'])->name('seguimiento.residente'); ///seguimiento de residente

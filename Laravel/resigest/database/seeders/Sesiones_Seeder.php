@@ -18,7 +18,7 @@ class Sesiones_Seeder extends Seeder
                 'empleado_id'  => 5,
                 'residente_id' => 1,
                 'Fecha'        => '2024-03-14',
-                'Hora'         => '12:00:00',
+                'Hora'         => '12:00',
             ],
         ]);
     }

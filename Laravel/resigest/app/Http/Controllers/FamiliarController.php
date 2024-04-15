@@ -58,14 +58,11 @@ class FamiliarController extends Controller
      */
     public function edit(string $id)//enviar a formulario de creacion o modificación de empleado con el empleado indicado
     {
-        $familiar   = Familiar::find($id);
+        $familiar = Familiar::find($id);
 
         $residentes = Residente::whereDoesntHave('familiares', function ($query) use ($id) { //familiares sin relacion con el familiar ordenador por nombre y apellido
             $query->where('familiar_id', $id);
         })->orderBy('nombre')->orderBy('apellidos')->get();
-
-
-
 
         return view('gerente.formFamiliar', ['familiar' => $familiar, 'residentes' => $residentes]);
 
@@ -104,6 +101,16 @@ class FamiliarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $familiar = Familiar::find($id);
+        $familiar->delete();
+
+        // Empleado del 1 al 5
+        $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();
+
+        // Obtener los usuarios familiares (departamento_id 6)
+        $familiares = Familiar::where('departamento_id', 6)->get();
+
+        return view('gerente.familiar_empleado', ['empleados' => $empleados, 'familiares' => $familiares]); //enviamos todos los usuario por separado a la vista
     }
+
 }

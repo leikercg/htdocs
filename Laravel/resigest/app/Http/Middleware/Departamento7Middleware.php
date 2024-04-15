@@ -19,8 +19,14 @@ class Departamento7Middleware
         if ($request->user() && $request->user()->departamento_id == 7) {
             return $next($request);
         }
+        return redirect()->back();//devolver a la ruta de donde viene ojo con los form mas de una vez
 
         // Si no pertenece al departamento 7, redirigir a una página de acceso denegado o a cualquier otra página deseada.
-        abort(403, 'Unauthorized');
+       // abort(403, 'Unauthorized');mostrar vista de pagina no atorizada
+
+
+
+
+        //@@@@@@@@@@@@@@@@@@@@@@@@revisar
     }
 }

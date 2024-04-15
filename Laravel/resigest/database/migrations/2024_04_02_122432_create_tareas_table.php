@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tareas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha')->nullable(false);
-            $table->time('hora')->nullable(false);
+            $table->time('Hora', 0)->nullable(false);//Formato hh:mm
             $table->unsignedBigInteger('auxiliar_id');
             $table->unsignedBigInteger('empleado_id');
             $table->string('descripcion', 255)->nullable(false);

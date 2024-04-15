@@ -1,18 +1,23 @@
-body {
+body,html {
     background-color: grey;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
+
 
 header {
     background-color: rgb(47, 145, 194);
     min-height: 20vh;
 }
 
-div#user {
-
-    background-color: rgb(47, 145, 194);
-}
 
 main {
     background-color: white;
     min-height: 60vh;
+}
+
+footer{
+    background-color: rgb(47, 145, 194);
+    min-height: 20vh;
 }

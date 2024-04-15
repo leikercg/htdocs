@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'dni'=>'12345678M',
+            'dni'=>'123456789',
             'email' => 'test@example.com',
             'departamento_id'=>1,
         ]);

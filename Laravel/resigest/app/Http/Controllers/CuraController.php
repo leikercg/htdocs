@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cura;
+use App\Models\Residente;
+
 
 class CuraController extends Controller
 {
@@ -17,9 +20,11 @@ class CuraController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id_residente)
     {
-        //
+        $residente = Residente::find($id_residente);
+
+        return view('enfermeria.formCuras', ['residente' => $residente]);
     }
 
     /**
@@ -27,23 +32,44 @@ class CuraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $residente            = Residente::find($request->residente_id);
+        $cura               = new Cura();
+        $cura->fecha        = $request->fecha;
+        $cura->Hora         = $request->hora;
+        $cura->residente_id = $request->residente_id;
+        $cura->empleado_id  = $request->empleado_id;
+        $cura->estado  = $request->estado;
+        $cura->zona  = $request->zona;
+
+
+        $cura->save();
+        $curas = Cura::where('residente_id', $request->residente_id)->get(); //para devolver a la vista de las curas del residente
+        return view('enfermeria.curas', ['residente' => $residente, 'curas' => $curas]); //devolvemos el residente para mostar de nuevo las curas
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $Id_residente)
     {
-        //
+        $curas  = Cura::where('residente_id', $Id_residente)->get();
+        $residente = Residente::find($Id_residente);
+
+        return view('enfermeria.curas', ['curas' => $curas, 'residente' => $residente]); //envialos a la vista el residente y sus curas
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, string $residente_id)
     {
         //
+        $residente = Residente::find($residente_id);
+        $cura    = Cura::find($id);
+
+        return view('enfermeria.formCuras', ['cura' => $cura, 'residente' => $residente]);
     }
 
     /**
@@ -51,7 +77,20 @@ class CuraController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $cura = Cura::find($id);
+
+        $cura->fecha = $request->fecha;
+        $cura->Hora  = $request->hora;
+        $cura->estado  = $request->estado;
+
+        $cura->save();
+
+        $curas = Cura::all();
+
+        $residente = Residente::find($cura->residente_id);
+
+        return view('enfermeria.curas', ['curas' => $curas, 'residente' => $residente]); //envialos a la vista el residente y sus curas
+
     }
 
     /**
@@ -60,5 +99,14 @@ class CuraController extends Controller
     public function destroy(string $id)
     {
         //
+        $cura = Cura::find($id);
+        $cura->delete();
+
+        $curas = Cura::all();
+
+        $residente = Residente::find($cura->residente_id);
+
+        return view('enfermeria.curas', ['curas' => $curas, 'residente' => $residente]); //envialos a la vista el residente y sus sesiones
+
     }
 }

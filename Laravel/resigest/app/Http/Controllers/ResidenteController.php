@@ -101,6 +101,7 @@ class ResidenteController extends Controller
             }
         }
 
+
         //////////devuelve la lista de residentes para la vista///////////////////
 
         $residentes = Residente::all();
@@ -150,7 +151,29 @@ class ResidenteController extends Controller
     {
         $todosResidentes = Residente::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con ek nombre ó apellido
 
-        $residentes= $todosResidentes->where('estado', 'alta');
+        $residentes = $todosResidentes->where('estado', 'alta');
+
+        foreach ($residentes as $residente) {
+
+            $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
+
+            $fechaActual = new DateTime(); //Fecha de actual
+
+            $edad = $fechaActual->diff($fechaNacimiento)->y; //edad en años ->Y
+
+            $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
+        }
+        if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
+            return view('gerente.gestionarResidentes', ['residentes' => $residentes]); //enviar a la vista de bajas con filtro
+        }
+        return view('empleado.general', ['residentes' => $residentes]); //si no es gerente ira a esta vista
+    }
+
+    public function buscarBajas(Request $request)
+    {
+        $todosResidentes = Residente::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con ek nombre ó apellido
+
+        $residentes = $todosResidentes->where('estado', 'baja');
 
         foreach ($residentes as $residente) {
 
@@ -163,7 +186,7 @@ class ResidenteController extends Controller
             $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
         }
 
-        return view('empleado.general', ['residentes' => $residentes]);
+        return view('gerente.bajas', ['residentes' => $residentes]);
     }
 
     /**
@@ -216,7 +239,7 @@ class ResidenteController extends Controller
         $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
 
         $sesiones = $residente->sesiones->where('Fecha', $fecha)->sortBy('Hora'); //comparar fechas
-        $curas    = $residente->curas->where('Fecha', $fecha)->sortBy('Hora');
+        $curas    = $residente->curas->where('fecha', $fecha)->sortBy('Hora');
         $visitas  = $residente->visitas->where('Fecha', $fecha)->sortBy('Hora');
 
         $actividades = $actividades->concat($sesiones)->concat($curas)->concat($visitas); //juntarlo en una colección

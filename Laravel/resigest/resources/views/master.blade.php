@@ -12,38 +12,43 @@
 <body>
     <header class="container-fluid d-flex flex-column justify-content-center"><!--Ocupar todo el ancho disponible-->
 
-        <div id='user' class='row justify-content-end'>
-            <div class="col-3">
-                <a href="{{ route('logout')}}" class="btn btn-secondary">Cerrar sesión</a>
+        <div class='row justify-content-end my-4'>
+            <div class="col-5 d-flex flex-column align-items-center">
+                <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">Cerrar sesión</button>
+                </form>
             </div>
         </div>
-        <br>
         <!--empleados-->
         @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
-            <div id='user' class='row justify-content-end'>
-                <div class="col-4">{{ auth()->user()->empleado->nombre }} {{ auth()->user()->empleado->apellidos }}
-                </div>
-                <div id='user' class='row justify-content-end'>
-                    <div class="col-4">Área de {{ auth()->user()->empleado->departamento->nombre }}</div>
+            <div class='row justify-content-end'>
+                <div class="col-5 d-flex flex-column align-items-center">
+                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
+                        alt="avatar">
+                    <h5>Área de {{ auth()->user()->empleado->departamento->nombre }}</h5>
                 </div>
             </div>
 
-        <!--familiares-->
+
+            <!--familiares-->
         @elseif(auth()->user()->departamento_id == 6)
-            <div id='user' class='row justify-content-end'>
-                <div class="col-4">{{ auth()->user()->familiar->nombre }} {{ auth()->user()->familiar->apellidos }}
-                </div>
-                <div id='user' class='row justify-content-end'>
-                    <div class="col-4">Área de {{ auth()->user()->familiar->departamento->nombre }}</div>
+            <div class='row justify-content-end'>
+                <div class="col-5 d-flex flex-column align-items-center">
+                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
+                        alt="avatar">
+                    <h5>Área de {{ auth()->user()->familiar->departamento->nombre }}</h5>
                 </div>
             </div>
         @else
-        <!--ADMIN-->
-            <div id='user' class='row justify-content-end'>
-                <div class="col-4">ADMIN</div>
-            </div>
-            <div id='user' class='row justify-content-end'>
-                <div class="col-4">Área de Administración</div>
+            <!--ADMIN-->
+            <div class='row justify-content-end'>
+
+                <div class="col-5 d-flex flex-column align-items-center">
+                    <img src="https://ui-avatars.com/api/?name=ADMIN&background=random&font-size=0.33&rounded=true"
+                        alt="avatar">
+                    <h5>Área de Administración</h5>
+                </div>
             </div>
         @endif
 
@@ -190,11 +195,13 @@
                             <a class="btn btn-outline-dark" href="#" role="button">Área Personal</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}' role="button">Gestional
+                            <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}'
+                                role="button">Gestional
                                 Residentes</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="{{ route('familiar_empleado') }}" role="button">Gestional Usuarios</a>
+                            <a class="btn btn-outline-dark" href="{{ route('familiar_empleado') }}"
+                                role="button">Gestional Usuarios</a>
                         </li>
                     </ul>
                 </div>
@@ -208,6 +215,33 @@
     <main class="container py-4">
         @yield('content')
     </main>
+    <footer>
+        <div class='row justify-content-center p-4'>
+            <div class="col d-flex flex-column align-items-center">
+                <!--Empleados-->
+                @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
+                    <div class="col-5 d-flex flex-column align-items-center">
+                        <p>Ha iniciado sesión como <b>{{ auth()->user()->empleado->nombre }}
+                                {{ auth()->user()->empleado->apellidos }}</b></p>
+                    </div>
+
+
+                    <!--familiares-->
+                @elseif(auth()->user()->departamento_id == 6)
+                    <div class="col-5 d-flex flex-column align-items-center">
+                        <p>Ha iniciado sesión como <b>{{ auth()->user()->familiar->nombre }}
+                                {{ auth()->user()->familiar->apellidos }}</b></p>
+                    </div>
+                @else
+                    <!--ADMIN-->
+                    <div class="col-5 d-flex flex-column align-items-center">
+                        <p>Ha iniciado sesión como <b>ADMINISTRADOR</b></p>
+                    </div>
+                @endif
+
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

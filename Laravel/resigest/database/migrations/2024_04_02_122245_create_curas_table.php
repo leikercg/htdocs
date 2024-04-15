@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('residente_id');
             $table->unsignedBigInteger('empleado_id');
             $table->date('fecha')->nullable(false);
-            $table->time('hora')->nullable(false);
+            $table->time('Hora', 0)->nullable(false);//Formato hh:mm
             $table->string('zona', 255)->nullable(false);
             $table->string('estado', 50)->nullable(false);
             $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');

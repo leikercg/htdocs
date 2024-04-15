@@ -7,13 +7,13 @@
     @isset($residente)
         <div class="row">
             <div class="col-12 text-center">
-                <h2>Modificar Residente</h2>
+                <h2>MODIFICAR RESIDENTE</h2>
             </div>
         </div>
     @else
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-10 text-center">
-                <h2>Crear Residente</h2>
+                <h2>CREAR RESIDENTE</h2>
             </div>
         </div>
     @endisset
@@ -52,7 +52,10 @@
                         <label for="estado" class="form-label">Estado:</label>
                         <select class="form-select" id="estado" name="estado">
                             <option value="alta">Alta</option>
-                            <option value="baja">Baja</option>
+                            @isset($residente)
+                                <option value="baja" @if ($residente->estado == 'baja') selected @endif>
+                                    Baja</option>
+                            @endisset
                         </select>
                     </div>
                     <div class="mb-3">
@@ -60,7 +63,9 @@
                         <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
                             value="{{ $residente->fecha_nac ?? '' }}"
                             @isset($residente) readonly @endisset>
-                    </div>
+                    </div><br>
+
+
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
         </div>

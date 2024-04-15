@@ -2,25 +2,30 @@
 @section('title', 'Home')
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-2 text-center"> <a href="{{ route('crear.residente') }}" class="btn btn-primary">Crear Residente</a>
+        <div class="col-2 text-center"> <a href="{{ route('crear.residente') }}" class="btn btn-success">CREAR RESIDENTE</a>
         </div>
-        <div class="col-2 text-center"> <a href="{{ route('lista.completa.residentes') }}" class="btn btn-primary">Ver Bajas
+        <div class="col-2 text-center"> <a href="{{ route('lista.completa.residentes') }}" class="btn btn-primary">VER BAJAS
             </a>
         </div>
     </div>
     <br>
+
     <div class="row">
         <div class="col-12 text-center">
-            <h2>Lista de Residentes</h2>
+            <h2>LISTA DE RESIDENTES</h2>
         </div>
     </div>
-    <div class="row">
-        <form action="{{ route('buscar.residente') }}">
-            <label for="busquda"></label><br><br>
-            <input type="text" name="busqueda" id="busquda"> <br><br>
-            <input type="submit">
-        </form>
-        <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <form action="{{ route('buscar.residente') }}" class="mt-4">
+                <div class="mb-3">
+                    <label for="busqueda" class="form-label">Búsqueda</label>
+                    <input type="text" class="form-control" id="busqueda" name="busqueda">
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
+            </form>
+        </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-10">

@@ -1,9 +1,9 @@
 @extends('master')
-@section('title', $residente->Nombre . ' ' . $residente->Apellidos)
+@section('title', $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
     <div class="row">
         <div class="col-12 text-center">
-            <h2>Ficha Personal de {{ $residente->nombre }} {{ $residente->apellidos }}</h2>
+            <h2>FICHA PERSONAL DE: <br>{{ $residente->nombre }} {{ $residente->apellidos }}</h2>
         </div>
     </div><br>
     <div class="row">
@@ -66,14 +66,14 @@
             <div class="btn-group-vertical gap-4" role="group" aria-label="Vertical button group">
                 <a href='{{ route('itinerario.residente', ['id' => $residente->id]) }}' class="btn btn-primary" role="button">Ver itinerario</a>
                 @if (auth()->user()->departamento_id == 1)
-                    <a href="#" class="btn btn-primary" role="button">Ver visitas</a>
+                    <a href="{{route('visitas.residente',['residente_id'=>$residente->id])}}" class="btn btn-primary" role="button">Ver visitas</a>
                 @elseif(auth()->user()->departamento_id == 2)
                     <a href="#" class="btn btn-primary" role="button">Ver tareas</a>
-                    <a href="#" class="btn btn-primary" role="button">Ver curas</a>
+                    <a href="{{route('curas.residente',['residente_id'=>$residente->id])}}" class="btn btn-primary" role="button">Ver curas</a>
                 @elseif(auth()->user()->departamento_id == 3)
-                    <a href="#" class="btn btn-primary" role="button">Ver grupos</a>
+                    <a href="{{route('sesiones.residente',['residente_id'=>$residente->id])}}" class="btn btn-primary" role="button">Ver sesiones</a>
                 @elseif(auth()->user()->departamento_id == 4)
-                    <a href="#" class="btn btn-primary" role="button">Ver sesiones</a>
+                    <a href="#" class="btn btn-primary" role="button">Ver grupos</a>
                 @endif
             </div>
         </div>

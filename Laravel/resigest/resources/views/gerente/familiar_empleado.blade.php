@@ -5,14 +5,14 @@
     @isset($empleados)
         <div class="row justify-content-center">
             <div class="col-2 text-center">
-                <a href="{{ route('crear.familiar') }}" class="btn btn-primary">Crear Familiar</a>
+                <a href="{{ route('crear.familiar') }}" class="btn btn-success">CREAR FAMILIAR</a>
             </div>
             <div class="col-2 text-center">
-                <a href="{{ route('crear.empleado') }}" class="btn btn-primary">Crear Empleado</a>
+                <a href="{{ route('crear.empleado') }}" class="btn btn-primary">CREAR EMPLEADO</a>
             </div>
         </div>
 
-        <br><br>
+        <br>
         <div class="row">
             <div class="col-12 text-center">
                 <h2>EMPLEADOS</h2>
@@ -26,9 +26,10 @@
                         <input type="text" class="form-control" id="busqueda" name="busqueda">
                     </div>
                     <button type="submit" class="btn btn-primary">Buscar</button>
+                    <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
                 </form>
             </div>
-            <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
+
         </div>
         <div class="row justify-content-center">
             <div class="col-l0">
@@ -79,9 +80,10 @@
                         <input type="text" class="form-control" id="busqueda" name="busqueda">
                     </div>
                     <button type="submit" class="btn btn-primary">Buscar</button>
+                    <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
                 </form>
             </div>
-            <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
+
         </div>
         <div class="row justify-content-center">
             <div class="col-l0">
@@ -92,7 +94,7 @@
                             <th scope="col">Apellidos</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Departamento</th>
-                            <th scope="col">Dirección</th>
+                            <th scope="col">Familiar</th>
                             <th scope="col">Telefono</th>
                         </tr>
                     </thead>
@@ -103,16 +105,23 @@
                                 <td>{{ $familiar->apellidos }}</td>
                                 <td>{{ $familiar->nombre }}</td>
                                 <td>{{ $familiar->departamento->nombre }}</td>
-                                <td>{{ $familiar->direccion }}</td>
-                                <td>{{ $familiar->telefono }}</td>
-                                <td><a href="{{ route('editar.familiar', ['id' => $familiar->id]) }}"
-                                        class="btn btn-primary">Modificar</a>
-                            </tr>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                <td>
+                                    @forelse ($familiar->residentes as $residente)
+                                    {{ $residente->nombre }} {{ $residente->apellidos }}@if (!$loop->last)
+                                            <br> @endif
+                                        @empty<!--Borrar, usado solo para pruebas-->
+                                            Sin residentes
+                                        @endforelse
+                                    </td>
+                                    <td>{{ $familiar->telefono }}</td>
+                                    <td><a href="{{ route('editar.familiar', ['id' => $familiar->id]) }}"
+                                            class="btn btn-primary">Modificar</a>
+                                </tr>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    @endisset
-@endsection
+        @endisset
+    @endsection

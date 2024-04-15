@@ -10,8 +10,9 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\ResidenteController;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\Departamento7Middleware;
 use App\Http\Controllers\FamiliarController;
 
 Route::middleware('guest')->group(function () {
@@ -36,7 +37,10 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 });
 ///rutas de creacion de usuarios
-Route::middleware([Departamento7Middleware::class])->group(function () {//usamos el middlewere creado, solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_7', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+    Route::get('empleado/busqueda', [EmpleadoController::class, 'buscar'])->name('buscar.empleado'); /// empleado por filtro de búsquda
+    Route::get('familiar/busqueda', [FamiliarController::class, 'buscar'])->name('buscar.familiar'); ///familiar por filtro de búsquda
+
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
     Route::get('familiar_empleado', [RegisteredUserController::class, 'elegir'])->name('familiar_empleado'); // para elegir entre empleado y familiar
@@ -49,11 +53,29 @@ Route::middleware([Departamento7Middleware::class])->group(function () {//usamos
     Route::get('familiar/{id}', [FamiliarController::class, 'edit'])->name('editar.familiar'); //lanzar formulario de edición
     Route::put('familiar/{id}', [FamiliarController::class, 'update'])->name('actualizar.familiar'); //actualizar familiar
 
+    Route::delete('familiar/delete/{id}', [FamiliarController::class, 'destroy'])->name('borrar.familiar'); //borrar familiar
+
+
+
     //NO HACE FALTA RUTAS DE CREACION DE EMPLEADOS Y FAMILIARES POR QUE SE CREAR EN LA MISMA RUTA QUE EL USUARIO
 
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () { //lista de rutas solo accesibles si esta autenticado un usuario, en caso contrario envia a la ruta de login
+    /////////rutas de residentes///////////
+    Route::get('lista_residentes', [ResidenteController::class, 'index'])->name('lista.residentes'); ///lista de residentes
+    Route::get('lista_residentes_completa', [ResidenteController::class, 'indexBajas'])->name('lista.completa.residentes'); ///lista de residentes con bajas incluidas
+    Route::get('ficha_residente/{id}', [ResidenteController::class, 'show'])->name('ficha.residente'); ///ficha de residente
+    Route::get('itinerario/{id}', [ResidenteController::class, 'itinerario'])->name('itinerario.residente'); ///itinerario de residente
+
+    Route::get('residente/crear', [ResidenteController::class, 'create'])->name('crear.residente'); //formulario de creación de residente
+    Route::post('residente/{id?}', [ResidenteController::class, 'store'])->name('almacenar.residente'); //almacenar residente
+    Route::get('residente/{id}', [ResidenteController::class, 'edit'])->name('editar.residente'); //lanzar formulario de edición
+    Route::put('residente/{id}', [ResidenteController::class, 'update'])->name('actualizar.residente'); //actualizar residente
+
+    Route::get('lista_residentes/busqueda', [ResidenteController::class, 'buscar'])->name('buscar.residente'); ///ficha de residente por filtro de búsquda
+    Route::get('lista_residentes/bajas/busqueda', [ResidenteController::class, 'buscarBajas'])->name('buscar.residente.bajas'); ///ficha de residente por filtro de búsquda en baja
+
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 
