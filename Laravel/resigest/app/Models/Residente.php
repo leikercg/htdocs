@@ -22,7 +22,7 @@ class Residente extends Model
     public function grupos() //un residente puede tener varios grupos
     {
         return $this->belongsToMany(Grupo::class, 'residentes_grupos', 'residente_id', 'grupo_id');
-        //parametros, nombre de la tabla que los relaciona, Fk local, FK
+        //parametros, nombre de la tabla que los relaciona, local, FK
     }
 
     public function familiares()//un residente puede tener varios familiares
@@ -57,7 +57,7 @@ class Residente extends Model
 
     public function tareas()//un residente puede tener varias tareas asociadas
     {
-        return $this->hasMany(Tarea::class, 'Id_residente');
+        return $this->hasMany(Tarea::class, 'residente_id');
     }
 
 }

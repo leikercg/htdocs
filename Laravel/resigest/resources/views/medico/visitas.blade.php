@@ -32,11 +32,11 @@ $hoy = now()->format('Y-m-d');
                     @foreach ($visitas as $visita)
                         <tr>
                             <td>{{ $visita->id }}</td>
-                            <td>{{ date('d/m/Y', strtotime($visita->Fecha)) }} </td>
-                            <td>{{ $visita->Hora }}</td>
+                            <td>{{ date('d/m/Y', strtotime($visita->fecha)) }} </td>
+                            <td>{{ $visita->hora }}</td>
                             <td>{{ $visita->empleado->nombre }} {{ $visita->empleado->apellidos }}</td>
                             <td><!--Si el empleado es el que creo la visita y la fecha aun no ha llegado se podra modificar -->
-                                @if (auth()->user()->empleado->id == $visita->empleado_id && $visita->Fecha >= $hoy)
+                                @if (auth()->user()->empleado->id == $visita->empleado_id && $visita->fecha >= $hoy)
                                     <a href="{{ route('editar.visita', ['id' => $visita->id, 'residente_id' => $residente->id]) }}"
                                         class="btn btn-primary">Modificar</a>
                                 @endif

@@ -11,4 +11,6 @@ class Residente_Grupo extends Model
 
 
     //rellenar
+    protected $table = 'residentes_grupos';
+
 }

@@ -18,8 +18,8 @@ class Visitas_Seeder extends Seeder
             [
                 'empleado_id'  => 3,
                 'residente_id' => 1,
-                'Fecha'        => '2024-03-14',
-                'Hora'         => '10:00',
+                'fecha'        => '2024-03-14',
+                'hora'         => '10:00',
             ],
         ]);
     }

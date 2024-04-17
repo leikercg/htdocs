@@ -17,8 +17,8 @@
         <br><br>
         <p>Itineario de {{ date('d/m/Y', strtotime($fecha)) }}:</p>
         @foreach ($programacion as $actividad)
-            @if ($actividad->Fecha == $fecha)
-                <p>{{ date('d/m/Y', strtotime($actividad->Fecha)) }} {{ $actividad->Hora }}
+            @if ($actividad->fecha == $fecha)
+                <p>{{ date('d/m/Y', strtotime($actividad->fecha)) }} {{ $actividad->Hora }}
                     {{ $actividad->empleado->departamento->nombre }}</p>
             @endif
         @endforeach

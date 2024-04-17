@@ -44,12 +44,12 @@
                     <div class="mb-3">
                         <label for="fecha" class="form-label">Fecha:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha"
-                            value="{{ $sesion->Fecha ?? '' }}">
+                           required value="{{ $sesion->fecha ?? '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="hora" class="form-label">Hora:</label>
                         <input type="time" class="form-control" id="hora" name="hora"
-                            value="{{ $sesion->hora ?? '' }}">
+                           required value="{{ $sesion->hora ?? '' }}">
                     </div>
                     <br>
                     <input type="text" hidden name="residente_id" value="{{ $residente->id }}">

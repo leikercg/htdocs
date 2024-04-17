@@ -1,68 +1,77 @@
 @extends('master')
-@section('title', 'Crear cura para ' . $residente->nombre . ' ' . $residente->apellidos)
+@section('title', 'Tareas de ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
-    @isset($cura->id)
+    @php
+        $iterador = 1;
+    @endphp
+    @isset($tarea->id)
         <div class="row">
             <div class="col-12 text-center">
-                <h2>MODIFICAR CURA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>MODIFICAR TAREA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
         <div class="row justify-content-center">
             <div class="col-10 text-center">
-                <h2>CREAR CURA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>CREAR TAREA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @endisset
-    <!-- Solo puede modificar la hora y la fecha-->
-    <!--Si la cura esta creada ya se muestra este formulario de actualización-->
+    <!-- Solo puede modificar la hora, la fecha, auxiliar y descripción-->
+    <!--Si la tarea esta creada ya se muestra este formulario de actualización-->
     <div class="row justify-content-center">
         <div class="col-md-6">
-            @isset($cura->id)
-                <form action="{{ route('actualizar.cura', ['id' => $cura->id]) }}" method="POST">
+            @isset($tarea->id)
+                <form action="{{ route('actualizar.tarea', ['id' => $tarea->id]) }}" method="POST">
                     @method('put')
                 @else
-                    <form action="{{ route('almacenar.cura') }}" method="POST">
+                    <form action="{{ route('almacenar.tarea') }}" method="POST">
                     @endisset
                     @csrf
-                    @isset($cura)
+                    @isset($tarea)
                         <div class="mb-3">
                             <label for="id" class="form-label">ID:</label>
                             <input type="text" class="form-control" id="id" name="id"
-                                value="{{ $cura->id ?? '' }}" @isset($cura) readonly @endisset>
+                                value="{{ $tarea->id ?? '' }}" @isset($tarea) readonly @endisset>
                         </div>
                     @endisset
-
                     <div class="mb-3">
                         <label for="enfermero" class="form-label">Enfermero/a:</label>
                         <input type="text" class="form-control" id="enfermero" name="nombre"
                             value="{{ auth()->user()->empleado->nombre }} {{ auth()->user()->empleado->apellidos }} "
                             disabled>
                         <input type="text" name="empleado_id" id="" hidden
-                            value="{{ auth()->user()->empleado->id }}">
+                            value="{{ auth()->user()->empleado->id }}"><!--Enviamos el id del residente oculto para los usuarios-->
                     </div>
                     <div class="mb-3">
-                        <label for="zona" class="form-label">Zona</label>
-                        <input type="text" class="form-control" id="zona" name="zona"
-                            value="{{ $cura->zona ?? '' }}" requiredy
-                            @isset($cura->id)
-                                disabled
-                            @endisset>
+                        @foreach ($auxiliares as $auxiliar)
+                            <input type="radio" class="form-check-input" id="auxiliar{{ $iterador }}"
+                                name="auxiliar_id" value="{{ $auxiliar->id }}"
+                                @isset($tarea)
+                                    @if ($auxiliar->id == $tarea->auxiliar_id)  selected @endif>
+                                @endisset
+                                <label for="auxiliar{{ $iterador }}" class="form-check-label">
+                            {{ $auxiliar->nombre }} {{ $auxiliar->apellidos }}
+                            </label>
+                            @php
+                                $iterador++;
+                            @endphp
+                        @endforeach
                     </div>
                     <div class="mb-3">
-                        <label for="estado" class="form-label">Estado</label>
-                        <input type="text" class="form-control" id="estado" name="estado" required
-                            value="{{ $cura->estado ?? '' }}">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required
+                            value="{{ $tarea->descripcion ?? '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="fecha" class="form-label">Fecha:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
-                            value="{{ $cura->fecha ?? '' }}">
+                            value="{{ $tarea->fecha ?? '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="hora" class="form-label">Hora:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
-                            value="{{ $cura->hora ?? '' }}">
+                            value="{{ $tarea->hora ?? '' }}">
                     </div>
                     <br>
                     <input type="text" hidden name="residente_id" value="{{ $residente->id }}">
@@ -74,14 +83,14 @@
         </div>
     </div>
 
-    @isset($cura->id)
+    @isset($tarea->id)
         <div class="row justify-content-center">
             <div class="col-2 text-center">
-                <form action="{{ route('borrar.cura', $cura->id) }}" method="POST">
+                <form action="{{ route('borrar.tarea', $tarea->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta cura?')">BORRAR</button>
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?')">BORRAR</button>
                     <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
                 </form>
             </div>

@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('tareas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha')->nullable(false);
-            $table->time('Hora', 0)->nullable(false);//Formato hh:mm
-            $table->unsignedBigInteger('auxiliar_id');
-            $table->unsignedBigInteger('empleado_id');
+            $table->time('hora', 0)->nullable(false);//Formato hh:mm
+            $table->unsignedBigInteger('auxiliar_id')->nullable(false);
+            $table->unsignedBigInteger('empleado_id')->nullable(false);
+            $table->unsignedBigInteger('residente_id')->nullable(false);
             $table->string('descripcion', 255)->nullable(false);
             $table->foreign('auxiliar_id')->references('id')->on('empleados')->onDelete('cascade');
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
+            $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');
+
 
             $table->timestamps();
         });

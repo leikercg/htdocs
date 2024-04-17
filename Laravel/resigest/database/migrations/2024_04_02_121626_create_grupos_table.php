@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('descripcion', 255)->nullable(false);
             $table->date('fecha')->nullable(false);
-            $table->time('Hora', 0)->nullable(false);//Formato hh:mm
+            $table->time('hora', 0)->nullable(false);//Formato hh:mm
             $table->unsignedBigInteger('empleado_id');
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
 

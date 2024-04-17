@@ -11,13 +11,13 @@ class Grupo extends Model
 
     public function residentes()
     {
-        return $this->belongsToMany(Residente::class, 'residentes_grupos', 'Id_grupo', 'Id_residente');
-        //parametros, nombre de la tabla que los relaciona, Fk local, FK
+        return $this->belongsToMany(Residente::class, 'residentes_grupos', 'grupo_id', 'residente_id');
+        //parametros, nombre de la tabla que los relaciona, k local, FK
     }
 
     public function empleado() // un grupo solo puede tener un empleado
     {
-        return $this->belongsTo(Empleado::class, 'Id_empleado');
+        return $this->belongsTo(Empleado::class, 'empleado_id');
     }
 
 }

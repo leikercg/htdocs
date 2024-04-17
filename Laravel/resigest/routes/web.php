@@ -3,10 +3,13 @@
 use App\Http\Controllers\CuraController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\FamiliarController;
+use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SeguimientoController;
 use App\Http\Controllers\SesionController;
+use App\Http\Controllers\TareaController;
 use App\Http\Controllers\VisitaController;
+use App\Models\Grupo;
 use App\Models\Residente;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +61,46 @@ Route::put('residente/cura/{id}', [CuraController::class, 'update'])->name('actu
 Route::get('cura/{residente_id}', [CuraController::class, 'create'])->name('crear.cura'); //formulario de creación de curas
 Route::post('cura/{id?}', [CuraController::class, 'store'])->name('almacenar.cura');//crea la cura
 Route::delete('cura/{id}', [CuraController::class, 'destroy'])->name('borrar.cura');//borrar cura
+
+
+Route::get('residente/cura/{residente_id}', [CuraController::class, 'show'])->name('curas.residente');
+Route::get('residente/cura/{id}/{residente_id}', [CuraController::class, 'edit'])->name('editar.cura'); //lanzar formulario de edición
+Route::put('residente/cura/{id}', [CuraController::class, 'update'])->name('actualizar.cura'); //actualizar cura
+Route::post('cura/{id?}', [CuraController::class, 'store'])->name('almacenar.cura');//crea la cura
+Route::delete('cura/{id}', [CuraController::class, 'destroy'])->name('borrar.cura');//borrar cura
+
+
+
+Route::get('grupo/crear', [GrupoController::class, 'create'])->name('crear.grupo'); //formulario de creación de grupos de trabajo
+Route::get('grupo', [GrupoController::class, 'index'])->name('lista.grupos'); //ver todos los grupos
+Route::post('grupo/{id?}', [GrupoController::class, 'store'])->name('almacenar.grupo');//crea la grupo
+Route::get('grupo/{id}/editar', [GrupoController::class, 'edit'])->name('editar.grupo'); //lanzar formulario de edición
+Route::put('grupo/{id}', [GrupoController::class, 'update'])->name('actualizar.grupo'); //actualizar grupo
+Route::delete('grupo/{id}', [GrupoController::class, 'destroy'])->name('borrar.grupo');//borrar grupo
+Route::get('grupoResidente/{id}/{residente_id}', [GrupoController::class, 'destroyPivot'])->name('borrar.pivot');//borrar la relación de un residente con el grupo, es decir, sacarlo del grupo
+Route::get('grupo/residente/{residente_id}', [GrupoController::class, 'gruposResidente'])->name('residente.grupos'); //ver todos los grupos de residente
+
+
+Route::get('residente/tareas/{residente_id}', [TareaController::class, 'show'])->name('tareas.residente');
+Route::get('residente/tareas/{residente_id}/crear', [TareaController::class, 'create'])->name('crear.tarea'); //formulario de creación de grupos de trabajo
+Route::post('tarea/{id?}', [TareaController::class, 'store'])->name('almacenar.tarea');//crea la tarea
+Route::get('tarea/{id}/editar', [TareaController::class, 'edit'])->name('editar.tarea'); //lanzar formulario de edición
+Route::put('tarea/{id}', [TareaController::class, 'update'])->name('actualizar.tarea'); //actualizar tarea
+Route::delete('tarea/borrar/{id}', [GrupoController::class, 'destroy'])->name('borrar.tarea');//borrar grupo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -35,7 +35,7 @@ $hoy = now()->format('Y-m-d');
                         <tr>
                             <td>{{ $cura->id }}</td>
                             <td>{{ date('d/m/Y', strtotime($cura->fecha)) }} </td>
-                            <td>{{ $cura->Hora }}</td>
+                            <td>{{ $cura->hora }}</td>
                             <td>{{ $cura->empleado->nombre }} {{ $cura->empleado->apellidos }}</td>
                             <td>{{ $cura->zona }}</td>
                             <td>{{ $cura->estado }}</td>

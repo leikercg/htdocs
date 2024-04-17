@@ -33,8 +33,8 @@ class SesionController extends Controller
     {
         $residente            = Residente::find($request->residente_id);
         $sesion               = new Sesion();
-        $sesion->Fecha        = $request->fecha;
-        $sesion->Hora         = $request->hora;
+        $sesion->fecha        = $request->fecha;
+        $sesion->hora         = $request->hora;
         $sesion->residente_id = $request->residente_id;
         $sesion->empleado_id  = $request->empleado_id;
 
@@ -75,8 +75,8 @@ class SesionController extends Controller
     {
         $sesion = Sesion::find($id);
 
-        $sesion->Fecha = $request->fecha;
-        $sesion->Hora  = $request->hora;
+        $sesion->fecha = $request->fecha;
+        $sesion->hora  = $request->hora;
 
         $sesion->save();
 

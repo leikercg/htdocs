@@ -64,16 +64,22 @@
         <!--Lista de  funciones personales-->
         <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
             <div class="btn-group-vertical gap-4" role="group" aria-label="Vertical button group">
-                <a href='{{ route('itinerario.residente', ['id' => $residente->id]) }}' class="btn btn-primary" role="button">Ver itinerario</a>
+                <a href='{{ route('itinerario.residente', ['id' => $residente->id]) }}' class="btn btn-primary"
+                    role="button">Ver itinerario</a>
                 @if (auth()->user()->departamento_id == 1)
-                    <a href="{{route('visitas.residente',['residente_id'=>$residente->id])}}" class="btn btn-primary" role="button">Ver visitas</a>
+                    <a href="{{ route('visitas.residente', ['residente_id' => $residente->id]) }}" class="btn btn-primary"
+                        role="button">Ver visitas</a>
                 @elseif(auth()->user()->departamento_id == 2)
-                    <a href="#" class="btn btn-primary" role="button">Ver tareas</a>
-                    <a href="{{route('curas.residente',['residente_id'=>$residente->id])}}" class="btn btn-primary" role="button">Ver curas</a>
+                    <a href="{{ route('curas.residente', ['residente_id' => $residente->id]) }}" class="btn btn-primary"
+                        role="button">Ver curas</a>
+                    <a href="{{ route('tareas.residente', ['residente_id' => $residente->id]) }}" class="btn btn-primary"
+                        role="button">Ver tareas</a>
                 @elseif(auth()->user()->departamento_id == 3)
-                    <a href="{{route('sesiones.residente',['residente_id'=>$residente->id])}}" class="btn btn-primary" role="button">Ver sesiones</a>
+                    <a href="{{ route('sesiones.residente', ['residente_id' => $residente->id]) }}" class="btn btn-primary"
+                        role="button">Ver sesiones</a>
                 @elseif(auth()->user()->departamento_id == 4)
-                    <a href="#" class="btn btn-primary" role="button">Ver grupos</a>
+                    <a href="{{ route('residente.grupos', ['residente_id' => $residente->id]) }}" class="btn btn-primary"
+                        role="button">Ver grupos</a>
                 @endif
             </div>
         </div>

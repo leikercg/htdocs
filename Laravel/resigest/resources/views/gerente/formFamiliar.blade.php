@@ -95,12 +95,17 @@
             </div>
         </div>
 
+        <!-- Borrar familiar -->
+
+
         <div class="row justify-content-center">
             <div class="col-2 text-center">
                 <form action="{{ route('borrar.familiar', $familiar->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este familiar?')">BORRAR</button> <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar este familiar?')">BORRAR</button>
+                    <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
                 </form>
             </div>
         </div>

@@ -19,10 +19,10 @@ class Curas_Seeder extends Seeder
             [
                 'residente_id' => 1,
                 'empleado_id' => 3,
-                'Fecha' => '2024-03-14',
-                'Hora' => '15:00',
-                'Zona' => 'Cadera',
-                'Estado' => 'Irritado',
+                'fecha' => '2024-03-14',
+                'hora' => '15:00',
+                'zona' => 'Cadera',
+                'estado' => 'Irritado',
             ],
         ]);
     }

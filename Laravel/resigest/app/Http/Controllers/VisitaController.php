@@ -33,8 +33,8 @@ class VisitaController extends Controller
     {
         $residente            = Residente::find($request->residente_id);
         $visita               = new Visita();
-        $visita->Fecha        = $request->fecha;
-        $visita->Hora         = $request->hora;
+        $visita->fecha        = $request->fecha;
+        $visita->hora         = $request->hora;
         $visita->residente_id = $request->residente_id;
         $visita->empleado_id  = $request->empleado_id;
 
@@ -74,8 +74,8 @@ class VisitaController extends Controller
     {
         $visita = Visita::find($id);
 
-        $visita->Fecha = $request->fecha;
-        $visita->Hora  = $request->hora;
+        $visita->fecha = $request->fecha;
+        $visita->hora  = $request->hora;
 
         $visita->save();
 

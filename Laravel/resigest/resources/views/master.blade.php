@@ -108,7 +108,7 @@
                             <a class="btn btn-outline-dark" href="#" role="button">Área Personal</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">Crear Grupo</a>
+                            <a class="btn btn-outline-dark" href="{{route('lista.grupos')}}" role="button">Ver Grupos</a>
                         </li>
                     </ul>
                 </div>

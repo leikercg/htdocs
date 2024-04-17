@@ -80,7 +80,7 @@ class CuraController extends Controller
         $cura = Cura::find($id);
 
         $cura->fecha = $request->fecha;
-        $cura->Hora  = $request->hora;
+        $cura->hora  = $request->hora;
         $cura->estado  = $request->estado;
 
         $cura->save();

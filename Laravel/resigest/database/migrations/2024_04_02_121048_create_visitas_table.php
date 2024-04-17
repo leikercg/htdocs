@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->unsignedBigInteger('residente_id');
             $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');
-            $table->date('Fecha')->nullable(false);
-            $table->time('Hora', 0)->nullable(false);//Formato hh:mm
+            $table->date('fecha')->nullable(false);
+            $table->time('hora', 0)->nullable(false);//Formato hh:mm
             $table->timestamps();
         });
     }

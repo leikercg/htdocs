@@ -238,9 +238,9 @@ class ResidenteController extends Controller
         $residente   = Residente::find($Id_residente);
         $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
 
-        $sesiones = $residente->sesiones->where('Fecha', $fecha)->sortBy('Hora'); //comparar fechas
+        $sesiones = $residente->sesiones->where('fecha', $fecha)->sortBy('Hora'); //comparar fechas
         $curas    = $residente->curas->where('fecha', $fecha)->sortBy('Hora');
-        $visitas  = $residente->visitas->where('Fecha', $fecha)->sortBy('Hora');
+        $visitas  = $residente->visitas->where('fecha', $fecha)->sortBy('Hora');
 
         $actividades = $actividades->concat($sesiones)->concat($curas)->concat($visitas); //juntarlo en una colección
 

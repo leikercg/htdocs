@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 text-center">
-            <h2>Lista de Residentes</h2>
+            <h2>LISTA DE RESIDENTES</h2>
         </div>
     </div>
     <div class="row justify-content-center">

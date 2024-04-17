@@ -32,11 +32,11 @@ $hoy = now()->format('Y-m-d');
                     @foreach ($sesiones as $sesion)
                         <tr>
                             <td>{{ $sesion->id }}</td>
-                            <td>{{ date('d/m/Y', strtotime($sesion->Fecha)) }} </td><!--formato de la fecha-->
-                            <td>{{ $sesion->Hora }}</td>
+                            <td>{{ date('d/m/Y', strtotime($sesion->fecha)) }} </td><!--formato de la fecha-->
+                            <td>{{ $sesion->hora }}</td>
                             <td>{{ $sesion->empleado->nombre }} {{ $sesion->empleado->apellidos }}</td>
                             <td><!--Si el empleado es el que creo la sesion y la fecha aun no ha llegado se podra modificar -->
-                                @if (auth()->user()->empleado->id == $sesion->empleado_id && $sesion->Fecha >= $hoy)
+                                @if (auth()->user()->empleado->id == $sesion->empleado_id && $sesion->fecha >= $hoy)
                                     <a href="{{ route('editar.sesion', ['id' => $sesion->id, 'residente_id' => $residente->id]) }}"
                                         class="btn btn-primary">Modificar</a>
                                 @endif
