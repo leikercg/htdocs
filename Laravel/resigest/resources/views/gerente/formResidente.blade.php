@@ -30,23 +30,26 @@
                     <div class="mb-3">
                         <label for="dni" class="form-label">DNI:</label>
                         <input type="text" class="form-control" id="dni" name="dni"
-                            value="{{ $residente->dni ?? '' }}" @isset($residente) readonly @endisset>
+                            value="{{ $residente->dni ?? '' }}" @isset($residente) readonly @endisset
+                            pattern="[0-9]{8}[A-Za-z]" placeholder="012345678A" maxlength="9">
+                        <x-input-error :messages="$errors->get('dni')" class="mt-2" /> <!--Componente personalizado de laravel que devuelve los errores de validación del controller para mostralos -->
+
                     </div>
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre"
-                            value="{{ $residente->nombre ?? '' }}" @isset($residente) readonly @endisset>
+                            value="{{ old('nombre', $residente->nombre ?? '' )}}" @isset($residente) readonly @endisset> <!-- old('') devuelve el valor enviado al formulario para no reescribirlo en caso de vuelta al formulario por error de validación -->
                     </div>
                     <div class="mb-3">
                         <label for="apellidos" class="form-label">Apellidos:</label>
                         <input type="text" class="form-control" id="apellidos" name="apellidos"
-                            value="{{ $residente->apellidos ?? '' }}"
+                            value="{{ old('apellidos', $residente->apellidos ?? '' )}}"
                             @isset($residente) readonly @endisset>
                     </div>
                     <div class="mb-3">
                         <label for="habitacion" class="form-label">Habitación:</label>
                         <input type="number" class="form-control" id="habitacion" name="habitacion"
-                            value="{{ $residente->habitacion ?? '' }}">
+                            value="{{ old('habitacion', $residente->habitacion ?? '') }}">
                     </div>
                     <div class="mb-3">
                         <label for="estado" class="form-label">Estado:</label>
@@ -61,12 +64,21 @@
                     <div class="mb-3">
                         <label for="fecha_nac" class="form-label">Fecha de nacimiento:</label>
                         <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
-                            value="{{ $residente->fecha_nac ?? '' }}"
+                            value="{{ old('fecha_nac', $residente->fecha_nac ?? '' )}}"
                             @isset($residente) readonly @endisset>
+                        <x-input-error :messages="$errors->get('fecha_nac')" class="mt-2" />
+
                     </div><br>
 
 
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    @isset($residente)
+                        <!--Si está establecida la tarea mostrar modificar, si no crear-->
+                        <button type="submit" class="btn btn-primary"
+                            onclick="return confirm('¿Estás seguro de que deseas modificar este residente?')">MODIFICAR</button>
+                        <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
+                    @else
+                        <button type="submit" class="btn btn-success">CREAR</button>
+                    @endisset
                 </form>
         </div>
     </div>

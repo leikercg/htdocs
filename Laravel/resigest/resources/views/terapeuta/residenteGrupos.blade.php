@@ -46,19 +46,27 @@
                                         <br>
                                     @endif
                                 @endforeach
-                                </td>
-  <!--Revisar esto da error-->                          <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
+                            </td>
+                            <!--Revisar esto da error-->
+                            {{--  <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
                                     @if (auth()->user()->empleado->id == $grupo->empleado_id && $grupo->fecha >= $hoy)
                                         <a href="{{ route('borrar.pivot', ['id' => $grupo->id,'residente_id'=>$residente->id]) }}"
                                             class="btn btn-danger">Sacar del grupo</a>
                                     @endif
+                            </td> --}}
+
+                            <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
+                                @if (auth()->user()->empleado->id == $grupo->empleado_id && $grupo->fecha >= $hoy)
+                                    <a href="{{ route('editar.grupo', ['id' => $grupo->id]) }}"
+                                        class="btn btn-primary">Modificar</a>
+                                @endif
                             </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
 
 
-        @endsection
+    @endsection

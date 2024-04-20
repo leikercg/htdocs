@@ -31,6 +31,13 @@ class VisitaController extends Controller
      */
     public function store(Request $request)
     {
+        $fechaLimite = date('Y-m-d', strtotime('+1 month'));
+        $fechaMinima = date('Y-m-d', strtotime('-1 day'));
+
+        $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
+            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
+        ]);
+
         $residente            = Residente::find($request->residente_id);
         $visita               = new Visita();
         $visita->fecha        = $request->fecha;
@@ -39,8 +46,8 @@ class VisitaController extends Controller
         $visita->empleado_id  = $request->empleado_id;
 
         $visita->save();
-        $visitas = Visita::where('residente_id', $request->residente_id)->get(); //para devolver a la vista de las visitas del residente
-        return view('medico.visitas', ['residente' => $residente, 'visitas' => $visitas]); //devolvemos el residente para mostar de nuevo las visitas
+
+        return redirect()->route('visitas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de visitas del residente.
 
     }
 
@@ -49,7 +56,7 @@ class VisitaController extends Controller
      */
     public function show(string $Id_residente)
     {
-        $visitas   = Visita::where('residente_id', $Id_residente)->get();
+        $visitas   = Visita::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
         $residente = Residente::find($Id_residente);
 
         return view('medico.visitas', ['visitas' => $visitas, 'residente' => $residente]); //envialos a la vista el residente y sus visitas
@@ -61,8 +68,16 @@ class VisitaController extends Controller
     public function edit(string $id, string $residente_id)
     {
         //
+
+        $usuario = auth()->user(); //verificar si es el creador de la visita
+
         $residente = Residente::find($residente_id);
         $visita    = Visita::find($id);
+
+        if($usuario->id != $visita->empleado->user->id) {
+            abort(403, 'No tienes autorización'); //mostrar vista de pagina no atorizada
+
+        }
 
         return view('medico.formVisitas', ['visita' => $visita, 'residente' => $residente]);
     }
@@ -72,6 +87,13 @@ class VisitaController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $fechaLimite = date('Y-m-d', strtotime('+1 month'));
+        $fechaMinima = date('Y-m-d', strtotime('-1 day'));
+
+        $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
+            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
+        ]);
+
         $visita = Visita::find($id);
 
         $visita->fecha = $request->fecha;
@@ -79,11 +101,9 @@ class VisitaController extends Controller
 
         $visita->save();
 
-        $visitas = Visita::all();
-
         $residente = Residente::find($visita->residente_id);
 
-        return view('medico.visitas', ['visitas' => $visitas, 'residente' => $residente]); //envialos a la vista el residente y sus visitas
+        return redirect()->route('visitas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario al recargar. Ruta de visitas del residente.
 
     }
 
@@ -96,11 +116,9 @@ class VisitaController extends Controller
         $visita = Visita::find($id);
         $visita->delete();
 
-        $visitas = Visita::all();
-
         $residente = Residente::find($visita->residente_id);
 
-        return view('medico.visitas', ['visitas' => $visitas, 'residente' => $residente]); //envialos a la vista el residente y sus visitas
+        return redirect()->route('visitas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario al recargar. Ruta de visitas del residente.
 
     }
 

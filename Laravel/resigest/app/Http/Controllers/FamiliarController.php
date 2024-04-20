@@ -80,12 +80,14 @@ class FamiliarController extends Controller
         $familiar->direccion = $request->direccion;
         $familiar->save(); //actualizar familiar
 
-        //en caso de agregar familiar hacer esto
-        $familiar_residente               = new Familiar_Residente_();
-        $familiar_residente->familiar_id  = $familiar->id;
-        $familiar_residente->residente_id = $request->residente;
+        if($request->residente != null) { //si se agrega un nuevo familiar crear la relación en la tabla, es decir si se ingresa null no hcaer esto
+            //en caso de agregar familiar hacer esto
+            $familiar_residente               = new Familiar_Residente_();
+            $familiar_residente->familiar_id  = $familiar->id;
+            $familiar_residente->residente_id = $request->residente;
 
-        $familiar_residente->save();
+            $familiar_residente->save();
+        }
 
         // Empleado del 1 al 5
         $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();

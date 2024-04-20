@@ -31,6 +31,14 @@ class SesionController extends Controller
      */
     public function store(Request $request)
     {
+
+        $fechaLimite = date('Y-m-d', strtotime('+1 month'));
+        $fechaMinima = date('Y-m-d', strtotime('-1 day'));
+
+        $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
+            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
+        ]);
+
         $residente            = Residente::find($request->residente_id);
         $sesion               = new Sesion();
         $sesion->fecha        = $request->fecha;
@@ -39,8 +47,7 @@ class SesionController extends Controller
         $sesion->empleado_id  = $request->empleado_id;
 
         $sesion->save();
-        $sesiones = Sesion::where('residente_id', $request->residente_id)->get(); //para devolver a la vista de las sesiones del residente
-        return view('fisioterapeuta.sesiones', ['residente' => $residente, 'sesiones' => $sesiones]); //devolvemos el residente para mostar de nuevo las sesiones
+        return redirect()->route('sesiones.residente', ['residente_id' => $residente->id]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
 
     }
 
@@ -49,7 +56,7 @@ class SesionController extends Controller
      */
     public function show(string $Id_residente)
     {
-        $sesiones   = Sesion::where('residente_id', $Id_residente)->get();
+        $sesiones  = Sesion::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
         $residente = Residente::find($Id_residente);
 
         return view('fisioterapeuta.sesiones', ['sesiones' => $sesiones, 'residente' => $residente]); //envialos a la vista el residente y sus sesiones
@@ -62,8 +69,16 @@ class SesionController extends Controller
     public function edit(string $id, string $residente_id)
     {
         //
+
+        $usuario = auth()->user(); //verificar si es el creador de la sesion
+
         $residente = Residente::find($residente_id);
         $sesion    = Sesion::find($id);
+
+        if($usuario->id != $sesion->empleado->user->id) {
+            abort(403, 'No tienes autorización'); //mostrar vista de pagina no atorizada
+
+        }
 
         return view('fisioterapeuta.formsesiones', ['sesion' => $sesion, 'residente' => $residente]);
     }
@@ -73,6 +88,14 @@ class SesionController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $fechaLimite = date('Y-m-d', strtotime('+1 month'));
+        $fechaMinima = date('Y-m-d', strtotime('-1 day'));
+
+        $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
+            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
+        ]);
+
         $sesion = Sesion::find($id);
 
         $sesion->fecha = $request->fecha;
@@ -80,11 +103,9 @@ class SesionController extends Controller
 
         $sesion->save();
 
-        $sesiones = Sesion::all();
-
         $residente = Residente::find($sesion->residente_id);
 
-        return view('fisioterapeuta.sesiones', ['sesiones' => $sesiones, 'residente' => $residente]); //envialos a la vista el residente y sus sesiones
+        return redirect()->route('sesiones.residente', ['residente_id' => $residente->id]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
 
     }
 
@@ -97,11 +118,9 @@ class SesionController extends Controller
         $sesion = Sesion::find($id);
         $sesion->delete();
 
-        $sesiones = Sesion::all();
-
         $residente = Residente::find($sesion->residente_id);
 
-        return view('fisioterapeuta.sesiones', ['sesiones' => $sesiones, 'residente' => $residente]); //envialos a la vista el residente y sus sesiones
+        return redirect()->route('sesiones.residente', ['residente_id' => $residente->id]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
 
     }
 }

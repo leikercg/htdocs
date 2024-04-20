@@ -33,15 +33,21 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        $request->validate([
-            'dni'          => ['required', 'string', 'size:9'],
+        $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
+            'dni'          => ['required', 'string', 'size:9','unique:' . User::class], //verificar que no exita ese dni en la tabla de users
             'name'         => ['required', 'string', 'max:255'],
             'email'        => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password'     => ['required', 'confirmed', Rules\Password::defaults()],
             'departamento' => ['required', 'numeric', 'integer', 'between:1,7'],
         ]);
 
-        $user = User::create([
+        if($request->departamento ==6){//si es del daparetamento 6, es decir, un familiar, este campo es obligatorio
+            $request->validate([
+                'residente' => ['required'],
+            ]);
+        }
+
+        $user = User::create([ //metodo fillable
             'dni'             => $request->dni,
             'name'            => $request->name,
             'email'           => $request->email,

@@ -33,7 +33,7 @@
                     @foreach ($grupos as $grupo)
                         <tr>
                             <td>{{ $grupo->id }}</td>
-                            <td>{{ $grupo->fecha }}</td>
+                            <td>{{ date('d/m/Y', strtotime($grupo->fecha)) }}</td>
                             <td>{{ $grupo->hora }}</td>
                             <td>{{ $grupo->empleado->nombre}} {{ $grupo->empleado->apellidos}}</td>
                             <td>{{ $grupo->descripcion }}</td>

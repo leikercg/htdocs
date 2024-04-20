@@ -9,7 +9,7 @@ $hoy = now()->format('Y-m-d');
     <div class="row justify-content-center">
         <div class="col-2 text-center">
             <a href="{{ route('crear.sesion', ['residente_id' => $residente->id]) }}" class="btn btn-success">AÑADIR
-                VISITA</a>
+                SESIÓN</a>
         </div>
     </div><br>
     <div class="row justify-content-center text-center">

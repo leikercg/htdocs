@@ -23,4 +23,7 @@
             </x-primary-button>
         </div>
     </form>
+    {{-- AÑADIMOS UN ENLACE AL LOGIN--}}
+<br>
+<a href="{{route('login')}}" style="background-color:white" >Volver a iniciar sesión</a>
 </x-guest-layout>

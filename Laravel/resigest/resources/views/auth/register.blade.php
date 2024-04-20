@@ -22,7 +22,7 @@
         <!-- DNI -->
         <div class="mt-4">
             <x-input-label for="dni" :value="__('DNI')" />
-            <x-text-input id="dni" class="block mt-1 w-full" type="text" name="dni" :value="old('dni')" required autocomplete="dni" />
+            <x-text-input id="dni" class="block mt-1 w-full" type="text" name="dni" :value="old('dni')" required autocomplete="dni"  maxlength="9" />
             <x-input-error :messages="$errors->get('dni')" class="mt-2" />
         </div>
 

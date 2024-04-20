@@ -31,7 +31,8 @@
                     <div class="mt-4">
                         <label for="dni">DNI</label>
                         <input id="dni" class="block mt-1 w-full form-control" type="text" name="dni"
-                            value="{{ $empleado->dni }}" required readonly>
+                            value="{{ $empleado->dni }}" pattern="[0-9]{8}[A-Za-z]" placeholder="012345678A" maxlength="9"
+                            required readonly>
                     </div>
                     <div class="mt-4">
                         <label for="apellidos">Apellidos</label>
@@ -46,7 +47,8 @@
                     <div class="mt-4">
                         <label for="telefono">Teléfono</label>
                         <input id="telefono" class="block mt-1 w-full form-control" type="text" name="telefono"
-                            value="{{ $empleado->telefono }}" required>
+                            pattern="[0-9]{9}" placeholder="623456789" maxlength="9" value="{{ $empleado->telefono }}"
+                            required>
                     </div>
                     <div class="mt-4">
                         <label for="departamento">Departamento</label>
@@ -54,7 +56,9 @@
                             value="{{ $empleado->departamento->nombre }}" readonly class="form-control">
                     </div>
                     <br><br>
-                    <input type="submit" value="Actualizar" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary"
+                        onclick="return confirm('¿Estás seguro de que deseas modificar esta empleado?')">MODIFICAR</button>
+
                 </form>
             </div>
         </div>
@@ -74,25 +78,8 @@
                     <!-- Name -->
                     <div class="mt-4">
                         <x-input-label for="name" :value="__('Nombre')" />
-                        <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="name" :value="old('name')"
-                            required autofocus autocomplete="name" />
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                    </div>
-
-                    <!-- Email Address -->
-                    <div class="mt-4">
-                        <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full form-control" type="email" name="email" :value="old('email')"
-                            required autocomplete="username" />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
-
-                    <!-- DNI -->
-                    <div class="mt-4">
-                        <x-input-label for="dni" :value="__('DNI')" />
-                        <x-text-input id="dni" class="block mt-1 w-full form-control" type="text" name="dni" :value="old('dni')"
-                            required autocomplete="dni" />
-                        <x-input-error :messages="$errors->get('dni')" class="mt-2" />
+                        <x-text-input id="name" class="block mt-1 w-full form-control" type="text" name="name"
+                            :value="old('name')" required autofocus autocomplete="name" />
                     </div>
 
                     <!-- Apellidos -->
@@ -100,8 +87,26 @@
                         <x-input-label for="apellidos" :value="__('Apellidos')" />
                         <x-text-input id="apellidos" class="block mt-1 w-full form-control" type="text" name="apellidos"
                             :value="old('apellidos')" required autocomplete="apellidos" />
-                        <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
                     </div>
+
+                    <!-- Email Address -->
+                    <div class="mt-4">
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" class="block mt-1 w-full form-control" type="email" name="email"
+                            :value="old('email')" required autocomplete="username" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    </div>
+
+                    <!-- DNI -->
+                    <div class="mt-4">
+                        <x-input-label for="dni" :value="__('DNI')" />
+                        <x-text-input id="dni" class="block mt-1 w-full form-control" type="text" name="dni"
+                            :value="old('dni')" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]" placeholder="012345678A"
+                            maxlength="9" />
+                        <x-input-error :messages="$errors->get('dni')" class="mt-2" />
+                    </div>
+
+
 
                     <!-- Dirección -->
                     <div class="mt-4">
@@ -115,7 +120,8 @@
                     <div class="mt-4">
                         <x-input-label for="telefono" :value="__('Teléfono')" />
                         <x-text-input id="telefono" class="block mt-1 w-full form-control" type="text" name="telefono"
-                            :value="old('telefono')" required autocomplete="telefono" />
+                            pattern="[0-9]{9}" placeholder="623456789" maxlength="9" :value="old('telefono')" required
+                            autocomplete="telefono" />
                         <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
                     </div>
 
@@ -129,14 +135,13 @@
                             <option value="4">Terapia</option>
                             <option value="5">Asistencial</option>
                         </select>
-                        <x-input-error :messages="$errors->get('departamento')" class="mt-2" />
                     </div>
 
                     <!-- Password -->
                     <div class="mt-4">
                         <x-input-label for="password" :value="__('Password')" />
-                        <x-text-input id="password" class="block mt-1 w-full form-control" type="password" name="password" required
-                            autocomplete="new-password" />
+                        <x-text-input id="password" class="block mt-1 w-full form-control" type="password" name="password"
+                            required autocomplete="new-password" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
@@ -149,13 +154,13 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <input type="submit" value="Crear" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success">CREAR</button>
                     </div>
                 </form>
             </div>
         </div>
 
-            </div>
+        </div>
         </div>
     @endisset
 

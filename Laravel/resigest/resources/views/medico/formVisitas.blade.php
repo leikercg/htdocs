@@ -43,19 +43,28 @@
                     </div>
                     <div class="mb-3">
                         <label for="fecha" class="form-label">Fecha:</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha"
-                        required value="{{ $visita->fecha ?? '' }}">
+                        <input type="date" class="form-control" id="fecha" name="fecha" required
+                            value="{{ old('fecha', $visita->fecha ?? '') }}">
+                        <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
+
                     </div>
                     <div class="mb-3">
                         <label for="hora" class="form-label">Hora:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
-                            value="{{ $visita->hora ?? '' }}">
+                        value="{{old('hora', $visita->hora ?? '' )}}">
                     </div>
                     <br>
                     <input type="text" hidden name="residente_id" value="{{ $residente->id }}">
 
 
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    @isset($visita)
+                        <!--Si está establecida la visita mostrar modificar, si no crear-->
+                        <button type="submit" class="btn btn-primary"
+                            onclick="return confirm('¿Estás seguro de que deseas modificar esta visita?')">MODIFICAR</button>
+                        <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
+                    @else
+                        <button type="submit" class="btn btn-success">CREAR</button>
+                    @endisset
                 </form>
         </div>
     </div>

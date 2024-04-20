@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="myInput" placeholder="Escribe algo...">
+<div id="autocomplete-list"></div>
+
+<script>
+  var fruits = ["Manzana", "Banana", "Cereza", "Dátil", "Uva", "Higo", "Kiwi", "Limón", "Mango", "Naranja", "Pera", "Sandía"];
+
+document.getElementById("myInput").addEventListener("input", function(e) {
+    var val = this.value;
+    var autocompleteList = document.getElementById("autocomplete-list");
+    autocompleteList.innerHTML = "";
+    if (val.length > 0) {
+        fruits.forEach(function(fruit) {
+            if (fruit.toLowerCase().startsWith(val.toLowerCase())) {
+                var option = document.createElement("div");
+                option.innerHTML = "<strong>" + fruit.substr(0, val.length) + "</strong>";
+                option.innerHTML += fruit.substr(val.length);
+                option.addEventListener("click", function() {
+                    document.getElementById("myInput").value = fruit;
+                    autocompleteList.innerHTML = "";
+                });
+                autocompleteList.appendChild(option);
+            }
+        });
+    }
+});
+
+</script>
+
+</body>
+</html>

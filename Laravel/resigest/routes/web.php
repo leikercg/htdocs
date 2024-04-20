@@ -24,7 +24,6 @@ Route::get('/dashboard', function () {//ruta al dashboarda
 Route::middleware('auth')->group(function () {//rutas accesibles solo si estas autenticado el usuriao, editar actualizar y borrar perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
 
@@ -38,77 +37,8 @@ Route::delete('product/{product}', 'ProductController@destroy')->name('product.d
 
 
 
-//////////////////////////////// Rutas de medicos///////////////////////////////
-Route::get('residente/visitas/{residente_id}', [VisitaController::class, 'show'])->name('visitas.residente');
-Route::get('residente/visitas/{id}/{residente_id}', [VisitaController::class, 'edit'])->name('editar.visita'); //lanzar formulario de edición
-Route::put('residente/visita/{id}', [VisitaController::class, 'update'])->name('actualizar.visita'); //actualizar visita
-Route::get('visita/{residente_id}', [VisitaController::class, 'create'])->name('crear.visita'); //formulario de creación de vistas
-Route::post('visita/{id?}', [VisitaController::class, 'store'])->name('almacenar.visita');//crea la visita
-Route::delete('visita/{id}', [VisitaController::class, 'destroy'])->name('borrar.visita');//borrar visita
-
-Route::get('residente/sesion/{residente_id}', [SesionController::class, 'show'])->name('sesiones.residente');
-Route::get('residente/sesion/{id}/{residente_id}', [SesionController::class, 'edit'])->name('editar.sesion'); //lanzar formulario de edición
-Route::put('residente/sesion/{id}', [SesionController::class, 'update'])->name('actualizar.sesion'); //actualizar sesion
-Route::get('sesion/{residente_id}', [SesionController::class, 'create'])->name('crear.sesion'); //formulario de creación de vistas
-Route::post('sesion/{id?}', [SesionController::class, 'store'])->name('almacenar.sesion');//crea la sesion
-Route::delete('sesion/{id}', [SesionController::class, 'destroy'])->name('borrar.sesion');//borrar sesion
-
-
-
-Route::get('residente/cura/{residente_id}', [CuraController::class, 'show'])->name('curas.residente');
-Route::get('residente/cura/{id}/{residente_id}', [CuraController::class, 'edit'])->name('editar.cura'); //lanzar formulario de edición
-Route::put('residente/cura/{id}', [CuraController::class, 'update'])->name('actualizar.cura'); //actualizar cura
-Route::get('cura/{residente_id}', [CuraController::class, 'create'])->name('crear.cura'); //formulario de creación de curas
-Route::post('cura/{id?}', [CuraController::class, 'store'])->name('almacenar.cura');//crea la cura
-Route::delete('cura/{id}', [CuraController::class, 'destroy'])->name('borrar.cura');//borrar cura
-
-
-Route::get('residente/cura/{residente_id}', [CuraController::class, 'show'])->name('curas.residente');
-Route::get('residente/cura/{id}/{residente_id}', [CuraController::class, 'edit'])->name('editar.cura'); //lanzar formulario de edición
-Route::put('residente/cura/{id}', [CuraController::class, 'update'])->name('actualizar.cura'); //actualizar cura
-Route::post('cura/{id?}', [CuraController::class, 'store'])->name('almacenar.cura');//crea la cura
-Route::delete('cura/{id}', [CuraController::class, 'destroy'])->name('borrar.cura');//borrar cura
-
-
-
-Route::get('grupo/crear', [GrupoController::class, 'create'])->name('crear.grupo'); //formulario de creación de grupos de trabajo
-Route::get('grupo', [GrupoController::class, 'index'])->name('lista.grupos'); //ver todos los grupos
-Route::post('grupo/{id?}', [GrupoController::class, 'store'])->name('almacenar.grupo');//crea la grupo
-Route::get('grupo/{id}/editar', [GrupoController::class, 'edit'])->name('editar.grupo'); //lanzar formulario de edición
-Route::put('grupo/{id}', [GrupoController::class, 'update'])->name('actualizar.grupo'); //actualizar grupo
-Route::delete('grupo/{id}', [GrupoController::class, 'destroy'])->name('borrar.grupo');//borrar grupo
-Route::get('grupoResidente/{id}/{residente_id}', [GrupoController::class, 'destroyPivot'])->name('borrar.pivot');//borrar la relación de un residente con el grupo, es decir, sacarlo del grupo
-Route::get('grupo/residente/{residente_id}', [GrupoController::class, 'gruposResidente'])->name('residente.grupos'); //ver todos los grupos de residente
-
-
-Route::get('residente/tareas/{residente_id}', [TareaController::class, 'show'])->name('tareas.residente');
-Route::get('residente/tareas/{residente_id}/crear', [TareaController::class, 'create'])->name('crear.tarea'); //formulario de creación de grupos de trabajo
-Route::post('tarea/{id?}', [TareaController::class, 'store'])->name('almacenar.tarea');//crea la tarea
-Route::get('tarea/{id}/editar', [TareaController::class, 'edit'])->name('editar.tarea'); //lanzar formulario de edición
-Route::put('tarea/{id}', [TareaController::class, 'update'])->name('actualizar.tarea'); //actualizar tarea
-Route::delete('tarea/borrar/{id}', [GrupoController::class, 'destroy'])->name('borrar.tarea');//borrar grupo
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////RUTAS DE ADMINISTRACIÓN///////////////////////////////////////
-
-//////////////////////////////////// Rutas para gerentes/////////////////////////////////////
-
-//////////////////////////////// Rutas de seguimientos///////////////////////////////
-Route::get('segumiento_residente/{id}/{departamento_id}', [SeguimientoController::class, 'show'])->name('seguimiento.residente'); ///seguimiento de residente
-
-require __DIR__ . '/auth.php';
+require __DIR__ . '/auth.php'; //esto es una ruta de archivo del mismo directorio, es como tener todo el fichero en una línea, lo crea breeze.

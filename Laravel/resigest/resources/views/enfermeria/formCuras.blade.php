@@ -44,7 +44,7 @@
                     <div class="mb-3">
                         <label for="zona" class="form-label">Zona</label>
                         <input type="text" class="form-control" id="zona" name="zona"
-                            value="{{ $cura->zona ?? '' }}" requiredy
+                            value="{{ old('zona', $cura->zona ?? '' )}}" requiredy
                             @isset($cura->id)
                                 disabled
                             @endisset>
@@ -52,23 +52,31 @@
                     <div class="mb-3">
                         <label for="estado" class="form-label">Estado</label>
                         <input type="text" class="form-control" id="estado" name="estado" required
-                            value="{{ $cura->estado ?? '' }}">
+                            value="{{ old('estado', $cura->estado ?? '' )}}">
                     </div>
                     <div class="mb-3">
                         <label for="fecha" class="form-label">Fecha:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
-                            value="{{ $cura->fecha ?? '' }}">
+                            value="{{ old('fecha' ,$cura->fecha ?? '' )}}">
+                        <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
+
                     </div>
                     <div class="mb-3">
                         <label for="hora" class="form-label">Hora:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
-                            value="{{ $cura->hora ?? '' }}">
+                            value="{{old('hora', $cura->hora ?? '' )}}">
                     </div>
                     <br>
                     <input type="text" hidden name="residente_id" value="{{ $residente->id }}">
 
 
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    @isset($cura) <!--Si está establecida la cura mostrar modificar, si no crear-->
+                        <button type="submit" class="btn btn-primary"
+                            onclick="return confirm('¿Estás seguro de que deseas modificar esta cura?')">MODIFICAR</button>
+                        <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
+                    @else
+                        <button type="submit" class="btn btn-success">CREAR</button>
+                    @endisset
                 </form>
 
         </div>

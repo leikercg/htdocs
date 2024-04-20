@@ -26,7 +26,7 @@
                 <div class="col-5 d-flex flex-column align-items-center">
                     <img src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
                         alt="avatar">
-                    <h5>Área de {{ auth()->user()->empleado->departamento->nombre }}</h5>
+                    <h5 class="text-center">Área de {{ auth()->user()->empleado->departamento->nombre }}</h5>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                 <div class="col-5 d-flex flex-column align-items-center">
                     <img src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
                         alt="avatar">
-                    <h5>Área de {{ auth()->user()->familiar->departamento->nombre }}</h5>
+                    <h5 class="text-center">Área de {{ auth()->user()->familiar->departamento->nombre }}</h5>
                 </div>
             </div>
         @else
@@ -47,7 +47,7 @@
                 <div class="col-5 d-flex flex-column align-items-center">
                     <img src="https://ui-avatars.com/api/?name=ADMIN&background=random&font-size=0.33&rounded=true"
                         alt="avatar">
-                    <h5>Área de Administración</h5>
+                    <h5 class="text-center">Área de Administración</h5>
                 </div>
             </div>
         @endif
@@ -73,9 +73,6 @@
                                 </li>
                                 <li class="nav-item mx-1">
                                     <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
-                                </li>
-                                <li class="nav-item mx-1">
-                                    <a class="btn btn-outline-dark" href="#" role="button">Área Personal</a>
                                 </li>
                             </ul>
                         </div>
@@ -103,9 +100,6 @@
                         </li>
                         <li class="nav-item mx-1">
                             <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">Área Personal</a>
                         </li>
                         <li class="nav-item mx-1">
                             <a class="btn btn-outline-dark" href="{{route('lista.grupos')}}" role="button">Ver Grupos</a>
@@ -139,10 +133,7 @@
                             <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">Área Personal</a>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">Ver Tareas</a>
+                            <a class="btn btn-outline-dark" href="{{route('auxiliar.tareas',['id'=>auth()->user()->empleado->id])}}" role="button">Ver Tareas</a>
                         </li>
                     </ul>
                 </div>
@@ -168,9 +159,6 @@
                                 role="button">Lista
                                 de Residentes</a>
                         </li>
-                        <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">Área Personal</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -191,9 +179,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">Área Personal</a>
-                        </li>
                         <li class="nav-item mx-1">
                             <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}'
                                 role="button">Gestional

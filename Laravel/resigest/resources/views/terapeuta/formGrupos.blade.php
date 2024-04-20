@@ -30,12 +30,13 @@
                     <div>
                         <label for="fecha">Fecha</label>
                         <input id="fecha" class="block mt-1 w-full form-control" type="date" name="fecha"
-                            value="{{ $grupo->fecha }}" required autofocus>
+                        value="{{ old('fecha', $grupo->fecha ?? '') }}" required autofocus>
+                        <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
                     </div>
                     <div class="mt-4">
                         <label for="hora">Hora</label>
                         <input id="hora" class="block mt-1 w-full form-control" type="time" name="hora"
-                            value="{{ $grupo->hora }}" required>
+                            value="{{ old('hora', $grupo->hora ?? '') }}" required>
                     </div>
                     <div class="mt-4">
                         <label for="empleado">Fisio</label>
@@ -45,7 +46,7 @@
                     <div class="mt-4">
                         <label for="descripcion">Descripción</label>
                         <input id="descripcion" class="block mt-1 w-full form-control" type="text" name="descripcion"
-                            value="{{ $grupo->descripcion}}" required>
+                            value="{{ old('descipcion', $grupo->descripcion )}}" required>
                     </div>
                     <div class="mt-4">
                         <label>Participantes</label><br>
@@ -65,16 +66,18 @@
                         @empty
                             <p>Sin participantes</p>
                         @endforelse
+                        <x-input-error :messages="$errors->get('residentes')" class="mt-2" />
                     </div><br>
-                    <input type="submit" value="Actualizar" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary"
+                        onclick="return confirm('¿Estás seguro de que deseas modificar este grupo?')">MODIFICAR</button>
                 </form>
             </div>
         </div>
 
-         <!-- Borrar grupo -->
-         <div class="row justify-content-center">
+        <!-- Borrar grupo -->
+        <div class="row justify-content-center">
             <div class="col-2 text-center">
-                <form action="{{ route('borrar.grupo', ['id'=>$grupo->id]) }}" method="POST">
+                <form action="{{ route('borrar.grupo', ['id' => $grupo->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
@@ -83,7 +86,6 @@
                 </form>
             </div>
         </div>
-
     @else
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -91,12 +93,14 @@
                     @csrf
                     <div>
                         <label for="fecha">Fecha</label>
-                        <input id="fecha" class="block mt-1 w-full form-control" type="date" name="fecha" required
+                        <input id="fecha" class="block mt-1 w-full form-control" type="date" name="fecha" required value="{{old('fecha')}}"
                             autofocus>
+                        <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
+
                     </div>
                     <div class="mt-4">
                         <label for="hora">Hora</label>
-                        <input id="hora" class="block mt-1 w-full form-control" type="time" name="hora" required>
+                        <input id="hora" class="block mt-1 w-full form-control" type="time" name="hora" required value="{{old('hora')}}">
                     </div>
                     <div class="mt-4">
                         <label for="empleado">Fisio</label>
@@ -106,7 +110,8 @@
                     </div>
                     <div class="mt-4">
                         <label for="descripcion">Descripción</label>
-                        <input id="descripcion" class="block mt-1 w-full form-control" type="text" name="descripcion" required>
+                        <input id="descripcion" class="block mt-1 w-full form-control" type="text" name="descripcion"
+                           value="{{old('descripcion')}}" required>
                     </div>
                     <div class="mt-4">
                         <label>Participantes</label><br>
@@ -122,16 +127,17 @@
                             @php
                                 $iterador++;
                             @endphp
-                            @empty
+                        @empty
                             Sin participantes
-                    @endforelse
-                </div>
+                        @endforelse
+                        <x-input-error :messages="$errors->get('residentes')" class="mt-2" />
+                    </div>
 
-                <br>
-                <input type="submit" value="Enviar" class="btn btn-primary">
-            </form>
+                    <br>
+                    <button type="submit" class="btn btn-success">CREAR</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-@endisset
+    @endisset
 @endsection

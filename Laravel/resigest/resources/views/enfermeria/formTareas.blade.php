@@ -47,37 +47,45 @@
                         @foreach ($auxiliares as $auxiliar)
                             <input type="radio" class="form-check-input" id="auxiliar{{ $iterador }}"
                                 name="auxiliar_id" value="{{ $auxiliar->id }}"
-                                @isset($tarea)
-                                    @if ($auxiliar->id == $tarea->auxiliar_id)  selected @endif>
-                                @endisset
-                                <label for="auxiliar{{ $iterador }}" class="form-check-label">
-                            {{ $auxiliar->nombre }} {{ $auxiliar->apellidos }}
+                                @if (isset($tarea->auxiliar_id) && $auxiliar->id == $tarea->auxiliar_id) checked @endif>
+                            <label for="auxiliar{{ $iterador }}" class="form-check-label">
+                                {{ $auxiliar->nombre }} {{ $auxiliar->apellidos }}
                             </label>
                             @php
                                 $iterador++;
                             @endphp
+
                         @endforeach
+                        <x-input-error :messages="$errors->get('auxiliar_id')" class="mt-2" />
+
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required
-                            value="{{ $tarea->descripcion ?? '' }}">
+                            value="{{old('descripcion', $tarea->descripcion ?? '' )}}">
                     </div>
                     <div class="mb-3">
                         <label for="fecha" class="form-label">Fecha:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
-                            value="{{ $tarea->fecha ?? '' }}">
+                            value="{{ old('fecha', $tarea->fecha ?? '' )}}">
                     </div>
                     <div class="mb-3">
                         <label for="hora" class="form-label">Hora:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
-                            value="{{ $tarea->hora ?? '' }}">
+                            value="{{ old('hora', $tarea->hora ?? '' )}}">
                     </div>
                     <br>
                     <input type="text" hidden name="residente_id" value="{{ $residente->id }}">
 
 
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    @isset($tarea)
+                        <!--Si está establecida la tarea mostrar modificar, si no crear-->
+                        <button type="submit" class="btn btn-primary"
+                            onclick="return confirm('¿Estás seguro de que deseas modificar esta tarea?')">MODIFICAR</button>
+                        <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
+                    @else
+                        <button type="submit" class="btn btn-success">CREAR</button>
+                    @endisset
                 </form>
 
         </div>
@@ -86,7 +94,7 @@
     @isset($tarea->id)
         <div class="row justify-content-center">
             <div class="col-2 text-center">
-                <form action="{{ route('borrar.tarea', $tarea->id) }}" method="POST">
+                <form action="{{ route('borrar.tarea', [$tarea->id, 'residente_id' => $residente->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"

@@ -63,7 +63,7 @@ class ResidenteController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() //validado por el middleware del departamento
     {
         if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
             return view('gerente.formResidente'); //enviar al formulario de creación/modificación de residente
@@ -77,6 +77,13 @@ class ResidenteController extends Controller
      */
     public function store(Request $request)
     {
+        /////////////validar datos/////////
+
+
+        $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
+            'dni'          => ['required', 'string', 'size:9','unique:' . Residente::class], //verificar que no exita ese dni en la tabla de users
+            'fecha_nac' => ['date', 'after:1900-01-01', 'before:2020-01-01'], //fecha minima antes del 2000
+        ]);
         /////////////////crea el residente////////////////////////
         $residente             = new Residente();
         $residente->nombre     = $request->nombre;
@@ -101,10 +108,9 @@ class ResidenteController extends Controller
             }
         }
 
-
         //////////devuelve la lista de residentes para la vista///////////////////
 
-        $residentes = Residente::all();
+        $residentes = Residente::all()->where('estado', 'alta');
         foreach ($residentes as $residente) {
 
             $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
@@ -116,7 +122,8 @@ class ResidenteController extends Controller
             $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
 
         }
-        return view('gerente.gestionarResidentes', ['residentes' => $residentes]); //enviar al formulario de creación/modificación de residente
+
+        return redirect()->route('lista.residentes'); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
     }
 
     /**
@@ -196,6 +203,7 @@ class ResidenteController extends Controller
     {
         $residente = Residente::find($id);
 
+        ////////REVISAR validado ya en middleware////
         if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
             return view('gerente.formResidente', ['residente' => $residente]); //enviar al formulario de creación/modificación de residente
         }
@@ -219,7 +227,7 @@ class ResidenteController extends Controller
         $residente->fecha_nac  = $request->fecha_nac;
         $residente->save();
 
-        return redirect()->route('lista.residentes');
+        return redirect()->route('lista.residentes'); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
     }
 
     /**

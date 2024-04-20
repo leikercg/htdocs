@@ -55,6 +55,6 @@ class Empleado extends Model
 
     public function user() //cada empleado tiene un unico usuario
     {
-        return $this->belongsTo(User::class,'dni');
+        return $this->belongsTo(User::class,'dni','dni');
         }
 }

@@ -30,19 +30,22 @@
                             value="{{ $familiar->nombre }}" required />
                     </div>
 
-                    <!-- DNI -->
-                    <div class="mt-4">
-                        <label for="dni">DNI</label>
-                        <input id="dni" class="block mt-1 w-full form-control" type="text" name="dni"
-                            value="{{ $familiar->dni }}" required readonly>
-                    </div>
-
                     <!-- Apellidos -->
                     <div class="mt-4">
                         <label for="apellidos">Apellidos</label>
                         <input id="apellidos" class="block mt-1 w-full form-control" type="text" name="apellidos"
                             value="{{ $familiar->apellidos }}" required readonly />
                     </div>
+
+                    <!-- DNI -->
+                    <div class="mt-4">
+                        <label for="dni">DNI</label>
+                        <input id="dni" class="block mt-1 w-full form-control" type="text" name="dni"
+                            value="{{ $familiar->dni }}" pattern="[0-9]{8}[A-Za-z]" placeholder="012345678A" maxlength="9"
+                            required readonly>
+                    </div>
+
+
                     <!--Familiar-->
                     <div class="mt-4">
                         @foreach ($familiar->residentes as $residente)
@@ -57,6 +60,7 @@
                     <div class="mt-0">
                         <label>Nuevo residente</label>
                         <select name="residente" id="" class="form-select">
+                            <option value="Selecciona" selected disabled>Selecciona</option>
                             @foreach ($residentes as $residente)
                                 <option value="{{ $residente->id }}">
                                     {{ $residente->nombre }} {{ $residente->apellidos }}
@@ -76,7 +80,7 @@
                     <div class="mt-4">
                         <label for="telefono">Teléfono</label>
                         <input id="telefono" class="block mt-1 w-full form-control" type="text" name="telefono"
-                            value="{{ $familiar->telefono }}" required />
+                            maxlength="9" placeholder="623456789" value="{{ $familiar->telefono }}" required />
                     </div>
 
                     <!-- Departamento -->
@@ -89,7 +93,8 @@
                     <!-- Password Solo podrá cambiarla el usuario -->
 
                     <div class="flex items-center justify-center mt-4">
-                        <input type="submit" value="Actualizar" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary"
+                            onclick="return confirm('¿Estás seguro de que deseas modificar esta familiar?')">MODIFICAR</button>
                     </div>
                 </form>
             </div>
@@ -105,7 +110,7 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
                         onclick="return confirm('¿Estás seguro de que deseas eliminar este familiar?')">BORRAR</button>
-                    <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
+                    <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
                 </form>
             </div>
         </div>
@@ -131,6 +136,13 @@
                             :value="old('name')" required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
+                    <!-- Apellidos -->
+                    <div class="mt-4">
+                        <x-input-label for="apellidos" :value="__('Apellidos')" />
+                        <x-text-input id="apellidos" class="block mt-1 w-full form-control" type="text" name="apellidos"
+                            :value="old('apellidos')" required autocomplete="apellidos" />
+                        <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
+                    </div>
 
                     <!-- Email Address -->
                     <div class="mt-4">
@@ -144,28 +156,9 @@
                     <div class="mt-4">
                         <x-input-label for="dni" :value="__('DNI')" />
                         <x-text-input id="dni" class="block mt-1 w-full form-control" type="text" name="dni"
-                            :value="old('dni')" required autocomplete="dni" />
+                            :value="old('dni')" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]"
+                            placeholder="012345678A" maxlength="9" />
                         <x-input-error :messages="$errors->get('dni')" class="mt-2" />
-                    </div>
-
-                    <!-- Apellidos -->
-                    <div class="mt-4">
-                        <x-input-label for="apellidos" :value="__('Apellidos')" />
-                        <x-text-input id="apellidos" class="block mt-1 w-full form-control" type="text" name="apellidos"
-                            :value="old('apellidos')" required autocomplete="apellidos" />
-                        <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
-                    </div>
-
-                    <!--Familiar-->
-                    <div class="mt-4">
-                        <label for="residente">Residentes</label>
-                        <select name="residente" id="residente" class="form-select">
-                            @foreach ($residentes as $residente)
-                                <option value="{{ $residente->id }}">
-                                    {{ $residente->nombre }} {{ $residente->apellidos }}
-                                </option>
-                            @endforeach
-                        </select>
                     </div>
 
                     <!-- Dirección -->
@@ -180,7 +173,7 @@
                     <div class="mt-4">
                         <x-input-label for="telefono" :value="__('Teléfono')" />
                         <x-text-input id="telefono" class="block mt-1 w-full form-control" type="text" name="telefono"
-                            :value="old('telefono')" required autocomplete="telefono" />
+                            maxlength="9" placeholder="623456789" :value="old('telefono')" required autocomplete="telefono" />
                         <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
                     </div>
 
@@ -193,6 +186,21 @@
                         <x-input-error :messages="$errors->get('departamento')" class="mt-2" />
                     </div>
 
+                    <!--Familiar-->
+                    <div class="mt-4">
+                        <label for="residente">Residentes</label>
+                        <select name="residente" id="residente" class="form-select">
+                            <option value="Seleciona" selected disabled>Selecciona</option>
+                            @foreach ($residentes as $residente)
+                                <option value="{{ old('residente', $residente->id )}}">
+                                    {{ $residente->nombre }} {{ $residente->apellidos }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('residente')" class="mt-2" />
+                    </div>
+
+
                     <!-- Password -->
                     <div class="mt-4">
                         <x-input-label for="password" :value="__('Password')" />
@@ -200,6 +208,7 @@
                             required autocomplete="new-password" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
+
 
                     <!-- Confirm Password -->
                     <div class="mt-4">
@@ -210,7 +219,7 @@
                     </div>
 
                     <div class="flex items-center justify-center mt-4">
-                        <input type="submit" value="enviar" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success">CREAR</button>
                     </div>
                 </form>
             </div>
