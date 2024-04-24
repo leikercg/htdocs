@@ -25,7 +25,7 @@ class FamiliarController extends Controller
     public function create()
     {
 
-        $residentes = Residente::all();
+        $residentes = Residente::all()->where('estado', 'alta');
 
         return view('gerente.formFamiliar', ['residentes' => $residentes]); //enviamos todos los residentes para que pueda elegir al correspondiente
     }
@@ -62,7 +62,7 @@ class FamiliarController extends Controller
 
         $residentes = Residente::whereDoesntHave('familiares', function ($query) use ($id) { //familiares sin relacion con el familiar ordenador por nombre y apellido
             $query->where('familiar_id', $id);
-        })->orderBy('nombre')->orderBy('apellidos')->get();
+        })->where('estado','alta')->orderBy('nombre')->orderBy('apellidos')->get();
 
         return view('gerente.formFamiliar', ['familiar' => $familiar, 'residentes' => $residentes]);
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Residente;
 use App\Models\Seguimiento;
 use App\Models\Departamento;
+use App\Models\Familiar;
 use DateTime; //exportar clase Date
 
 class ResidenteController extends Controller
@@ -31,9 +32,34 @@ class ResidenteController extends Controller
         }
         if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
             return view('gerente.gestionarResidentes', ['residentes' => $residentes]);
+        }elseif (auth()->check() && auth()->user()->departamento_id == 6) {//comprobar si hay un usuario autenticado y si es del departamento  6 (familiar) usar esta ruta:
+            return redirect()->route('lista.residentesFamiliar');//nos lleva a la ruta de lista de residentes familiares
         }
         return view('empleado.general', ['residentes' => $residentes]); //array clave--> valor
         //en las vistas se reciben las variables ya extraidas, no hay que indexarlars.
+
+    }
+
+    public function indexFamiliar()
+    {
+        //
+        $familiar   = Familiar::find(auth()->user()->familiar->id); //encontrar el id del familiar que esta siendo usuario.
+        $residentes = $familiar->residentes->sortBy('apellidos');
+        //ordenar por apellido y nombre y filtro de estado
+        // Calcular la edad para cada residente
+        foreach ($residentes as $residente) {
+
+            $fechaNacimiento = new DateTime($residente->fecha_nac); //Fecha de nacimiento
+
+            $fechaActual = new DateTime(); //Fecha de actual
+
+            $edad = $fechaActual->diff($fechaNacimiento)->y; //edad en años ->Y
+
+            $residente->edad = $edad; //Agregar atributo edad a los datos de la vista
+        }
+        if(auth()->check() && auth()->user()->departamento_id == 6) {//comprobar si hay un usuario autenticado y si es del departamento  6 (familiar) usar esta vista:
+            return view('familiar.general', ['residentes' => $residentes]);
+        }
 
     }
 
@@ -79,9 +105,8 @@ class ResidenteController extends Controller
     {
         /////////////validar datos/////////
 
-
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
-            'dni'          => ['required', 'string', 'size:9','unique:' . Residente::class], //verificar que no exita ese dni en la tabla de users
+            'dni'       => ['required', 'string', 'size:9', 'unique:' . Residente::class], //verificar que no exita ese dni en la tabla de users
             'fecha_nac' => ['date', 'after:1900-01-01', 'before:2020-01-01'], //fecha minima antes del 2000
         ]);
         /////////////////crea el residente////////////////////////
@@ -246,14 +271,16 @@ class ResidenteController extends Controller
         $residente   = Residente::find($Id_residente);
         $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
 
-        $sesiones = $residente->sesiones->where('fecha', $fecha)->sortBy('Hora'); //comparar fechas
-        $curas    = $residente->curas->where('fecha', $fecha)->sortBy('Hora');
-        $visitas  = $residente->visitas->where('fecha', $fecha)->sortBy('Hora');
+        $sesiones = $residente->sesiones->where('fecha', $fecha); //comparar fechas
+        $curas    = $residente->curas->where('fecha', $fecha);
+        $visitas  = $residente->visitas->where('fecha', $fecha);
+        $tareas   = $residente->tareas->where('fecha', $fecha);
+        $grupos   = $residente->grupos->where('fecha', $fecha);
 
-        $actividades = $actividades->concat($sesiones)->concat($curas)->concat($visitas); //juntarlo en una colección
+        $actividades = $actividades->concat($sesiones)->concat($curas)->concat($visitas)->concat($tareas)->concat($grupos); //juntarlo en una colección
 
         $actividades = $actividades->sortBy(function ($actividad) { //ordenarlos
-            return $actividad->Fecha . ' ' . $actividad->Hora;
+            return $actividad->fecha . ' ' . $actividad->hora;
         });
 
         return view('residente.itinerario', ['residente' => $residente, 'programacion' => $actividades, 'fecha' => $fecha]);

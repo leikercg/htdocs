@@ -55,6 +55,8 @@
                                 $iterador++;
                             @endphp
 
+                            <br>
+
                         @endforeach
                         <x-input-error :messages="$errors->get('auxiliar_id')" class="mt-2" />
 

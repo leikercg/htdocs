@@ -159,6 +159,16 @@ Route::middleware(['departamento_5', 'auth'])->group(function () {//usamos el mi
 
 });
 
+//DEPARTAMENTO FAMLIAR
+
+Route::middleware(['departamento_6', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+
+    //////////////////////////////// Rutas de auxiliares ///////////////////////////////
+
+    Route::get('lista_residentes_familiar', [ResidenteController::class, 'indexFamiliar'])->name('lista.residentesFamiliar'); ///lista de residentes
+
+});
+
 Route::middleware('auth')->group(function () { //lista de rutas solo accesibles si esta autenticado un usuario, en caso contrario envia a la ruta de login
     /////////RUTAS USABLES POR TODOS LOS USUARIOS///////////
     Route::get('segumiento_residente/{id}/{departamento_id}', [SeguimientoController::class, 'show'])->name('seguimiento.residente'); ///seguimiento de residente

@@ -64,7 +64,7 @@ class TareaController extends Controller
      */
     public function show(string $Id_residente)//envía a la vista de las tareas del residente
     {
-        $tareas    = Tarea::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
+        $tareas    = Tarea::where('residente_id', $Id_residente)->orderByDesc('fecha')->orderBy('hora')->get();
         $residente = Residente::find($Id_residente);
 
         $auxiliares = Empleado::where('departamento_id', 5)->get(); //empleados del departamento 5, auxiliares
@@ -79,7 +79,7 @@ class TareaController extends Controller
         $fechaActual = now()->toDateString(); //Fecha de actual en string para compararla
 
         $tareas = Tarea::where('auxiliar_id', $auxiliar_id)->get();
-        $tareas = Tarea::where('fecha', $fechaActual)->orderByDesc('fecha')->get();
+        $tareas = Tarea::where('fecha', $fechaActual)->orderByDesc('fecha')->orderBy('hora')->get();
 
         $auxiliar = Empleado::find($auxiliar_id);
 

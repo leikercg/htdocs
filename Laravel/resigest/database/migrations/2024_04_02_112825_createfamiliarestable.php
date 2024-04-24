@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre', 255)->nullable(false);
             $table->string('apellidos', 255)->nullable(false);
             $table->string('direccion', 255);
-            $table->string('telefono', 15)->nullable(false);
+            $table->string('telefono', 9)->nullable(false);
             $table->unsignedBigInteger('departamento_id');
             $table->timestamps();
 
