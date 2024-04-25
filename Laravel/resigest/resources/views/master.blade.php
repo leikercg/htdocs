@@ -24,8 +24,8 @@
         @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
             <div class='row justify-content-end'>
                 <div class="col-5 d-flex flex-column align-items-center">
-                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
-                        alt="avatar">
+                    <a href="{{route('profile.edit')}}"><img src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
+                        alt="avatar"></a>
                     <h5 class="text-center">Área de {{ auth()->user()->empleado->departamento->nombre }}</h5>
                 </div>
             </div>
@@ -35,8 +35,8 @@
         @elseif(auth()->user()->departamento_id == 6)
             <div class='row justify-content-end'>
                 <div class="col-5 d-flex flex-column align-items-center">
-                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
-                        alt="avatar">
+                    <a href="{{route('profile.edit')}}"><img src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
+                        alt="avatar"></a>
                     <h5 class="text-center">Área de {{ auth()->user()->familiar->departamento->nombre }}</h5>
                 </div>
             </div>
@@ -45,8 +45,8 @@
             <div class='row justify-content-end'>
 
                 <div class="col-5 d-flex flex-column align-items-center">
-                    <img src="https://ui-avatars.com/api/?name=ADMIN&background=random&font-size=0.33&rounded=true"
-                        alt="avatar">
+                    <a href="{{route('profile.edit')}}"> <img src="https://ui-avatars.com/api/?name=ADMIN&background=random&font-size=0.33&rounded=true"
+                        alt="avatar"></a>
                     <h5 class="text-center">Área de Administración</h5>
                 </div>
             </div>

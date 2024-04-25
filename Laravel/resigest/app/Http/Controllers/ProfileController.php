@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Empleado;
+use App\Models\Familiar;
 
 class ProfileController extends Controller
 {
@@ -33,6 +35,24 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+
+        if(isset(auth()->user()->empleado)) {//si esta establecido un empleado o admin hacer esto
+
+            if(auth()->user()->empleado->id != 7) {//si no es admin actualizar telefono y dirección, ya que admin no tiene dirección
+                $empleado = Empleado::find(auth()->user()->id);
+
+                $empleado->telefono  = $request->telefono;
+                $empleado->direccion = $request->direccion;
+                $empleado->save();
+            }
+
+        } else {//si no es un familiar
+            $familiar = Familiar::find(auth()->user()->id);
+
+            $familiar->telefono  = $request->telefono;
+            $familiar->direccion = $request->direccion;
+            $familiar->save();
+        }
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
