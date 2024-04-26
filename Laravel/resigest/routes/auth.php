@@ -172,6 +172,10 @@ Route::middleware(['departamento_6', 'auth'])->group(function () {//usamos el mi
 Route::middleware('auth')->group(function () { //lista de rutas solo accesibles si esta autenticado un usuario, en caso contrario envia a la ruta de login
     /////////RUTAS USABLES POR TODOS LOS USUARIOS///////////
     Route::get('segumiento_residente/{id}/{departamento_id}', [SeguimientoController::class, 'show'])->name('seguimiento.residente'); ///seguimiento de residente
+    Route::get('seguimiento/editar/{id}/{departamento_id}', [SeguimientoController::class, 'edit'])->name('editar.seguimiento'); //lanzar formulario de edición de segumiento
+    Route::put('segumiento/{id}', [SeguimientoController::class, 'update'])->name('actualizar.seguimiento'); //actualizar grupo
+
+
     Route::get('lista_residentes', [ResidenteController::class, 'index'])->name('lista.residentes'); ///lista de residentes
     Route::get('ficha_residente/{id}', [ResidenteController::class, 'show'])->name('ficha.residente'); ///ficha de residente
     Route::get('itinerario/{id}', [ResidenteController::class, 'itinerario'])->name('itinerario.residente'); ///itinerario de residente

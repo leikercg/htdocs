@@ -37,23 +37,23 @@
         <!--Lista de  seguimientos-->
         <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
             <div class="list-group gap-4">
-                <a href="{{ route('seguimiento.residente', ['id' => $residente->id, 'departamento_id' => 1]) }}"
+                <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 1]) }}"
                     class="list-group-item list-group-item-action">
                     Seguimiento del departamento de medicina
                 </a>
-                <a href="{{ route('seguimiento.residente', ['id' => $residente->id, 'departamento_id' => 2]) }}"
+                <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 2]) }}"
                     class="list-group-item list-group-item-action">
                     Seguimiento del departamento de enfermería
                 </a>
-                <a href="{{ route('seguimiento.residente', ['id' => $residente->id, 'departamento_id' => 4]) }}"
+                <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 4]) }}"
                     class="list-group-item list-group-item-action">
                     Seguimiento del departamento de terapia
                 </a>
-                <a href="{{ route('seguimiento.residente', ['id' => $residente->id, 'departamento_id' => 3]) }}"
+                <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 3]) }}"
                     class="list-group-item list-group-item-action">
                     Seguimiento del departamento de fisioterapia
                 </a>
-                <a href="{{ route('seguimiento.residente', ['id' => $residente->id, 'departamento_id' => 5]) }}"
+                <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 5]) }}"
                     class="list-group-item list-group-item-action">
                     Seguimiento del departamento de asistencia
                 </a>
