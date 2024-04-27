@@ -19,7 +19,7 @@
     <br><br>
     <p>Itineario de {{ date('d/m/Y', strtotime($fecha)) }}:</p>
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-10 col-md-8">
             <ol class="list-group list-group-numbered">
                 @foreach ($programacion as $actividad)
                     @if ($actividad->fecha == $fecha)

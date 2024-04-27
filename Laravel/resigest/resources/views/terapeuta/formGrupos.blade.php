@@ -88,7 +88,7 @@
         </div>
     @else
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6 col-10">
                 <form method="POST" action="{{ route('almacenar.grupo') }}">
                     @csrf
                     <div>

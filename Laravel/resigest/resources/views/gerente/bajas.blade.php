@@ -1,13 +1,11 @@
 @extends('master')
 @section('title', 'Home')
 @section('content')
-
-
-    <div class="row justify-content-center">
-        <div class="col-2">
+    <div class="row justify-content-around justify-content-md-center">
+        <div class="col-10 col-md-2 text-center mb-3">
             <a href="{{ route('crear.residente') }}" class="btn btn-success">CREAR RESIDENTE</a>
         </div>
-        <div class="col-2 text-center"> <a href="{{ route('lista.residentes') }}" class="btn btn-primary">VER ALTAS
+        <div class="col-10  col-md-2 text-center"> <a href="{{ route('lista.residentes') }}" class="btn btn-primary">VER ALTAS
             </a></div>
     </div>
     <br>
@@ -30,32 +28,35 @@
     </div>
     <br>
     <div class="row justify-content-center">
-        <div class="col-10">
-            <table class="table table-hover text-center">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($residentes as $residente)
-                        <tr onclick="window.location='{{ route('ficha.residente', $residente->id) }}';">
-                            <td>{{ $residente->id }}</td>
-                            <td>{{ $residente->apellidos }}</td>
-                            <td>{{ $residente->nombre }}</td>
-                            <td>{{ $residente->edad }}</td>
-                            <td>{{ $residente->estado }}</td>
-                            <td><a href="{{ route('editar.residente', ['id' => $residente->id]) }}"
-                                    class="btn btn-primary">Modificar</a>
-                            </td>
+        <div class="col-md-10 col-12">
+            <div class="table-responsive">{{-- para desplazamiento lateral en caso de desbordamiento de pantallas --}}
+
+                <table class="table table-hover text-center align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Estado</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($residentes as $residente)
+                            <tr onclick="window.location='{{ route('ficha.residente', $residente->id) }}';">
+                                <td>{{ $residente->id }}</td>
+                                <td>{{ $residente->apellidos }}</td>
+                                <td>{{ $residente->nombre }}</td>
+                                <td>{{ $residente->edad }}</td>
+                                <td>{{ $residente->estado }}</td>
+                                <td><a href="{{ route('editar.residente', ['id' => $residente->id]) }}"
+                                        class="btn btn-primary">Modificar</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

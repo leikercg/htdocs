@@ -7,7 +7,7 @@ $hoy = now()->format('Y-m-d');
 @endphp
    <div>{{$hoy}}</div>
     <div class="row justify-content-center">
-        <div class="col-2 text-center">
+        <div class="col-4 col-md-2 text-center">
             <a href="{{ route('crear.sesion', ['residente_id' => $residente->id]) }}" class="btn btn-success">AÑADIR
                 SESIÓN</a>
         </div>
@@ -18,8 +18,9 @@ $hoy = now()->format('Y-m-d');
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-10">
-            <table class="table table-hover text-center">
+        <div class="col-md-10 col-12">
+            <div class="table-responsive">{{-- para desplazamiento lateral en caso de desbordamiento de pantallas --}}
+                <table class="table table-hover text-center align-middle">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -45,6 +46,7 @@ $hoy = now()->format('Y-m-d');
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 

@@ -17,7 +17,7 @@
     <!-- Solo puede modificar la hora y la fecha-->
     <!--Si la sesión esta creada ya se muestra este formulario de actualización-->
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 col-10">
             @isset($sesion->id)
                 <form action="{{ route('actualizar.sesion', ['id' => $sesion->id]) }}" method="POST">
                     @method('put')

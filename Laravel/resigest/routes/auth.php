@@ -21,7 +21,6 @@ use App\Http\Controllers\TareaController;
 use App\Http\Controllers\SeguimientoController;
 use App\Http\Controllers\ProfileController;
 
-
 Route::middleware('guest')->group(function () {
     //elimnamos las rutas de registro para que no se puedan crear usuarios independientemente (las pasamos al grupo de middleware de admin (7)).
 
@@ -48,7 +47,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['departamento_7', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
 
     ///rutas de creacion de usuarios
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');//ruta de borrado de cuenta, solo realizable por el admin
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); //ruta de borrado de cuenta, solo realizable por el admin
 
     Route::get('empleado/busqueda', [EmpleadoController::class, 'buscar'])->name('buscar.empleado'); /// empleado por filtro de búsquda
     Route::get('familiar/busqueda', [FamiliarController::class, 'buscar'])->name('buscar.familiar'); ///familiar por filtro de búsquda
@@ -80,7 +79,7 @@ Route::middleware(['departamento_7', 'auth'])->group(function () {//usamos el mi
 
 //DEPARTAMENTO MEDICINA
 
-Route::middleware(['departamento_1', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_1', 'auth', 'verified'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
 
     //////////////////////////////// Rutas de medicos///////////////////////////////
     Route::get('residente/visitas/{residente_id}', [VisitaController::class, 'show'])->name('visitas.residente');
@@ -169,29 +168,34 @@ Route::middleware(['departamento_6', 'auth'])->group(function () {//usamos el mi
 
 });
 
-Route::middleware('auth')->group(function () { //lista de rutas solo accesibles si esta autenticado un usuario, en caso contrario envia a la ruta de login
+///////RUTAS COMUNES QUE NECESITAN AUTENTICACIÓN Y ESTAR VALIDADADO EL CORREO////////////////////
+Route::middleware(['verified', 'auth'])->group(function () {//usamos los middleware predefinidos, auth (nos envia al login si no hay usuario autenticado) y verified (comprueba que el usuario haya verificado su correo)
+
     /////////RUTAS USABLES POR TODOS LOS USUARIOS///////////
     Route::get('segumiento_residente/{id}/{departamento_id}', [SeguimientoController::class, 'show'])->name('seguimiento.residente'); ///seguimiento de residente
     Route::get('seguimiento/editar/{id}/{departamento_id}', [SeguimientoController::class, 'edit'])->name('editar.seguimiento'); //lanzar formulario de edición de segumiento
     Route::put('segumiento/{id}', [SeguimientoController::class, 'update'])->name('actualizar.seguimiento'); //actualizar grupo
-
 
     Route::get('lista_residentes', [ResidenteController::class, 'index'])->name('lista.residentes'); ///lista de residentes
     Route::get('ficha_residente/{id}', [ResidenteController::class, 'show'])->name('ficha.residente'); ///ficha de residente
     Route::get('itinerario/{id}', [ResidenteController::class, 'itinerario'])->name('itinerario.residente'); ///itinerario de residente
     Route::get('lista_residentes/busqueda', [ResidenteController::class, 'buscar'])->name('buscar.residente'); ///ficha de residente por filtro de búsquda
 
+});
+
+Route::middleware('auth')->group(function () { //lista de rutas solo accesibles si esta autenticado un usuario, en caso contrario envia a la ruta de login
+
     ////RUTAS DEFINIDAS DE AUTH/////
     Route::get('verify-email', EmailVerificationPromptController::class)
-                ->name('verification.notice');
+                ->name('verification.notice'); //nos avisa de que debemos verificar el correo
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
                 ->middleware(['signed', 'throttle:6,1'])
-                ->name('verification.verify');
+                ->name('verification.verify'); //al pulsar el enlace del correo se confirma la verificación
 
     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
                 ->middleware('throttle:6,1')
-                ->name('verification.send');
+                ->name('verification.send'); //reenviar el correo de verificación
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->name('password.confirm');

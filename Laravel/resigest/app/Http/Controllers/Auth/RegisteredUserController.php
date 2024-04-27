@@ -64,7 +64,7 @@ class RegisteredUserController extends Controller
             $empleado->departamento_id = $request->departamento;
             $empleado->save();
 
-            event(new Registered($user));
+            event(new Registered($user));//otros eventos de registrar, como mandar correo de confirmación
 
             //  Auth::login($user); comentamos esto para que no se inicie sesion al crear un usuario
 

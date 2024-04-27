@@ -55,12 +55,12 @@ class SeguimientoController extends Controller
             $usuario  = User::find(auth()->user()->id);
             $familiar = $usuario->familiar; //encontramos al familiar
 
-            $familiares = $familiar->residentes;//obtenemos los familiares internos del familiar
+            $familiares = $familiar->residentes; //obtenemos los familiares internos del familiar
 
             if($familiares->contains($residente)) {//si el residente indicado en la ruta esta en lista de familiares la variable es true
                 $esFamiliar = true;
             } else {
-                $esFamiliar = false;//si no es familiar es falso
+                $esFamiliar = false; //si no es familiar es falso
             }
 
         }

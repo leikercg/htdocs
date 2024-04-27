@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-10 col-sm-8">
                 <table class="table table-hover">
                     <thead>
                         <tr>

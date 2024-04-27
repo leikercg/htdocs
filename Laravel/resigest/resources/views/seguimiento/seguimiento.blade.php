@@ -12,7 +12,7 @@
     </div>
     <br>
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-10 col-sm-8">
             <form action="{{ route('actualizar.seguimiento', ['id' => $seguimiento->id]) }}" method="POST">
                 @method('put')
                 @csrf
@@ -34,7 +34,7 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-1">
+        <div class="col-2 col-sm-1">
             <a class="btn btn-primary" href="{{ route('ficha.residente', $residente->id) }}">Volver</a>
         </div>
     </div>

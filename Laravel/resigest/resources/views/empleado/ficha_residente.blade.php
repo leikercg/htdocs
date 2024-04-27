@@ -8,8 +8,8 @@
     </div><br>
     <div class="row">
         <!--Ficha del residente -->
-        <div class="col-12 col-md-4 d-flex align-items-center">
-            <div class="card" style="width: 18rem;">
+        <div class="col-12 col-md-4 my-2 align-items-center justify-content-center d-flex ">
+            <div class="card w-100">
                 <div class="card-body">
                     <h3 class="card-title">{{ $residente->nombre }} {{ $residente->apellidos }}</h3>
                     <p><b>ID:</b> {{ $residente->id }}</p>
@@ -35,26 +35,26 @@
 
 
         <!--Lista de  seguimientos-->
-        <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+        <div class="col-10 col-md-4 offset-1 offset-md-0 my-2 align-items-center justify-content-center d-flex">
             <div class="list-group gap-4">
                 <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 1]) }}"
-                    class="list-group-item list-group-item-action">
+                    class="list-group-item list-group-item-action list-group-item-primary">
                     Seguimiento del departamento de medicina
                 </a>
                 <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 2]) }}"
-                    class="list-group-item list-group-item-action">
+                    class="list-group-item list-group-item-action list-group-item-secondary">
                     Seguimiento del departamento de enfermería
                 </a>
                 <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 4]) }}"
-                    class="list-group-item list-group-item-action">
+                    class="list-group-item list-group-item-action list-group-item-success">
                     Seguimiento del departamento de terapia
                 </a>
                 <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 3]) }}"
-                    class="list-group-item list-group-item-action">
+                    class="list-group-item list-group-item-action list-group-item-warning">
                     Seguimiento del departamento de fisioterapia
                 </a>
                 <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 5]) }}"
-                    class="list-group-item list-group-item-action">
+                    class="list-group-item list-group-item-action list-group-item-danger">
                     Seguimiento del departamento de asistencia
                 </a>
             </div>
@@ -62,7 +62,7 @@
 
 
         <!--Lista de  funciones personales-->
-        <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-4 my-4 d-flex justify-content-center align-items-center">
             <div class="btn-group-vertical gap-4" role="group" aria-label="Vertical button group">
                 <a href='{{ route('itinerario.residente', ['id' => $residente->id]) }}' class="btn btn-primary"
                     role="button">Ver itinerario</a>

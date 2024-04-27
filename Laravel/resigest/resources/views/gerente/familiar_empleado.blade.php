@@ -3,11 +3,11 @@
 @section('content')
 
     @isset($empleados)
-        <div class="row justify-content-center">
-            <div class="col-2 text-center">
+        <div class="row justify-content-around justify-content-md-center">
+            <div class="col-10 col-md-2 text-center mb-3">
                 <a href="{{ route('crear.familiar') }}" class="btn btn-success">CREAR FAMILIAR</a>
             </div>
-            <div class="col-2 text-center">
+            <div class="col-10  col-md-2 text-center">
                 <a href="{{ route('crear.empleado') }}" class="btn btn-primary">CREAR EMPLEADO</a>
             </div>
         </div>
@@ -32,35 +32,37 @@
 
         </div>
         <div class="row justify-content-center">
-            <div class="col-l0">
-                <table class="table table-hover text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Departamento</th>
-                            <th scope="col">Dirección</th>
-                            <th scope="col">Teléfono</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($empleados as $empleado)
+            <div class="col-md-10 col-12">
+                <div class="table-responsive">{{-- para desplazamiento lateral en caso de desbordamiento de pantallas --}}
+                    <table class="table table-hover text-center align-middle">
+                        <thead>
                             <tr>
-                                <td>{{ $empleado->id }}</td>
-                                <td>{{ $empleado->apellidos }}</td>
-                                <td>{{ $empleado->nombre }}</td>
-                                <td>{{ $empleado->departamento->nombre }}</td>
-                                <td>{{ $empleado->direccion }}</td>
-                                <td>{{ $empleado->telefono }}</td>
-                                <td>
-                                    <a href="{{ route('editar.empleado', ['id' => $empleado->id]) }}"
-                                        class="btn btn-primary">Modificar</a>
-                                </td>
+                                <th scope="col">ID</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Dirección</th>
+                                <th scope="col">Teléfono</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($empleados as $empleado)
+                                <tr>
+                                    <td>{{ $empleado->id }}</td>
+                                    <td>{{ $empleado->apellidos }}</td>
+                                    <td>{{ $empleado->nombre }}</td>
+                                    <td>{{ $empleado->departamento->nombre }}</td>
+                                    <td>{{ $empleado->direccion }}</td>
+                                    <td>{{ $empleado->telefono }}</td>
+                                    <td>
+                                        <a href="{{ route('editar.empleado', ['id' => $empleado->id]) }}"
+                                            class="btn btn-primary">Modificar</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -86,41 +88,44 @@
 
         </div>
         <div class="row justify-content-center">
-            <div class="col-l0">
-                <table class="table table-hover text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Departamento</th>
-                            <th scope="col">Familiar</th>
-                            <th scope="col">Telefono</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($familiares as $familiar)
+            <div class="col-md-10 col-12">
+                <div class="table-responsive">{{-- para desplazamiento lateral en caso de desbordamiento de pantallas --}}
+                    <table class="table table-hover text-center align-middle">
+                        <thead>
                             <tr>
-                                <td>{{ $familiar->id }}</td>
-                                <td>{{ $familiar->apellidos }}</td>
-                                <td>{{ $familiar->nombre }}</td>
-                                <td>{{ $familiar->departamento->nombre }}</td>
-                                <td>
-                                    @forelse ($familiar->residentes as $residente)
-                                    {{ $residente->nombre }} {{ $residente->apellidos }}@if (!$loop->last)
-                                            <br> @endif
-                                        @empty<!--Borrar, usado solo para pruebas-->
-                                            Sin residentes
-                                        @endforelse
-                                    </td>
-                                    <td>{{ $familiar->telefono }}</td>
-                                    <td><a href="{{ route('editar.familiar', ['id' => $familiar->id]) }}"
-                                            class="btn btn-primary">Modificar</a>
-                                </tr>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                <th scope="col">ID</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Familiar</th>
+                                <th scope="col">Telefono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($familiares as $familiar)
+                                <tr>
+                                    <td>{{ $familiar->id }}</td>
+                                    <td>{{ $familiar->apellidos }}</td>
+                                    <td>{{ $familiar->nombre }}</td>
+                                    <td>{{ $familiar->departamento->nombre }}</td>
+                                    <td>
+                                        @forelse ($familiar->residentes as $residente)
+                                            {{ $residente->nombre }} {{ $residente->apellidos }}@if (!$loop->last)
+                                                <br>
+                                            @endif
+                                            @empty<!--Borrar, usado solo para pruebas-->
+                                                Sin residentes
+                                            @endforelse
+                                        </td>
+                                        <td>{{ $familiar->telefono }}</td>
+                                        <td><a href="{{ route('editar.familiar', ['id' => $familiar->id]) }}"
+                                                class="btn btn-primary">Modificar</a>
+                                    </tr>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         @endisset

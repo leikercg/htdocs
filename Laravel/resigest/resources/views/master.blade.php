@@ -12,7 +12,12 @@
 <body>
     <header class="container-fluid d-flex flex-column justify-content-center"><!--Ocupar todo el ancho disponible-->
 
-        <div class='row justify-content-end my-4'>
+        {{-- Logo --}}
+        <div class='row justify-content-between mt-4 mb-1'>
+            <div class="col-2 d-flex offset-1 flex-column align-items-center">
+                <img src="{{ asset('images/logo-FRA.png') }}" class="img-fluid d-md-block d-none" alt= "Logo de Fundación Rey Ardid" />
+            </div>
+            {{-- Avatar --}}
             <div class="col-5 d-flex flex-column align-items-center">
                 <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
                     @csrf
@@ -24,8 +29,9 @@
         @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
             <div class='row justify-content-end'>
                 <div class="col-5 d-flex flex-column align-items-center">
-                    <a href="{{route('profile.edit')}}"><img src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
-                        alt="avatar"></a>
+                    <a href="{{ route('profile.edit') }}"><img
+                            src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
+                            alt="avatar"></a>
                     <h5 class="text-center">Área de {{ auth()->user()->empleado->departamento->nombre }}</h5>
                 </div>
             </div>
@@ -35,8 +41,9 @@
         @elseif(auth()->user()->departamento_id == 6)
             <div class='row justify-content-end'>
                 <div class="col-5 d-flex flex-column align-items-center">
-                    <a href="{{route('profile.edit')}}"><img src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
-                        alt="avatar"></a>
+                    <a href="{{ route('profile.edit') }}"><img
+                            src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
+                            alt="avatar"></a>
                     <h5 class="text-center">Área de {{ auth()->user()->familiar->departamento->nombre }}</h5>
                 </div>
             </div>
@@ -45,8 +52,9 @@
             <div class='row justify-content-end'>
 
                 <div class="col-5 d-flex flex-column align-items-center">
-                    <a href="{{route('profile.edit')}}"> <img src="https://ui-avatars.com/api/?name=ADMIN&background=random&font-size=0.33&rounded=true"
-                        alt="avatar"></a>
+                    <a href="{{ route('profile.edit') }}"> <img
+                            src="https://ui-avatars.com/api/?name=ADMIN&background=random&font-size=0.33&rounded=true"
+                            alt="avatar"></a>
                     <h5 class="text-center">Área de Administración</h5>
                 </div>
             </div>
@@ -102,7 +110,8 @@
                             <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="{{route('lista.grupos')}}" role="button">Ver Grupos</a>
+                            <a class="btn btn-outline-dark" href="{{ route('lista.grupos') }}" role="button">Ver
+                                Grupos</a>
                         </li>
                     </ul>
                 </div>
@@ -133,7 +142,9 @@
                             <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="btn btn-outline-dark" href="{{route('auxiliar.tareas',['id'=>auth()->user()->empleado->id])}}" role="button">Ver Tareas</a>
+                            <a class="btn btn-outline-dark"
+                                href="{{ route('auxiliar.tareas', ['id' => auth()->user()->empleado->id]) }}"
+                                role="button">Ver Tareas</a>
                         </li>
                     </ul>
                 </div>
