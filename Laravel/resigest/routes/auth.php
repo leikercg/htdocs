@@ -44,7 +44,7 @@ Route::middleware('guest')->group(function () {
 
 //DEPARTAMENTO ADMINISTRACIÓN
 
-Route::middleware(['departamento_7', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_7', 'auth','verified'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo), solo los admin tendran acceso a esta ruta
 
     ///rutas de creacion de usuarios
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); //ruta de borrado de cuenta, solo realizable por el admin
@@ -79,7 +79,7 @@ Route::middleware(['departamento_7', 'auth'])->group(function () {//usamos el mi
 
 //DEPARTAMENTO MEDICINA
 
-Route::middleware(['departamento_1', 'auth', 'verified'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_1', 'auth', 'verified'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de medicos///////////////////////////////
     Route::get('residente/visitas/{residente_id}', [VisitaController::class, 'show'])->name('visitas.residente');
@@ -93,7 +93,7 @@ Route::middleware(['departamento_1', 'auth', 'verified'])->group(function () {//
 
 //DEPARTAMENTO ENFERMERÍA
 
-Route::middleware(['departamento_2', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_2', 'auth','verified'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de enfermeros///////////////////////////////
 
@@ -118,7 +118,7 @@ Route::middleware(['departamento_2', 'auth'])->group(function () {//usamos el mi
 
 //DEPARTAMENTO FISIOTERAPIA
 
-Route::middleware(['departamento_3', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_3', 'auth','verified'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de fisioterapeutas///////////////////////////////
 
@@ -133,7 +133,7 @@ Route::middleware(['departamento_3', 'auth'])->group(function () {//usamos el mi
 
 //DEPARTAMENTO TERAPIA
 
-Route::middleware(['departamento_4', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_4', 'auth','verified'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de terapeutas ///////////////////////////////
 
@@ -150,7 +150,7 @@ Route::middleware(['departamento_4', 'auth'])->group(function () {//usamos el mi
 
 //DEPARTAMENTO ASISTENCIA
 
-Route::middleware(['departamento_5', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_5', 'auth','verfied'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de auxiliares ///////////////////////////////
 
@@ -160,7 +160,7 @@ Route::middleware(['departamento_5', 'auth'])->group(function () {//usamos el mi
 
 //DEPARTAMENTO FAMLIAR
 
-Route::middleware(['departamento_6', 'auth'])->group(function () {//usamos el middlewere creado y el predefinido auth (nos envia al login si no hay usuario autenticado), solo los admin tendran acceso a esta ruta
+Route::middleware(['departamento_6', 'auth','verfied'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de auxiliares ///////////////////////////////
 
