@@ -4,6 +4,13 @@
 
 @section('content')
     <div class="row">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Lista de residentes</a></li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
         <div class="col-12 text-center">
             <h2>LISTA DE RESIDENTES</h2>
         </div>

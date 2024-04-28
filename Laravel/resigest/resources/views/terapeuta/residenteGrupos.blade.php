@@ -1,6 +1,19 @@
 @extends('master')
 @section('title', 'Gestionar grupos de ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
+    <div class="row">
+        <div class="row">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
+                            {{ $residente->apellidos }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Grupos</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
 
     @php
         $hoy = now()->format('Y-m-d'); // creamos la fehca de hoy
@@ -34,7 +47,7 @@
                     </thead>
                     <tbody>
                         @foreach ($grupos as $grupo)
-                            <tr>
+                            <tr @if ($grupo->fecha == $hoy) class="table-success" @endif>
                                 <td>{{ $grupo->id }}</td>
                                 <td>{{ date('d/m/Y', strtotime($grupo->fecha)) }} </td>
                                 <td>{{ $grupo->hora }}</td>
@@ -42,7 +55,8 @@
                                 <td>{{ $grupo->descripcion }}</td>
                                 <td>
                                     @foreach ($grupo->residentes as $residente)
-                                        {{ $residente->nombre }} {{ $residente->apellidos }} <br> @if (!$loop->last)
+                                        {{ $residente->nombre }} {{ $residente->apellidos }} <br>
+                                        @if (!$loop->last)
                                             <!--Si la fila es la ultima hacer salto de linea-->
                                             <br>
                                         @endif

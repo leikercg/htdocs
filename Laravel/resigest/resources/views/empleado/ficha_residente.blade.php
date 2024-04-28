@@ -2,6 +2,14 @@
 @section('title', $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
     <div class="row">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('lista.residentes')}}">Lista de residentes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{$residente->nombre}} {{$residente->apellidos}}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
         <div class="col-12 text-center">
             <h2>FICHA PERSONAL DE: <br>{{ $residente->nombre }} {{ $residente->apellidos }}</h2>
         </div>

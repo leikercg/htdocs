@@ -6,12 +6,33 @@
     @endphp
     @isset($tarea->id)
         <div class="row">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
+                            {{ $residente->apellidos }}</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('tareas.residente', ['residente_id' => $residente->id]) }}">Tareas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Modificar tarea</li>
+                </ol>
+            </nav>
             <div class="col-12 text-center">
                 <h2>MODIFICAR TAREA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
         <div class="row justify-content-center">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
+                            {{ $residente->apellidos }}</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('tareas.residente', ['residente_id' => $residente->id]) }}">Tareas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear tarea</li>
+                </ol>
+            </nav>
             <div class="col-10 text-center">
                 <h2>CREAR TAREA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
@@ -20,7 +41,7 @@
     <!-- Solo puede modificar la hora, la fecha, auxiliar y descripción-->
     <!--Si la tarea esta creada ya se muestra este formulario de actualización-->
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 col-11">
             @isset($tarea->id)
                 <form action="{{ route('actualizar.tarea', ['id' => $tarea->id]) }}" method="POST">
                     @method('put')
@@ -56,7 +77,6 @@
                             @endphp
 
                             <br>
-
                         @endforeach
                         <x-input-error :messages="$errors->get('auxiliar_id')" class="mt-2" />
 
@@ -64,17 +84,17 @@
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required
-                            value="{{old('descripcion', $tarea->descripcion ?? '' )}}">
+                            value="{{ old('descripcion', $tarea->descripcion ?? '') }}">
                     </div>
                     <div class="mb-3">
                         <label for="fecha" class="form-label">Fecha:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
-                            value="{{ old('fecha', $tarea->fecha ?? '' )}}">
+                            value="{{ old('fecha', $tarea->fecha ?? '') }}">
                     </div>
                     <div class="mb-3">
                         <label for="hora" class="form-label">Hora:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
-                            value="{{ old('hora', $tarea->hora ?? '' )}}">
+                            value="{{ old('hora', $tarea->hora ?? '') }}">
                     </div>
                     <br>
                     <input type="text" hidden name="residente_id" value="{{ $residente->id }}">
@@ -95,7 +115,7 @@
 
     @isset($tarea->id)
         <div class="row justify-content-center">
-            <div class="col-2 text-center">
+            <div class="col-2 my-2 text-center d-flex justify-content-center">
                 <form action="{{ route('borrar.tarea', [$tarea->id, 'residente_id' => $residente->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')

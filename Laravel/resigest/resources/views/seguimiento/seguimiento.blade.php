@@ -2,7 +2,15 @@
 @section('title', $residente->nombre . ' ' . $residente->apellidos)
 
 @section('content')
-
+    <div class="row">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }} {{ $residente->apellidos }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Seguimiento de {{$seguimiento->departamento->nombre}}</li>
+            </ol>
+        </nav>
+    </div>
     <div class="row justify-content-center">
         <div class="col-12 text-center">
             <h3>Seguimiento de {{ $residente->nombre }} {{ $residente->apellidos }} en
@@ -44,7 +52,7 @@
 
 
         textarea.scrollTop = textarea.scrollHeight - textarea
-        .clientHeight; //definimos la cantidad de scroll, le restamos la altura de la pantalla ya que siempre será mayor, asi nos muestra la última linea
+            .clientHeight; //definimos la cantidad de scroll, le restamos la altura de la pantalla ya que siempre será mayor, asi nos muestra la última linea
     </script>
 
 

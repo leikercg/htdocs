@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header class="container-fluid d-flex flex-column justify-content-center"><!--Ocupar todo el ancho disponible-->
+    <header class="container-fluid d-flex flex-column justify-content-center" ><!--Ocupar todo el ancho disponible-->
 
         {{-- Logo --}}
         <div class='row justify-content-between mt-4 mb-1'>
@@ -74,12 +74,12 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                                <li class="nav-item mx-1">
+                            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1">
+                                <li class="nav-item mx-1 my-1">
                                     <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}'
                                         role="button">Lista de Residentes</a>
                                 </li>
-                                <li class="nav-item mx-1">
+                                <li class="nav-item mx-1 my-1">
                                     <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
                                 </li>
                             </ul>
@@ -101,15 +101,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item mx-1">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1 ">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}' role="button">Lista
                                 de Residentes</a>
                         </li>
-                        <li class="nav-item mx-1">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
                         </li>
-                        <li class="nav-item mx-1">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href="{{ route('lista.grupos') }}" role="button">Ver
                                 Grupos</a>
                         </li>
@@ -132,16 +132,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item mx-1">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1 ">
+                        <li class="nav-item mx-1 my-1" >
                             <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}'
                                 role="button">Lista
                                 de Residentes</a>
                         </li>
-                        <li class="nav-item mx-1">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href="#" role="button">Agenda</a>
                         </li>
-                        <li class="nav-item mx-1">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark"
                                 href="{{ route('auxiliar.tareas', ['id' => auth()->user()->empleado->id]) }}"
                                 role="button">Ver Tareas</a>
@@ -164,8 +164,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item mx-1">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href='{{ route('lista.residentesFamiliar') }}'
                                 role="button">Lista
                                 de Residentes</a>
@@ -189,13 +189,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item mx-1">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1 ">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}'
                                 role="button">Gestional
                                 Residentes</a>
                         </li>
-                        <li class="nav-item mx-1">
+                        <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href="{{ route('familiar_empleado') }}"
                                 role="button">Gestional Usuarios</a>
                         </li>
@@ -213,7 +213,7 @@
     </main>
     <footer>
         <div class='row justify-content-center p-4'>
-            <div class="col d-flex flex-column align-items-center">
+            <div class="col d-flex flex-column align-items-center text-center">
                 <!--Empleados-->
                 @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
                     <div class="col-5 d-flex flex-column align-items-center">
@@ -224,13 +224,13 @@
 
                     <!--familiares-->
                 @elseif(auth()->user()->departamento_id == 6)
-                    <div class="col-5 d-flex flex-column align-items-center">
+                    <div class="col-5 d-flex flex-column align-items-center text-center">
                         <p>Ha iniciado sesión como <b>{{ auth()->user()->familiar->nombre }}
                                 {{ auth()->user()->familiar->apellidos }}</b></p>
                     </div>
                 @else
                     <!--ADMIN-->
-                    <div class="col-5 d-flex flex-column align-items-center">
+                    <div class="col-5 d-flex flex-column align-items-center text-center">
                         <p>Ha iniciado sesión como <b>ADMINISTRADOR</b></p>
                     </div>
                 @endif

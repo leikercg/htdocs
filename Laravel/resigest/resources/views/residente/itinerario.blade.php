@@ -1,8 +1,15 @@
 @extends('master')
 @section('title', 'Itinerario')
 @section('content')
-    <br>
-    <br>
+<div class="row">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }} {{ $residente->apellidos }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Itineario</li>
+        </ol>
+    </nav>
+</div>
     <div class="row">
         <div class="col-12 text-center">
             <h2>Itineario de {{ $residente->nombre }} {{ $residente->apellidos }}</h2>

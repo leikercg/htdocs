@@ -1,6 +1,13 @@
 @extends('master')
 @section('title', 'Tareas del auxiliar ' . $auxiliar->nombre . ' ' . $auxiliar->nombre)
 @section('content')
+    <div class="row">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Lista de tareas</a></li>
+            </ol>
+        </nav>
+    </div>
     @php
         //creamos una varibale con la fecha del dia de hoy
         $hoy = now()->format('d-m-Y');
@@ -33,12 +40,12 @@
                                 <td>{{ $tarea->residente->nombre }} {{ $tarea->residente->apellidos }}</td>
                                 <!--Quien le manda la tarea-->
                                 <!--<td>
-                                    @foreach ($auxiliares as $auxiliar)
-                                        @if ($auxiliar->id == $tarea->auxiliar_id)
-                                            {{ $auxiliar->nombre }} {{ $auxiliar->apellidos }}
-                                        @endif
-                                    @endforeach
-                                </td>-->
+                 @foreach ($auxiliares as $auxiliar)
+    @if ($auxiliar->id == $tarea->auxiliar_id)
+    {{ $auxiliar->nombre }} {{ $auxiliar->apellidos }}
+    @endif
+    @endforeach
+                </td>-->
 
                                 <td>{{ $tarea->descripcion }}</td>
                             </tr>

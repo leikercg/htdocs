@@ -1,6 +1,15 @@
 @extends('master')
 @section('title', 'Sesiones de ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
+<div class="row">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }} {{ $residente->apellidos }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sesiones</li>
+        </ol>
+    </nav>
+</div>
 @php
 //creamos una varibale con la fecha del dia de hoy
 $hoy = now()->format('Y-m-d');
@@ -31,8 +40,8 @@ $hoy = now()->format('Y-m-d');
                 </thead>
                 <tbody>
                     @foreach ($sesiones as $sesion)
-                        <tr>
-                            <td>{{ $sesion->id }}</td>
+                    <tr @if ($sesion->fecha==$hoy)   class="table-success"  @endif>
+                        <td>{{ $sesion->id }}</td>
                             <td>{{ date('d/m/Y', strtotime($sesion->fecha)) }} </td><!--formato de la fecha-->
                             <td>{{ $sesion->hora }}</td>
                             <td>{{ $sesion->empleado->nombre }} {{ $sesion->empleado->apellidos }}</td>

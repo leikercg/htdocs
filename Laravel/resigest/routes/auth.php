@@ -150,7 +150,7 @@ Route::middleware(['departamento_4', 'auth','verified'])->group(function () {//u
 
 //DEPARTAMENTO ASISTENCIA
 
-Route::middleware(['departamento_5', 'auth','verfied'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
+Route::middleware(['departamento_5', 'auth','verified'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de auxiliares ///////////////////////////////
 
@@ -160,7 +160,7 @@ Route::middleware(['departamento_5', 'auth','verfied'])->group(function () {//us
 
 //DEPARTAMENTO FAMLIAR
 
-Route::middleware(['departamento_6', 'auth','verfied'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
+Route::middleware(['departamento_6', 'auth','verified'])->group(function () {//usamos el middlewere creado y el predefinido auth y verified (auth nos envia al login si no hay usuario autenticado y verified nos verifica si esta verificado el correo)
 
     //////////////////////////////// Rutas de auxiliares ///////////////////////////////
 

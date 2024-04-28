@@ -9,8 +9,13 @@
         <!-- SI ESTA ESTABLECIDO EL el grupo MOSTRAR EL FORMULUARIO DE EDICIÓN, SI NO MOSTRAR EL DE CREACIÓN-->
         <!-- Solo se puede modificar el dia, la hora  y los participantes-->
 
-        <br><br>
         <div class="row">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('lista.grupos') }}">Todos los grupos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Modificar grupo</li>
+                </ol>
+            </nav>
             <div class="col-12 text-center">
                 <h2>MODIFICAR GRUPO</h2>
             </div>
@@ -88,6 +93,12 @@
         </div>
     @else
         <div class="row justify-content-center">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('lista.grupos') }}">Todos los grupos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear grupo</li>
+                </ol>
+            </nav>
             <div class="col-md-6 col-10">
                 <form method="POST" action="{{ route('almacenar.grupo') }}">
                     @csrf

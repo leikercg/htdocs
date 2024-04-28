@@ -1,6 +1,13 @@
 @extends('master')
 @section('title', 'Gestionar grupos')
 @section('content')
+    <div class="row">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Todos los grupos</a></li>
+            </ol>
+        </nav>
+    </div>
 
     @php
         $hoy = now()->format('Y-m-d'); // creamos la fehca de hoy
@@ -32,7 +39,7 @@
                     </thead>
                     <tbody>
                         @foreach ($grupos as $grupo)
-                            <tr>
+                            <tr @if ($grupo->fecha == $hoy) class="table-success" @endif>
                                 <td>{{ $grupo->id }}</td>
                                 <td>{{ date('d/m/Y', strtotime($grupo->fecha)) }}</td>
                                 <td>{{ $grupo->hora }}</td>
@@ -40,27 +47,28 @@
                                 <td>{{ $grupo->descripcion }}</td>
                                 <td>
                                     @forelse ($grupo->residentes as $residente)
-                                        {{ $residente->nombre }} {{ $residente->apellidos }} <br> @if (!$loop->last)
+                                        {{ $residente->nombre }} {{ $residente->apellidos }} <br>
+                                        @if (!$loop->last)
                                             <!--Si la fila es la ultima hacer salto de linea-->
                                             <br>
                                         @endif
-                                        @empty<!--Borrar, usado solo para pruebas-->
-                                            Sin Participantes
-                                        @endforelse
-                                    </td>
-                                    <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
-                                        @if (auth()->user()->empleado->id == $grupo->empleado_id && $grupo->fecha >= $hoy)
-                                            <a href="{{ route('editar.grupo', ['id' => $grupo->id]) }}"
-                                                class="btn btn-primary">Modificar</a>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                    @empty<!--Borrar, usado solo para pruebas-->
+                                        Sin Participantes
+                                    @endforelse
+                                </td>
+                                <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
+                                    @if (auth()->user()->empleado->id == $grupo->empleado_id && $grupo->fecha >= $hoy)
+                                        <a href="{{ route('editar.grupo', ['id' => $grupo->id]) }}"
+                                            class="btn btn-primary">Modificar</a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
+        </div>
 
 
 
-        @endsection
+    @endsection

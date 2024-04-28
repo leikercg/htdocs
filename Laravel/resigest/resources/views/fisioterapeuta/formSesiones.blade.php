@@ -1,13 +1,33 @@
 @extends('master')
 @section('title', 'Crear sesión para ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
-    @isset($vista->id)
+    @isset($sesion->id)
         <div class="row">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
+                            {{ $residente->apellidos }}</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('sesiones.residente', ['residente_id' => $residente->id]) }}">Sesiones</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Modificar sesión</li>
+                </ol>
+            </nav>
             <div class="col-12 text-center">
                 <h2>MODIFICAR SESIÓN A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
+                    {{ $residente->apellidos }}</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('sesiones.residente', ['residente_id' => $residente->id]) }}">Sesiones</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Crear sesión</li>
+        </ol>
+    </nav>
         <div class="row justify-content-center">
             <div class="col-10 text-center">
                 <h2>CREAR SESIÓN A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>

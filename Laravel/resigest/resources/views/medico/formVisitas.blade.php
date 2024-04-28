@@ -1,13 +1,33 @@
 @extends('master')
 @section('title', 'Crear visita para ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
-    @isset($vista->id)
+    @isset($visita->id)
+        <div class="row">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
+                            {{ $residente->apellidos }}</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('visitas.residente', ['residente_id' => $residente->id]) }}">Visitas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Modificar visita</li>
+                </ol>
+            </nav>
+        </div>
         <div class="row">
             <div class="col-12 text-center">
                 <h2>MODIFICAR VISITA A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }} {{ $residente->apellidos }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('visitas.residente', ['residente_id' => $residente->id]) }}">Visitas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Crear visita</li>
+        </ol>
+    </nav>
         <div class="row justify-content-center">
             <div class="col-10 text-center">
                 <h2>CREAR VISITA A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
@@ -51,7 +71,7 @@
                     <div class="mb-3">
                         <label for="hora" class="form-label">Hora:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
-                        value="{{old('hora', $visita->hora ?? '' )}}">
+                            value="{{ old('hora', $visita->hora ?? '') }}">
                     </div>
                     <br>
                     <input type="text" hidden name="residente_id" value="{{ $residente->id }}">

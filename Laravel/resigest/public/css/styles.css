@@ -1,4 +1,5 @@
-body,html {
+body,
+html {
     background-color: grey;
     display: flex;
     flex-direction: column;
@@ -17,7 +18,14 @@ main {
     min-height: 60vh;
 }
 
-footer{
+footer {
     background-color: rgb(47, 145, 194);
     min-height: 20vh;
 }
+
+.breadcrumb-item a {/*dar estilo al breadcrumbs*/
+    color:  rgb(47, 145, 194);
+    text-decoration: none;
+    font-weight: bold;
+}
+
