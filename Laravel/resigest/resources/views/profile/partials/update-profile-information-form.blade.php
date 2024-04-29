@@ -78,10 +78,10 @@
                 <div class="mt-4">
                     <x-input-label for="email" :value="__('Email')" />
                     <x-text-input id="email" name="email" type="email" class="form-control" :value="old('email', $user->email)"
-                        required autocomplete="username" />
+                        required autocomplete="username" readonly />
                     <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-                    @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && $user->hasVerifiedEmail())
+                  {{--  @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && $user->hasVerifiedEmail()) MENSAJE DE CONFIRMAR CORREO
                         <div>
                             <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                                 {{ __('Your email address is unverified.') }}
@@ -97,7 +97,7 @@
                                 </p>
                             @endif
                         </div>
-                    @endif
+                    @endif--}}
                 </div>
                 <br>
                 <div class="flex items-center gap-4">

@@ -48,8 +48,8 @@ class GrupoController extends Controller
     public function store(Request $request) //almacenar el grupo en la bbdd, se debe ademas rellenar los datos en la tabla pivot para usar las relaciones de eloquent
     {
 
-        $fechaLimite = date('Y-m-d', strtotime('+1 month'));
-        $fechaMinima = date('Y-m-d', strtotime('-1 day'));
+        $fechaLimite = date('d-m-Y', strtotime('+1 month +1 day')); //este formato es el que se mostrará en los errores
+        $fechaMinima = date('d-m-Y', strtotime('-1 day'));
 
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
             'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
@@ -112,8 +112,8 @@ class GrupoController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $fechaLimite = date('Y-m-d', strtotime('+1 month'));
-        $fechaMinima = date('Y-m-d', strtotime('-1 day'));
+        $fechaLimite = date('d-m-Y', strtotime('+1 month +1 day')); //este formato es el que se mostrará en los errores
+        $fechaMinima = date('d-m-Y', strtotime('-1 day'));
 
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
             'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes

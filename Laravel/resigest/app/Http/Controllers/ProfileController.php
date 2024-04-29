@@ -39,7 +39,7 @@ class ProfileController extends Controller
         if(isset(auth()->user()->empleado)) {//si esta establecido un empleado o admin hacer esto
 
             if(auth()->user()->empleado->id != 7) {//si no es admin actualizar telefono y dirección, ya que admin no tiene dirección
-                $empleado = Empleado::find(auth()->user()->id);
+                $empleado = Empleado::find(auth()->user()->empleado->id);
 
                 $empleado->telefono  = $request->telefono;
                 $empleado->direccion = $request->direccion;
@@ -47,7 +47,7 @@ class ProfileController extends Controller
             }
 
         } else {//si no es un familiar
-            $familiar = Familiar::find(auth()->user()->id);
+            $familiar = Familiar::find(auth()->user()->familiar->id);
 
             $familiar->telefono  = $request->telefono;
             $familiar->direccion = $request->direccion;

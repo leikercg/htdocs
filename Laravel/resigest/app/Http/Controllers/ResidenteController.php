@@ -32,8 +32,9 @@ class ResidenteController extends Controller
         }
         if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
             return view('gerente.gestionarResidentes', ['residentes' => $residentes]);
-        }elseif (auth()->check() && auth()->user()->departamento_id == 6) {//comprobar si hay un usuario autenticado y si es del departamento  6 (familiar) usar esta ruta:
-            return redirect()->route('lista.residentesFamiliar');//nos lleva a la ruta de lista de residentes familiares
+        }
+        if (auth()->check() && auth()->user()->departamento_id == 6) {//comprobar si hay un usuario autenticado y si es del departamento  6 (familiar) usar esta ruta:
+            return redirect()->route('lista.residentesFamiliar'); //nos lleva a la ruta de lista de residentes familiares
         }
         return view('empleado.general', ['residentes' => $residentes]); //array clave--> valor
         //en las vistas se reciben las variables ya extraidas, no hay que indexarlars.
@@ -105,9 +106,12 @@ class ResidenteController extends Controller
     {
         /////////////validar datos/////////
 
+        $fechaMinima = date('d-m-Y', strtotime('1900-01-01'));
+        $fechaLimite = date('d-m-Y', strtotime('2020-01-01'));
+
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
             'dni'       => ['required', 'string', 'size:9', 'unique:' . Residente::class], //verificar que no exita ese dni en la tabla de users
-            'fecha_nac' => ['date', 'after:1900-01-01', 'before:2020-01-01'], //fecha minima antes del 2000
+            'fecha_nac' => ['date', 'after:' . $fechaMinima , 'before:'. $fechaLimite],
         ]);
         /////////////////crea el residente////////////////////////
         $residente             = new Residente();
