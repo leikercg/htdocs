@@ -5,32 +5,32 @@
         <div class="row">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{__('Lista de residentes')}}</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                             {{ $residente->apellidos }}</a></li>
                     <li class="breadcrumb-item"><a
-                            href="{{ route('curas.residente', ['residente_id' => $residente->id]) }}">Curas</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Modificar cura</li>
+                            href="{{ route('curas.residente', ['residente_id' => $residente->id]) }}">{{__('Curas')}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{__('Modificar cura')}}</li>
                 </ol>
             </nav>
             <div class="col-12 text-center">
-                <h2>MODIFICAR CURA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{__('MODIFICAR CURA A:')}} <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{__('Lista de residentes')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                         {{ $residente->apellidos }}</a></li>
                 <li class="breadcrumb-item"><a
-                        href="{{ route('curas.residente', ['residente_id' => $residente->id]) }}">Curas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Crea cura</li>
+                        href="{{ route('curas.residente', ['residente_id' => $residente->id]) }}">{{__('Curas')}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Crear cura')}}</li>
             </ol>
         </nav>
         <div class="row justify-content-center">
             <div class="col-10 text-center">
-                <h2>CREAR CURA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{__('CREAR CURA A:')}} <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @endisset
@@ -54,7 +54,7 @@
                     @endisset
 
                     <div class="mb-3">
-                        <label for="enfermero" class="form-label">Enfermero/a:</label>
+                        <label for="enfermero" class="form-label">{{__('Enfermero/a')}}:</label>
                         <input type="text" class="form-control" id="enfermero" name="nombre"
                             value="{{ auth()->user()->empleado->nombre }} {{ auth()->user()->empleado->apellidos }} "
                             disabled>
@@ -62,7 +62,7 @@
                             value="{{ auth()->user()->empleado->id }}">
                     </div>
                     <div class="mb-3">
-                        <label for="zona" class="form-label">Zona</label>
+                        <label for="zona" class="form-label">{{__('Zona')}}</label>
                         <input type="text" class="form-control" id="zona" name="zona"
                             value="{{ old('zona', $cura->zona ?? '') }}" requiredy
                             @isset($cura->id)
@@ -70,19 +70,19 @@
                             @endisset>
                     </div>
                     <div class="mb-3">
-                        <label for="estado" class="form-label">Estado</label>
+                        <label for="estado" class="form-label">{{__('Estado')}}</label>
                         <input type="text" class="form-control" id="estado" name="estado" required
                             value="{{ old('estado', $cura->estado ?? '') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="fecha" class="form-label">Fecha:</label>
+                        <label for="fecha" class="form-label">{{__('Fecha')}}</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
                             value="{{ old('fecha', $cura->fecha ?? '') }}">
                         <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
 
                     </div>
                     <div class="mb-3">
-                        <label for="hora" class="form-label">Hora:</label>
+                        <label for="hora" class="form-label">{{__('Hora')}}</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
                             value="{{ old('hora', $cura->hora ?? '') }}">
                     </div>
@@ -93,10 +93,10 @@
                     @isset($cura)
                         <!--Si está establecida la cura mostrar modificar, si no crear-->
                         <button type="submit" class="btn btn-primary"
-                            onclick="return confirm('¿Estás seguro de que deseas modificar esta cura?')">MODIFICAR</button>
+                            onclick="return confirm('¿Estás seguro de que deseas modificar esta cura?')">{{__('MODIFICAR')}}</button>
                         <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
                     @else
-                        <button type="submit" class="btn btn-success">CREAR</button>
+                        <button type="submit" class="btn btn-success">{{__('CREAR')}}</button>
                     @endisset
                 </form>
 
@@ -110,7 +110,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta cura?')">BORRAR</button>
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta cura?')">{{__('BORRAR')}}</button>
                     <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
                 </form>
             </div>

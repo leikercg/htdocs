@@ -1,32 +1,32 @@
 @extends('master')
-@section('title', 'Gestionar Residente')
+@section('title', __('Gestionar Residente'))
 @section('content')
 
     @isset($empleados)
         <div class="row justify-content-around justify-content-md-center">
             <div class="col-10 col-md-2 text-center mb-3">
-                <a href="{{ route('crear.familiar') }}" class="btn btn-success">CREAR FAMILIAR</a>
+                <a href="{{ route('crear.familiar') }}" class="btn btn-success">{{ __('CREAR FAMILIAR') }}</a>
             </div>
             <div class="col-10  col-md-2 text-center">
-                <a href="{{ route('crear.empleado') }}" class="btn btn-primary">CREAR EMPLEADO</a>
+                <a href="{{ route('crear.empleado') }}" class="btn btn-primary">{{ __('CREAR EMPLEADO') }}</a>
             </div>
         </div>
 
         <br>
         <div class="row">
             <div class="col-12 text-center">
-                <h2>EMPLEADOS</h2>
+                <h2>{{ __('EMPLEADOS') }}</h2>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-8">
                 <form action="{{ route('buscar.empleado') }}" class="mt-4">
                     <div class="mb-3">
-                        <label for="busqueda" class="form-label">Búsqueda</label>
+                        <label for="busqueda" class="form-label">{{ __('Búsqueda') }}</label>
                         <input type="text" class="form-control" id="busqueda" name="busqueda">
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar</button>
-                    <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
+                    <button type="submit" class="btn btn-primary">{{ __('Buscar') }}</button>
+                    <p>{{ __('Para ver la lista completa despues de una búsqueda pulse enviar') }}</p>
                 </form>
             </div>
 
@@ -37,12 +37,12 @@
                     <table class="table table-hover text-center align-middle">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Apellidos</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Departamento</th>
-                                <th scope="col">Dirección</th>
-                                <th scope="col">Teléfono</th>
+                                <th scope="col">{{ __('ID') }}</th>
+                                <th scope="col">{{ __('Apellidos') }}</th>
+                                <th scope="col">{{ __('Nombre') }}</th>
+                                <th scope="col">{{ __('Departamento') }}</th>
+                                <th scope="col">{{ __('Dirección') }}</th>
+                                <th scope="col">{{ __('Teléfono') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,7 +56,7 @@
                                     <td>{{ $empleado->telefono }}</td>
                                     <td>
                                         <a href="{{ route('editar.empleado', ['id' => $empleado->id]) }}"
-                                            class="btn btn-primary">Modificar</a>
+                                            class="btn btn-primary">{{ __('Modificar') }}</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,18 +71,18 @@
     @isset($familiares)
         <div class="row">
             <div class="col-12 text-center">
-                <h2>FAMILIARES</h2>
+                <h2>{{ __('FAMILIARES') }}</h2>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-8">
                 <form action="{{ route('buscar.familiar') }}" class="mt-4">
                     <div class="mb-3">
-                        <label for="busqueda" class="form-label">Búsqueda</label>
+                        <label for="busqueda" class="form-label">{{ __('Búsqueda') }}</label>
                         <input type="text" class="form-control" id="busqueda" name="busqueda">
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar</button>
-                    <p>Para ver la lista completa despues de una búsqueda pulse enviar</p>
+                    <button type="submit" class="btn btn-primary">{{ __('Buscar') }}</button>
+                    <p>{{ __('Para ver la lista completa despues de una búsqueda pulse enviar') }}</p>
                 </form>
             </div>
 
@@ -93,12 +93,12 @@
                     <table class="table table-hover text-center align-middle">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Apellidos</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Departamento</th>
-                                <th scope="col">Familiar</th>
-                                <th scope="col">Telefono</th>
+                                <th scope="col">{{ __('ID') }}</th>
+                                <th scope="col">{{ __('Apellidos') }}</th>
+                                <th scope="col">{{ __('Nombre') }}</th>
+                                <th scope="col">{{ __('Departamento') }}</th>
+                                <th scope="col">{{ __('Familiar') }}</th>
+                                <th scope="col">{{ __('Teléfono') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,7 +119,7 @@
                                         </td>
                                         <td>{{ $familiar->telefono }}</td>
                                         <td><a href="{{ route('editar.familiar', ['id' => $familiar->id]) }}"
-                                                class="btn btn-primary">Modificar</a>
+                                                class="btn btn-primary">{{ __('Modificar') }}</a>
                                     </tr>
                                     </tr>
                                 @endforeach

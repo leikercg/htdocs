@@ -1,36 +1,36 @@
 @extends('master')
-@section('title', 'Crear sesión para ' . $residente->nombre . ' ' . $residente->apellidos)
+@section('title', __('Crear sesión para') . ' ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
     @isset($sesion->id)
         <div class="row">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{ __('Lista de residentes') }}</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                             {{ $residente->apellidos }}</a></li>
                     <li class="breadcrumb-item"><a
-                            href="{{ route('sesiones.residente', ['residente_id' => $residente->id]) }}">Sesiones</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Modificar sesión</li>
+                            href="{{ route('sesiones.residente', ['residente_id' => $residente->id]) }}">{{ __('Sesiones') }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Modificar sesión') }}</li>
                 </ol>
             </nav>
             <div class="col-12 text-center">
-                <h2>MODIFICAR SESIÓN A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{ __('MODIFICAR SESIÓN A') }}: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{ __('Lista de residentes') }}</a></li>
             <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                     {{ $residente->apellidos }}</a></li>
             <li class="breadcrumb-item"><a
-                    href="{{ route('sesiones.residente', ['residente_id' => $residente->id]) }}">Sesiones</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Crear sesión</li>
+                    href="{{ route('sesiones.residente', ['residente_id' => $residente->id]) }}">{{ __('Sesiones') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Crear sesión') }}</li>
         </ol>
     </nav>
         <div class="row justify-content-center">
             <div class="col-10 text-center">
-                <h2>CREAR SESIÓN A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{ __('CREAR SESIÓN A') }}: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @endisset
@@ -47,14 +47,14 @@
                     @csrf
                     @isset($sesion)
                         <div class="mb-3">
-                            <label for="id" class="form-label">ID:</label>
+                            <label for="id" class="form-label">{{ __('ID:') }}</label>
                             <input type="text" class="form-control" id="id" name="id"
                                 value="{{ $sesion->id ?? '' }}" @isset($sesion) readonly @endisset>
                         </div>
                     @endisset
 
                     <div class="mb-3">
-                        <label for="fisio" class="form-label">Fisio:</label>
+                        <label for="fisio" class="form-label">{{ __('Fisio') }}</label>
                         <input type="text" class="form-control" id="fisio" name="nombre"
                             value="{{ auth()->user()->empleado->nombre }} {{ auth()->user()->empleado->apellidos }} "
                             disabled>
@@ -62,12 +62,12 @@
                             value="{{ auth()->user()->empleado->id }}">
                     </div>
                     <div class="mb-3">
-                        <label for="fecha" class="form-label">Fecha:</label>
+                        <label for="fecha" class="form-label">{{ __('Fecha:') }}</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
                             value="{{ $sesion->fecha ?? '' }}">
                     </div>
                     <div class="mb-3">
-                        <label for="hora" class="form-label">Hora:</label>
+                        <label for="hora" class="form-label">{{ __('Hora:') }}</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
                             value="{{ $sesion->hora ?? '' }}">
                     </div>
@@ -78,10 +78,10 @@
                     @isset($sesion)
                         <!--Si  establecida la sesión mostrar modificar, si no crear-->
                         <button type="submit" class="btn btn-primary"
-                            onclick="return confirm('¿Estás seguro de que deseas modificar esta sesión ?')">MODIFICAR</button>
+                            onclick="return confirm('{{ __('¿Estás seguro de que deseas modificar esta sesión ?') }}')">{{ __('MODIFICAR') }}</button>
                         <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
                     @else
-                        <button type="submit" class="btn btn-success">CREAR</button>
+                        <button type="submit" class="btn btn-success">{{ __('CREAR') }}</button>
                     @endisset
                 </form>
         </div>
@@ -94,7 +94,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta sesion?')">BORRAR</button>
+                        onclick="return confirm('{{ __('¿Estás seguro de que deseas eliminar esta sesión?') }}')">{{ __('BORRAR') }}</button>
                     <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
                 </form>
             </div>

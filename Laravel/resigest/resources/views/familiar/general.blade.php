@@ -4,7 +4,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 text-center">
-            <h2>LISTA DE RESIDENTES</h2>
+            <h2>{{__('mensaje.lista')}}</h2>
         </div>
     </div>
 

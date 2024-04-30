@@ -1,10 +1,10 @@
 @extends('master')
-@section('title', 'Gestionar grupos')
+@section('title', __('Gestionar grupos'))
 @section('content')
     <div class="row">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="">Todos los grupos</a></li>
+                <li class="breadcrumb-item"><a href="">{{ __('Todos los grupos') }}</a></li>
             </ol>
         </nav>
     </div>
@@ -14,12 +14,12 @@
     @endphp
     <div class="row justify-content-center">
         <div class="col-4 col-md-2 text-center">
-            <a href="{{ route('crear.grupo') }}" class="btn btn-success">CREAR GRUPO</a>
+            <a href="{{ route('crear.grupo') }}" class="btn btn-success">{{ __('CREAR GRUPO') }}</a>
         </div>
     </div><br>
     <div class="row">
         <div class="col-12 text-center">
-            <h2>LISTA DE GRUPOS</h2>
+            <h2>{{ __('LISTA DE GRUPOS') }}</h2>
         </div>
     </div>
 
@@ -29,12 +29,12 @@
                 <table class="table table-hover text-center align-middle">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Terapeuta</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Participantes</th>
+                            <th scope="col">{{ __('ID') }}</th>
+                            <th scope="col">{{ __('Fecha') }}</th>
+                            <th scope="col">{{ __('Hora') }}</th>
+                            <th scope="col">{{ __('Terapeuta') }}</th>
+                            <th scope="col">{{ __('Descripción') }}</th>
+                            <th scope="col">{{ __('Participantes') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,13 +53,13 @@
                                             <br>
                                         @endif
                                     @empty<!--Borrar, usado solo para pruebas-->
-                                        Sin Participantes
+                                        {{ __('Sin Participantes') }}
                                     @endforelse
                                 </td>
                                 <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
                                     @if (auth()->user()->empleado->id == $grupo->empleado_id && $grupo->fecha >= $hoy)
                                         <a href="{{ route('editar.grupo', ['id' => $grupo->id]) }}"
-                                            class="btn btn-primary">Modificar</a>
+                                            class="btn btn-primary">{{ __('Modificar') }}</a>
                                     @endif
                                 </td>
                             </tr>
@@ -68,7 +68,4 @@
                 </table>
             </div>
         </div>
-
-
-
     @endsection

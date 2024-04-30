@@ -1,36 +1,36 @@
 @extends('master')
-@section('title', 'Crear visita para ' . $residente->nombre . ' ' . $residente->apellidos)
+@section('title', __('Crear visita para ') . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
     @isset($visita->id)
         <div class="row">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{ __('Lista de residentes') }}</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                             {{ $residente->apellidos }}</a></li>
                     <li class="breadcrumb-item"><a
-                            href="{{ route('visitas.residente', ['residente_id' => $residente->id]) }}">Visitas</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Modificar visita</li>
+                            href="{{ route('visitas.residente', ['residente_id' => $residente->id]) }}">{{ __('Visitas') }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Modificar visita') }}</li>
                 </ol>
             </nav>
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <h2>MODIFICAR VISITA A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{ __('MODIFICAR VISITA A: ') . $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{ __('Lista de residentes') }}</a></li>
             <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }} {{ $residente->apellidos }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('visitas.residente', ['residente_id' => $residente->id]) }}">Visitas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Crear visita</li>
+            <li class="breadcrumb-item"><a href="{{ route('visitas.residente', ['residente_id' => $residente->id]) }}">{{ __('Visitas') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Crear visita') }}</li>
         </ol>
     </nav>
         <div class="row justify-content-center">
             <div class="col-10 text-center">
-                <h2>CREAR VISITA A: {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{ __('CREAR VISITA A: ') . $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @endisset
@@ -47,14 +47,14 @@
                     @csrf
                     @isset($visita)
                         <div class="mb-3">
-                            <label for="id" class="form-label">ID:</label>
+                            <label for="id" class="form-label">{{ __('ID') }}:</label>
                             <input type="text" class="form-control" id="id" name="id"
                                 value="{{ $visita->id ?? '' }}" @isset($visita) readonly @endisset>
                         </div>
                     @endisset
 
                     <div class="mb-3">
-                        <label for="medico" class="form-label">Médico:</label>
+                        <label for="medico" class="form-label">{{ __('Médico') }}:</label>
                         <input type="text" class="form-control" id="medico" name="nombre"
                             value="{{ auth()->user()->empleado->nombre }} {{ auth()->user()->empleado->apellidos }} "
                             disabled>
@@ -62,14 +62,14 @@
                             value="{{ auth()->user()->empleado->id }}">
                     </div>
                     <div class="mb-3">
-                        <label for="fecha" class="form-label">Fecha:</label>
+                        <label for="fecha" class="form-label">{{ __('Fecha') }}:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
                             value="{{ old('fecha', $visita->fecha ?? '') }}">
                         <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
 
                     </div>
                     <div class="mb-3">
-                        <label for="hora" class="form-label">Hora:</label>
+                        <label for="hora" class="form-label">{{ __('Hora') }}:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
                             value="{{ old('hora', $visita->hora ?? '') }}">
                     </div>
@@ -80,10 +80,10 @@
                     @isset($visita)
                         <!--Si está establecida la visita mostrar modificar, si no crear-->
                         <button type="submit" class="btn btn-primary"
-                            onclick="return confirm('¿Estás seguro de que deseas modificar esta visita?')">MODIFICAR</button>
+                            onclick="return confirm('{{ __('¿Estás seguro de que deseas modificar esta visita?') }}')">{{ __('MODIFICAR') }}</button>
                         <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
                     @else
-                        <button type="submit" class="btn btn-success">CREAR</button>
+                        <button type="submit" class="btn btn-success">{{ __('CREAR') }}</button>
                     @endisset
                 </form>
         </div>
@@ -96,7 +96,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta visita?')">BORRAR</button>
+                        onclick="return confirm('{{ __('¿Estás seguro de que deseas eliminar esta visita?') }}')">{{ __('BORRAR') }}</button>
                     <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
                 </form>
             </div>

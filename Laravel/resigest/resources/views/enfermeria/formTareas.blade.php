@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Tareas de ' . $residente->nombre . ' ' . $residente->apellidos)
+@section('title', __('Tareas de ') . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
     @php
         $iterador = 1;
@@ -8,33 +8,33 @@
         <div class="row">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{__('Lista de residentes')}}</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                             {{ $residente->apellidos }}</a></li>
                     <li class="breadcrumb-item"><a
-                            href="{{ route('tareas.residente', ['residente_id' => $residente->id]) }}">Tareas</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Modificar tarea</li>
+                            href="{{ route('tareas.residente', ['residente_id' => $residente->id]) }}">{{__('Tareas')}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> {{__('Modificar tarea')}}</li>
                 </ol>
             </nav>
             <div class="col-12 text-center">
-                <h2>MODIFICAR TAREA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{__('MODIFICAR TAREA A: ')}}<br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @else
         <div class="row justify-content-center">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{__('Lista de residentes')}}</a></li>
                     <li class="breadcrumb-item"><a
                             href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                             {{ $residente->apellidos }}</a></li>
                     <li class="breadcrumb-item"><a
-                            href="{{ route('tareas.residente', ['residente_id' => $residente->id]) }}">Tareas</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Crear tarea</li>
+                            href="{{ route('tareas.residente', ['residente_id' => $residente->id]) }}">{{__('Tareas')}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{__('Crear tarea')}}</li>
                 </ol>
             </nav>
             <div class="col-10 text-center">
-                <h2>CREAR TAREA A: <br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
+                <h2>{{__('CREAR TAREA A: ')}}<br> {{ $residente->nombre . ' ' . $residente->apellidos }} </h2>
             </div>
         </div>
     @endisset
@@ -51,13 +51,13 @@
                     @csrf
                     @isset($tarea)
                         <div class="mb-3">
-                            <label for="id" class="form-label">ID:</label>
+                            <label for="id" class="form-label">{{__('ID')}}:</label>
                             <input type="text" class="form-control" id="id" name="id"
                                 value="{{ $tarea->id ?? '' }}" @isset($tarea) readonly @endisset>
                         </div>
                     @endisset
                     <div class="mb-3">
-                        <label for="enfermero" class="form-label">Enfermero/a:</label>
+                        <label for="enfermero" class="form-label">{{__('Enfermero/a')}}:</label>
                         <input type="text" class="form-control" id="enfermero" name="nombre"
                             value="{{ auth()->user()->empleado->nombre }} {{ auth()->user()->empleado->apellidos }} "
                             disabled>
@@ -82,17 +82,17 @@
 
                     </div>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
+                        <label for="descripcion" class="form-label">{{__('Descripción')}}:</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required
                             value="{{ old('descripcion', $tarea->descripcion ?? '') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="fecha" class="form-label">Fecha:</label>
+                        <label for="fecha" class="form-label">{{__('Fecha')}}:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
                             value="{{ old('fecha', $tarea->fecha ?? '') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="hora" class="form-label">Hora:</label>
+                        <label for="hora" class="form-label">{{__('Hora')}}:</label>
                         <input type="time" class="form-control" id="hora" name="hora" required
                             value="{{ old('hora', $tarea->hora ?? '') }}">
                     </div>
@@ -103,10 +103,10 @@
                     @isset($tarea)
                         <!--Si está establecida la tarea mostrar modificar, si no crear-->
                         <button type="submit" class="btn btn-primary"
-                            onclick="return confirm('¿Estás seguro de que deseas modificar esta tarea?')">MODIFICAR</button>
+                            onclick="return confirm('{{ __('¿Estás seguro de que deseas modificar esta tarea?') }}')">{{__('MODIFICAR')}}</button>
                         <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
                     @else
-                        <button type="submit" class="btn btn-success">CREAR</button>
+                        <button type="submit" class="btn btn-success">{{__('CREAR')}}</button>
                     @endisset
                 </form>
 
@@ -120,7 +120,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?')">BORRAR</button>
+                        onclick="return confirm('{{ __('¿Estás seguro de que deseas eliminar esta tarea?') }}')">{{__('BORRAR')}}</button>
                     <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
                 </form>
             </div>

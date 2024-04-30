@@ -1,17 +1,20 @@
 <?php
 
-use App\Http\Controllers\CuraController;
-use App\Http\Controllers\EmpleadoController;
-use App\Http\Controllers\FamiliarController;
-use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SeguimientoController;
-use App\Http\Controllers\SesionController;
-use App\Http\Controllers\TareaController;
-use App\Http\Controllers\VisitaController;
-use App\Models\Grupo;
-use App\Models\Residente;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
+
+Route::get('/idioma/{locale}', function (string $locale) {
+    if (!in_array($locale, ['en', 'es'])) {
+        abort(403,'NO IDIOMA');
+    }
+    App::setLocale($locale);
+
+    $localee = App::currentLocale();
+        //return view('test',['locale'=>$localee]);
+  return redirect()->back();
+
+})->name('idiom');
 
 Route::get('/', function () {
     return view('welcome'); //inicio de laravel, hacemos que la pagina raiz deveulva la bista login
@@ -34,11 +37,5 @@ Route::post('product/{product?}', 'ProductController@store')->name('product.stor
 Route::get('product/{product}/edit', 'ProductController@edit')->name('product.edit');
 Route::patch('product/{product}', 'ProductController@update')->name('product.update');
 Route::delete('product/{product}', 'ProductController@destroy')->name('product.destroy');
-
-
-
-
-
-
 
 require __DIR__ . '/auth.php'; //esto es una ruta de archivo del mismo directorio, es como tener todo el fichero en una línea, lo crea breeze.

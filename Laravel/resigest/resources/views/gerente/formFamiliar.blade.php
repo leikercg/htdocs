@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Crear Usuario')
+@section('title', __('Crear Usuario'))
 @section('content')
     @isset($familiar)<!-- SI ESTA ESTABLECIDO EL FAMILIAR MOSTRAR EL FORMULUARIO DE EDICIÓN, SI NO MOSTRAR EL DE CREACIÓN-->
         <!-- Solo se puede modificar el telefono y dirección-->
@@ -7,7 +7,7 @@
         <br><br>
         <div class="row">
             <div class="col text-center">
-                <h2>Modificar Familiar </h2>
+                <h2>{{ __('Modificar Familiar') }}</h2>
             </div>
         </div>
         <br>
@@ -18,28 +18,28 @@
                     @csrf
                     <!-- ID -->
                     <div class="mt-4">
-                        <label for="id">ID</label>
+                        <label for="id">{{ __('ID') }}</label>
                         <input class="form-control" id="id" class="block mt-1 w-full form-control" type="text"
                             name="id" readonly value="{{ $familiar->id }}" required />
                     </div>
 
                     <!-- Nombre -->
                     <div class="mt-4">
-                        <label for="name">Nombre</label>
+                        <label for="name">{{ __('Nombre') }}</label>
                         <input id="name" class="block mt-1 w-full form-control" type="text" name="nombre" readonly
                             value="{{ $familiar->nombre }}" required />
                     </div>
 
                     <!-- Apellidos -->
                     <div class="mt-4">
-                        <label for="apellidos">Apellidos</label>
+                        <label for="apellidos">{{ __('Apellidos') }}</label>
                         <input id="apellidos" class="block mt-1 w-full form-control" type="text" name="apellidos"
                             value="{{ $familiar->apellidos }}" required readonly />
                     </div>
 
                     <!-- DNI -->
                     <div class="mt-4">
-                        <label for="dni">DNI</label>
+                        <label for="dni">{{ __('DNI') }}</label>
                         <input id="dni" class="block mt-1 w-full form-control" type="text" name="dni"
                             value="{{ $familiar->dni }}" pattern="[0-9]{8}[A-Za-z]" placeholder="012345678A" maxlength="9"
                             required readonly>
@@ -49,7 +49,7 @@
                     <!--Familiar-->
                     <div class="mt-4">
                         @foreach ($familiar->residentes as $residente)
-                            <label>Residentes</label>
+                            <label>{{ __('Residentes') }}</label>
                             <input id="apellidos" class="block mt-1 w-full form-control" type="text"
                                 value="{{ $residente->nombre }} {{ $residente->apellidos }}" required readonly /> <br>
                             <!--No tiene name por que no se envia-->
@@ -58,9 +58,9 @@
 
                     <!--Agregar otro Familiar-->
                     <div class="mt-0">
-                        <label>Nuevo residente</label>
+                        <label>{{ __('Nuevo residente') }}</label>
                         <select name="residente" id="" class="form-select">
-                            <option value="Selecciona" selected disabled>Selecciona</option>
+                            <option value="Selecciona" selected disabled>{{ __('Selecciona') }}</option>
                             @foreach ($residentes as $residente)
                                 <option value="{{ $residente->id }}">
                                     {{ $residente->nombre }} {{ $residente->apellidos }}
@@ -71,21 +71,21 @@
 
                     <!-- Dirección -->
                     <div class="mt-4">
-                        <label for="direccion">Dirección</label>
+                        <label for="direccion">{{ __('Dirección') }}</label>
                         <input id="direccion" class="block mt-1 w-full form-control" type="text" name="direccion"
                             value="{{ $familiar->direccion }}" required autofocus />
                     </div>
 
                     <!-- Teléfono -->
                     <div class="mt-4">
-                        <label for="telefono">Teléfono</label>
+                        <label for="telefono">{{ __('Teléfono') }}</label>
                         <input id="telefono" class="block mt-1 w-full form-control" type="text" name="telefono"
                             maxlength="9" placeholder="623456789" value="{{ $familiar->telefono }}" required />
                     </div>
 
                     <!-- Departamento -->
                     <div class="mt-4">
-                        <label for="departamento">Departamento</label>
+                        <label for="departamento">{{ __('Departamento') }}</label>
                         <input type="text" name="departamento" id="departamento"
                             value="{{ $familiar->departamento->nombre }}" class="form-control" readonly>
                     </div>
@@ -94,7 +94,7 @@
 
                     <div class="flex items-center justify-center mt-4">
                         <button type="submit" class="btn btn-primary"
-                            onclick="return confirm('¿Estás seguro de que deseas modificar esta familiar?')">MODIFICAR</button>
+                            onclick="return confirm('{{ __('¿Estás seguro de que deseas modificar esta familiar?') }}')">{{ __('MODIFICAR') }}</button>
                     </div>
                 </form>
             </div>
@@ -109,7 +109,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar este familiar?')">BORRAR</button>
+                        onclick="return confirm('{{ __('¿Estás seguro de que deseas eliminar este familiar?') }}')">{{ __('BORRAR') }}</button>
                     <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia, por lo que no se borra-->
                 </form>
             </div>
@@ -118,7 +118,7 @@
         <br><br>
         <div class="row">
             <div class="col-12 text-center">
-                <h2>Crear Familiar</h2>
+                <h2>{{ __('Crear Familiar') }}</h2>
             </div>
         </div>
         <br>
@@ -181,16 +181,16 @@
                     <div class="mt-4">
                         <x-input-label for="departamento" :value="__('Departamento')" />
                         <select name="departamento" id="departamento" class="form-control">
-                            <option value="6">Familiar</option>
+                            <option value="6">{{ __('Familiar') }}</option>
                         </select>
                         <x-input-error :messages="$errors->get('departamento')" class="mt-2" />
                     </div>
 
                     <!--Familiar-->
                     <div class="mt-4">
-                        <label for="residente">Residentes</label>
+                        <label for="residente">{{ __('Residentes') }}</label>
                         <select name="residente" id="residente" class="form-select">
-                            <option value="Seleciona" selected disabled>Selecciona</option>
+                            <option value="Seleciona" selected disabled>{{ __('Selecciona') }}</option>
                             @foreach ($residentes as $residente)
                                 <option value="{{ old('residente', $residente->id )}}">
                                     {{ $residente->nombre }} {{ $residente->apellidos }}
@@ -219,7 +219,7 @@
                     </div>
 
                     <div class="flex items-center justify-center mt-4">
-                        <button type="submit" class="btn btn-success">CREAR</button>
+                        <button type="submit" class="btn btn-success">{{ __('CREAR') }}</button>
                     </div>
                 </form>
             </div>

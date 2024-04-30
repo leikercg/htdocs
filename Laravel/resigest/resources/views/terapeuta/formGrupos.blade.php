@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Crear Usuario')
+@section('title', __('Crear Usuario'))
 @section('content')
     @php
         $iterador = 1;
@@ -12,12 +12,12 @@
         <div class="row">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.grupos') }}">Todos los grupos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Modificar grupo</li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.grupos') }}">{{ __('Todos los grupos') }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Modificar grupo') }}</li>
                 </ol>
             </nav>
             <div class="col-12 text-center">
-                <h2>MODIFICAR GRUPO</h2>
+                <h2>{{ __('MODIFICAR GRUPO') }}</h2>
             </div>
         </div>
         <br>
@@ -27,34 +27,34 @@
                     @method('put')
                     @csrf
                     <div>
-                        <label for="id">ID</label>
+                        <label for="id">{{ __('ID') }}</label>
                         <input id="id" class="block mt-1 w-full form-control" type="text" name="id" readonly
                             value="{{ $grupo->id }}" required>
                     </div>
                     <br>
                     <div>
-                        <label for="fecha">Fecha</label>
+                        <label for="fecha">{{ __('Fecha') }}</label>
                         <input id="fecha" class="block mt-1 w-full form-control" type="date" name="fecha"
                         value="{{ old('fecha', $grupo->fecha ?? '') }}" required autofocus>
                         <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
                     </div>
                     <div class="mt-4">
-                        <label for="hora">Hora</label>
+                        <label for="hora">{{ __('Hora') }}</label>
                         <input id="hora" class="block mt-1 w-full form-control" type="time" name="hora"
                             value="{{ old('hora', $grupo->hora ?? '') }}" required>
                     </div>
                     <div class="mt-4">
-                        <label for="empleado">Fisio</label>
+                        <label for="empleado">{{ __('Fisio') }}</label>
                         <input id="empleado" class="block mt-1 w-full form-control" type="text" name="empleado_id"
                             value="{{ $grupo->empleado->nombre }} {{ $grupo->empleado->apellidos }}" required readonly>
                     </div>
                     <div class="mt-4">
-                        <label for="descripcion">Descripción</label>
+                        <label for="descripcion">{{ __('Descripción') }}</label>
                         <input id="descripcion" class="block mt-1 w-full form-control" type="text" name="descripcion"
                             value="{{ old('descipcion', $grupo->descripcion )}}" required>
                     </div>
                     <div class="mt-4">
-                        <label>Participantes</label><br>
+                        <label>{{ __('Participantes') }}</label><br>
                         @forelse ($residentes as $residente)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="residentes[]"
@@ -69,12 +69,12 @@
                                 </label>
                             </div>
                         @empty
-                            <p>Sin participantes</p>
+                            <p>{{ __('Sin participantes') }}</p>
                         @endforelse
                         <x-input-error :messages="$errors->get('residentes')" class="mt-2" />
                     </div><br>
                     <button type="submit" class="btn btn-primary"
-                        onclick="return confirm('¿Estás seguro de que deseas modificar este grupo?')">MODIFICAR</button>
+                        onclick="return confirm('{{ __('¿Estás seguro de que deseas modificar este grupo?') }}')">{{ __('MODIFICAR') }}</button>
                 </form>
             </div>
         </div>
@@ -86,7 +86,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar este grupo?')">BORRAR</button>
+                        onclick="return confirm('{{ __('¿Estás seguro de que deseas eliminar este grupo?') }}')">{{ __('BORRAR') }}</button>
                     <!--si no devuelve true nos sigue el comportamiento por defecto, es decir no se envia-->
                 </form>
             </div>
@@ -95,37 +95,37 @@
         <div class="row justify-content-center">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.grupos') }}">Todos los grupos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Crear grupo</li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.grupos') }}">{{ __('Todos los grupos') }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Crear grupo') }}</li>
                 </ol>
             </nav>
             <div class="col-md-6 col-10">
                 <form method="POST" action="{{ route('almacenar.grupo') }}">
                     @csrf
                     <div>
-                        <label for="fecha">Fecha</label>
+                        <label for="fecha">{{ __('Fecha') }}</label>
                         <input id="fecha" class="block mt-1 w-full form-control" type="date" name="fecha" required value="{{old('fecha')}}"
                             autofocus>
                         <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
 
                     </div>
                     <div class="mt-4">
-                        <label for="hora">Hora</label>
+                        <label for="hora">{{ __('Hora') }}</label>
                         <input id="hora" class="block mt-1 w-full form-control" type="time" name="hora" required value="{{old('hora')}}">
                     </div>
                     <div class="mt-4">
-                        <label for="empleado">Fisio</label>
+                        <label for="empleado">{{ __('Fisio') }}</label>
                         <input id="empleado" class="block mt-1 w-full form-control" type="text" name="empleado_id"
                             value="{{ auth()->user()->empleado->nombre }} {{ auth()->user()->empleado->apellidos }}" readonly>
                         <input type="text" name="empleado_id" value="{{ auth()->user()->empleado->id }}" hidden>
                     </div>
                     <div class="mt-4">
-                        <label for="descripcion">Descripción</label>
+                        <label for="descripcion">{{ __('Descripción') }}</label>
                         <input id="descripcion" class="block mt-1 w-full form-control" type="text" name="descripcion"
                            value="{{old('descripcion')}}" required>
                     </div>
                     <div class="mt-4">
-                        <label>Participantes</label><br>
+                        <label>{{ __('Participantes') }}</label><br>
                         @forelse ($residentes as $residente)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="residentes[]"
@@ -139,13 +139,13 @@
                                 $iterador++;
                             @endphp
                         @empty
-                            Sin participantes
+                            {{ __('Sin participantes') }}
                         @endforelse
                         <x-input-error :messages="$errors->get('residentes')" class="mt-2" />
                     </div>
 
                     <br>
-                    <button type="submit" class="btn btn-success">CREAR</button>
+                    <button type="submit" class="btn btn-success">{{ __('CREAR') }}</button>
                 </form>
             </div>
         </div>

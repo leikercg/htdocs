@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Crear Usuario')
+@section('title', __('Crear Usuario'))
 @section('content')
     @isset($empleado)
         <!-- SI ESTA ESTABLECIDO EL EMPLEADO MOSTRAR EL FORMULUARIO DE EDICIÓN, SI NO MOSTRAR EL DE CREACIÓN-->
@@ -8,7 +8,7 @@
         <br><br>
         <div class="row">
             <div class="col-12 text-center">
-                <h2>MODIFICAR EMPLEADO </h2>
+                <h2>{{ __('MODIFICAR EMPLEADO') }}</h2>
             </div>
         </div>
         <br>
@@ -18,46 +18,46 @@
                     @method('put')
                     @csrf
                     <div>
-                        <label for="id">Id</label>
+                        <label for="id">{{ __('Id') }}</label>
                         <input id="id" class="block mt-1 w-full form-control" type="text" name="id" readonly
                             value="{{ $empleado->id }}" required>
                     </div>
                     <br>
                     <div>
-                        <label for="name">Nombre</label>
+                        <label for="name">{{ __('Nombre') }}</label>
                         <input id="name" class="block mt-1 w-full form-control" type="text" name="nombre" readonly
                             value="{{ $empleado->nombre }}" required>
                     </div>
                     <div class="mt-4">
-                        <label for="dni">DNI</label>
+                        <label for="dni">{{ __('DNI') }}</label>
                         <input id="dni" class="block mt-1 w-full form-control" type="text" name="dni"
                             value="{{ $empleado->dni }}" pattern="[0-9]{8}[A-Za-z]" placeholder="012345678A" maxlength="9"
                             required readonly>
                     </div>
                     <div class="mt-4">
-                        <label for="apellidos">Apellidos</label>
+                        <label for="apellidos">{{ __('Apellidos') }}</label>
                         <input id="apellidos" class="block mt-1 w-full form-control" type="text" name="apellidos"
                             value="{{ $empleado->apellidos }}" required readonly>
                     </div>
                     <div class="mt-4">
-                        <label for="direccion">Dirección</label>
+                        <label for="direccion">{{ __('Dirección') }}</label>
                         <input id="direccion" class="block mt-1 w-full form-control" type="text" name="direccion"
                             value="{{ $empleado->direccion }}" required autofocus>
                     </div>
                     <div class="mt-4">
-                        <label for="telefono">Teléfono</label>
+                        <label for="telefono">{{ __('Teléfono') }}</label>
                         <input id="telefono" class="block mt-1 w-full form-control" type="text" name="telefono"
                             pattern="[0-9]{9}" placeholder="623456789" maxlength="9" value="{{ $empleado->telefono }}"
                             required>
                     </div>
                     <div class="mt-4">
-                        <label for="departamento">Departamento</label>
+                        <label for="departamento">{{ __('Departamento') }}</label>
                         <input type="text" name="departamento" id="departamento"
                             value="{{ $empleado->departamento->nombre }}" readonly class="form-control">
                     </div>
                     <br><br>
                     <button type="submit" class="btn btn-primary"
-                        onclick="return confirm('¿Estás seguro de que deseas modificar esta empleado?')">MODIFICAR</button>
+                        onclick="return confirm('{{ __('¿Estás seguro de que deseas modificar esta empleado?') }}')">{{ __('MODIFICAR') }}</button>
 
                 </form>
             </div>
@@ -66,7 +66,7 @@
         <br><br>
         <div class="row">
             <div class="col-12 text-center">
-                <h2>CREAR EMPLEADO</h2>
+                <h2>{{ __('CREAR EMPLEADO') }}</h2>
             </div>
         </div>
         <br>
@@ -129,11 +129,11 @@
                     <div class="mt-4">
                         <x-input-label for="departamento" :value="__('Departamento')" />
                         <select name="departamento" id="" class="form-select">
-                            <option value="1">Medicina</option>
-                            <option value="2">Enfermería</option>
-                            <option value="3">Fisioterapía</option>
-                            <option value="4">Terapia</option>
-                            <option value="5">Asistencial</option>
+                            <option value="1">{{ __('Medicina') }}</option>
+                            <option value="2">{{ __('Enfermería') }}</option>
+                            <option value="3">{{ __('Fisioterapia') }}</option>
+                            <option value="4">{{ __('Terapia') }}</option>
+                            <option value="5">{{ __('Asistencial') }}</option>
                         </select>
                     </div>
 
@@ -154,7 +154,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <button type="submit" class="btn btn-success">CREAR</button>
+                        <button type="submit" class="btn btn-success">{{ __('CREAR') }}</button>
                     </div>
                 </form>
             </div>

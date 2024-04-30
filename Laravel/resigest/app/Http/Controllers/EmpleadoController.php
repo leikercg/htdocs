@@ -77,8 +77,8 @@ class EmpleadoController extends Controller
          // Obtener los usuarios familiares (departamento_id 6)
          $familiares = Familiar::where('departamento_id', 6)->get();
 
-         return view('gerente.familiar_empleado', ['empleados' => $empleados, 'familiares' => $familiares]); //enviamos todos los usuario por separado a la vista
-    }
+         return redirect()->route('familiar_empleado');//usamos rutas para no reeenviar formularios al recargar
+        }
 
     /**
      * Remove the specified resource from storage.

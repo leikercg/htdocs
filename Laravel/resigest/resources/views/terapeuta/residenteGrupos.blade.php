@@ -1,15 +1,15 @@
 @extends('master')
-@section('title', 'Gestionar grupos de ' . $residente->nombre . ' ' . $residente->apellidos)
+@section('title', __('Gestionar grupos de') . ' ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
     <div class="row">
         <div class="row">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{ __('Lista de residentes') }}</a></li>
                     <li class="breadcrumb-item"><a
                             href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }}
                             {{ $residente->apellidos }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Grupos</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Grupos') }}</li>
                 </ol>
             </nav>
         </div>
@@ -20,12 +20,12 @@
     @endphp
     <div class="row justify-content-center">
         <div class="col-4 col-md-2 text-center">
-            <a href="{{ route('crear.grupo') }}" class="btn btn-success">CREAR GRUPO</a>
+            <a href="{{ route('crear.grupo') }}" class="btn btn-success">{{ __('CREAR GRUPO') }}</a>
         </div>
     </div><br>
     <div class="row">
         <div class="col-12 text-center">
-            <h2>LISTA DE GRUPOS DE <br>
+            <h2>{{ __('LISTA DE GRUPOS DE') }} <br>
                 {{ $residente->nombre }} {{ $residente->apellidos }}
             </h2>
         </div>
@@ -37,12 +37,12 @@
                 <table class="table table-hover text-center align-middle">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Terapeuta</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Participantes</th>
+                            <th scope="col">{{ __('ID') }}</th>
+                            <th scope="col">{{ __('Fecha') }}</th>
+                            <th scope="col">{{ __('Hora') }}</th>
+                            <th scope="col">{{ __('Terapeuta') }}</th>
+                            <th scope="col">{{ __('Descripción') }}</th>
+                            <th scope="col">{{ __('Participantes') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,14 +66,14 @@
                                 {{--  <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
                                     @if (auth()->user()->empleado->id == $grupo->empleado_id && $grupo->fecha >= $hoy)
                                         <a href="{{ route('borrar.pivot', ['id' => $grupo->id,'residente_id'=>$residente->id]) }}"
-                                            class="btn btn-danger">Sacar del grupo</a>
+                                            class="btn btn-danger">{{ __('Sacar del grupo') }}</a>
                                     @endif
                             </td> --}}
 
                                 <td><!--Si el empleado es el que creo el grupo y la fecha aun no ha llegado se podrá modificar -->
                                     @if (auth()->user()->empleado->id == $grupo->empleado_id && $grupo->fecha >= $hoy)
                                         <a href="{{ route('editar.grupo', ['id' => $grupo->id]) }}"
-                                            class="btn btn-primary">Modificar</a>
+                                            class="btn btn-primary">{{ __('Modificar') }}</a>
                                     @endif
                                 </td>
                             </tr>

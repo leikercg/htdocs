@@ -5,15 +5,15 @@
     <div class="row">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">Lista de residentes</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{__('Lista de residentes')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('ficha.residente', $residente->id) }}">{{ $residente->nombre }} {{ $residente->apellidos }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Seguimiento de {{$seguimiento->departamento->nombre}}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('Seguimiento de')}} {{$seguimiento->departamento->nombre}}</li>
             </ol>
         </nav>
     </div>
     <div class="row justify-content-center">
         <div class="col-12 text-center">
-            <h3>Seguimiento de {{ $residente->nombre }} {{ $residente->apellidos }} en
+            <h3>{{__('Seguimiento de')}} {{ $residente->nombre }} {{ $residente->apellidos }} {{__('en')}}
                 {{ $seguimiento->departamento->nombre }}
             </h3>
         </div>
@@ -25,7 +25,7 @@
                 @method('put')
                 @csrf
                 <div class="mb-3">
-                    <label class="form-label">Seguimiento:</label>
+                    <label class="form-label">{{__('Seguimiento')}}:</label>
                     <textarea id="textarea" class="form-control" rows="15" disabled>{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}{{ $seguimiento->seguimiento }}</textarea>
                 </div>
 
@@ -43,7 +43,7 @@
 
     <div class="row justify-content-center">
         <div class="col-2 col-sm-1">
-            <a class="btn btn-primary" href="{{ route('ficha.residente', $residente->id) }}">Volver</a>
+            <a class="btn btn-primary" href="{{ route('ficha.residente', $residente->id) }}">{{__('Volver')}}</a>
         </div>
     </div>
 
