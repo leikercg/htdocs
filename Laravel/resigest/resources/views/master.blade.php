@@ -6,16 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', __('Home'))</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 
 <body>
-    <header class="container-fluid d-flex flex-column justify-content-center">
+    <div class="floating-button" onclick="scrollArriba()">
+        <i class="material-icons">arrow_upward</i><!--Icono de flecha-->
+    </div>
+    <header class="container-fluid d-flex flex-column justify-content-center position-sticky top-0">
 
-        <a href="{{route('idiom',['locale'=>'en'])}}">English</a>
-        <a href="{{route('idiom',['locale'=>'es'])}}">Español</a>
+        <div class="row justify-content-around">
+            <a class="idioma " href="{{route('idiom',['locale'=>'en'])}}">English</a>
+            <a class="idioma " href="{{route('idiom',['locale'=>'es'])}}">Español</a>
+        </div>
         {{-- Logo --}}
-        <div class='row justify-content-between mt-4 mb-1'>
+        <div class='row justify-content-between mt-1 mb-1'>
             <div class="col-2 d-flex offset-1 flex-column align-items-center">
                 <img src="{{ asset('images/logo-FRA.png') }}" class="img-fluid d-md-block d-none" alt="{{ __('Logo de Fundación Rey Ardid') }}" />
             </div>
@@ -207,29 +213,31 @@
             <div class="col d-flex flex-column align-items-center text-center">
                 <!--Empleados-->
                 @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
-                    <div class="col-5 d-flex flex-column align-items-center">
-                        <p>{{ __('Ha iniciado sesión como') }} <b>{{ auth()->user()->empleado->nombre }}
+                    <div class="col d-flex flex-column align-items-center">
+                        <p>{{ __('Ha iniciado sesión como') }} <br> <b>{{ auth()->user()->empleado->nombre }}
                                 {{ auth()->user()->empleado->apellidos }}</b></p>
                     </div>
 
 
                     <!--familiares-->
                 @elseif(auth()->user()->departamento_id == 6)
-                    <div class="col-5 d-flex flex-column align-items-center text-center">
-                        <p>{{ __('Ha iniciado sesión como') }} <b>{{ auth()->user()->familiar->nombre }}
+                    <div class="col d-flex flex-column align-items-center text-center">
+                        <p>{{ __('Ha iniciado sesión como') }} <br> <b>{{ auth()->user()->familiar->nombre }}
                                 {{ auth()->user()->familiar->apellidos }}</b></p>
                     </div>
                 @else
                     <!--ADMIN-->
-                    <div class="col-5 d-flex flex-column align-items-center text-center">
-                        <p>{{ __('Ha iniciado sesión como') }} <b>{{ __('ADMINISTRADOR') }}</b></p>
+                    <div class="col d-flex flex-column align-items-center text-center">
+                        <p>{{ __('Ha iniciado sesión como') }} <br> <b>{{ __('ADMINISTRADOR') }}</b></p>
                     </div>
                 @endif
 
             </div>
         </div>
     </footer>
+    <script src="{{ asset('js/interactividad.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

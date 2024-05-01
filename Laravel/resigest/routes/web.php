@@ -4,31 +4,33 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
-Route::get('/idioma/{locale}', function (string $locale) {
-    if (!in_array($locale, ['en', 'es'])) {
-        abort(403,'NO IDIOMA');
-    }
-    App::setLocale($locale);
+Route::middleware('localization')->group(function () { //usamos el middleware para establecer localization en todas las rutas
+    Route::get('/idioma/{locale}', function (string $locale) {
+        if (!in_array($locale, ['en', 'es'])) {//si no esta entre esos da error
+            abort(403, 'NO IDIOMA');
+        }
+        session()->put('locale', $locale); //previamente en el middleware se establece en la variable de sesión 'locale' el valor 'es' o 'en'
+        $localee = App::currentLocale(); //para pruebas
+        // return view('dashboard');
+        return redirect()->back(); //nos devuelve a la página con el idioma cambiado
+    })->name('idiom');
 
-    $localee = App::currentLocale();
-        //return view('test',['locale'=>$localee]);
-  return redirect()->back();
+    Route::get('/', function () {
+        if(auth()->check()) { //si esta un usuario autenticado enviar a la lista de residentes
+            return redirect()->route('lista.residentes');
+        }
+        return view('auth.login'); //si no enviar al login
+    });
 
-})->name('idiom');
+    Route::middleware('auth')->group(function () {//rutas accesibles solo si estas autenticado el usuriao, editar actualizar y borrar perfil
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-Route::get('/', function () {
-    return view('welcome'); //inicio de laravel, hacemos que la pagina raiz deveulva la bista login
-})->name('inicio');
-
-Route::get('/dashboard', function () {//ruta al dashboarda
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {//rutas accesibles solo si estas autenticado el usuriao, editar actualizar y borrar perfil
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    });
 
 });
+
+//Route::get('/dashboard', function () { return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard'); la anulamos
 
 Route::get('product', 'ProductController@index')->name('product.index');
 Route::get('product/id={product?}', 'ProductController@show')->name('product.show'); ///////////////////////////////////////////////////////////

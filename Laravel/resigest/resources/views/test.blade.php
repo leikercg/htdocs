@@ -1,1 +1,1 @@
-{{$locale}}
+{{$locale}} {{__('Nombre')}}
