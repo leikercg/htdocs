@@ -87,7 +87,7 @@
                                         role="button">{{ __('Lista de Residentes') }}</a>
                                 </li>
                                 <li class="nav-item mx-1 my-1">
-                                    <a class="btn btn-outline-dark" href="#" role="button">{{ __('Agenda') }}</a>
+                                    <a class="btn btn-outline-dark" href="{{route('itinerario.empleado')}}" role="button">{{ __('Agenda') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -112,7 +112,7 @@
                             <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}' role="button">{{ __('Lista de Residentes') }}</a>
                         </li>
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">{{ __('Agenda') }}</a>
+                            <a class="btn btn-outline-dark" href="{{route('itinerario.empleado')}}" role="button">{{ __('Agenda') }}</a>
                         </li>
                         <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark" href="{{ route('lista.grupos') }}" role="button">{{ __('Ver Grupos') }}</a>
@@ -138,9 +138,6 @@
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1 ">
                         <li class="nav-item mx-1 my-1" >
                             <a class="btn btn-outline-dark" href="{{ route('lista.residentes') }}" role="button">{{ __('Lista de Residentes') }}</a>
-                        </li>
-                        <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href="#" role="button">{{ __('Agenda') }}</a>
                         </li>
                         <li class="nav-item mx-1 my-1">
                             <a class="btn btn-outline-dark"

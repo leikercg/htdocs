@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('visitas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empleado_id');
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
             $table->unsignedBigInteger('residente_id');
             $table->foreign('residente_id')->references('id')->on('residentes')->onDelete('cascade');
             $table->date('fecha')->nullable(false);

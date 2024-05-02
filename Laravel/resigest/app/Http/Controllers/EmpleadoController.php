@@ -66,19 +66,18 @@ class EmpleadoController extends Controller
         //
         $empleado = Empleado::find($id);
 
-
         $empleado->telefono  = $request->telefono;
         $empleado->direccion = $request->direccion;
         $empleado->save();
 
-         // Empleado del 1 al 5
-         $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();
+        // Empleado del 1 al 5
+        $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();
 
-         // Obtener los usuarios familiares (departamento_id 6)
-         $familiares = Familiar::where('departamento_id', 6)->get();
+        // Obtener los usuarios familiares (departamento_id 6)
+        $familiares = Familiar::where('departamento_id', 6)->get();
 
-         return redirect()->route('familiar_empleado');//usamos rutas para no reeenviar formularios al recargar
-        }
+        return redirect()->route('familiar_empleado'); //usamos rutas para no reeenviar formularios al recargar
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -87,4 +86,36 @@ class EmpleadoController extends Controller
     {
         //
     }
+    public function itinerario(Request $request)
+    {
+        if(auth()->user()->departamento_id ==5 || auth()->user()->departamento_id ==7 || auth()->user()->departamento_id ==6){
+            return redirect()->back();
+        }
+
+        $fecha       = $request->input('fecha', now()->toDateString()); // Si no se especifica la fecha, se establece como la fecha de hoy
+        $empleado    = Empleado::find(auth()->user()->empleado->id);
+        $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
+
+        if($empleado->departamento->id == 1) {
+            $visitas     = $empleado->visitas->where('fecha', $fecha);
+            $actividades = $actividades->concat($visitas);
+        } elseif($empleado->departamento->id == 2) {
+            $tareas      = $empleado->tareas->where('fecha', $fecha);
+            $curas       = $empleado->curas->where('fecha', $fecha);
+            $actividades = $actividades->concat($curas)->concat($tareas);
+        } elseif($empleado->departamento->id == 3) {
+            $sesiones    = $empleado->sesiones->where('fecha', $fecha);
+            $actividades = $actividades->concat($sesiones);
+        } elseif($empleado->departamento->id == 4) {
+            $grupos      = $empleado->grupos->where('fecha', $fecha);
+            $actividades = $actividades->concat($grupos);
+        }
+
+        $actividades = $actividades->sortBy(function ($actividad) { //ordenarlos por fecha y hora
+            return $actividad->fecha . ' ' . $actividad->hora;
+        });
+
+        return view('empleado.itinerario', ['empleado' => $empleado, 'programacion' => $actividades, 'fecha' => $fecha]);
+    }
+
 }

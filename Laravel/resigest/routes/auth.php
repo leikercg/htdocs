@@ -91,6 +91,7 @@ Route::middleware('localization')->group(function () { //usamos el middleware pa
         Route::post('visita/{id?}', [VisitaController::class, 'store'])->name('almacenar.visita'); //crea la visita
         Route::delete('visita/{id}', [VisitaController::class, 'destroy'])->name('borrar.visita'); //borrar visita
 
+
     });
 
     //DEPARTAMENTO ENFERMERÍA
@@ -182,6 +183,8 @@ Route::middleware('localization')->group(function () { //usamos el middleware pa
         Route::get('ficha_residente/{id}', [ResidenteController::class, 'show'])->name('ficha.residente'); ///ficha de residente
         Route::get('itinerario/{id}', [ResidenteController::class, 'itinerario'])->name('itinerario.residente'); ///itinerario de residente
         Route::get('lista_residentes/busqueda', [ResidenteController::class, 'buscar'])->name('buscar.residente'); ///ficha de residente por filtro de búsquda
+        Route::get('agenda/empleado', [EmpleadoController::class, 'itinerario'])->name('itinerario.empleado'); ///itinerario de empleados
+
 
     });
 
