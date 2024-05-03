@@ -1,7 +1,7 @@
 <section>
     <!-- modificamos la sección para que trenga estilo de nuestro sitio-->
     <div class="row">
-        <div class="col text-center"><h2>{{__('MODIFICAR CONTRASEÑA')}}</h2></div>
+        <div class="col text-center"><h2>{{__('Modificar contraseña')}}</h2></div>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-6">

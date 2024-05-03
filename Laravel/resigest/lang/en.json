@@ -119,6 +119,7 @@
     "Modificar": "Modify",
     "Crear visita para": "Create visit for",
     "Modificar visita": "Modify visit",
+    "MODIFICAR VISITA A: ": "MODIFY VISIT: ",
     "Crear visita": "Create visit",
     "Médico": "Doctor",
     "¿Estás seguro de que deseas modificar esta visita?": "Are you sure you want to modify this visit?",
@@ -145,7 +146,7 @@
     "Asistencial":"Healthcare",
     "Enfermería":"Nursing",
     "Terapia":"Therapy",
-    "MODIFICAR CONTRASEÑA":"MODIFY PASSWORD",
+    "Modificar contraseña":"Modify password",
     "LISTA DE RESIDENTES DE BAJA":"LIST OF LOW RESIDENTS",
     "CURAS DE: ":"CURES: ",
     "Curas de ":"Cures: ",
@@ -176,5 +177,7 @@
     "Sesión de fisioterapia": "Physiotherapy session",
     "Grupo de terapia": "Therapy group",
     "Realizar cura en": "Perform wound care in",
-    "en estado": "in state????"
+    "en estado": "in state????",
+    "Página creada para la Fundación Rey Ardid":"Page created for the Rey Ardid Foundation",
+    "CREAR VISITA A: ":"CREATE VISIT: "
   }

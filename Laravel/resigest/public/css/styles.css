@@ -32,10 +32,6 @@ footer {
     font-weight: bold;
 }
 
-.idioma {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
 
 /* Estilos para el botón flotante */
 .floating-button {
@@ -58,4 +54,11 @@ footer {
 
 .floating-button:hover {
     background-color: #2e2f30;
+}
+
+#logo{
+    width: 150px;
+}
+.bandera{
+    width: 20px;
 }

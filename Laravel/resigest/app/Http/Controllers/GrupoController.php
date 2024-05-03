@@ -75,7 +75,7 @@ class GrupoController extends Controller
             $grupo_residente->save();
         }
 
-        return redirect()->route('lista.grupos'); //no enviamos vistas para evitar el reenvio del formulario. Ruta de mostrar todos los grupos.
+        return redirect()->route('lista.grupos')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //no enviamos vistas para evitar el reenvio del formulario. Ruta de mostrar todos los grupos.
     }
 
     /**
@@ -138,7 +138,7 @@ class GrupoController extends Controller
             $grupo->residentes()->attach($residenteId); ///APUNTES LARAVEL CLASE
         }
 
-        return redirect()->route('lista.grupos'); //no enviamos vistas para evitar el reenvio del formulario. Ruta de mostrar todos los grupos.
+        return redirect()->route('lista.grupos')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //no enviamos vistas para evitar el reenvio del formulario. Ruta de mostrar todos los grupos.
 
     }
 
@@ -155,7 +155,7 @@ class GrupoController extends Controller
 
         //no hay que borrar manual mente las relaciones de la tabla residentes_grupos por que tiene delete on cascade
 
-        return redirect()->route('lista.grupos'); //no enviamos vistas para evitar el reenvio del formulario. Ruta de mostrar todos los grupos.
+        return redirect()->route('lista.grupos')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //no enviamos vistas para evitar el reenvio del formulario. Ruta de mostrar todos los grupos.
     }
 
     public function destroyPivot(string $id, string $residente_id)

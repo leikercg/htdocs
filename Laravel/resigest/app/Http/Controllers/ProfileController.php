@@ -54,7 +54,7 @@ class ProfileController extends Controller
             $familiar->save();
         }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('status', 'profile-updated')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito;
     }
 
     /**

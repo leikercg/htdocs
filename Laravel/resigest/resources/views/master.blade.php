@@ -11,27 +11,32 @@
 </head>
 
 <body>
+
     <div class="floating-button" onclick="scrollArriba()">
         <i class="material-icons">arrow_upward</i><!--Icono de flecha-->
     </div>
     <header class="container-fluid d-flex flex-column justify-content-center position-sticky top-0">
-
-        <div class="row justify-content-around">
-            <a class="idioma " href="{{route('idiom',['locale'=>'en'])}}">English</a>
-            <a class="idioma " href="{{route('idiom',['locale'=>'es'])}}">Español</a>
-        </div>
-        {{-- Logo --}}
-        <div class='row justify-content-between mt-1 mb-1'>
-            <div class="col-2 d-flex offset-1 flex-column align-items-center">
-                <img src="{{ asset('images/logo-FRA.png') }}" class="img-fluid d-md-block d-none" alt="{{ __('Logo de Fundación Rey Ardid') }}" />
-            </div>
-            {{-- Avatar --}}
-            <div class="col-5 d-flex flex-column align-items-center">
+        <div class="row justify-content-end">
+            <a class="col-1 d-flex justify-content-center align-items-center"
+                href="{{ route('idiom', ['locale' => 'es']) }}">
+                <img src="{{ asset('images/spain.webp') }}" class="bandera" alt="">
+            </a>
+            <a class="col-1 d-flex  align-items-center" href="{{ route('idiom', ['locale' => 'en']) }}"><img
+                    src="{{ asset('images/uk.png') }}" class="bandera" alt=""></a>
+            <div class="col-12 d-flex flex-column align-items-center">
                 <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
                     @csrf
                     <button type="submit" class="btn btn-secondary">{{ __('Cerrar sesión') }}</button>
                 </form>
             </div>
+        </div>
+        {{-- Logo --}}
+        <div class='row justify-content-between mt-1 mb-1'>
+            <div class="col-2 d-flex offset-1 flex-column align-items-center">
+                <img id="logo" src="{{ asset('images/logo-FRA.png') }}" class="d-md-block d-none"
+                    alt="{{ __('Logo de Fundación Rey Ardid') }}" />
+            </div>
+            {{-- Avatar --}}
         </div>
         <!--empleados-->
         @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
@@ -40,7 +45,8 @@
                     <a href="{{ route('profile.edit') }}"><img
                             src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
                             alt="{{ __('avatar') }}"></a>
-                    <h5 class="text-center">{{ __('Área de') }} {{ auth()->user()->empleado->departamento->nombre }}</h5>
+                    <h5 class="text-center">{{ __('Área de') }} {{ auth()->user()->empleado->departamento->nombre }}
+                    </h5>
                 </div>
             </div>
 
@@ -52,7 +58,8 @@
                     <a href="{{ route('profile.edit') }}"><img
                             src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
                             alt="{{ __('avatar') }}"></a>
-                    <h5 class="text-center">{{ __('Área de') }} {{ auth()->user()->familiar->departamento->nombre }}</h5>
+                    <h5 class="text-center">{{ __('Área de') }} {{ auth()->user()->familiar->departamento->nombre }}
+                    </h5>
                 </div>
             </div>
         @else
@@ -83,11 +90,12 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1">
                                 <li class="nav-item mx-1 my-1">
-                                    <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}'
+                                    <a class="btn btn-light" href='{{ route('lista.residentes') }}'
                                         role="button">{{ __('Lista de Residentes') }}</a>
                                 </li>
                                 <li class="nav-item mx-1 my-1">
-                                    <a class="btn btn-outline-dark" href="{{route('itinerario.empleado')}}" role="button">{{ __('Agenda') }}</a>
+                                    <a class="btn btn-light" href="{{ route('itinerario.empleado') }}"
+                                        role="button">{{ __('Agenda') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -109,13 +117,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1 ">
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href='{{ route('lista.residentes') }}' role="button">{{ __('Lista de Residentes') }}</a>
+                            <a class="btn btn-light" href='{{ route('lista.residentes') }}'
+                                role="button">{{ __('Lista de Residentes') }}</a>
                         </li>
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href="{{route('itinerario.empleado')}}" role="button">{{ __('Agenda') }}</a>
+                            <a class="btn btn-light" href="{{ route('itinerario.empleado') }}"
+                                role="button">{{ __('Agenda') }}</a>
                         </li>
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href="{{ route('lista.grupos') }}" role="button">{{ __('Ver Grupos') }}</a>
+                            <a class="btn btn-light" href="{{ route('lista.grupos') }}"
+                                role="button">{{ __('Ver Grupos') }}</a>
                         </li>
                     </ul>
                 </div>
@@ -136,11 +147,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1 ">
-                        <li class="nav-item mx-1 my-1" >
-                            <a class="btn btn-outline-dark" href="{{ route('lista.residentes') }}" role="button">{{ __('Lista de Residentes') }}</a>
+                        <li class="nav-item mx-1 my-1">
+                            <a class="btn btn-light" href="{{ route('lista.residentes') }}"
+                                role="button">{{ __('Lista de Residentes') }}</a>
                         </li>
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark"
+                            <a class="btn btn-light"
                                 href="{{ route('auxiliar.tareas', ['id' => auth()->user()->empleado->id]) }}"
                                 role="button">{{ __('Ver Tareas') }}</a>
                         </li>
@@ -163,7 +175,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1">
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href="{{ route('lista.residentesFamiliar') }}"
+                            <a class="btn btn-light" href="{{ route('lista.residentesFamiliar') }}"
                                 role="button">{{ __('Lista de Residentes') }}</a>
                         </li>
                     </ul>
@@ -186,11 +198,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 my-1 ">
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href="{{ route('lista.residentes') }}"
+                            <a class="btn btn-light" href="{{ route('lista.residentes') }}"
                                 role="button">{{ __('Gestionar Residentes') }}</a>
                         </li>
                         <li class="nav-item mx-1 my-1">
-                            <a class="btn btn-outline-dark" href="{{ route('familiar_empleado') }}"
+                            <a class="btn btn-light" href="{{ route('familiar_empleado') }}"
                                 role="button">{{ __('Gestionar Usuarios') }}</a>
                         </li>
                     </ul>
@@ -203,6 +215,10 @@
     @endif
 
     <main class="container py-4">
+        @if (session('success'))
+        <div class="row text-center">
+           <b>{{ session('success') }}</b><br> <br> </div>
+        @endif
         @yield('content')
     </main>
     <footer>
@@ -230,6 +246,10 @@
                 @endif
 
             </div>
+        </div>
+        <div class="row d-flex text-center">
+            <div class="col-12">{{ __('Página creada para la Fundación Rey Ardid') }}</div>
+            <div class="col-12">&copy; 2024 Leiker Castillo Guzmán</div>
         </div>
     </footer>
     <script src="{{ asset('js/interactividad.js') }}"></script>

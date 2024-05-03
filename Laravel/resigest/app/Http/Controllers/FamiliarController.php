@@ -94,7 +94,7 @@ class FamiliarController extends Controller
 
         // Obtener los usuarios familiares (departamento_id 6)
         $familiares = Familiar::where('departamento_id', 6)->get();
-        return redirect()->route('familiar_empleado');//usamos rutas para no reeenviar formularios al recargar
+        return redirect()->route('familiar_empleado')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito;//usamos rutas para no reeenviar formularios al recargar
     }
 
     /**
@@ -111,7 +111,7 @@ class FamiliarController extends Controller
         // Obtener los usuarios familiares (departamento_id 6)
         $familiares = Familiar::where('departamento_id', 6)->get();
 
-        return redirect()->route('familiar_empleado');//usamos rutas para no reeenviar formularios al recargar
+        return redirect()->route('familiar_empleado')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito;//usamos rutas para no reeenviar formularios al recargar
     }
 
 }

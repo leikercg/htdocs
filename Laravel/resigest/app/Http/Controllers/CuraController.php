@@ -50,7 +50,7 @@ class CuraController extends Controller
 
         $cura->save();
 
-        return redirect()->route('curas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
+        return redirect()->route('curas.residente', ['residente_id' => $residente])->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
 
     }
 
@@ -108,7 +108,7 @@ class CuraController extends Controller
 
         $residente = Residente::find($cura->residente_id);
 
-        return redirect()->route('curas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
+        return redirect()->route('curas.residente', ['residente_id' => $residente])->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
 
     }
 
@@ -123,7 +123,7 @@ class CuraController extends Controller
 
         $residente = Residente::find($cura->residente_id);
 
-        return redirect()->route('curas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
+        return redirect()->route('curas.residente', ['residente_id' => $residente])->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
 
     }
 }

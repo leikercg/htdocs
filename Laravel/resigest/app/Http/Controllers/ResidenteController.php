@@ -152,7 +152,7 @@ class ResidenteController extends Controller
 
         }
 
-        return redirect()->route('lista.residentes'); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
+        return redirect()->route('lista.residentes')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
     }
 
     /**
@@ -256,17 +256,17 @@ class ResidenteController extends Controller
         $residente->fecha_nac  = $request->fecha_nac;
         $residente->save();
 
-        return redirect()->route('lista.residentes'); //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
+        return redirect()->route('lista.residentes')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id)//NO USADA
     {
         $residente = Residente::find($id);
         $residente->delete();
-        return redirect()->route('lista.residentes'); ////revisar
+        return redirect()->route('lista.residentes')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; ////revisar
     }
 
     public function itinerario(Request $request, $Id_residente)

@@ -7,11 +7,6 @@
         <div class="col text-center">
             <h2> {{ __('Profile Information') }}</h2>
         </div>
-        <div>
-            <p class="col text-center">
-                {{ __("Update your account's profile information and email address.") }}
-            </p>
-        </div>
     </div>
 
     <div class="row justify-content-center">

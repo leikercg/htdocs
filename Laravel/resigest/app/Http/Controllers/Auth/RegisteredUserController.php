@@ -88,7 +88,7 @@ class RegisteredUserController extends Controller
             event(new Registered($user));//otros eventos de registrar, como mandar correo de confirmación
 
         }
-        return redirect(route('familiar_empleado'));
+        return redirect(route('familiar_empleado'))->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito;
     }
 
     public function elegir()//esto nos envia la vista de gestion de usuarios para crear, o modificar usuarios de diferentes tipos

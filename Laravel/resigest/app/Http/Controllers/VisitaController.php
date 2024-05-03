@@ -47,7 +47,7 @@ class VisitaController extends Controller
 
         $visita->save();
 
-        return redirect()->route('visitas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario. Ruta de visitas del residente.
+        return redirect()->route('visitas.residente', ['residente_id' => $residente])->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; //no enviamos vistas para evitar el reenvio del formulario. Ruta de visitas del residente.
 
     }
 
@@ -103,8 +103,7 @@ class VisitaController extends Controller
 
         $residente = Residente::find($visita->residente_id);
 
-        return redirect()->route('visitas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario al recargar. Ruta de visitas del residente.
-
+        return redirect()->route('visitas.residente', ['residente_id' => $residente])->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito
     }
 
     /**
@@ -118,7 +117,7 @@ class VisitaController extends Controller
 
         $residente = Residente::find($visita->residente_id);
 
-        return redirect()->route('visitas.residente', ['residente_id' => $residente]); //no enviamos vistas para evitar el reenvio del formulario al recargar. Ruta de visitas del residente.
+        return redirect()->route('visitas.residente', ['residente_id' => $residente])->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; //no enviamos vistas para evitar el reenvio del formulario al recargar. Ruta de visitas del residente.
 
     }
 

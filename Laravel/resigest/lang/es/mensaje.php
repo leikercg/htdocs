@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'lista' => 'Welcome to our application!',
+    'exito' => '!Acción realizada con éxito!',
 ];
