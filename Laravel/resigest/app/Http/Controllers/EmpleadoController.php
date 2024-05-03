@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use App\Models\Familiar;
+use Dompdf\Dompdf;
 
 use Illuminate\Http\Request;
 
@@ -88,7 +89,7 @@ class EmpleadoController extends Controller
     }
     public function itinerario(Request $request)
     {
-        if(auth()->user()->departamento_id ==5 || auth()->user()->departamento_id ==7 || auth()->user()->departamento_id ==6){
+        if(auth()->user()->departamento_id == 5 || auth()->user()->departamento_id == 7 || auth()->user()->departamento_id == 6) {
             return redirect()->back();
         }
 
@@ -116,6 +117,44 @@ class EmpleadoController extends Controller
         });
 
         return view('empleado.itinerario', ['empleado' => $empleado, 'programacion' => $actividades, 'fecha' => $fecha]);
+    }
+
+    public function imprimirAgenda($date)
+    {
+
+        if(auth()->user()->departamento_id == 5 || auth()->user()->departamento_id == 7 || auth()->user()->departamento_id == 6) {
+            return redirect()->back();
+        }
+
+        $fecha       = $date;
+        $empleado    = Empleado::find(auth()->user()->empleado->id);
+        $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
+
+        if($empleado->departamento->id == 1) {
+            $visitas     = $empleado->visitas->where('fecha', $fecha);
+            $actividades = $actividades->concat($visitas);
+        } elseif($empleado->departamento->id == 2) {
+            $tareas      = $empleado->tareas->where('fecha', $fecha);
+            $curas       = $empleado->curas->where('fecha', $fecha);
+            $actividades = $actividades->concat($curas)->concat($tareas);
+        } elseif($empleado->departamento->id == 3) {
+            $sesiones    = $empleado->sesiones->where('fecha', $fecha);
+            $actividades = $actividades->concat($sesiones);
+        } elseif($empleado->departamento->id == 4) {
+            $grupos      = $empleado->grupos->where('fecha', $fecha);
+            $actividades = $actividades->concat($grupos);
+        }
+
+        $actividades = $actividades->sortBy(function ($actividad) { //ordenarlos por fecha y hora
+            return $actividad->fecha . ' ' . $actividad->hora;
+        });
+        $html   = view('imprimir.impresiones', ['empleado' => $empleado, 'programacion' => $actividades, 'fecha' => $fecha]);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+        return $dompdf->stream('agenda.pdf', ['Attachment' => 0]);
     }
 
 }

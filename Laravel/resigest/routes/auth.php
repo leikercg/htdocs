@@ -184,7 +184,7 @@ Route::middleware('localization')->group(function () { //usamos el middleware pa
         Route::get('itinerario/{id}', [ResidenteController::class, 'itinerario'])->name('itinerario.residente'); ///itinerario de residente
         Route::get('lista_residentes/busqueda', [ResidenteController::class, 'buscar'])->name('buscar.residente'); ///ficha de residente por filtro de búsquda
         Route::get('agenda/empleado', [EmpleadoController::class, 'itinerario'])->name('itinerario.empleado'); ///itinerario de empleados
-
+        Route::get('agenda/imprimir/{fecha}', [EmpleadoController::class, 'imprimirAgenda'])->name('itinerario.imprimir'); ///itinerario de empleados
 
     });
 
