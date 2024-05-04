@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tarea;
 use App\Models\Residente;
 use App\Models\Empleado;
+use Dompdf\Dompdf;
 
 //exportar clase Date
 
@@ -25,6 +26,9 @@ class TareaController extends Controller
     public function create(string $id_residente)
     {
         $residente  = Residente::find($id_residente);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
         $auxiliares = Empleado::where('departamento_id', 5)->get(); //empleados del departamento 5, auxiliares
 
         return view('enfermeria.formTareas', ['residente' => $residente, 'auxiliares' => $auxiliares]); //envia al formulario de creación de tareas junto con el residente y los auxiliares.
@@ -66,6 +70,9 @@ class TareaController extends Controller
     {
         $tareas    = Tarea::where('residente_id', $Id_residente)->orderByDesc('fecha')->orderBy('hora')->get();
         $residente = Residente::find($Id_residente);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         $auxiliares = Empleado::where('departamento_id', 5)->get(); //empleados del departamento 5, auxiliares
 
@@ -82,10 +89,41 @@ class TareaController extends Controller
         $tareas = Tarea::where('fecha', $fechaActual)->orderByDesc('fecha')->orderBy('hora')->get();
 
         $auxiliar = Empleado::find($auxiliar_id);
+        if (!$auxiliar) { //si no existe el auxiliar volver atrás
+            return redirect()->back();
+        }
 
         $auxiliares = Empleado::where('departamento_id', 5)->get(); //empleados del departamento 5, auxiliares
 
         return view('auxiliar.tareas', ['tareas' => $tareas, 'auxiliares' => $auxiliares, 'auxiliar' => $auxiliar]); //envialos a la vista el residente y sus tareas @@@@@borrar auxiliares, solo para pruebas
+    }
+
+
+    public function imprimirAuxiliar(){
+
+
+        if(auth()->user()->departamento_id != 5) { //no es auxiliar
+            return redirect()->back();
+        }
+        $auxiliar_id=auth()->user()->empleado->id;
+        $fechaActual = now()->toDateString(); //Fecha de actual en string para compararla
+
+        $tareas = Tarea::where('auxiliar_id', $auxiliar_id)->get();
+        $tareas = Tarea::where('fecha', $fechaActual)->orderByDesc('fecha')->orderBy('hora')->get();
+
+        $auxiliar = Empleado::find($auxiliar_id);
+
+        $auxiliares = Empleado::where('departamento_id', 5)->get(); //empleados del departamento 5, auxiliares
+
+       $html = view('imprimir.auxiliar', ['tareas' => $tareas, 'auxiliares' => $auxiliares, 'auxiliar' => $auxiliar]); //envialos a la vista el residente y sus tareas @@@@@borrar auxiliares, solo para pruebas
+
+
+       $dompdf = new Dompdf();
+       $dompdf->loadHtml($html);
+       $dompdf->setPaper('A4', 'portrait');
+
+       $dompdf->render();
+       return $dompdf->stream('agenda.pdf', ['Attachment' => false]); //con true se descargaria automáticamente
     }
 
     /**
@@ -98,6 +136,9 @@ class TareaController extends Controller
         $usuario = auth()->user(); //verificar si es el creador de la sesión
 
         $tarea      = Tarea::find($id);
+        if (!$tarea) { //si no existe la tearea volver atrás
+            return redirect()->back();
+        }
         $residente  = $tarea->residente;
         $auxiliares = Empleado::where('departamento_id', 5)->get(); //empleados del departamento 5, auxiliares
 
@@ -141,6 +182,9 @@ class TareaController extends Controller
     {
         //
         $tarea = Tarea::find($id);
+        if (!$tarea) { //si no existe la tarea volver atrás
+            return redirect()->back();
+        }
 
         $tarea->delete();
 

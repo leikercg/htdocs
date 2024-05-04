@@ -22,6 +22,9 @@ class VisitaController extends Controller
     public function create(string $id_residente)
     {
         $residente = Residente::find($id_residente);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         return view('medico.formVisitas', ['residente' => $residente]);
     }
@@ -58,6 +61,9 @@ class VisitaController extends Controller
     {
         $visitas   = Visita::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
         $residente = Residente::find($Id_residente);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         return view('medico.visitas', ['visitas' => $visitas, 'residente' => $residente]); //envialos a la vista el residente y sus visitas
 
@@ -73,6 +79,9 @@ class VisitaController extends Controller
 
         $residente = Residente::find($residente_id);
         $visita    = Visita::find($id);
+        if (!$residente || !$visita) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         if($usuario->id != $visita->empleado->user->id) {
             abort(403, 'No tienes autorización'); //mostrar vista de pagina no atorizada
@@ -113,6 +122,9 @@ class VisitaController extends Controller
     {
         //
         $visita = Visita::find($id);
+        if (!$visita) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
         $visita->delete();
 
         $residente = Residente::find($visita->residente_id);

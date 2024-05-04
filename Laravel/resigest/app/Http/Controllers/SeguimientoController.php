@@ -46,7 +46,12 @@ class SeguimientoController extends Controller
     {
         //
 
-        $residente = Residente::find($Id_residente); //encontramos el residente
+        $residente = Residente::find($Id_residente); //encontramos el residente en caso no existir ese departamento o residente volver atrás
+        if (!$residente || !in_array($Id_departamento, [1, 2, 3, 4, 5])) {
+            return redirect()->back();
+        }
+
+
 
         $esFamiliar = true; //creamos una variable booleana
 

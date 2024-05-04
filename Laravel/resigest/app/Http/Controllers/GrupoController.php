@@ -26,6 +26,9 @@ class GrupoController extends Controller
         //
 
         $residente = Residente::find($residente_id);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         $grupos = $residente->grupos->sortByDesc('fecha');
         return view('terapeuta.residenteGrupos', ['grupos' => $grupos, 'residente' => $residente]);
@@ -52,8 +55,8 @@ class GrupoController extends Controller
         $fechaMinima = date('d-m-Y', strtotime('-1 day'));
 
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
-            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
-            'residentes' =>['required'],
+            'fecha'      => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
+            'residentes' => ['required'],
         ]);
         //creación de grupo;
         $grupo              = new Grupo();
@@ -96,6 +99,9 @@ class GrupoController extends Controller
 
         $residentes = Residente::where('estado', 'alta')->get();
         $grupo      = Grupo::find($id);
+        if (!$grupo) { //si no existe el grupo volver atrás
+            return redirect()->back();
+        }
 
         if($usuario->id != $grupo->empleado->user->id) {
             abort(403, 'No tienes autorización'); //mostrar vista de pagina no atorizada
@@ -116,8 +122,8 @@ class GrupoController extends Controller
         $fechaMinima = date('d-m-Y', strtotime('-1 day'));
 
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
-            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
-            'residentes' =>['required'],
+            'fecha'      => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
+            'residentes' => ['required'],
         ]);
 
         //creación de grupo;
@@ -149,6 +155,9 @@ class GrupoController extends Controller
     {
         //
         $grupo = Grupo::find($id);
+        if (!$grupo) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
         $grupo->delete();
 
         $grupos = Grupo::orderByDesc('fecha')->get();
@@ -160,8 +169,7 @@ class GrupoController extends Controller
 
     public function destroyPivot(string $id, string $residente_id)
     {
-        //
-        $grupo = Grupo::find($id);
+
         //borar las relaciones
         DB::table('residentes_grupos')->where('grupo_id', $id)->where('residente_id', $residente_id)->delete(); // lo hacemos por sql->> seguir probando detach
 

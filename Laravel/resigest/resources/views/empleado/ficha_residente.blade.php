@@ -43,7 +43,7 @@
 
         <!--Lista de  seguimientos-->
         <div class="col-10 col-md-4 offset-1 offset-md-0 my-2 align-items-center justify-content-center d-flex">
-            <div class="list-group gap-4">
+            <div class="list-group gap-1">
                 <a href="{{ route('editar.seguimiento', ['id' => $residente->id, 'departamento_id' => 1]) }}"
                     class="list-group-item list-group-item-action list-group-item-primary">
                     {{ __('Seguimiento del departamento de medicina') }}

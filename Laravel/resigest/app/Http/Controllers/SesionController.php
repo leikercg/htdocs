@@ -22,6 +22,9 @@ class SesionController extends Controller
     public function create(string $id_residente)
     {
         $residente = Residente::find($id_residente);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         return view('fisioterapeuta.formSesiones', ['residente' => $residente]);
     }
@@ -57,6 +60,9 @@ class SesionController extends Controller
     {
         $sesiones  = Sesion::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
         $residente = Residente::find($Id_residente);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         return view('fisioterapeuta.sesiones', ['sesiones' => $sesiones, 'residente' => $residente]); //envialos a la vista el residente y sus sesiones
 
@@ -73,6 +79,9 @@ class SesionController extends Controller
 
         $residente = Residente::find($residente_id);
         $sesion    = Sesion::find($id);
+        if (!$residente || !$sesion) { //si no existe el residente o la sesión volver atrás
+            return redirect()->back();
+        }
 
         if($usuario->id != $sesion->empleado->user->id) {
             abort(403, 'No tienes autorización'); //mostrar vista de pagina no atorizada
@@ -114,6 +123,9 @@ class SesionController extends Controller
     {
         //
         $sesion = Sesion::find($id);
+        if (!$sesion) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
         $sesion->delete();
 
         $residente = Residente::find($sesion->residente_id);

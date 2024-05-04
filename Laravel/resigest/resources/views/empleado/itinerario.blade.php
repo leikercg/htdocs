@@ -15,7 +15,7 @@
     </div>
     <div class="row">
         <div class="col-12 text-center">
-            <a href="{{route('itinerario.imprimir',['fecha'=>$fecha])}}"><button>imprimir</button></a>
+            <a href="{{route('itinerario.imprimir',['fecha'=>$fecha])}}"><button class="btn btn-dark">imprimir</button></a>
         </div>
     </div>
     <br>
@@ -23,7 +23,7 @@
         <form method="GET" action="{{ route('itinerario.empleado') }}">
             <label for="fecha" class="form-label">{{ __('Selecciona una fecha') }}:</label>
             <input type="date" id="fecha" name="fecha">
-            <button type="submit">{{ __('Buscar') }}</button>
+            <button class="btn btn-primary" type="submit">{{ __('Buscar') }}</button>
         </form>
     </div>
     <br><br>

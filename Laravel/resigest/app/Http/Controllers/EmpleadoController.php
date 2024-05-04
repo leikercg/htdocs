@@ -154,7 +154,7 @@ class EmpleadoController extends Controller
         $dompdf->setPaper('A4', 'portrait');
 
         $dompdf->render();
-        return $dompdf->stream('agenda.pdf', ['Attachment' => 0]);
+        return $dompdf->stream('agenda.pdf', ['Attachment' => false]); //con true se descargaria automáticamente
     }
 
 }

@@ -1,22 +1,27 @@
-@extends('master')
-@section('title', __('Tareas del auxiliar') . ' ' . $auxiliar->nombre . ' ' . $auxiliar->apellidos)
-@section('content')
-    <div class="row">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="">{{ __('Lista de tareas') }}</a></li>
-            </ol>
-        </nav>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Tareas auxiliar</title>
+    <style>
+        /* Estilo personalizado para agregar espacios entre las columnas */
+        th,
+        td {
+            padding-left: 30px; /* Ajusta el espacio de relleno según sea necesario */
+        }
+    </style>
+</head>
+
+<body>
     @php
         //creamos una varibale con la fecha del dia de hoy
         $hoy = now()->format('d-m-Y');
     @endphp
-    <div class="row">
-        <div class="col-12 text-center">
-            <a href="{{route('imprimir.auxiliar')}}"><button class="btn btn-dark">imprimir</button></a>
-        </div>
-    </div>
     <div>{{ __('Fecha') }}: {{ $hoy }}</div>
     <div class="row justify-content-center text-center">
         <h2>{{ __('TAREAS A REALIZAR HOY POR') }}: <br> {{ $auxiliar->nombre }} {{ $auxiliar->apellidos }}</h2>
@@ -27,8 +32,6 @@
                 <table class="table table-hover text-center align-middle">
                     <thead>
                         <tr>
-                            <th scope="col">{{ __('ID') }}</th>
-                            <th scope="col">{{ __('Fecha') }}</th>
                             <th scope="col">{{ __('Hora') }}</th>
                             <th scope="col">{{ __('Enfermero/a') }}</th>
                             <th scope="col">{{ __('Residente') }}</th>
@@ -38,8 +41,6 @@
                     <tbody>
                         @foreach ($tareas as $tarea)
                             <tr>
-                                <td>{{ $tarea->id }}</td>
-                                <td>{{ date('d/m/Y', strtotime($tarea->fecha)) }} </td>
                                 <td>{{ $tarea->hora }}</td>
                                 <td>{{ $tarea->empleado->nombre }} {{ $tarea->empleado->apellidos }}</td>
                                 <td>{{ $tarea->residente->nombre }} {{ $tarea->residente->apellidos }}</td>
@@ -51,5 +52,6 @@
             </div>
         </div>
     </div>
+</body>
 
-@endsection
+</html>

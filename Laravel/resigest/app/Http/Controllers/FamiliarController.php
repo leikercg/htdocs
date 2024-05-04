@@ -103,6 +103,9 @@ class FamiliarController extends Controller
     public function destroy(string $id)
     {
         $familiar = Familiar::find($id);
+        if (!$familiar) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
         $familiar->delete();
 
         // Empleado del 1 al 5

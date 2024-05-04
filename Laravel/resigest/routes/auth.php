@@ -158,6 +158,8 @@ Route::middleware('localization')->group(function () { //usamos el middleware pa
         //////////////////////////////// Rutas de auxiliares ///////////////////////////////
 
         Route::get('tareas/{id}', [TareaController::class, 'showAuxiliar'])->name('auxiliar.tareas');
+        Route::get('agenda/imprimir/auxiliar', [TareaController::class, 'imprimirAuxiliar'])->name('imprimir.auxiliar'); ///itinerario de empleados
+
 
     });
 

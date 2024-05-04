@@ -23,6 +23,10 @@ class CuraController extends Controller
     {
         $residente = Residente::find($id_residente);
 
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
+
         return view('enfermeria.formCuras', ['residente' => $residente]);
     }
 
@@ -36,7 +40,7 @@ class CuraController extends Controller
         $fechaMinima = date('d-m-Y', strtotime('-1 day'));
 
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
-            'fecha' => ['date', 'after:'.$fechaMinima, 'before:' . $fechaLimite],//fecha minima hoy, fecha máxima dentro de un mes
+            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
         ]);
 
         $residente          = Residente::find($request->residente_id);
@@ -59,8 +63,12 @@ class CuraController extends Controller
      */
     public function show(string $Id_residente)
     {
+
         $curas     = Cura::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
         $residente = Residente::find($Id_residente);
+        if (!$residente) {//si no existe volver atrás
+            return redirect()->back();
+        }
 
         return view('enfermeria.curas', ['curas' => $curas, 'residente' => $residente]); //envialos a la vista el residente y sus curas
 
@@ -76,7 +84,9 @@ class CuraController extends Controller
 
         $residente = Residente::find($residente_id);
         $cura      = Cura::find($id);
-
+        if (!$residente || !$cura) {//si no existe la cura o el residente volver atrás
+            return redirect()->back();
+        }
         if($usuario->id != $cura->empleado->user->id) {
             abort(403, 'No tienes autorización'); //mostrar vista de pagina no atorizada
 
@@ -95,7 +105,7 @@ class CuraController extends Controller
         $fechaMinima = date('d-m-Y', strtotime('-1 day'));
 
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
-            'fecha' => ['date', 'after:'.$fechaMinima, 'before:' . $fechaLimite],//fecha minima hoy, fecha máxima dentro de un mes
+            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
         ]);
 
         $cura = Cura::find($id);
@@ -119,6 +129,10 @@ class CuraController extends Controller
     {
         //
         $cura = Cura::find($id);
+        if (!$cura) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
+
         $cura->delete();
 
         $residente = Residente::find($cura->residente_id);

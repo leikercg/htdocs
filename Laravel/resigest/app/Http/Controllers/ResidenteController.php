@@ -161,11 +161,9 @@ class ResidenteController extends Controller
     public function show(string $id)
     {
         $residente = Residente::find($id);
-
-        /* if (!$residente) {
-             // Manejar el caso en el que el residente no se encuentre
-             return redirect()->route('pagina_de_error');
-         }*/
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         // Obtener los familiares del residente
 
@@ -231,6 +229,9 @@ class ResidenteController extends Controller
     public function edit(string $id)
     {
         $residente = Residente::find($id);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
 
         ////////REVISAR validado ya en middleware////
         if(auth()->check() && auth()->user()->departamento_id == 7) {//comprobar si hay un usuario autenticado y si es del departamento 7 (gerencia) usar esta ruta:
@@ -265,6 +266,9 @@ class ResidenteController extends Controller
     public function destroy(string $id)//NO USADA
     {
         $residente = Residente::find($id);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
         $residente->delete();
         return redirect()->route('lista.residentes')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; ////revisar
     }
@@ -273,6 +277,9 @@ class ResidenteController extends Controller
     {
         $fecha       = $request->input('fecha', now()->toDateString()); // Si no se especifica la fecha, se establece como la fecha de hoy
         $residente   = Residente::find($Id_residente);
+        if (!$residente) { //si no existe el residente volver atrás
+            return redirect()->back();
+        }
         $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
 
         $sesiones = $residente->sesiones->where('fecha', $fecha); //comparar fechas

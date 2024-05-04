@@ -20,7 +20,7 @@
         <form method="GET" action="{{ route('itinerario.residente', ['id' => $residente->id]) }}">
             <label for="fecha" class="form-label">{{__('Selecciona una fecha')}}:</label>
             <input type="date" id="fecha" name="fecha">
-            <button type="submit">{{__('Buscar')}}</button>
+            <button class="btn btn-primary" type="submit">{{__('Buscar')}}</button>
         </form>
     </div>
     <br><br>
