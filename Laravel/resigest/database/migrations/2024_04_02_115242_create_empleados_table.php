@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('apellidos', 255)->nullable(false);
             $table->string('direccion', 255)->nullable(false);
             $table->string('telefono', 9)->nullable(false);
+            $table->string('estado',255)->default('alta')->nullable(false);
             $table->unsignedBigInteger('departamento_id');
             $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
             $table->timestamps();

@@ -1,9 +1,19 @@
+<div class="fila">
+    <a class="columna"
+        href="{{ route('idiom', ['locale' => 'es']) }}">
+        <img src="{{ asset('images/spain.webp') }}" class="bandera" alt="">
+    </a>
+    <a class="columna" href="{{ route('idiom', ['locale' => 'en']) }}"><img
+            src="{{ asset('images/uk.png') }}" class="bandera" alt=""></a>
+</div>
+@if (session('error'))
+        <div class="row text-center">
+           <b>{{ session('error') }}</b><br> <br> </div>
+@endif
+
+
 <x-guest-layout>
     <!-- Session Status -->
-<div class="row text-center ">
-    <a class="idioma" style="color: rgb(255, 0, 0)" href="{{route('idiom',['locale'=>'en'])}}">English-</a>
-    <a class="idioma" style="color: rgb(0, 0, 0)" href="{{route('idiom',['locale'=>'es'])}}">-Español</a>
-</div>
 
     <img src="{{ asset('images/logo-FRA.png') }}" alt= "Logo de Fundación Rey Ardid" />
 

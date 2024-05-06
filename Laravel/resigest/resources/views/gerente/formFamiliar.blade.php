@@ -80,7 +80,7 @@
                     <div class="mt-4">
                         <label for="telefono">{{ __('Teléfono') }}</label>
                         <input id="telefono" class="block mt-1 w-full form-control" type="text" name="telefono"
-                            maxlength="9" placeholder="623456789" value="{{ $familiar->telefono }}" required />
+                            maxlength="9" pattern="[0-9]{9}" placeholder="623456789" value="{{ $familiar->telefono }}" required />
                     </div>
 
                     <!-- Departamento -->

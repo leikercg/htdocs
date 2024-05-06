@@ -255,6 +255,7 @@ class ResidenteController extends Controller
         $residente->fecha_nac  = $request->fecha;
         $residente->estado     = $request->estado;
         $residente->fecha_nac  = $request->fecha_nac;
+        $residente->contacto = $request->contacto;
         $residente->save();
 
         return redirect()->route('lista.residentes')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; //no enviamos vistas para evitar el reenvio del formulario. Ruta de curas del residente.

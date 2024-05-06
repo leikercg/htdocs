@@ -19,6 +19,7 @@ class ResidentesSeeder extends Seeder
             'apellidos' => 'González',
             'habitacion' => 101,
             'estado'=>'alta',
+            'contacto' =>'666666666',
             'fecha_nac' => '1940-05-15',
             'created_at' => '2011-11-11',
         ]);
@@ -29,6 +30,7 @@ class ResidentesSeeder extends Seeder
             'apellidos' => 'Martínez',
             'habitacion' => 102,
             'estado'=>'alta',
+            'contacto' =>'999999999',
             'fecha_nac' => '1935-09-20',
             'created_at' => '2018-11-11',
         ]);
@@ -38,6 +40,7 @@ class ResidentesSeeder extends Seeder
             'apellidos' => 'Bajado',
             'habitacion' => 103,
             'estado'=>'baja',
+            'contacto' =>'696969696',
             'fecha_nac' => '1900-09-23',
             'created_at' => '2018-11-11',
         ]);

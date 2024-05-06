@@ -55,6 +55,16 @@
                         <input type="text" name="departamento" id="departamento"
                             value="{{ $empleado->departamento->nombre }}" readonly class="form-control">
                     </div>
+                    <div class="mt-4">
+                        <label for="estado" class="form-label">{{ __('Estado:') }}</label>
+                        <select class="form-select" id="estado" name="estado">
+                            <option value="alta">Alta</option>
+                            @isset($empleado)
+                                <option value="baja" @if ($empleado->estado == 'baja') selected @endif>
+                                    Baja</option>
+                            @endisset
+                        </select>
+                    </div>
                     <br><br>
                     <button type="submit" class="btn btn-primary"
                         onclick="return confirm('{{ __('¿Estás seguro de que deseas modificar esta empleado?') }}')">{{ __('MODIFICAR') }}</button>

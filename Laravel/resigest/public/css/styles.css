@@ -62,3 +62,11 @@ footer {
 .bandera{
     width: 20px;
 }
+.fila{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.fila .columna{
+    margin-right: 20px;
+}

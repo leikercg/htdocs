@@ -44,7 +44,7 @@ class EmpleadoController extends Controller
 
     public function buscar(Request $request)
     {
-        $empleados = Empleado::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con el nombre ó apellido
+        $empleados = Empleado::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('estado')->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con el nombre ó apellido
 
         return view('gerente.familiar_empleado', ['empleados' => $empleados]);
     }
@@ -69,6 +69,8 @@ class EmpleadoController extends Controller
 
         $empleado->telefono  = $request->telefono;
         $empleado->direccion = $request->direccion;
+        $empleado->estado = $request->estado;
+
         $empleado->save();
 
         // Empleado del 1 al 5

@@ -93,11 +93,12 @@ class RegisteredUserController extends Controller
 
     public function elegir()//esto nos envia la vista de gestion de usuarios para crear, o modificar usuarios de diferentes tipos
     {
-        // Empleado del 1 al 5
-        $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();
+        // Empleado del 1 al 5 ordenados por estado, apellido y nombre
+        $empleados = Empleado::whereBetween('departamento_id', [1, 5])->orderBy('estado')->orderBy('apellidos')->orderBy('nombre')->get();
 
-        // Obtener los usuarios familiares (departamento_id 6)
-        $familiares = Familiar::where('departamento_id', 6)->get();
+
+        // Obtener los usuarios familiares (departamento_id 6) ordenados por apellido y nombre
+        $familiares = Familiar::where('departamento_id', 6)->orderBy('apellidos')->orderBy('nombre')->get();
 
         return view('gerente.familiar_empleado', ['empleados' => $empleados, 'familiares' => $familiares]);
     }

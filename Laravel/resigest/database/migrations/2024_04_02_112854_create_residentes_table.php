@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('habitacion')->nullable(false);
             $table->string('estado')->nullable(false);
             $table->date('fecha_nac')->nullable(false);
+            $table->string('contacto', 9)->nullable(false);
             $table->timestamps();
         });
     }

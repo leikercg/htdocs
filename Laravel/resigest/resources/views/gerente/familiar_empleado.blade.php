@@ -23,7 +23,7 @@
                 <form action="{{ route('buscar.empleado') }}" class="mt-4">
                     <div class="mb-3">
                         <label for="busqueda" class="form-label">{{ __('Búsqueda') }}</label>
-                        <input type="text" class="form-control" id="busqueda" name="busqueda">
+                        <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="{{__('Buscar por coincidencia en nombre o apellido')}}">
                     </div>
                     <button type="submit" class="btn btn-primary">{{ __('Buscar') }}</button>
                     <p>{{ __('Para ver la lista completa despues de una búsqueda pulse enviar') }}</p>
@@ -43,6 +43,7 @@
                                 <th scope="col">{{ __('Departamento') }}</th>
                                 <th scope="col">{{ __('Dirección') }}</th>
                                 <th scope="col">{{ __('Teléfono') }}</th>
+                                <th scope="col">{{ __('Estado') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +55,7 @@
                                     <td>{{ $empleado->departamento->nombre }}</td>
                                     <td>{{ $empleado->direccion }}</td>
                                     <td>{{ $empleado->telefono }}</td>
+                                    <td>{{ $empleado->estado }}</td>
                                     <td>
                                         <a href="{{ route('editar.empleado', ['id' => $empleado->id]) }}"
                                             class="btn btn-primary">{{ __('Modificar') }}</a>
@@ -79,7 +81,7 @@
                 <form action="{{ route('buscar.familiar') }}" class="mt-4">
                     <div class="mb-3">
                         <label for="busqueda" class="form-label">{{ __('Búsqueda') }}</label>
-                        <input type="text" class="form-control" id="busqueda" name="busqueda">
+                        <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="{{__('Buscar por coincidencia en nombre o apellido')}}">
                     </div>
                     <button type="submit" class="btn btn-primary">{{ __('Buscar') }}</button>
                     <p>{{ __('Para ver la lista completa despues de una búsqueda pulse enviar') }}</p>
