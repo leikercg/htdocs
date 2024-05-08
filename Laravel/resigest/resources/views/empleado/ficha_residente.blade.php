@@ -24,6 +24,8 @@
                     <p><b>{{ __('DNI') }}:</b> {{ $residente->dni }}</p>
                     <p><b>{{ __('Edad') }}:</b> {{ $residente->edad }}</p>
                     <p><b>{{ __('Habitación') }}:</b> {{ $residente->habitacion }}</p>
+                    <p><b>{{ __('Contacto') }}:</b> {{ $residente->contacto }}</p>
+                    <p><b>{{ __('Estado') }}:</b> {{ $residente->estado }}</p>
                     <p><b>{{ __('Fecha de nacimiento') }}:</b> {{ date('d/m/Y', strtotime($residente->fecha_nac)) }}</p>
                     <p><b>{{ __('Fecha de ingreso') }}:</b> {{ date('d/m/Y', strtotime($residente->created_at)) }}</p>
                     <h5>{{ __('Familiares') }}:</h5>

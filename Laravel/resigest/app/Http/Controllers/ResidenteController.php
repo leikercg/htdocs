@@ -121,6 +121,7 @@ class ResidenteController extends Controller
         $residente->habitacion = $request->habitacion;
         $residente->fecha_nac  = $request->fecha;
         $residente->estado     = $request->estado;
+        $residente->contacto     = $request->contacto;
         $residente->fecha_nac  = $request->fecha_nac;
 
         $residente->save();

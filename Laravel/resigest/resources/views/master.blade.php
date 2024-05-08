@@ -19,7 +19,7 @@
         <div class="row justify-content-end">
             <a class="col-1 d-flex justify-content-center align-items-center"
                 href="{{ route('idiom', ['locale' => 'es']) }}">
-                <img src="{{ asset('images/spain.webp') }}" class="bandera" alt="">
+                <img src="{{ asset('images/spain.png') }}" class="bandera" alt="">
             </a>
             <a class="col-1 d-flex  align-items-center" href="{{ route('idiom', ['locale' => 'en']) }}"><img
                     src="{{ asset('images/uk.png') }}" class="bandera" alt=""></a>

@@ -1,7 +1,7 @@
 <div class="fila">
     <a class="columna"
         href="{{ route('idiom', ['locale' => 'es']) }}">
-        <img src="{{ asset('images/spain.webp') }}" class="bandera" alt="">
+        <img src="{{ asset('images/spain.png') }}" class="bandera" alt="">
     </a>
     <a class="columna" href="{{ route('idiom', ['locale' => 'en']) }}"><img
             src="{{ asset('images/uk.png') }}" class="bandera" alt=""></a>
