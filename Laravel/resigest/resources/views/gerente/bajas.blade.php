@@ -1,3 +1,4 @@
+{{--Lista de residentes de baja--}}
 @extends('master')
 @section('title', __('Home'))
 @section('content')

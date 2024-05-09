@@ -1,3 +1,4 @@
+{{--Vista de residentes como admin--}}
 @extends('master')
 @section('title', __('Home'))
 @section('content')

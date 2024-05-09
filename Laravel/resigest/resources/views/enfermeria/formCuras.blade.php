@@ -1,3 +1,4 @@
+{{--Lista de modificación y creación de curas--}}
 @extends('master')
 @section('title', 'Crear cura para ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
@@ -52,6 +53,7 @@
                                 value="{{ $cura->id ?? '' }}" @isset($cura) readonly @endisset>
                         </div>
                     @endisset
+                    {{--enfermero--}}
 
                     <div class="mb-3">
                         <label for="enfermero" class="form-label">{{__('Enfermero/a')}}:</label>
@@ -61,6 +63,8 @@
                         <input type="text" name="empleado_id" id="" hidden
                             value="{{ auth()->user()->empleado->id }}">
                     </div>
+                    {{--Zona--}}
+
                     <div class="mb-3">
                         <label for="zona" class="form-label">{{__('Zona')}}</label>
                         <input type="text" class="form-control" id="zona" name="zona"
@@ -69,18 +73,23 @@
                                 disabled
                             @endisset>
                     </div>
+                    {{--Estado--}}
+
                     <div class="mb-3">
                         <label for="estado" class="form-label">{{__('Estado')}}</label>
                         <input type="text" class="form-control" id="estado" name="estado" required
                             value="{{ old('estado', $cura->estado ?? '') }}">
                     </div>
+                    {{--FEcha--}}
+
                     <div class="mb-3">
                         <label for="fecha" class="form-label">{{__('Fecha')}}</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
                             value="{{ old('fecha', $cura->fecha ?? '') }}">
                         <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
-
                     </div>
+                    {{--Hora--}}
+
                     <div class="mb-3">
                         <label for="hora" class="form-label">{{__('Hora')}}</label>
                         <input type="time" class="form-control" id="hora" name="hora" required

@@ -1,3 +1,4 @@
+{{-- Vista del itinerario del residente--}}
 @extends('master')
 @section('title', __('Itinerario'))
 @section('content')
@@ -27,10 +28,11 @@
         </form>
     </div>
     <br><br>
-    <p>{{ __('Itinerario de') }} {{ date('d/m/Y', strtotime($fecha)) }}:</p>
+    <p>{{ __('Itinerario de') }} {{ date('d/m/Y', strtotime($fecha)) }}:</p> {{--Formato de fecha --}}
     <div class="row justify-content-center">
         <div class="col-10 col-md-8">
             <ol class="list-group list-group-numbered">
+                {{--Recorre todas las tareas del dia de hoy y se muestran--}}
                 @foreach ($programacion as $actividad)
                     @if ($actividad->fecha == $fecha)
                         @if ($actividad->empleado->departamento->id == 1)

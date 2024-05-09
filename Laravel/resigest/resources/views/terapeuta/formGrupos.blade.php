@@ -1,3 +1,4 @@
+{{--formulario de edición y creación de grupos--}}
 @extends('master')
 @section('title', __('Crear Usuario'))
 @section('content')

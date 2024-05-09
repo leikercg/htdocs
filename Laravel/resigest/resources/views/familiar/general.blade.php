@@ -1,3 +1,4 @@
+{{--Vista de la lista de residentes de un familiar--}}
 @extends('master')
 @section('title', 'Familiares')
 

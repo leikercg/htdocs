@@ -8,7 +8,7 @@ html {
 }
 
 
-header {
+header { /* Estilo del header*/
     background-color: rgb(47, 145, 194);
     min-height: 20vh;
 
@@ -20,21 +20,21 @@ main {
     min-height: 60vh;
 }
 
-footer {
+footer {  /* Estilo del footer*/
     background-color: rgb(47, 145, 194);
     min-height: 20vh;
 }
 
-.breadcrumb-item a {
-    /*dar estilo al breadcrumbs*/
+.breadcrumb-item a {/* Estilo al breadcrumbs*/
+
     color: rgb(47, 145, 194);
     text-decoration: none;
     font-weight: bold;
 }
 
 
-/* Estilos para el botón flotante */
-.floating-button {
+
+.floating-button {/* Estilos para el botón flotante */
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -52,21 +52,24 @@ footer {
     z-index: 99;
 }
 
-.floating-button:hover {
+.floating-button:hover { /*Color del botoón al estar sobre él*/
     background-color: #2e2f30;
 }
 
-#logo{
+#logo {/* Ancho del logo */
     width: 150px;
 }
-.bandera{
+
+.bandera {/* Tamaño de las banderas*/
     width: 20px;
 }
-.fila{
+
+.fila {
     display: flex;
     justify-content: end;
     align-items: center;
 }
-.fila .columna{
+
+.fila .columna {
     margin-right: 20px;
 }

@@ -1,3 +1,4 @@
+{{--Vista del formulario de edición y modificacion de una sesión--}}
 @extends('master')
 @section('title', __('Crear sesión para') . ' ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
@@ -45,6 +46,7 @@
                     <form action="{{ route('almacenar.sesion') }}" method="POST">
                     @endisset
                     @csrf
+                    {{--Id--}}
                     @isset($sesion)
                         <div class="mb-3">
                             <label for="id" class="form-label">{{ __('ID:') }}</label>
@@ -52,7 +54,7 @@
                                 value="{{ $sesion->id ?? '' }}" @isset($sesion) readonly @endisset>
                         </div>
                     @endisset
-
+                    {{--Fisioterapeuta--}}
                     <div class="mb-3">
                         <label for="fisio" class="form-label">{{ __('Fisio') }}</label>
                         <input type="text" class="form-control" id="fisio" name="nombre"
@@ -61,11 +63,13 @@
                         <input type="text" name="empleado_id" id="" hidden
                             value="{{ auth()->user()->empleado->id }}">
                     </div>
+                    {{--Fecha--}}
                     <div class="mb-3">
                         <label for="fecha" class="form-label">{{ __('Fecha:') }}</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" required
                             value="{{ $sesion->fecha ?? '' }}">
                     </div>
+                    {{--Hora--}}
                     <div class="mb-3">
                         <label for="hora" class="form-label">{{ __('Hora:') }}</label>
                         <input type="time" class="form-control" id="hora" name="hora" required

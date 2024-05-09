@@ -1,3 +1,4 @@
+{{--Vista de la lista de sesiones de residente--}}
 @extends('master')
 @section('title', __('Sesiones de ') . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
@@ -12,9 +13,9 @@
 </div>
 @php
 //creamos una varibale con la fecha del dia de hoy
-$hoy = now()->format('Y-m-d');
+$hoy = now()->format('d-m-Y');
 @endphp
-   <div>{{$hoy}}</div>
+   <div><b>{{$hoy}}</b></div>
     <div class="row justify-content-center">
         <div class="col-4 col-md-2 text-center">
             <a href="{{ route('crear.sesion', ['residente_id' => $residente->id]) }}" class="btn btn-success">{{ __('AÑADIR SESIÓN') }}</a>

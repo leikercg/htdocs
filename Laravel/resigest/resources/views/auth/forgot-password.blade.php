@@ -27,3 +27,6 @@
 <br>
 <a href="{{route('login')}}" style="background-color:white" >Volver a iniciar sesión</a>
 </x-guest-layout>
+
+
+{{--Vista de recuperación de contraseña--}}

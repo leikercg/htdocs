@@ -1,3 +1,4 @@
+{{--Lista de empleados y familiares--}}
 @extends('master')
 @section('title', __('Gestionar Residente'))
 @section('content')
@@ -111,6 +112,7 @@
                                     <td>{{ $familiar->nombre }}</td>
                                     <td>{{ $familiar->departamento->nombre }}</td>
                                     <td>
+                                        {{--mostramos todos sus residentes internos--}}
                                         @forelse ($familiar->residentes as $residente)
                                             {{ $residente->nombre }} {{ $residente->apellidos }}@if (!$loop->last)
                                                 <br>

@@ -29,3 +29,5 @@
         </form>
     </div>
 </x-guest-layout>
+
+{{--Vista para confirmar e-aml en el primer accesso--}}

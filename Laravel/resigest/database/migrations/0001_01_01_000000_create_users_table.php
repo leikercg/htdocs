@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) { //Creación tabla de usuarios añadiendo otros campos necesarios
             $table->id();
             $table->char('dni', 9)->unique();
             $table->string('name');

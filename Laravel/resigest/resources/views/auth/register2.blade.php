@@ -50,3 +50,6 @@
         </div>
     </form>
 </x-guest-layout>
+
+
+{{--Vista no usada--}}

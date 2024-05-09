@@ -1,3 +1,4 @@
+{{--Vista de un segumiento de residente--}}
 @extends('master')
 @section('title', $residente->nombre . ' ' . $residente->apellidos)
 
@@ -20,6 +21,7 @@
                     <div class="col-12 text-center">
                         <div class="list-group">
                             <div
+                            {{--Dependiendo del segumineto tiene un color el titulo--}}
                                 class="list-group-item
                 @if ($seguimiento->departamento->id == 1) list-group-item-primary
                 @elseif ($seguimiento->departamento->id == 2) list-group-item-secondary
@@ -42,6 +44,7 @@
         <div class="col-10 col-sm-8">
             <form action="{{ route('actualizar.seguimiento', ['id' => $seguimiento->id]) }}" method="POST">
                 @method('put')
+                {{--Bucle de pruebas, BOOOOOOORRRRRRRRRRRRRRRRRRRRRRRAR--}}
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">{{ __('Seguimiento') }}:</label>

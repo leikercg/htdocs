@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
+    public function run(): void// este es el primer seeder que se ejecuta
     {
 
 
-        DB::table('departamentos')->insert([
+        DB::table('departamentos')->insert([ //Cellenamnos tabla de departamentos
             ['nombre' => 'Medicina'],
             ['nombre' => 'Enfermería'],
             ['nombre' => 'Fisioterapia'],
@@ -30,14 +30,14 @@ class DatabaseSeeder extends Seeder
         ]);
         // User::factory(10)->create();
 
-        User::factory()->create([
+        User::factory()->create([ // Creamos usuarios de cada campo
             'name' => 'Test User',
             'dni'=>'123456789',
             'email' => 'test@example.com',
             'departamento_id'=>1,
         ]);
 
-          // usuarios para pruebas
+          // Usuarios para pruebas
 
           //////ADMIN ////
           User::factory()->create([
@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder
             'departamento_id'=>5,
         ]);
 
-        ////////////////////familiares para pruebas
+        ////////////////////Familiares para pruebas
 
         User::factory()->create([
             'dni' => '1111111F1',
@@ -115,7 +115,7 @@ class DatabaseSeeder extends Seeder
             'departamento_id'=>6,
 
         ]);
-
+        // Se ejecutan los seeders en este orden
         $this->call(DepartamentosSeeder::class);
         $this->call(EmpleadosSeeder::class);
         $this->call(ResidentesSeeder::class);

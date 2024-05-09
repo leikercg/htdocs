@@ -1,3 +1,4 @@
+{{--Plantilla para imprimir la agenda de un empleado distinto a axiliar--}}
 <!DOCTYPE html>
 <html lang="en">
 

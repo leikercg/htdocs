@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up(): void//Creación tabla de residebtes
     {
         Schema::create('residentes', function (Blueprint $table) {
             $table->id();

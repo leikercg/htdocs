@@ -1,3 +1,4 @@
+{{--Formulario de creación de residentes--}}
 @extends('master')
 @section('title', __('Gestionar Residente'))
 @section('content')

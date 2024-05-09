@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up(): void //Creación tabla pivot de grupos de trabajo y residentes
     {
         Schema::create('residentes_grupos', function (Blueprint $table) {
             $table->id();

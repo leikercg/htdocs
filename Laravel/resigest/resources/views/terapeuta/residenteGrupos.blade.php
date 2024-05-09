@@ -1,3 +1,4 @@
+{{--Lista de grupos de un residente--}}
 @extends('master')
 @section('title', __('Gestionar grupos de') . ' ' . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
@@ -16,8 +17,9 @@
     </div>
 
     @php
-        $hoy = now()->format('Y-m-d'); // creamos la fehca de hoy
+        $hoy = now()->format('d-m-Y'); // creamos la fehca de hoy
     @endphp
+      <div><b>{{ $hoy }}</b></div>
     <div class="row justify-content-center">
         <div class="col-4 col-md-2 text-center">
             <a href="{{ route('crear.grupo') }}" class="btn btn-success">{{ __('CREAR GRUPO') }}</a>

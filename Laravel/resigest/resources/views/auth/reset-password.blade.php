@@ -37,3 +37,5 @@
         </div>
     </form>
 </x-guest-layout>
+
+{{--Vista para resetear contraseña--}}

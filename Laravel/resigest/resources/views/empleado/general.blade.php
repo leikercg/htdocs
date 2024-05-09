@@ -1,10 +1,11 @@
+{{-- Vista general de la lista de residentes --}}
 @extends('master')
 @section('title', __('Home'))
 
 
 @section('content')
     <div class="row">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="{{ __('breadcrumb') }}">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="{{ __('breadcrumb') }}"> {{-- BreadCrumbs--}}
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="">{{ __('Lista de residentes') }}</a></li>
             </ol>
@@ -39,7 +40,7 @@
                     </thead>
                     <tbody>
                         @foreach ($residentes as $residente)
-                            <tr onclick="window.location='{{ route('ficha.residente', $residente->id) }}';">
+                            <tr onclick="window.location='{{ route('ficha.residente', $residente->id) }}';"> {{-- Al pulsar en la fila nos lleva a la ruta especificada--}}
                                 <td>{{ $residente->id }}</td>
                                 <td>{{ $residente->apellidos }}</td>
                                 <td>{{ $residente->nombre }}</td>

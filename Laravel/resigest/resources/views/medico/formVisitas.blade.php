@@ -1,3 +1,4 @@
+{{--Vista de formulario de edicion y creación de visitas--}}
 @extends('master')
 @section('title', __('Crear visita para ') . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')

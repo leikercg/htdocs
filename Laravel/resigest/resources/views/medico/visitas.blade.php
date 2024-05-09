@@ -1,3 +1,4 @@
+{{--Vista de la lista de visitas de un residente--}}
 @extends('master')
 @section('title', __('Visitas de ') . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
@@ -14,7 +15,7 @@
         //creamos una varibale con la fecha del dia de hoy
         $hoy = now()->format('Y-m-d');
     @endphp
-    <div>{{ $hoy }}</div>
+    <div><b>{{ $hoy }}</b></div>
     <div class="row justify-content-center">
         <div class="col-4 col-md-2 text-center">
             <a href="{{ route('crear.visita', ['residente_id' => $residente->id]) }}" class="btn btn-success">{{ __('AÑADIR VISITA') }}</a>

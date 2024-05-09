@@ -1,10 +1,11 @@
+{{--Fila para mostrar error de aceso a empleados de baja--}}
 <div class="fila">
     <a class="columna"
         href="{{ route('idiom', ['locale' => 'es']) }}">
         <img src="{{ asset('images/spain.png') }}" class="bandera" alt="">
     </a>
     <a class="columna" href="{{ route('idiom', ['locale' => 'en']) }}"><img
-            src="{{ asset('images/uk.png') }}" class="bandera" alt=""></a>
+            src="{{ asset('images/uk.jpg') }}" class="bandera" alt=""></a>
 </div>
 @if (session('error'))
         <div class="row text-center">
@@ -15,6 +16,7 @@
 <x-guest-layout>
     <!-- Session Status -->
 
+    {{--Logo--}}
     <img src="{{ asset('images/logo-FRA.png') }}" alt= "Logo de Fundación Rey Ardid" />
 
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -62,3 +64,6 @@
         </div>
     </form>
 </x-guest-layout>
+
+
+{{--Vista de inicio de sesión --}}

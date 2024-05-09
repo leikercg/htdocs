@@ -1,3 +1,4 @@
+{{--Vista de la lista de curas--}}
 @extends('master')
 @section('title', __('Curas de ') . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
@@ -13,9 +14,9 @@
     </div>
     @php
         //creamos una varibale con la fecha del dia de hoy
-        $hoy = now()->format('Y-m-d');
+        $hoy = now()->format('d-m-Y');
     @endphp
-    <div>{{ $hoy }}</div>
+    <div><b>{{ $hoy }}</b></div>
     <div class="row justify-content-center">
         <div class="col-4 col-md-2 text-center">
             <a href="{{ route('crear.cura', ['residente_id' => $residente->id]) }}" class="btn btn-success">{{ __('AÑADIR CURA') }}</a>

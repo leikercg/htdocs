@@ -219,6 +219,7 @@
         <div class="row text-center">
            <b>{{ session('success') }}</b><br> <br> </div>
         @endif
+
         @yield('content')
     </main>
     <footer>

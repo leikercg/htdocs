@@ -1,3 +1,4 @@
+{{--Vista de tareas por hacer de un axiliar--}}
 @extends('master')
 @section('title', __('Tareas del auxiliar') . ' ' . $auxiliar->nombre . ' ' . $auxiliar->apellidos)
 @section('content')
@@ -8,16 +9,11 @@
             </ol>
         </nav>
     </div>
-    @php
-        //creamos una varibale con la fecha del dia de hoy
-        $hoy = now()->format('d-m-Y');
-    @endphp
     <div class="row">
         <div class="col-12 text-center">
-            <a href="{{route('imprimir.auxiliar')}}"><button class="btn btn-dark">imprimir</button></a>
+            <a href="{{route('imprimir.auxiliar')}}"><button class="btn btn-dark">imprimir</button></a> {{--Botón para genera pdfs--}}
         </div>
     </div>
-    <div>{{ __('Fecha') }}: {{ $hoy }}</div>
     <div class="row justify-content-center text-center">
         <h2>{{ __('TAREAS A REALIZAR HOY POR') }}: <br> {{ $auxiliar->nombre }} {{ $auxiliar->apellidos }}</h2>
     </div>

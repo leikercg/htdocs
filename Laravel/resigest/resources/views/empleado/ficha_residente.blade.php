@@ -1,7 +1,8 @@
+{{--Vista para ver la ficha del residente--}}
 @extends('master')
 @section('title', __('FICHA PERSONAL DE: ') . $residente->nombre . ' ' . $residente->apellidos)
 @section('content')
-    <div class="row">
+    <div class="row"> {{--BreadCrumbs--}}
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="{{ __('breadcrumb') }}">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('lista.residentes') }}">{{ __('Lista de residentes') }}</a></li>
@@ -30,6 +31,7 @@
                     <p><b>{{ __('Fecha de ingreso') }}:</b> {{ date('d/m/Y', strtotime($residente->created_at)) }}</p>
                     <h5>{{ __('Familiares') }}:</h5>
                     <ul>
+                        {{-- Por cada familiar extraemos esta información--}}
                         @foreach ($familiares as $familiar)
                             <b>{{ $familiar->nombre }} {{ $familiar->aellidos }}</b>
                             <li><b>{{ __('Dirección') }}:</b> {{ $familiar->direccion }}</li>
