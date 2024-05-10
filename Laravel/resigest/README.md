@@ -7,9 +7,9 @@ Bienvenido a Resigest
 
 Resigest es una aplicación de gestión socio-sanitaria desarrolada por Leiker Castillo Guzmán
 
-- Interaz limpia.
+- Interfaz limpia.
 - Multilenguaje.
-- Adaptable a movil y tablet.
-- Fácil e intituita.
+- Adaptable a móvil y tablet.
+- Fácil e intuitiva.
   
 ### Resigest nace con la finalidad de adaptarse la forma de trabajo de la Fundación Rey Ardid y crear la mejor experiencia de usuario posible
