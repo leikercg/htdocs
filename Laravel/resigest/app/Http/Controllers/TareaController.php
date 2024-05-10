@@ -80,7 +80,7 @@ class TareaController extends Controller
 
     }
 
-    public function showAuxiliar(string $auxiliar_id)//envía a la vista de las tareas del residente
+    public function showAuxiliar(string $auxiliar_id)//envía a la vista de las tareas del Auxiliar para ese día
     {
 
         $fechaActual = now()->toDateString(); //Fecha de actual en string para compararla
@@ -99,7 +99,7 @@ class TareaController extends Controller
     }
 
 
-    public function imprimirAuxiliar(){
+    public function imprimirAuxiliar(){ // Método para generar pdf y/o imprimirlo
 
 
         if(auth()->user()->departamento_id != 5) { //no es auxiliar

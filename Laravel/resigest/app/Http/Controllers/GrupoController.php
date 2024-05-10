@@ -13,7 +13,7 @@ class GrupoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() //envia todos los grupos a la vista
+    public function index() //envia TODOS los grupos a la vista
     {
         //
         $grupos = Grupo::orderByDesc('fecha')->get();
@@ -21,7 +21,7 @@ class GrupoController extends Controller
         return view('terapeuta.todosGrupos', ['grupos' => $grupos]);
     }
 
-    public function gruposResidente(string $residente_id) //envia todos los grupos a la vista
+    public function gruposResidente(string $residente_id) //envia todos los grupos DEL RESIDENTE la vista
     {
         //
 
@@ -92,7 +92,7 @@ class GrupoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id) // Método para mostrar ek formulario de edición de un grupo
     {
         //
         $usuario = auth()->user(); //para validadar que es el creador del grupo
@@ -115,7 +115,7 @@ class GrupoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) // Método para actualizar la base de datos con los datos del formulario
     {
         //
         $fechaLimite = date('d-m-Y', strtotime('+1 month +1 day')); //este formato es el que se mostrará en los errores
@@ -151,7 +151,7 @@ class GrupoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) // Método para destruir un grupo de la base de datos
     {
         //
         $grupo = Grupo::find($id);
@@ -167,7 +167,7 @@ class GrupoController extends Controller
         return redirect()->route('lista.grupos')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //no enviamos vistas para evitar el reenvio del formulario. Ruta de mostrar todos los grupos.
     }
 
-    public function destroyPivot(string $id, string $residente_id)
+    public function destroyPivot(string $id, string $residente_id) // Método para borrar las relaciones del grupo con el residente, es decir, sacarlo del grupo
     {
 
         //borar las relaciones

@@ -19,7 +19,7 @@ class CuraController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $id_residente) //VALIDADO YA EN EL MIDLEAWARE
+    public function create(string $id_residente) //VALIDADO YA EN EL MIDLEAWARE // Método lanzar el formulario de creación de curas
     {
         $residente = Residente::find($id_residente);
 
@@ -33,7 +33,7 @@ class CuraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) // Método para almacenar la cura en la base de datos
     {
 
         $fechaLimite = date('d-m-Y', strtotime('+1 month +1 day')); //este formato es el que se mostrará en los errores
@@ -61,10 +61,10 @@ class CuraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $Id_residente)
+    public function show(string $Id_residente) // Método para ver las curas de un residente
     {
 
-        $curas     = Cura::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
+        $curas     = Cura::where('residente_id', $Id_residente)->orderByDesc('fecha')->get(); // Obtenemos las curas ordenadas por fecha
         $residente = Residente::find($Id_residente);
         if (!$residente) {//si no existe volver atrás
             return redirect()->back();
@@ -77,10 +77,10 @@ class CuraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id, string $residente_id)
+    public function edit(string $id, string $residente_id) // Método para lanzar el formulario de edición de una cura
     {
         //
-        $usuario = auth()->user();
+        $usuario = auth()->user(); // obtenemos el usuario para verificar que es el creador
 
         $residente = Residente::find($residente_id);
         $cura      = Cura::find($id);
@@ -98,7 +98,7 @@ class CuraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) // Método para actualizar la base de datos
     {
 
         $fechaLimite = date('d-m-Y', strtotime('+1 month +1 day')); //este formato es el que se mostrará en los errores
@@ -125,7 +125,7 @@ class CuraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) //Método para eliminar una cura
     {
         //
         $cura = Cura::find($id);

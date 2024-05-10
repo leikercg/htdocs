@@ -26,9 +26,9 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request): RedirectResponse // Método para accualizar información del usuario
     {
-        $request->user()->fill($request->validated());
+        $request->user()->fill($request->validated()); //Valida los datos
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
@@ -60,7 +60,7 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request): RedirectResponse // Método para borrar cuenta propia (Nos disponible en nuestra aplicación)
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],

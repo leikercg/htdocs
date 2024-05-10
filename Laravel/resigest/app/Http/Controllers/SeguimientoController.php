@@ -42,7 +42,7 @@ class SeguimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $Id_residente, string $Id_departamento)
+    public function edit(string $Id_residente, string $Id_departamento) // Método para lanzar el formulario de edición de un seguimiento
     {
         //
 
@@ -90,7 +90,7 @@ class SeguimientoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) //Actualizar seguimiento
     {
         //
         $fechaActual = (new DateTime())->format('d-m-Y'); //optenemos la fecha de hoy con formato

@@ -42,7 +42,7 @@ class EmpleadoController extends Controller
         //
     }
 
-    public function buscar(Request $request)
+    public function buscar(Request $request) // Método para buscar empleados
     {
         $empleados = Empleado::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('estado')->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con el nombre ó apellido
 
@@ -62,22 +62,16 @@ class EmpleadoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) //método para actualizar la base de datos
     {
         //
         $empleado = Empleado::find($id);
 
         $empleado->telefono  = $request->telefono;
         $empleado->direccion = $request->direccion;
-        $empleado->estado = $request->estado;
+        $empleado->estado    = $request->estado;
 
         $empleado->save();
-
-        // Empleado del 1 al 5
-        $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();
-
-        // Obtener los usuarios familiares (departamento_id 6)
-        $familiares = Familiar::where('departamento_id', 6)->get();
 
         return redirect()->route('familiar_empleado')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito //usamos rutas para no reeenviar formularios al recargar
     }
@@ -85,12 +79,13 @@ class EmpleadoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) // Método para actualizar la base de datos
     {
         //
     }
-    public function itinerario(Request $request)
+    public function itinerario(Request $request) // Método para ver el itinerario del EMPLEADO
     {
+        // Si es un usuario admin, familiar o auxiliar volver atrás (No tienen esta función)
         if(auth()->user()->departamento_id == 5 || auth()->user()->departamento_id == 7 || auth()->user()->departamento_id == 6) {
             return redirect()->back();
         }
@@ -99,6 +94,7 @@ class EmpleadoController extends Controller
         $empleado    = Empleado::find(auth()->user()->empleado->id);
         $actividades = collect([]); // Una colección de Laravel para almacenar las relaciones
 
+        // Cogemos cada actividad dependiendo del tipo de usuario
         if($empleado->departamento->id == 1) {
             $visitas     = $empleado->visitas->where('fecha', $fecha);
             $actividades = $actividades->concat($visitas);
@@ -118,12 +114,12 @@ class EmpleadoController extends Controller
             return $actividad->fecha . ' ' . $actividad->hora;
         });
 
-        return view('empleado.itinerario', ['empleado' => $empleado, 'programacion' => $actividades, 'fecha' => $fecha]);
+        return view('empleado.itinerario', ['empleado' => $empleado, 'programacion' => $actividades, 'fecha' => $fecha]); // Devolvemos la vista con todos los datos necesarios
     }
 
-    public function imprimirAgenda($date)
+    public function imprimirAgenda($date) // Método para generr pdf y/o imprimir el pdf (es igual que mostrar el itinerario solo que instancion un objeto dompdf)
     {
-
+        // Si es un usuario admin, familiar o auxiliar volver atrás (No tienen esta función)
         if(auth()->user()->departamento_id == 5 || auth()->user()->departamento_id == 7 || auth()->user()->departamento_id == 6) {
             return redirect()->back();
         }

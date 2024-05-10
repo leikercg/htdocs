@@ -19,7 +19,7 @@ class SesionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $id_residente)
+    public function create(string $id_residente) // Método para crear un sesión de fisioterapia
     {
         $residente = Residente::find($id_residente);
         if (!$residente) { //si no existe el residente volver atrás
@@ -32,7 +32,7 @@ class SesionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) // Almacenar una sesión en la bvas de datos
     {
         $fechaLimite = date('d-m-Y', strtotime('+1 month +1 day')); //este formato es el que se mostrará en los errores
         $fechaMinima = date('d-m-Y', strtotime('-1 day'));
@@ -56,7 +56,7 @@ class SesionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $Id_residente)
+    public function show(string $Id_residente) // mostrar las sesiones de un residente
     {
         $sesiones  = Sesion::where('residente_id', $Id_residente)->orderByDesc('fecha')->get();
         $residente = Residente::find($Id_residente);
@@ -71,7 +71,7 @@ class SesionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id, string $residente_id)
+    public function edit(string $id, string $residente_id) //Formulario de edición de una sesión
     {
         //
 
@@ -119,7 +119,7 @@ class SesionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) // borrar una sesión
     {
         //
         $sesion = Sesion::find($id);

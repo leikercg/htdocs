@@ -22,12 +22,12 @@ class FamiliarController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() // Método para lanzar el formulario de creación de un familiar
     {
 
-        $residentes = Residente::all()->where('estado', 'alta');
+        $residentes = Residente::all()->where('estado', 'alta'); // Para devolver a la vista los residentes que esten de alta
 
-        return view('gerente.formFamiliar', ['residentes' => $residentes]); //enviamos todos los residentes para que pueda elegir al correspondiente
+        return view('gerente.formFamiliar', ['residentes' => $residentes]);
     }
 
     /**
@@ -46,7 +46,7 @@ class FamiliarController extends Controller
         //
     }
 
-    public function buscar(Request $request)
+    public function buscar(Request $request) // Método para buscar familiares por nombre o por apellido
     {
         $familiares = Familiar::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con el nombre ó apellido
 
@@ -71,7 +71,7 @@ class FamiliarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) // Método para actualizar la base de datos
     {
         //
         $familiar = Familiar::find($id);
@@ -89,18 +89,13 @@ class FamiliarController extends Controller
             $familiar_residente->save();
         }
 
-        // Empleado del 1 al 5
-        $empleados = Empleado::whereBetween('departamento_id', [1, 5])->get();
-
-        // Obtener los usuarios familiares (departamento_id 6)
-        $familiares = Familiar::where('departamento_id', 6)->get();
         return redirect()->route('familiar_empleado')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito;//usamos rutas para no reeenviar formularios al recargar
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) // Método para actualizar la base de datos
     {
         $familiar = Familiar::find($id);
         if (!$familiar) { //si no existe el residente volver atrás

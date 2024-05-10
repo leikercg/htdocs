@@ -14,7 +14,7 @@ class ResidenteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() // Muestra toda la lista de residentes en ALTA
     {
         //
         $residentes = Residente::where('estado', 'alta')->orderBy('apellidos')->orderBy('nombre')->get();
@@ -41,7 +41,7 @@ class ResidenteController extends Controller
 
     }
 
-    public function indexFamiliar()
+    public function indexFamiliar() // Muesta los residentes que tiene internos un familiar en la residencia
     {
         //
         $familiar   = Familiar::find(auth()->user()->familiar->id); //encontrar el id del familiar que esta siendo usuario.
@@ -64,7 +64,7 @@ class ResidenteController extends Controller
 
     }
 
-    public function indexBajas()
+    public function indexBajas() // Método para mostrar todos los residentes de baja solo disponible para el ADMIN (en middleware)
     {
         //
         $residentes = Residente::where('estado', 'baja')->orderBy('apellidos')->orderBy('nombre')->get(); //ordenar por apellido y nombre
@@ -102,7 +102,7 @@ class ResidenteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) // Método para almacenar ub residente en la base de datos
     {
         /////////////validar datos/////////
 
@@ -159,7 +159,7 @@ class ResidenteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id) // Método para mostrar la ficha del residente
     {
         $residente = Residente::find($id);
         if (!$residente) { //si no existe el residente volver atrás
@@ -182,7 +182,7 @@ class ResidenteController extends Controller
         return view('empleado.ficha_residente', ['residente' => $residente, 'familiares' => $familiares]);
     }
 
-    public function buscar(Request $request)
+    public function buscar(Request $request) // Método para buscar residentes coincidencias en nombre o apellido
     {
         $todosResidentes = Residente::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con ek nombre ó apellido
 
@@ -204,7 +204,7 @@ class ResidenteController extends Controller
         return view('empleado.general', ['residentes' => $residentes]); //si no es gerente ira a esta vista
     }
 
-    public function buscarBajas(Request $request)
+    public function buscarBajas(Request $request) // Método para buscar residentes coincidencias en nombre o apellido en la lista de bajas
     {
         $todosResidentes = Residente::where('nombre', 'like', "%$request->busqueda%")->orWhere('apellidos', 'like', "%$request->busqueda%")->orderBy('apellidos')->orderBy('nombre')->get(); //buscar coincidencia con ek nombre ó apellido
 
@@ -227,7 +227,7 @@ class ResidenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id) // Para lanzar el formulario de edición
     {
         $residente = Residente::find($id);
         if (!$residente) { //si no existe el residente volver atrás
@@ -245,7 +245,7 @@ class ResidenteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) // acutializar base de datos con los datos del formulario
     {
 
         $residente             = Residente::find($id);
@@ -265,7 +265,7 @@ class ResidenteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)//NO USADA
+    public function destroy(string $id)//NO USADA @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ BORRAR ESTO
     {
         $residente = Residente::find($id);
         if (!$residente) { //si no existe el residente volver atrás
@@ -275,7 +275,7 @@ class ResidenteController extends Controller
         return redirect()->route('lista.residentes')->with('success', __('mensaje.exito')); // adjuntamos datos de sesion flash que solo duran ua solicitud, enviaos el mensaje de exito; ////revisar
     }
 
-    public function itinerario(Request $request, $Id_residente)
+    public function itinerario(Request $request, $Id_residente) // Método para mostrar el itinerario del residente a todos los usuarios
     {
         $fecha       = $request->input('fecha', now()->toDateString()); // Si no se especifica la fecha, se establece como la fecha de hoy
         $residente   = Residente::find($Id_residente);
