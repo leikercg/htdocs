@@ -59,7 +59,7 @@
             @endif
 
             <x-primary-button class="ms-3">
-                {{ __('Iniciar Sesión') }}
+                {{ __('Log in') }}
             </x-primary-button>
         </div>
     </form>

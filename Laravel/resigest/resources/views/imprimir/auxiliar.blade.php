@@ -19,6 +19,12 @@
 </head>
 
 <body>
+    <div class="row">
+        <div class="col-2">
+            <img id="impirmir" src="{{ asset('images/logo_impresora.png') }}" alt="Logo de Fundación Rey Ardid">
+        </div>
+    </div>
+    <br>
     @php
         //creamos una varibale con la fecha del dia de hoy
         $hoy = now()->format('d-m-Y');

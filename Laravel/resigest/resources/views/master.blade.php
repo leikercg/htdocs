@@ -22,7 +22,7 @@
                 <img src="{{ asset('images/spain.png') }}" class="bandera" alt="">
             </a>
             <a class="col-1 d-flex  align-items-center" href="{{ route('idiom', ['locale' => 'en']) }}"><img
-                    src="{{ asset('images/uk.png') }}" class="bandera" alt=""></a>
+                    src="{{ asset('images/uk.jpg') }}" class="bandera" alt=""></a>
             <div class="col-12 d-flex flex-column align-items-center">
                 <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
                     @csrf

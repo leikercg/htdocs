@@ -14,6 +14,11 @@
             <h2>{{ __('Itinerario de') }} {{ $empleado->nombre }} {{ $empleado->apellidos }}</h2>
         </div>
     </div>
+     @php
+      if (!isset($fecha)) { //en caso de no enviar fecha (darle a buscar sin poner fecha)
+        $fecha = now()->format('d-m-Y');
+    }
+    @endphp
     <div class="row">
         <div class="col-12 text-center">
             <a href="{{route('itinerario.imprimir',['fecha'=>$fecha])}}"><button class="btn btn-dark">imprimir</button></a>

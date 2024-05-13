@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleado;
-use App\Models\Familiar;
+
 use Dompdf\Dompdf;
+
+use Dompdf\Options;
+
 
 use Illuminate\Http\Request;
 
@@ -146,8 +149,16 @@ class EmpleadoController extends Controller
         $actividades = $actividades->sortBy(function ($actividad) { //ordenarlos por fecha y hora
             return $actividad->fecha . ' ' . $actividad->hora;
         });
-        $html   = view('imprimir.impresiones', ['empleado' => $empleado, 'programacion' => $actividades, 'fecha' => $fecha]);
-        $dompdf = new Dompdf();
+        $html = view('imprimir.impresiones', ['empleado' => $empleado, 'programacion' => $actividades, 'fecha' => $fecha]);
+
+
+        /* Establecer opciones, para mostyrar imágnes*/
+
+        $options= new Options();
+        $options->set('isRemoteEnabled',true);
+
+        $dompdf = new Dompdf($options);
+
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
 

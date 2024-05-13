@@ -7,6 +7,7 @@ use App\Models\Tarea;
 use App\Models\Residente;
 use App\Models\Empleado;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 //exportar clase Date
 
@@ -25,7 +26,7 @@ class TareaController extends Controller
      */
     public function create(string $id_residente)
     {
-        $residente  = Residente::find($id_residente);
+        $residente = Residente::find($id_residente);
         if (!$residente) { //si no existe el residente volver atrás
             return redirect()->back();
         }
@@ -43,7 +44,7 @@ class TareaController extends Controller
         $fechaMinima = date('d-m-Y', strtotime('-1 day'));
 
         $request->validate([ //si da no valida todos devuelve al formulario con una variable $errors que muestra los errores
-            'fecha' => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
+            'fecha'       => ['date', 'after:' . $fechaMinima, 'before:' . $fechaLimite], //fecha minima hoy, fecha máxima dentro de un mes
             'auxiliar_id' => ['required'],
 
         ]);
@@ -98,14 +99,11 @@ class TareaController extends Controller
         return view('auxiliar.tareas', ['tareas' => $tareas, 'auxiliares' => $auxiliares, 'auxiliar' => $auxiliar]); //envialos a la vista el residente y sus tareas @@@@@borrar auxiliares, solo para pruebas
     }
 
-
-    public function imprimirAuxiliar(){ // Método para generar pdf y/o imprimirlo
-
-
-        if(auth()->user()->departamento_id != 5) { //no es auxiliar
-            return redirect()->back();
-        }
-        $auxiliar_id=auth()->user()->empleado->id;
+    public function imprimirAuxiliar() // Método para generar pdf y/o imprimirlo
+    {if(auth()->user()->departamento_id != 5) { //no es auxiliar
+        return redirect()->back();
+    }
+        $auxiliar_id = auth()->user()->empleado->id;
         $fechaActual = now()->toDateString(); //Fecha de actual en string para compararla
 
         $tareas = Tarea::where('auxiliar_id', $auxiliar_id)->get();
@@ -115,15 +113,17 @@ class TareaController extends Controller
 
         $auxiliares = Empleado::where('departamento_id', 5)->get(); //empleados del departamento 5, auxiliares
 
-       $html = view('imprimir.auxiliar', ['tareas' => $tareas, 'auxiliares' => $auxiliares, 'auxiliar' => $auxiliar]); //envialos a la vista el residente y sus tareas @@@@@borrar auxiliares, solo para pruebas
+        $html = view('imprimir.auxiliar', ['tareas' => $tareas, 'auxiliares' => $auxiliares, 'auxiliar' => $auxiliar]); //envialos a la vista el residente y sus tareas @@@@@borrar auxiliares, solo para pruebas
 
+        /* Establecer opciones, para mostyrar imágnes*/
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
 
-       $dompdf = new Dompdf();
-       $dompdf->loadHtml($html);
-       $dompdf->setPaper('A4', 'portrait');
-
-       $dompdf->render();
-       return $dompdf->stream('agenda.pdf', ['Attachment' => false]); //con true se descargaria automáticamente
+        $dompdf->render();
+        return $dompdf->stream('agenda.pdf', ['Attachment' => false]); //con true se descargaria automáticamente
     }
 
     /**
@@ -135,7 +135,7 @@ class TareaController extends Controller
 
         $usuario = auth()->user(); //verificar si es el creador de la sesión
 
-        $tarea      = Tarea::find($id);
+        $tarea = Tarea::find($id);
         if (!$tarea) { //si no existe la tearea volver atrás
             return redirect()->back();
         }

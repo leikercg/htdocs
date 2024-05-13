@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <a href="{{route('inicio')}}"><img src="{{ asset('images/logo-FRA.png') }}" alt= "Logo de Fundación Rey Ardid" /></a>
+    <a href="{{route('login')}}"><img src="{{ asset('images/logo-FRA.png') }}" alt= "Logo de Fundación Rey Ardid" /></a>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('Inserta tu correo electrónico para restaurar tu contraseña') }}
     </div>
@@ -19,13 +19,12 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                {{ __('Enviar e-mail de restauración') }}
+                {{ __('Reset Password') }}
             </x-primary-button>
         </div>
     </form>
     {{-- AÑADIMOS UN ENLACE AL LOGIN--}}
 <br>
-<a href="{{route('login')}}" style="background-color:white" >Volver a iniciar sesión</a>
 </x-guest-layout>
 
 

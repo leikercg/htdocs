@@ -12,7 +12,11 @@
 
 <body>
 
-
+    <div class="row">
+        <div class="col-2">
+            <img id="impirmir" src="{{ asset('images/logo_impresora.png') }}" alt="Logo de Fundación Rey Ardid">
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 text-center">
             <h2>{{ __('Itinerario de') }} {{ $empleado->nombre }} {{ $empleado->apellidos }}</h2>
