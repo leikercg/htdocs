@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/icono.png') }}" />
 </head>
 
 <body>
@@ -15,7 +16,7 @@
     <div class="floating-button" onclick="scrollArriba()">
         <i class="material-icons">arrow_upward</i><!--Icono de flecha-->
     </div>
-    <header class="container-fluid d-flex flex-column justify-content-center position-sticky top-0">
+    <header class="d-flex flex-column justify-content-center">
         <div class="row justify-content-end">
             <a class="col-1 d-flex justify-content-center align-items-center"
                 href="{{ route('idiom', ['locale' => 'es']) }}">
@@ -31,49 +32,48 @@
             </div>
         </div>
         {{-- Logo --}}
-        <div class='row justify-content-between mt-1 mb-1'>
+        <div class='row justify-content-between align-items-center'>
             <div class="col-2 d-flex offset-1 flex-column align-items-center">
                 <img id="logo" src="{{ asset('images/logo-FRA.png') }}" class="d-md-block d-none"
                     alt="{{ __('Logo de Fundación Rey Ardid') }}" />
             </div>
             {{-- Avatar --}}
-        </div>
-        <!--empleados-->
-        @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
-            <div class='row justify-content-end'>
+            <!--empleados-->
+
+            @if (auth()->user()->departamento_id > 0 && auth()->user()->departamento_id < 6)
                 <div class="col-5 d-flex flex-column align-items-center">
                     <a href="{{ route('profile.edit') }}"><img
                             src="https://ui-avatars.com/api/?name={{ auth()->user()->empleado->nombre }}+{{ auth()->user()->empleado->apellidos }}&background=random&font-size=0.33&rounded=true"
                             alt="{{ __('avatar') }}"></a>
-                    <h5 class="text-center">{{ __('Área de') }} {{ auth()->user()->empleado->departamento->nombre }}
-                    </h5>
+                    <h6 class="text-center">{{ __('Área de') }}
+                        {{ auth()->user()->empleado->departamento->nombre }}
+                    </h6>
                 </div>
-            </div>
 
 
-            <!--familiares-->
-        @elseif(auth()->user()->departamento_id == 6)
-            <div class='row justify-content-end'>
+
+                <!--familiares-->
+            @elseif(auth()->user()->departamento_id == 6)
                 <div class="col-5 d-flex flex-column align-items-center">
                     <a href="{{ route('profile.edit') }}"><img
                             src="https://ui-avatars.com/api/?name={{ auth()->user()->familiar->nombre }}+{{ auth()->user()->familiar->apellidos }}&background=random&font-size=0.33&rounded=true"
                             alt="{{ __('avatar') }}"></a>
-                    <h5 class="text-center">{{ __('Área de') }} {{ auth()->user()->familiar->departamento->nombre }}
-                    </h5>
+                    <h6 class="text-center">{{ __('Área de') }} {{ auth()->user()->familiar->departamento->nombre }}
+                    </h6>
                 </div>
-            </div>
-        @else
-            <!--ADMIN-->
-            <div class='row justify-content-end'>
+            @else
+                <!--ADMIN-->
+
 
                 <div class="col-5 d-flex flex-column align-items-center">
                     <a href="{{ route('profile.edit') }}"> <img
                             src="https://ui-avatars.com/api/?name=ADMIN&background=random&font-size=0.33&rounded=true"
                             alt="{{ __('avatar') }}"></a>
-                    <h5 class="text-center">{{ __('Área de Administración') }}</h5>
+                    <h6 class="text-center">{{ __('Área de Administración') }}</h6>
                 </div>
-            </div>
-        @endif
+            @endif
+        </div>
+
 
         <!-- En caso de ser medico, enfermero o fisio mostrar esto-->
         @if (auth()->user()->departamento_id == 3 ||
@@ -216,8 +216,9 @@
 
     <main class="container py-4">
         @if (session('success'))
-        <div class="row text-center">
-           <b>{{ session('success') }}</b><br> <br> </div>
+            <div class="row text-center">
+                <b>{{ session('success') }}</b><br> <br>
+            </div>
         @endif
 
         @yield('content')
