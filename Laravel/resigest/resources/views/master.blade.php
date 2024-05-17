@@ -17,14 +17,14 @@
         <i class="material-icons">arrow_upward</i><!--Icono de flecha-->
     </div>
     <header class="d-flex flex-column justify-content-center">
-        <div class="row justify-content-end">
+        <div class="row justify-content-end px-4 py-2 ">
             <a class="col-1 d-flex justify-content-center align-items-center"
                 href="{{ route('idiom', ['locale' => 'es']) }}">
                 <img src="{{ asset('images/spain.png') }}" class="bandera" alt="">
             </a>
             <a class="col-1 d-flex  align-items-center" href="{{ route('idiom', ['locale' => 'en']) }}"><img
                     src="{{ asset('images/uk.jpg') }}" class="bandera" alt=""></a>
-            <div class="col-12 d-flex flex-column align-items-center">
+            <div class="col-12 d-flex flex-column align-items-center d-md-flex d-none ">
                 <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
                     @csrf
                     <button type="submit" class="btn btn-secondary">{{ __('Cerrar sesión') }}</button>
@@ -97,8 +97,17 @@
                                     <a class="btn btn-light" href="{{ route('itinerario.empleado') }}"
                                         role="button">{{ __('Agenda') }}</a>
                                 </li>
+                                <li class="nav-item mx-1 my-1">
+                                    <div class="col-12 d-flex flex-column align-items-center d-md-none ">
+                                        <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
+                                            @csrf
+                                            <button type="submit" class="btn btn-secondary">{{ __('Cerrar sesión') }}</button>
+                                        </form>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
+
                     </div>
                 </nav>
             </div>
@@ -128,6 +137,14 @@
                             <a class="btn btn-light" href="{{ route('lista.grupos') }}"
                                 role="button">{{ __('Ver Grupos') }}</a>
                         </li>
+                        <li class="nav-item mx-1 my-1">
+                            <div class="col-12 d-flex flex-column align-items-center d-md-none ">
+                                <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
+                                    @csrf
+                                    <button type="submit" class="btn btn-secondary">{{ __('Cerrar sesión') }}</button>
+                                </form>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -156,6 +173,14 @@
                                 href="{{ route('auxiliar.tareas', ['id' => auth()->user()->empleado->id]) }}"
                                 role="button">{{ __('Ver Tareas') }}</a>
                         </li>
+                        <li class="nav-item mx-1 my-1">
+                            <div class="col-12 d-flex flex-column align-items-center d-md-none ">
+                                <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
+                                    @csrf
+                                    <button type="submit" class="btn btn-secondary">{{ __('Cerrar sesión') }}</button>
+                                </form>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -177,6 +202,14 @@
                         <li class="nav-item mx-1 my-1">
                             <a class="btn btn-light" href="{{ route('lista.residentesFamiliar') }}"
                                 role="button">{{ __('Lista de Residentes') }}</a>
+                        </li>
+                        <li class="nav-item mx-1 my-1">
+                            <div class="col-12 d-flex flex-column align-items-center d-md-none ">
+                                <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
+                                    @csrf
+                                    <button type="submit" class="btn btn-secondary">{{ __('Cerrar sesión') }}</button>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -204,6 +237,14 @@
                         <li class="nav-item mx-1 my-1">
                             <a class="btn btn-light" href="{{ route('familiar_empleado') }}"
                                 role="button">{{ __('Gestionar Usuarios') }}</a>
+                        </li>
+                        <li class="nav-item mx-1 my-1">
+                            <div class="col-12 d-flex flex-column align-items-center d-md-none ">
+                                <form method="POST" action="{{ route('logout') }}"> <!--ruta para cerrar sesión-->
+                                    @csrf
+                                    <button type="submit" class="btn btn-secondary">{{ __('Cerrar sesión') }}</button>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </div>

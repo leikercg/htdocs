@@ -52,7 +52,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="habitacion" class="form-label">{{ __('Habitación:') }}</label>
-                        <input type="number" class="form-control" id="habitacion" name="habitacion"
+                        <input type="number" class="form-control" id="habitacion" name="habitacion" min="1" max="50"
                             value="{{ old('habitacion', $residente->habitacion ?? '') }}">
                     </div>
                     <div class="mb-3">
