@@ -13,6 +13,12 @@
             </div>
         </div>
 
+        <div class="row justify-content-around justify-content-md-center">
+            <div class="col-10 col-md-2 text-center mb-3">
+                <a href="#familiares" class="btn btn-info">{{ __('FAMILIARES') }}</a>
+            </div>
+        </div>
+
         <br>
         <div class="row">
             <div class="col-12 text-center">
@@ -74,7 +80,7 @@
     @isset($familiares)
         <div class="row">
             <div class="col-12 text-center">
-                <h2>{{ __('FAMILIARES') }}</h2>
+                <h2 id="familiares">{{ __('FAMILIARES') }}</h2>
             </div>
         </div>
         <div class="row justify-content-center">

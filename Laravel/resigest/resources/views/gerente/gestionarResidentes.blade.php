@@ -21,7 +21,7 @@
             <form action="{{ route('buscar.residente') }}" class="mt-4">
                 <div class="mb-3">
                     <label for="busqueda" class="form-label">{{ __('Búsqueda') }}</label>
-                    <input type="text" class="form-control" id="busqueda" name="busqueda">
+                    <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="{{__('Buscar por coincidencia en nombre o apellido')}}">
                 </div>
                 <button type="submit" class="btn btn-primary">{{ __('Buscar') }}</button>
                 <p>{{ __('Para ver la lista completa despues de una búsqueda pulse enviar') }}</p>
