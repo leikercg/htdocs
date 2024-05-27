@@ -29,6 +29,7 @@
         </div>
     </div>
     <br>
+    {{--Tabla--}}
     <div class="row justify-content-center">
         <div class="col-md-10 col-12">
             <div class="table-responsive">

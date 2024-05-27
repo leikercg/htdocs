@@ -4,7 +4,7 @@
     @isset($empleado)
         <!-- SI ESTA ESTABLECIDO EL EMPLEADO MOSTRAR EL FORMULUARIO DE EDICIÓN, SI NO MOSTRAR EL DE CREACIÓN-->
         <!-- Solo se puede modificar el telefono y dirección-->
-
+    {{--MODIFICACIÓN DE EMPLEADO--}}
         <br><br>
         <div class="row">
             <div class="col-12 text-center">
@@ -73,6 +73,8 @@
             </div>
         </div>
     @else
+
+    {{--CREACIÓN DE EMPLEADO--}}
         <br><br>
         <div class="row">
             <div class="col-12 text-center">

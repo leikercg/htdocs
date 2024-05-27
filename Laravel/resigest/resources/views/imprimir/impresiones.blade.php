@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+{{--Logo--}}
     <div class="row">
         <div class="col-2">
             <img id="impirmir" src="{{ asset('images/logo_impresora.png') }}" alt="Logo de Fundación Rey Ardid">
@@ -28,6 +28,7 @@
     <div class="row justify-content-center">
         <div class="col-10 col-md-8">
             <ol class="list-group list-group-numbered">
+                {{--Lista de tareas--}}
                 @foreach ($programacion as $actividad)
                     @if ($actividad->fecha == $fecha)
                         @if ($actividad->empleado->departamento->id == 1)

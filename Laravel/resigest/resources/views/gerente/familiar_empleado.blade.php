@@ -13,13 +13,14 @@
             </div>
         </div>
 
-        <div class="row justify-content-around justify-content-md-center">
+        <div class="row justify-content-around justify-content-md-center m-3">
             <div class="col-10 col-md-2 text-center mb-3">
-                <a href="#familiares" class="btn btn-info">{{ __('FAMILIARES') }}</a>
+                <a href="#familiares" class="btn btn-info">{{ __('FAMILIARES') }}</a> {{--Ancla parta ver la sección de familiares--}}
             </div>
         </div>
 
         <br>
+        {{--Sección de empleados--}}
         <div class="row">
             <div class="col-12 text-center">
                 <h2>{{ __('EMPLEADOS') }}</h2>
@@ -55,7 +56,9 @@
                         </thead>
                         <tbody>
                             @foreach ($empleados as $empleado)
-                                <tr>
+                                <tr  @if ($empleado->estado =="baja")
+                                    class="table-danger"
+                                @endif>
                                     <td>{{ $empleado->id }}</td>
                                     <td>{{ $empleado->apellidos }}</td>
                                     <td>{{ $empleado->nombre }}</td>
@@ -77,6 +80,9 @@
 
     @endisset
     <br><br>
+
+        {{--Sección de familiares--}}
+
     @isset($familiares)
         <div class="row">
             <div class="col-12 text-center">

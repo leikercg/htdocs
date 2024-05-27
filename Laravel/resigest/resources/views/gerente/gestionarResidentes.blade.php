@@ -28,6 +28,7 @@
             </form>
         </div>
     </div>
+    {{--Tabla de residentes vistos por el gerente--}}
     <div class="row justify-content-center">
         <div class="col-md-10 col-12">
             <div class="table-responsive">{{--para desplazamiento lateral en caso de desbordamiento de pantallas--}}

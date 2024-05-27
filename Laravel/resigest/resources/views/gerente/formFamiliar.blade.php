@@ -3,7 +3,7 @@
 @section('content')
     @isset($familiar)<!-- SI ESTA ESTABLECIDO EL FAMILIAR MOSTRAR EL FORMULUARIO DE EDICIÓN, SI NO MOSTRAR EL DE CREACIÓN-->
         <!-- Solo se puede modificar el telefono y dirección-->
-
+    {{--MODIFICACIÓN DE FAMILIAR--}}
         <br><br>
         <div class="row">
             <div class="col text-center">
@@ -115,6 +115,8 @@
             </div>
         </div>
     @else
+
+        {{--CREACIÓN DE FAMILIAR--}}
         <br><br>
         <div class="row">
             <div class="col-12 text-center">
