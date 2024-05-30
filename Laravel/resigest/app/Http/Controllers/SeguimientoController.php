@@ -93,13 +93,15 @@ class SeguimientoController extends Controller
     public function update(Request $request, string $id) //Actualizar seguimiento
     {
         //
-        $fechaActual = (new DateTime())->format('d-m-Y'); //optenemos la fecha de hoy con formato
+        date_default_timezone_set('Europe/Madrid'); // por que no me detectaba bien la zona horaria del servidor
+        $nombre=auth()->user()->empleado->nombre ." ". auth()->user()->empleado->apellidos;
+        $fechaActual = (new DateTime())->format('d-m-Y H:i'); //optenemos la fecha de hoy con formato
 
         $seguimiento = Seguimiento::find($id); //obtenemos el segumiento
 
         $texto = $request->seguimiento; //obtenemos la cadena de texto del formulario
 
-        $anadirSegumiento = $seguimiento->seguimiento . "\n" . $fechaActual . "\n" . $texto . "\n \n"; //concatenemos el antigua seguimiento con la fecha y el texto del formulario
+        $anadirSegumiento = $seguimiento->seguimiento . "\n" . $fechaActual.": ". $nombre . "\n" . $texto . "\n \n"; //concatenemos el antigua seguimiento con la fecha y el texto del formulario
 
         $seguimiento->seguimiento = $anadirSegumiento; //lo establecemos como nuevo segumiento
         $seguimiento->save();
