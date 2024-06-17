@@ -41,7 +41,9 @@
                     </thead>
                     <tbody>
                         @foreach ($grupos as $grupo)
-                            <tr @if ($grupo->fecha == $hoy) class="table-success" @endif>
+                            <tr @if (date('d-m-Y', strtotime($grupo->fecha))== $hoy)
+                                class="table-success"
+                            @endif>
                                 <td>{{ $grupo->id }}</td>
                                 <td>{{ date('d/m/Y', strtotime($grupo->fecha)) }}</td>
                                 <td>{{ $grupo->hora }}</td>

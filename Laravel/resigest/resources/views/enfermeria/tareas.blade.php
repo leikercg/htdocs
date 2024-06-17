@@ -44,7 +44,9 @@
                     </thead>
                     <tbody>
                         @foreach ($tareas as $tarea)
-                            <tr @if ($tarea->fecha == $hoy) class="table-success" @endif>
+                            <tr @if (date('d-m-Y', strtotime($tarea->fecha))== $hoy)
+                                class="table-success"
+                            @endif>
                                 <td>{{ $tarea->id }}</td>
                                 <td>{{ date('d/m/Y', strtotime($tarea->fecha)) }} </td>
                                 <td>{{ $tarea->hora }}</td>

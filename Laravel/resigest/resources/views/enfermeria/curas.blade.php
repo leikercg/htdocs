@@ -43,7 +43,9 @@
                     </thead>
                     <tbody>
                         @foreach ($curas as $cura)
-                            <tr @if ($cura->fecha == $hoy) class="table-success" @endif>
+                            <tr @if (date('d-m-Y', strtotime($cura->fecha))== $hoy)
+                                class="table-success"
+                            @endif>
                                 <td>{{ $cura->id }}</td>
                                 <td>{{ date('d/m/Y', strtotime($cura->fecha)) }} </td>
                                 <td>{{ $cura->hora }}</td>
